@@ -1,0 +1,39 @@
+{
+  "name": "sai",
+  "version": "2.0.0-alpha.8",
+  "license": "MIT",
+  "scripts": {
+    "start": "node ./src/server/server.js",
+    "dev": "yarn build && nodemon ./src/server/server.js",
+    "build": "yarn clean && next build ./src/client",
+    "deploy": "yarn build && gcloud app deploy",
+    "clean": "rimraf build",
+    "analyze": "yarn build",
+    "debug": "yarn dev --inspect --inspect-port=9230"
+  },
+  "dependencies": {
+    "@zeit/next-source-maps": "^0.0.2",
+    "babel-plugin-inline-dotenv": "^1.1.2",
+    "babel-plugin-transform-inline-environment-variables": "^0.4.3",
+    "body-parser": "^1.18.3",
+    "compression": "^1.7.3",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^6.0.0",
+    "express": "4.16.3",
+    "isomorphic-unfetch": "^2.1.0",
+    "next": "^6.1.1",
+    "next-compose-plugins": "^2.1.1",
+    "next-optimized-images": "^1.4.1",
+    "next-progressbar": "^1.0.0",
+    "next-router-events": "^2.1.0",
+    "node-sass": "^4.9.2",
+    "normalize.css": "^8.0.0",
+    "raw-loader": "^0.5.1",
+    "react": "16.4.1",
+    "react-dom": "16.4.1",
+    "rimraf": "^2.6.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.4"
+  }
+}
