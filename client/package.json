@@ -1,0 +1,52 @@
+{
+  "name": "one-deeds",
+  "version": "1.0.0",
+  "description": "oneDeeds client app",
+  "main": "server/app.js",
+  "repository": "https://github.com/yotamelkaslasy/oneDeeds",
+  "author": "Yotam Elkaslasy",
+  "license": "MIT",
+  "engines": {
+    "node": "8.11.3"
+  },
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development webpack-serve",
+    "build": "cross-env NODE_ENV=production webpack --mode=production",
+    "start": "cross-env NODE_ENV=production node server/app.js",
+    "clean": "rimraf dist",
+    "debug:dev": "cross-env NODE_ENV=development ndb server/app.js",
+    "debug:prod": "cross-env NODE_ENV=production ndb server/app.js"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0-beta.56",
+    "cross-env": "^5.2.0",
+    "lodash": "^4.17.10",
+    "moment": "^2.22.2",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "react-router-dom": "^4.3.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.56",
+    "@babel/core": "^7.0.0-beta.56",
+    "@babel/preset-env": "^7.0.0-beta.56",
+    "@babel/preset-react": "^7.0.0-beta.56",
+    "babel-loader": "^8.0.0-beta",
+    "css-loader": "^1.0.0",
+    "eslint": "^5.3.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.10.0",
+    "file-loader": "^1.1.11",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "ndb": "^1.0.19",
+    "react-hot-loader": "^4.3.4",
+    "rimraf": "^2.6.2",
+    "style-loader": "^0.21.0",
+    "webpack": "^4.16.4",
+    "webpack-cli": "^3.1.0",
+    "webpack-serve": "^2.0.2"
+  }
+}
