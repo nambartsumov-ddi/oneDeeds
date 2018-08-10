@@ -1,55 +1,53 @@
-"use strict";
-const webpack = require("webpack");
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+// const webpack = require('webpack')
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  mode: "development",
-  entry: [
-    // POLYFILL: Set up an ES6-ish environment
-    // 'babel-polyfill',  // The entire babel-polyfill
-    // Or pick es6 features needed (included into babel-polyfill)
-    // "core-js/fn/promise",
-    // "core-js/es6/object",
-    // "core-js/es6/array",
-    "./src/index.js"
-  ],
-  devtool: "inline-source-map",
+  mode: 'development',
+  entry: ['./src/index.js'],
+
   output: {
-    publicPath: "/",
+    publicPath: '/',
     path: path.resolve(__dirname, `dist/${process.env.NODE_ENV}`),
-    filename: "main.client.js"
+    filename: 'main.client.js'
   },
   module: {
     rules: [
       {
+        enforce: 'pre',
         test: /\.(js|jsx)$/,
         exclude: [/node_modules/, /dist/],
-        use: ["babel-loader"]
+        use: ['eslint-loader'],
+        options: {}
+      },
+      {
+        test: /\.(js|jsx)$/,
+        exclude: [/node_modules/, /dist/],
+        use: ['babel-loader']
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"]
+        use: ['style-loader', 'css-loader']
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/,
-        use: ["file-loader"]
+        use: ['file-loader']
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: ["file-loader"]
+        use: ['file-loader']
       },
       {
         test: /\.html$/,
-        use: ["html-loader"]
+        use: ['html-loader']
       }
     ]
   },
   resolve: {
-    extensions: [".js", ".jsx", ".css"],
+    extensions: ['.js', '.jsx', '.css'],
     modules: [
-      path.join(__dirname, "src"),
-      path.join(__dirname, "node_modules")
+      path.join(__dirname, 'src'),
+      path.join(__dirname, 'node_modules')
     ],
     alias: {}
   },
@@ -60,8 +58,12 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "src/index.html",
-      filename: "./index.html"
+      template: 'src/index.html',
+      filename: './index.html'
     })
-  ]
-};
+  ],
+  devtool: 'inline-source-map',
+  stats: {
+    colors: true
+  }
+}

@@ -1,5 +1,16 @@
 {
-  "presets": ["@babel/env", "@babel/react"],
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "usage",
+        "debug": true,
+        "modules": false,
+        "loose": true
+      }
+    ],
+    "@babel/react"
+  ],
   "env": {
     "development": {
       "plugins": ["react-hot-loader/babel"]
