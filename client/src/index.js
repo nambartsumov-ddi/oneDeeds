@@ -1,6 +1,16 @@
 import React from 'react';
-import { render } from 'react-dom';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'connected-react-router';
 
-import App from './containers/App';
+import Routes from './routes';
+import store, { history } from './store';
 
-render(<App />, document.getElementById('root'));
+ReactDOM.render(
+  <Provider store={store}>
+    <ConnectedRouter history={history}>
+      <Routes />
+    </ConnectedRouter>
+  </Provider>,
+  document.getElementById('root')
+);

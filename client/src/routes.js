@@ -1,15 +1,15 @@
-import React from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import Home from './pages/Home'
-// import About from "./components/About";
-// import Sample from "./components/Sample";
+import React from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
+import { hot } from 'react-hot-loader';
+
+import Home from './pages/Home';
 
 const Routes = () => (
-  <Router>
-    <div>
+  <div>
+    <BrowserRouter>
       <Route exact path="/" component={Home} />
-    </div>
-  </Router>
-)
+    </BrowserRouter>
+  </div>
+);
 
-export default Routes
+export default hot(module)(Routes);
