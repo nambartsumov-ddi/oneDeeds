@@ -1,15 +1,18 @@
 // const webpack = require('webpack')
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const env = process.env.NODE_ENV;
+const isProduction = env === 'production';
 
 module.exports = {
-  mode: 'development',
-  entry: ['./src/index.js'],
+  mode: env,
+  entry: { app: './src/index.js' },
 
   output: {
+    path: path.resolve(__dirname, `dist/${env}`),
+    filename: 'app.js',
     publicPath: '/',
-    path: path.resolve(__dirname, `dist/${process.env.NODE_ENV}`),
-    filename: 'main.client.js'
   },
   module: {
     rules: [
@@ -18,52 +21,48 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: [/node_modules/, /dist/],
         use: ['eslint-loader'],
-        options: {}
       },
       {
         test: /\.(js|jsx)$/,
         exclude: [/node_modules/, /dist/],
-        use: ['babel-loader']
+        use: ['babel-loader'],
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/,
-        use: ['file-loader']
+        use: ['file-loader'],
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: ['file-loader']
+        use: ['file-loader'],
       },
       {
         test: /\.html$/,
-        use: ['html-loader']
-      }
-    ]
+        use: ['html-loader'],
+      },
+    ],
   },
   resolve: {
     extensions: ['.js', '.jsx', '.css'],
-    modules: [
-      path.join(__dirname, 'src'),
-      path.join(__dirname, 'node_modules')
-    ],
-    alias: {}
+    modules: [path.join(__dirname, 'src'), path.join(__dirname, 'node_modules')],
+    alias: {},
   },
   serve: {
     port: 3000,
     hmr: true,
-    open: true
+    open: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: 'src/index.html',
-      filename: './index.html'
-    })
+      filename: './index.html',
+    }),
   ],
-  devtool: 'inline-source-map',
+  devtool: isProduction ? 'source-map' : 'inline-source-map',
   stats: {
-    colors: true
-  }
-}
+    colors: true,
+  },
+};

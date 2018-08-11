@@ -1,10 +1,6 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { hot } from "react-hot-loader";
-import Routes from "./routes";
+import React from 'react';
+import { render } from 'react-dom';
 
-const App = Component => {
-  return ReactDOM.render(<Component />, document.getElementById("root"));
-};
+import App from './containers/App';
 
-export default hot(module)(App(Routes));
+render(<App />, document.getElementById('root'));
