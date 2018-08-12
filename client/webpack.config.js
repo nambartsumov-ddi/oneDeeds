@@ -1,4 +1,4 @@
-// const webpack = require('webpack')
+const webpack = require('webpack')
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -7,11 +7,12 @@ const isProduction = env === 'production';
 
 module.exports = {
   mode: env,
-  entry: { app: './src/index.js' },
-
+  entry: {
+    app: './src/index.js',
+  },
   output: {
     path: path.resolve(__dirname, `dist/${env}`),
-    filename: 'app.js',
+    filename: isProduction ? '[name].[chunkhash].js' : '[name].js',
     publicPath: '/',
   },
   module: {
@@ -45,6 +46,22 @@ module.exports = {
       },
     ],
   },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          chunks: 'all'
+        }
+      }
+    }
+  },
+  performance: {
+    hints: false,
+    maxEntrypointSize: 400000,
+    maxAssetSize: 300000
+  },
   resolve: {
     extensions: ['.js', '.jsx', '.css'],
     modules: [path.join(__dirname, 'src'), path.join(__dirname, 'node_modules')],
@@ -60,9 +77,40 @@ module.exports = {
       template: 'src/index.html',
       filename: './index.html',
     }),
+
+    // isProduction && new ExtractTextPlugin('/css/style.css'),
+
+    new webpack.ProvidePlugin({
+      _: 'lodash',
+      moment: 'moment',
+    }),
+
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false
+    }),
+
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify(env)
+      }
+    }),
+
+    // new webpack.optimize.UglifyJsPlugin({
+    //   beautify: false,
+    //   compress: {
+    //     screw_ie8: true
+    //   },
+    //   comments: false
+    // }),
+    // new CompressionPlugin({
+    //   asset: '[path].gz[query]',
+    //   algorithm: 'gzip',
+    //   test: /\.js$|\.html$/,
+    //   threshold: 10240,
+    //   minRatio: 0.8
+    // })
   ],
   devtool: isProduction ? 'source-map' : 'inline-source-map',
-  stats: {
-    colors: true,
-  },
+  stats: 'normal',
 };

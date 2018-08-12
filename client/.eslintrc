@@ -1,5 +1,12 @@
 {
-  "extends": ["google", "plugin:react/recommended", "plugin:prettier/recommended", "prettier/react"],
+  "extends": [
+    "google",
+    "plugin:import/errors",
+    "plugin:jsx-a11y/recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    "prettier/react"
+  ],
   "parserOptions": {
     "ecmaVersion": 9,
     "sourceType": "module",
@@ -19,7 +26,10 @@
     "es6": true
   },
   "rules": {
-    "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
+    "react/jsx-filename-extension": ["warn", {
+      "extensions": [".js", ".jsx"]
+    }],
     "require-jsdoc": 0
-  }
+  },
+  "plugins": ["react", "jsx-a11y", "import"]
 }
