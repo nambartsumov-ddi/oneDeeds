@@ -27,3 +27,7 @@ prop-types
 - [ ] Redux
 
 - [ ] PropTypes
+
+- [ ] hmr reducers, redux devtools, logger, expose process.env webpack to client
+
+- [ ] react-router scrollTop() feature

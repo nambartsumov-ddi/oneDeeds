@@ -1,13 +1,17 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { hot } from 'react-hot-loader';
 
 import Home from './pages/Home';
+import NotFound from './pages/NotFound';
 
 const Routes = () => (
   <div>
     <BrowserRouter>
-      <Route exact path="/" component={Home} />
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route component={NotFound} />
+      </Switch>
     </BrowserRouter>
   </div>
 );

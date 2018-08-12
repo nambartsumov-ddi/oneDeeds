@@ -6,7 +6,8 @@ import { connectRouter, routerMiddleware } from 'connected-react-router';
 
 import rootReducer from '../reducers';
 
-export const history = createBrowserHistory();
+// const preloadedState = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {}
+const preloadedState = {};
 
 // Configure the logger middleware
 const logger = createLogger({
@@ -14,9 +15,9 @@ const logger = createLogger({
   collapsed: true,
 });
 
-const middleware = [thunk, routerMiddleware(history), logger];
+export const history = createBrowserHistory();
 
-const preloadedState = {};
+const middleware = [thunk, routerMiddleware(history), logger];
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -25,5 +26,9 @@ const store = createStore(
   preloadedState,
   composeEnhancers(applyMiddleware(...middleware))
 );
+
+// store.subscribe(() => {
+//   localStorage.setItem('user', JSON.stringify(store.getState()));
+// });
 
 export default store;
