@@ -1,12 +1,15 @@
 const webpack = require('webpack');
-
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const eslintFormatterPretty = require('eslint-formatter-pretty');
+const eslintFormatter = require('react-dev-utils/eslintFormatter');
 
 const appConfig = require('./config');
 
 const env = process.env.NODE_ENV;
 const isProduction = env === 'production';
+const isDevelopment = env === 'development';
 
 module.exports = {
   name: 'client',
@@ -15,11 +18,15 @@ module.exports = {
   devtool: isProduction ? 'source-map' : 'inline-source-map',
   bail: isProduction,
   entry: {
-    app: appConfig.appPaths.srcEntryPath,
+    app: [
+      // 'react-error-overlay',
+      appConfig.paths.srcEntryPath,
+    ],
   },
   output: {
-    path: appConfig.appPaths.buildPath,
-    filename: isProduction ? '[name].[chunkhash].js' : '[name].js',
+    path: appConfig.paths.buildPath,
+    filename: isProduction ? '[name].[contenthash].js' : '[name].js',
+    chunkFilename: '[name].chunk.js',
     publicPath: '/',
   },
   module: {
@@ -27,15 +34,12 @@ module.exports = {
       {
         enforce: 'pre',
         test: /\.(js|jsx)$/,
-        exclude: /(node_modules|build)/,
-        include: appConfig.appPaths.srcPath,
+        include: appConfig.paths.srcPath,
         use: [
           {
             loader: 'eslint-loader',
             options: {
-              formatter: eslintFormatterPretty, // use react-dev-utils https://github.com/facebook/create-react-app/tree/next/packages/react-dev-utils
-              eslintPath: require.resolve('eslint'),
-              emitError: true,
+              formatter: eslintFormatter,
             },
           },
         ],
@@ -43,11 +47,66 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /(node_modules|build)/,
-        use: ['babel-loader'],
+        use: {
+          loader: 'babel-loader',
+          options: {
+            cacheDirectory: true,
+            compact: isProduction,
+          },
+        },
       },
       {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        test: /\.(css|scss)$/,
+        exclude: [appConfig.paths.srcStylesPath],
+        use: [
+          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              camelCase: true,
+              modules: true,
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins: () => [
+                require('postcss-flexbugs-fixes'),
+                autoprefixer({
+                  browsers: ['last 2 versions', 'not ie < 11'], // TODO: Improve with browserslist
+                  flexbox: 'no-2009',
+                }),
+              ],
+            },
+          },
+          'sass-loader',
+          // 'import-glob-loader
+        ],
+      },
+      {
+        test: /\.(css|scss)$/,
+        include: [appConfig.paths.srcStylesPath],
+        use: [
+          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins: () => [
+                require('postcss-flexbugs-fixes'),
+                autoprefixer({
+                  browsers: ['last 2 versions', 'not ie < 11'], // TODO: Improve with browserslist
+                  flexbox: 'no-2009',
+                }),
+              ],
+            },
+          },
+          'sass-loader',
+          // 'import-glob-loader
+        ],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/,
@@ -64,12 +123,31 @@ module.exports = {
     ],
   },
   optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: true,
+        uglifyOptions: {
+          output: {
+            comments: false,
+          },
+        },
+      }),
+      new OptimizeCSSAssetsPlugin({}),
+    ],
     splitChunks: {
       cacheGroups: {
         commons: {
           test: /(node_modules)/,
           name: 'vendor',
           chunks: 'all',
+        },
+        styles: {
+          name: 'styles',
+          test: /\.css$/,
+          chunks: 'all',
+          enforce: true,
         },
       },
     },
@@ -81,7 +159,7 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.css'],
-    modules: [appConfig.appPaths.srcPath, appConfig.appPaths.nodeModulesPath],
+    modules: [appConfig.paths.srcPath, appConfig.paths.nodeModulesPath],
     alias: {},
   },
   serve: {
@@ -99,10 +177,17 @@ module.exports = {
     children: false,
   },
   plugins: [
-    // new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: isDevelopment ? '[name].css' : '[name].[contenthash].css',
+      chunkFilename: isDevelopment ? '[id].css' : '[id].[contenthash].css',
+    }),
 
     new HtmlWebpackPlugin({
-      template: appConfig.appPaths.indexHtmlPath,
+      template: appConfig.paths.indexHtmlPath,
       filename: 'index.html',
     }),
 
@@ -122,21 +207,7 @@ module.exports = {
       'process.env.NODE_ENV': JSON.stringify(env),
     }),
 
-    // new BundleAnalyzerPlugin(), // TODO: Make this conditional, based on a flag or something.
-
-    // new webpack.optimize.UglifyJsPlugin({
-    //   beautify: false,
-    //   compress: {
-    //     screw_ie8: true
-    //   },
-    //   comments: false
-    // }),
-    // new CompressionPlugin({
-    //   asset: '[path].gz[query]',
-    //   algorithm: 'gzip',
-    //   test: /\.js$|\.html$/,
-    //   threshold: 10240,
-    //   minRatio: 0.8
-    // })
+    // TODO: Make this conditional, based on a flag or something.
+    // new BundleAnalyzerPlugin(),
   ],
 };

@@ -3,13 +3,11 @@ import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
 // import {  } from '../actions';
 
-class Home extends Component {
-  constructor(props) {
-    super(props);
-  }
+import styles from './Home.scss';
 
+class Home extends Component {
   render() {
-    return <div>hiiiiiiiiiiii</div>;
+    return <div className={styles.Home}>hiiiiiiiiiiii</div>;
   }
 }
 

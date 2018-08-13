@@ -14,3 +14,12 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
+
+{
+  /* <Provider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Provider>,
+*/
+}

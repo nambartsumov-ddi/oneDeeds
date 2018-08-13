@@ -1,7 +1,7 @@
 'use strict';
 
-const appPaths = require('./appPaths');
+const paths = require('./paths');
 
 module.exports = {
-  appPaths,
+  paths,
 };
