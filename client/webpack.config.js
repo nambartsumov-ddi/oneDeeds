@@ -4,6 +4,8 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
+const autoprefixer = require('autoprefixer');
+const postcssFlexbugsFixes = require('postcss-flexbugs-fixes');
 
 const appConfig = require('./config');
 
@@ -26,7 +28,6 @@ module.exports = {
   output: {
     path: appConfig.paths.buildPath,
     filename: isProduction ? '[name].[contenthash].js' : '[name].js',
-    chunkFilename: '[name].chunk.js',
     publicPath: '/',
   },
   module: {
@@ -59,8 +60,7 @@ module.exports = {
         test: /\.(css|scss)$/,
         exclude: [appConfig.paths.srcStylesPath],
         use: [
-          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
+          isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
@@ -73,7 +73,7 @@ module.exports = {
             options: {
               ident: 'postcss',
               plugins: () => [
-                require('postcss-flexbugs-fixes'),
+                postcssFlexbugsFixes,
                 autoprefixer({
                   browsers: ['last 2 versions', 'not ie < 11'], // TODO: Improve with browserslist
                   flexbox: 'no-2009',
@@ -89,14 +89,14 @@ module.exports = {
         test: /\.(css|scss)$/,
         include: [appConfig.paths.srcStylesPath],
         use: [
-          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
           {
             loader: 'postcss-loader',
             options: {
               ident: 'postcss',
               plugins: () => [
-                require('postcss-flexbugs-fixes'),
+                postcssFlexbugsFixes,
                 autoprefixer({
                   browsers: ['last 2 versions', 'not ie < 11'], // TODO: Improve with browserslist
                   flexbox: 'no-2009',
