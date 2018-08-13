@@ -12,9 +12,9 @@ prop-types
 
 - [x] HMR
 
-- [ ] scss and node modules
+- [x] scss and node modules
 
-- [ ] postcss with autoprefixer
+- [x] postcss with autoprefixer
 
 - [ ] eslint-plugin-compat
 
@@ -22,15 +22,18 @@ prop-types
 
 - [ ] postcss-normalize
 
-- [ ] split scripts to app.js and vendor.js
+- [x] split scripts to app.js and vendor.js
 
-- [ ] Redux
+- [x] Redux
 
-- [ ] PropTypes
+- [x] PropTypes
 
-- [ ] hmr reducers, redux devtools, logger, expose process.env webpack to client
+- [x] redux-logger, redux devtools
 
-- [ ] react-router scrollTop() feature
+- [ ] hmr reducers, expose process.env webpack to client
 
-- [ ] use SplitChunksPlugin for splitting common vendor libraries <!-- https://stackoverflow.com/questions/49017682/webpack-4-migration-commonschunkplugin -->
+- [ ] react-router-dom scrollTop() feature ?
+
 - [ ] fix webpack-serve historyApiFallback
+
+- [ ] use husky githooks

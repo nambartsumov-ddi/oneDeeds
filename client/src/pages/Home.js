@@ -7,7 +7,7 @@ import styles from './Home.scss';
 
 class Home extends Component {
   render() {
-    return <div className={styles.Home}>hiiiiiiiiiiii</div>;
+    return <div className={styles.Home}>Hello oneDeeds</div>;
   }
 }
 
