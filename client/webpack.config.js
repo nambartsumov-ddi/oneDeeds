@@ -1,17 +1,24 @@
-const webpack = require('webpack')
-const path = require('path');
+const webpack = require('webpack');
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const eslintFormatterPretty = require('eslint-formatter-pretty');
+
+const appConfig = require('./config');
 
 const env = process.env.NODE_ENV;
 const isProduction = env === 'production';
 
 module.exports = {
+  name: 'client',
   mode: env,
+  target: 'web',
+  devtool: isProduction ? 'source-map' : 'inline-source-map',
+  bail: isProduction,
   entry: {
-    app: './src/index.js',
+    app: appConfig.appPaths.srcEntryPath,
   },
   output: {
-    path: path.resolve(__dirname, `dist/${env}`),
+    path: appConfig.appPaths.buildPath,
     filename: isProduction ? '[name].[chunkhash].js' : '[name].js',
     publicPath: '/',
   },
@@ -20,12 +27,22 @@ module.exports = {
       {
         enforce: 'pre',
         test: /\.(js|jsx)$/,
-        exclude: [/node_modules/, /dist/],
-        use: ['eslint-loader'],
+        exclude: /(node_modules|build)/,
+        include: appConfig.appPaths.srcPath,
+        use: [
+          {
+            loader: 'eslint-loader',
+            options: {
+              formatter: eslintFormatterPretty, // use react-dev-utils https://github.com/facebook/create-react-app/tree/next/packages/react-dev-utils
+              eslintPath: require.resolve('eslint'),
+              emitError: true,
+            },
+          },
+        ],
       },
       {
         test: /\.(js|jsx)$/,
-        exclude: [/node_modules/, /dist/],
+        exclude: /(node_modules|build)/,
         use: ['babel-loader'],
       },
       {
@@ -50,21 +67,21 @@ module.exports = {
     splitChunks: {
       cacheGroups: {
         commons: {
-          test: /[\\/]node_modules[\\/]/,
+          test: /(node_modules)/,
           name: 'vendor',
-          chunks: 'all'
-        }
-      }
-    }
+          chunks: 'all',
+        },
+      },
+    },
   },
   performance: {
     hints: false,
     maxEntrypointSize: 400000,
-    maxAssetSize: 300000
+    maxAssetSize: 300000,
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.css'],
-    modules: [path.join(__dirname, 'src'), path.join(__dirname, 'node_modules')],
+    extensions: ['.js', '.jsx', '.json', '.css'],
+    modules: [appConfig.appPaths.srcPath, appConfig.appPaths.nodeModulesPath],
     alias: {},
   },
   serve: {
@@ -72,10 +89,21 @@ module.exports = {
     hmr: true,
     open: true,
   },
+  stats: {
+    // 'normal'
+    colors: true,
+    assets: true,
+    modules: false,
+    builtAt: false,
+    source: false,
+    children: false,
+  },
   plugins: [
+    // new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+
     new HtmlWebpackPlugin({
-      template: 'src/index.html',
-      filename: './index.html',
+      template: appConfig.appPaths.indexHtmlPath,
+      filename: 'index.html',
     }),
 
     // isProduction && new ExtractTextPlugin('/css/style.css'),
@@ -87,14 +115,14 @@ module.exports = {
 
     new webpack.LoaderOptionsPlugin({
       minimize: true,
-      debug: false
+      debug: false,
     }),
 
     new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify(env)
-      }
+      'process.env.NODE_ENV': JSON.stringify(env),
     }),
+
+    // new BundleAnalyzerPlugin(), // TODO: Make this conditional, based on a flag or something.
 
     // new webpack.optimize.UglifyJsPlugin({
     //   beautify: false,
@@ -111,6 +139,4 @@ module.exports = {
     //   minRatio: 0.8
     // })
   ],
-  devtool: isProduction ? 'source-map' : 'inline-source-map',
-  stats: 'normal',
 };

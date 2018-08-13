@@ -33,3 +33,4 @@ prop-types
 - [ ] react-router scrollTop() feature
 
 - [ ] use SplitChunksPlugin for splitting common vendor libraries <!-- https://stackoverflow.com/questions/49017682/webpack-4-migration-commonschunkplugin -->
+- [ ] fix webpack-serve historyApiFallback

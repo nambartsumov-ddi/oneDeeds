@@ -9,7 +9,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # Release
-client/dist/
+client/build/
 
 # Dependency directories
 node_modules/
