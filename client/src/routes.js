@@ -1,18 +1,17 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { hot } from 'react-hot-loader';
 
 import Home from './pages/Home';
-import NotFound from './pages/NotFound';
 
 const Routes = () => (
   <div>
-    <BrowserRouter>
+    <Router>
       <Switch>
-        <Route exact path="/" component={Home} />
-        <Route component={NotFound} />
+        <Route path="/" exact component={Home} />
+        <Redirect to="/" />
       </Switch>
-    </BrowserRouter>
+    </Router>
   </div>
 );
 
