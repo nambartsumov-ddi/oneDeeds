@@ -6,8 +6,6 @@
 
 ## Client:
 
-prop-types
-
 - [x] eslint + prettier
 
 - [x] HMR
