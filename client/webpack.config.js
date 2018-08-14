@@ -4,6 +4,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
+const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
 const autoprefixer = require('autoprefixer');
 const postcssFlexbugsFixes = require('postcss-flexbugs-fixes');
 
@@ -20,10 +21,7 @@ module.exports = {
   devtool: isProduction ? 'source-map' : 'inline-source-map',
   bail: isProduction,
   entry: {
-    app: [
-      // 'react-error-overlay',
-      appConfig.paths.srcEntryPath,
-    ],
+    app: appConfig.paths.srcEntryPath,
   },
   output: {
     path: appConfig.paths.buildPath,
@@ -57,15 +55,17 @@ module.exports = {
         },
       },
       {
-        test: /\.(css|scss)$/,
+        test: /\.module.(css|scss)$/,
         exclude: [appConfig.paths.srcStylesPath],
         use: [
           isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
+              importLoaders: 1,
               camelCase: true,
               modules: true,
+              getLocalIdent: getCSSModuleLocalIdent,
             },
           },
           {
@@ -190,6 +190,12 @@ module.exports = {
       template: appConfig.paths.indexHtmlPath,
       filename: 'index.html',
     }),
+
+    // new InterpolateHtmlPlugin({
+    //   PUBLIC_URL: publicUrl,
+    //   // You can pass any key-value pairs, this was just an example.
+    //   // WHATEVER: 42 will replace %WHATEVER% with 42 in index.html.
+    // }),
 
     // isProduction && new ExtractTextPlugin('/css/style.css'),
 

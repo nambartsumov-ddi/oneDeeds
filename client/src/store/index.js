@@ -10,17 +10,14 @@ import rootReducer from '../reducers';
 const preloadedState = {};
 
 // Configure the logger middleware
-const logger = createLogger({
-  level: 'info',
-  collapsed: true,
-});
+const loggerMiddleware = createLogger();
 
 export const history = createBrowserHistory();
 
 const middleware = [thunk, routerMiddleware(history)];
 
 if (process.env.NODE_ENV === 'development') {
-  middleware.push(logger);
+  middleware.push(loggerMiddleware);
 }
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

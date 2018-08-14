@@ -1,24 +1,24 @@
 {
-    "editor.formatOnPaste": false,
-    "editor.formatOnSave": true,
-    "[javascript]": {
-        "editor.formatOnSave": false,
-    },
-    "eslint.autoFixOnSave": true,
-    "eslint.alwaysShowStatus": true,
-    "javascript.format.enable": false,
-    "typescript.validate.enable": false,
-    "typescript.format.enable": false,
-    "emmet.includeLanguages": {
-        "javascript": "javascriptreact"
-    },
-    "files.exclude": {
-        "**/.git": true,
-        "**/.svn": true,
-        "**/.hg": true,
-        "**/CVS": true,
-        "**/.DS_Store": true
-    },
-    "editor.renderWhitespace": "none",
-    "typescript.autoClosingTags": false,
+  "editor.formatOnPaste": false,
+  "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.formatOnSave": false
+  },
+  "eslint.autoFixOnSave": true,
+  "eslint.alwaysShowStatus": true,
+  "javascript.format.enable": false,
+  "typescript.format.enable": false,
+  "typescript.validate.enable": false,
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true
+  },
+  "editor.renderWhitespace": "none",
+  "eslint.packageManager": "yarn"
 }
