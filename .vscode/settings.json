@@ -20,4 +20,5 @@
         "**/.DS_Store": true
     },
     "editor.renderWhitespace": "none",
+    "typescript.autoClosingTags": false,
 }
