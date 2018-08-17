@@ -1,7 +1,4 @@
 const webpack = require('webpack');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
 // const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages'); //TODO: Implement
@@ -12,21 +9,21 @@ const postcssFlexbugsFixes = require('postcss-flexbugs-fixes');
 const appConfig = require('./config');
 
 const env = process.env.NODE_ENV;
-const isProduction = env === 'production';
-const isDevelopment = env === 'development';
 
 module.exports = {
-  name: 'client',
-  mode: env,
+  name: 'dev-client',
+  mode: 'development',
   target: 'web',
-  devtool: isProduction ? 'source-map' : 'inline-source-map',
-  bail: isProduction,
+  devtool: 'inline-source-map',
+  context: appConfig.paths.srcPath, // the home directory for webpack
+  stats: 'normal',
   entry: {
     app: appConfig.paths.srcEntryPath,
   },
   output: {
     path: appConfig.paths.buildPath,
-    filename: isProduction ? '[name].[contenthash].js' : '[name].js',
+    pathinfo: true,
+    filename: '[name].js',
     publicPath: '/',
   },
   module: {
@@ -51,7 +48,6 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             cacheDirectory: true,
-            compact: isProduction,
           },
         },
       },
@@ -59,11 +55,11 @@ module.exports = {
         test: /\.module.(css|scss)$/,
         exclude: [appConfig.paths.srcStylesPath],
         use: [
-          isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'style-loader',
           {
             loader: 'css-loader',
             options: {
-              importLoaders: 1,
+              importLoaders: 2,
               camelCase: true,
               modules: true,
               getLocalIdent: getCSSModuleLocalIdent,
@@ -76,22 +72,27 @@ module.exports = {
               plugins: () => [
                 postcssFlexbugsFixes,
                 autoprefixer({
-                  browsers: ['last 2 versions', 'not ie < 11'], // TODO: Improve with browserslist
+                  browsers: ['> 5%', 'not ie 11', 'not op_mini all', 'not dead'],
                   flexbox: 'no-2009',
                 }),
               ],
             },
           },
           'sass-loader',
-          // 'import-glob-loader
         ],
       },
       {
         test: /\.(css|scss)$/,
         include: [appConfig.paths.srcStylesPath],
         use: [
-          isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 2,
+              modules: false,
+            },
+          },
           {
             loader: 'postcss-loader',
             options: {
@@ -99,14 +100,13 @@ module.exports = {
               plugins: () => [
                 postcssFlexbugsFixes,
                 autoprefixer({
-                  browsers: ['last 2 versions', 'not ie < 11'], // TODO: Improve with browserslist
+                  browsers: ['> 5%', 'not ie 11', 'not op_mini all', 'not dead'],
                   flexbox: 'no-2009',
                 }),
               ],
             },
           },
           'sass-loader',
-          // 'import-glob-loader
         ],
       },
       {
@@ -117,26 +117,9 @@ module.exports = {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
         use: ['file-loader'],
       },
-      {
-        test: /\.html$/,
-        use: ['html-loader'],
-      },
     ],
   },
   optimization: {
-    minimizer: [
-      new UglifyJsPlugin({
-        cache: true,
-        parallel: true,
-        sourceMap: true,
-        uglifyOptions: {
-          output: {
-            comments: false,
-          },
-        },
-      }),
-      new OptimizeCSSAssetsPlugin({}),
-    ],
     splitChunks: {
       cacheGroups: {
         commons: {
@@ -146,47 +129,32 @@ module.exports = {
         },
         styles: {
           name: 'styles',
-          test: /\.css$/,
+          test: /\.(css)$/,
           chunks: 'all',
           enforce: true,
         },
       },
     },
   },
-  performance: {
-    hints: false,
-    maxEntrypointSize: 400000,
-    maxAssetSize: 300000,
-  },
   resolve: {
-    extensions: ['.js', '.jsx', '.json', '.css'],
+    extensions: ['.js', '.jsx'],
     modules: [appConfig.paths.srcPath, appConfig.paths.nodeModulesPath],
-    alias: {},
+    alias: {
+      Components: appConfig.paths.srcPath + '/components',
+      Containers: appConfig.paths.srcPath + '/containers',
+      Pages: appConfig.paths.srcPath + '/pages',
+      Actions: appConfig.paths.srcPath + '/actions',
+      Reducers: appConfig.paths.srcPath + '/reducers',
+      Store: appConfig.paths.srcPath + '/store',
+      Styles: appConfig.paths.srcPath + '/styles',
+    },
   },
   serve: {
     port: 3000,
     hmr: true,
     open: true,
   },
-  stats: {
-    // 'normal'
-    colors: true,
-    assets: true,
-    modules: false,
-    builtAt: false,
-    source: false,
-    children: false,
-  },
   plugins: [
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-
-    new MiniCssExtractPlugin({
-      // Options similar to the same options in webpackOptions.output
-      // both options are optional
-      filename: isDevelopment ? '[name].css' : '[name].[contenthash].css',
-      chunkFilename: isDevelopment ? '[id].css' : '[id].[contenthash].css',
-    }),
-
     new HtmlWebpackPlugin({
       template: appConfig.paths.indexHtmlPath,
       filename: 'index.html',
@@ -198,23 +166,34 @@ module.exports = {
     //   // WHATEVER: 42 will replace %WHATEVER% with 42 in index.html.
     // }),
 
-    // isProduction && new ExtractTextPlugin('/css/style.css'),
-
     new webpack.ProvidePlugin({
       _: 'lodash',
       moment: 'moment',
     }),
 
-    new webpack.LoaderOptionsPlugin({
-      minimize: true,
-      debug: false,
-    }),
-
+    // Makes some environment variables available to the JS code
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(env),
     }),
 
-    // TODO: Make this conditional, based on a flag or something.
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+
+    // TODO: Make this conditional, based on a flag
     // new BundleAnalyzerPlugin(),
   ],
+  // Some libraries import Node modules but don't use them in the browser.
+  // Tell Webpack to provide empty mocks for them so importing them works.
+  node: {
+    dgram: 'empty',
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty',
+    child_process: 'empty',
+  },
+  // Turn off performance hints during development because we don't do any
+  // splitting or minification in interest of speed. These warnings become
+  // cumbersome.
+  performance: {
+    hints: false,
+  },
 };

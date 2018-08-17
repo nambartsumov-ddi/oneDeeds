@@ -6,32 +6,37 @@
 
 ## Client:
 
-- [x] eslint + prettier
+- [ ] Setup env
 
-- [x] HMR
+- [x] split webpack config
 
-- [x] scss and node modules
+- [ ] configure redux/store/saga/reducers/actions/middleware
 
-- [x] postcss with autoprefixer
+- [ ] images loader (file loader and url loader)
 
-- [ ] eslint-plugin-compat
+* [x] eslint + prettier
 
-- [ ] stylelint-no-unsupported-browser-features
+* [x] HMR
 
-- [ ] postcss-normalize
+* [x] scss and node modules with global styles support
 
-- [x] split scripts to app.js and vendor.js
+* [x] postcss with autoprefixer
 
-- [x] Redux
+* [x] stylelint
+* [ ] stylelint - intergrat with webpack
 
-- [x] PropTypes
+* [x] split scripts to app.js and vendor.js
 
-- [x] redux-logger, redux devtools
+* [x] Redux
 
-- [ ] hmr reducers, expose process.env webpack to client
+* [x] PropTypes
 
-- [ ] react-router-dom scrollTop() feature ?
+* [x] redux-logger, redux devtools
 
-- [ ] fix webpack-serve historyApiFallback
+* [ ] hmr reducers, expose process.env webpack to client
 
-- [ ] use husky githooks
+* [ ] react-router-dom scrollTop() feature ?
+
+* [ ] fix webpack-serve historyApiFallback
+
+* [ ] use husky githooks ?
