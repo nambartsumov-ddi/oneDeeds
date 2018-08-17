@@ -1,11 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import { hot } from 'react-hot-loader';
 
 import Home from './pages/Home';
 
 const Routes = () => (
-  <div>
+  <div className="router">
     <Router>
       <Switch>
         <Route path="/" exact component={Home} />
@@ -15,4 +14,4 @@ const Routes = () => (
   </div>
 );
 
-export default hot(module)(Routes);
+export default Routes;

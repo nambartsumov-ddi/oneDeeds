@@ -1,27 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'connected-react-router';
 
-import './styles/index.scss';
-
-import Routes from './routes';
+import App from './containers/App';
 import store, { history } from './store';
 
 ReactDOM.render(
   <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <Routes />
-    </ConnectedRouter>
+    <App history={history} />
   </Provider>,
   document.getElementById('root')
 );
-
-{
-  /* <Provider store={store}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </Provider>,
-*/
-}
