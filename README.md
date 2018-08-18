@@ -1,54 +1,33 @@
 # oneDeeds
 
-# TODO:
+## TODO:
 
-## Server:
+### Server:
 
-## Client:
+### Client:
 
-- [ ] compression-webpack-plugin
-
-- [ ] Public URL
-
-- [ ] InterpolateHtmlPlugin
-
-- [ ] Setup env
-
-- [x] split webpack config
-
-- [ ] configure redux/store/saga/reducers/actions/middleware
-
+- [x] fix webpack-serve historyApiFallback
+- [ ] Setup env/rules like react/interpolateHtmlPlugin
 - [ ] images loader (file loader and url loader)
-
-- [ ] Tree shaking
-
-- [ ] Code splitting
-
+- [ ] Public URL
+- [x] Copy static files to build
+- [ ] configure redux/store/saga/reducers/actions/middleware
+- [ ] sourcemap Node modules in prod
+- [ ] compression-webpack-plugin
+- [x] split webpack config
+- [x] Tree shaking
+- [x] Code splitting
 - [ ] Lazy Loading
-
-* [x] eslint + prettier
-
-* [x] HMR
-
-* [x] scss and node modules with global styles support
-
-* [x] postcss with autoprefixer
-
-* [x] stylelint
-* [x] stylelint - intergrat with webpack
-
-* [x] split scripts to app.js and vendor.js
-
-* [x] Redux
-
-* [x] PropTypes
-
-* [x] redux-logger, redux devtools
-
-* [ ] hmr reducers, expose process.env webpack to client
-
-* [ ] react-router-dom scrollTop() feature ?
-
-* [ ] fix webpack-serve historyApiFallback
-
-* [ ] use husky githooks ?
+- [x] eslint + prettier
+- [x] HMR
+- [x] scss and node modules with global styles support
+- [x] postcss with autoprefixer
+- [x] stylelint
+- [x] stylelint - intergrat with webpack
+- [x] split scripts to app.js and vendor.js
+- [x] Redux
+- [x] PropTypes
+- [x] redux-logger, redux devtools
+- [ ] hmr reducers, expose process.env webpack to client
+- [ ] react-router-dom scrollTop() feature ?
+- [ ] Class properties, object rest spread

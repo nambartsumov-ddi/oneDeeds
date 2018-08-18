@@ -5,23 +5,15 @@ import styles from './Home.module.scss';
 
 class Home extends Component {
   render() {
-    return (
-      <div className={styles.Home}>
-        Hello oneDeeds
-      </div>
-    );
+    return <div className={styles.Home}>Hello oneDeeds</div>;
   }
 }
 
 Home.propTypes = {};
 
 function mapStateToProps(state) {
-  const { isFetching } = {
-    isFetching: true,
-  };
-
   return {
-    isFetching,
+    state,
   };
 }
 

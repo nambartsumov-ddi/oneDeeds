@@ -3,21 +3,25 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const eslintFormatter = require('react-dev-utils/eslintFormatter');
-// const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages'); //TODO: Implement
+const eslintFormatterPretty = require('eslint-formatter-pretty');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
-const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const appConfig = require('./config');
 
-// const env = process.env.NODE_ENV;
+const publicPath = '/';
+// const publicUrl = '';
+// const env = getClientEnvironment(publicUrl);
+
+// if (env.stringified['process.env'].NODE_ENV !== '"production"') {
+//   throw new Error('Production builds must have NODE_ENV=production.');
+// }
 
 module.exports = {
   name: 'client',
   mode: 'production',
   devtool: 'source-map',
   bail: true,
-  // the home directory for webpack
   context: appConfig.paths.appSrc,
   stats: 'normal',
   entry: {
@@ -25,8 +29,9 @@ module.exports = {
   },
   output: {
     path: appConfig.paths.appBuild,
-    filename: 'scripts/[name].[chunkhash].js',
-    publicPath: '/',
+    filename: 'scripts/[name].[chunkhash:8].js',
+    chunkFilename: 'scripts/[name].[chunkhash:8].chunk.js',
+    publicPath: publicPath,
   },
   module: {
     rules: [
@@ -38,7 +43,7 @@ module.exports = {
           {
             loader: 'eslint-loader',
             options: {
-              formatter: eslintFormatter,
+              formatter: eslintFormatterPretty,
             },
           },
         ],
@@ -70,7 +75,7 @@ module.exports = {
               importLoaders: 2,
               camelCase: true,
               modules: true,
-              getLocalIdent: getCSSModuleLocalIdent,
+              localIdentName: '[hash:base64:5]-[emoji:2]',
             },
           },
           'postcss-loader',
@@ -111,6 +116,10 @@ module.exports = {
         parallel: true,
         sourceMap: true,
         uglifyOptions: {
+          compress: {
+            warnings: false,
+            comparisons: false,
+          },
           output: {
             comments: false,
           },
@@ -129,7 +138,7 @@ module.exports = {
     },
   },
   performance: {
-    hints: false,
+    hints: 'warning',
     maxEntrypointSize: 400000,
     maxAssetSize: 300000,
   },
@@ -144,18 +153,41 @@ module.exports = {
       Reducers: appConfig.paths.appSrc + '/reducers',
       Store: appConfig.paths.appSrc + '/store',
       Styles: appConfig.paths.srcStyles,
+      Media: appConfig.paths.appMedia,
+      Images: appConfig.paths.appImages,
     },
+  },
+  serve: {
+    content: appConfig.paths.appBuild,
   },
   plugins: [
     new StyleLintPlugin(),
+    new CopyWebpackPlugin([
+      {
+        from: appConfig.paths.appStatic,
+        to: appConfig.paths.appBuildStatic,
+        cache: true,
+      },
+    ]),
     new MiniCssExtractPlugin({
       filename: 'styles/[name].[contenthash].css',
       chunkFilename: 'styles/[name].[contenthash].css',
     }),
-
+    // new InterpolateHtmlPlugin(env.raw),
     new HtmlWebpackPlugin({
+      inject: true,
       template: appConfig.paths.appHtml,
       filename: 'index.html',
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyURLs: true,
+      },
     }),
 
     // new InterpolateHtmlPlugin({

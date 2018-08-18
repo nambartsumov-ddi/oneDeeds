@@ -1,13 +1,17 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const eslintFormatter = require('react-dev-utils/eslintFormatter');
-// const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages'); //TODO: Implement
+const eslintFormatterPretty = require('eslint-formatter-pretty');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
-const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
+const history = require('connect-history-api-fallback');
+const convert = require('koa-connect');
+const proxy = require('http-proxy-middleware');
+const { execSync } = require('child_process');
 
 const appConfig = require('./config');
 
-// const env = process.env.NODE_ENV;
+const publicPath = '/';
+// const publicUrl = '';
+// const env = getClientEnvironment(publicUrl);
 
 module.exports = {
   name: 'client',
@@ -22,7 +26,8 @@ module.exports = {
   output: {
     path: appConfig.paths.appBuild,
     filename: '[name].js',
-    publicPath: '/',
+    chunkFilename: '[name].chunk.js',
+    publicPath: publicPath,
   },
   module: {
     rules: [
@@ -34,7 +39,7 @@ module.exports = {
           {
             loader: 'eslint-loader',
             options: {
-              formatter: eslintFormatter,
+              formatter: eslintFormatterPretty,
             },
           },
         ],
@@ -65,7 +70,7 @@ module.exports = {
               importLoaders: 2,
               camelCase: true,
               modules: true,
-              getLocalIdent: getCSSModuleLocalIdent,
+              localIdentName: '[path][name]__[local]--[hash:base64:5]',
             },
           },
           'postcss-loader',
@@ -127,16 +132,14 @@ module.exports = {
       Reducers: appConfig.paths.appSrc + '/reducers',
       Store: appConfig.paths.appSrc + '/store',
       Styles: appConfig.paths.srcStyles,
+      Media: appConfig.paths.appMedia,
+      Images: appConfig.paths.appImages,
     },
-  },
-  serve: {
-    port: 3000,
-    hmr: true,
-    open: true,
   },
   plugins: [
     new StyleLintPlugin(),
     new HtmlWebpackPlugin({
+      inject: true,
       template: appConfig.paths.appHtml,
       filename: 'index.html',
     }),
@@ -168,5 +171,30 @@ module.exports = {
   // cumbersome.
   performance: {
     hints: false,
+  },
+};
+
+module.exports.serve = {
+  port: 3000,
+  hmr: true,
+  open: false,
+  add: (app, middleware, options) => {
+    const historyOptions = {
+      verbose: false,
+    };
+
+    // To remove the "/api" prefix when proxying the API requests, just add
+    // "pathRewrite: { '^/api': '' }" to proxy's options.
+    app.use(convert(proxy('/api', { target: require(appConfig.paths.appPackageJson).proxy })));
+    app.use(convert(history(historyOptions)));
+  },
+  on: {
+    listening: () => {
+      execSync('ps cax | grep "Google Chrome"');
+      execSync(`osascript chrome.applescript "${encodeURI(`http://localhost:3000`)}"`, {
+        cwd: __dirname,
+        stdio: 'ignore',
+      });
+    },
   },
 };
