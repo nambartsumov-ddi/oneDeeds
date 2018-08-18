@@ -7,13 +7,5 @@ module.exports = {
   trailingComma: 'es5',
   bracketSpacing: true,
   jsxBracketSameLine: true,
-  arrowParens: 'always',
-  overrides: [
-    {
-      files: '*.test.js',
-      options: {
-        semi: true
-      }
-    }
-  ]
+  arrowParens: 'always'
 }

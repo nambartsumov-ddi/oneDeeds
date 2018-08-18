@@ -7,8 +7,6 @@ const eslintFormatter = require('react-dev-utils/eslintFormatter');
 // const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages'); //TODO: Implement
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
-const autoprefixer = require('autoprefixer');
-const postcssFlexbugsFixes = require('postcss-flexbugs-fixes');
 
 const appConfig = require('./config');
 
@@ -17,7 +15,6 @@ const appConfig = require('./config');
 module.exports = {
   name: 'client',
   mode: 'production',
-  target: 'web',
   devtool: 'source-map',
   bail: true,
   // the home directory for webpack
@@ -76,19 +73,7 @@ module.exports = {
               getLocalIdent: getCSSModuleLocalIdent,
             },
           },
-          {
-            loader: 'postcss-loader',
-            options: {
-              ident: 'postcss',
-              plugins: () => [
-                postcssFlexbugsFixes,
-                autoprefixer({
-                  browsers: ['> 5%', 'not ie 11', 'not op_mini all', 'not dead'],
-                  flexbox: 'no-2009',
-                }),
-              ],
-            },
-          },
+          'postcss-loader',
           'sass-loader',
         ],
       },
@@ -105,19 +90,7 @@ module.exports = {
               modules: false,
             },
           },
-          {
-            loader: 'postcss-loader',
-            options: {
-              ident: 'postcss',
-              plugins: () => [
-                postcssFlexbugsFixes,
-                autoprefixer({
-                  browsers: ['> 5%', 'not ie 11', 'not op_mini all', 'not dead'],
-                  flexbox: 'no-2009',
-                }),
-              ],
-            },
-          },
+          'postcss-loader',
           'sass-loader',
         ],
       },
@@ -197,9 +170,6 @@ module.exports = {
     }),
 
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-
-    // TODO: Make this conditional, based on a flag or something.
-    // new BundleAnalyzerPlugin(),
   ],
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.

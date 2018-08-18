@@ -6,6 +6,8 @@
 
 ## Client:
 
+- [ ] compression-webpack-plugin
+
 - [ ] Public URL
 
 - [ ] InterpolateHtmlPlugin
