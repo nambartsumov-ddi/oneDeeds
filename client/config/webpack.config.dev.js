@@ -11,7 +11,7 @@ const appConfig = require('./config');
 const env = process.env.NODE_ENV;
 
 module.exports = {
-  name: 'dev-client',
+  name: 'client',
   mode: 'development',
   target: 'web',
   devtool: 'inline-source-map',
@@ -50,6 +50,11 @@ module.exports = {
             cacheDirectory: true,
           },
         },
+      },
+      {
+        test: /\.(css"scss)$/,
+        exclude: [appConfig.paths.srcStylesPath, /\.module.(css|scss)$/],
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
         test: /\.module.(css|scss)$/,
@@ -169,11 +174,6 @@ module.exports = {
     new webpack.ProvidePlugin({
       _: 'lodash',
       moment: 'moment',
-    }),
-
-    // Makes some environment variables available to the JS code
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(env),
     }),
 
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),

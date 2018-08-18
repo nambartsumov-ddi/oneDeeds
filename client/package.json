@@ -17,7 +17,7 @@
     "build:dev": "cross-env NODE_ENV=development webpack --config config/webpack.config.dev.js",
     "build:prod": "cross-env NODE_ENV=production webpack --config config/webpack.config.prod.js",
     "start:dev": "browser-sync start --server 'build/development/' --port 3001",
-    "start:prod": "browser-sync start --server 'build/production/' --port 3001",
+    "start:prod": "browser-sync start --server 'build/' --port 3001",
     "clean": "rimraf build",
     "stylelint": "stylelint '**/*.scss'; exit 0",
     "debug:dev": "cross-env NODE_ENV=development ndb server/app.js",

@@ -14,7 +14,7 @@ const appConfig = require('./config');
 const env = process.env.NODE_ENV;
 
 module.exports = {
-  name: 'prod-client',
+  name: 'client',
   mode: 'production',
   target: 'web',
   devtool: 'source-map',
@@ -27,7 +27,7 @@ module.exports = {
   output: {
     path: appConfig.paths.buildPath,
     pathinfo: true,
-    filename: '[name].[contenthash].js',
+    filename: 'scripts/[name].[chunkhash].js',
     publicPath: '/',
   },
   module: {
@@ -57,8 +57,13 @@ module.exports = {
         },
       },
       {
+        test: /\.(css|scss)$/,
+        include: [/(node_modules)/],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+      },
+      {
         test: /\.module.(css|scss)$/,
-        exclude: [appConfig.paths.srcStylesPath],
+        exclude: [/(node_modules)/, appConfig.paths.srcStylesPath],
         use: [
           MiniCssExtractPlugin.loader,
           {
@@ -89,6 +94,7 @@ module.exports = {
       {
         test: /\.(css|scss)$/,
         include: [appConfig.paths.srcStylesPath],
+        exclude: /node_modules/,
         use: [
           MiniCssExtractPlugin.loader,
           {
@@ -105,6 +111,7 @@ module.exports = {
               plugins: () => [
                 postcssFlexbugsFixes,
                 autoprefixer({
+                  browsers: ['> 5%', 'not ie 11', 'not op_mini all', 'not dead'],
                   flexbox: 'no-2009',
                 }),
               ],
@@ -140,15 +147,9 @@ module.exports = {
     splitChunks: {
       cacheGroups: {
         commons: {
-          test: /(node_modules)/,
-          name: 'vendor',
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
           chunks: 'all',
-        },
-        styles: {
-          name: 'styles',
-          test: /\.(css)$/,
-          chunks: 'all',
-          enforce: true,
         },
       },
     },
@@ -159,8 +160,8 @@ module.exports = {
     maxAssetSize: 300000,
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.json', '.css'],
-    modules: [appConfig.paths.srcPath, appConfig.paths.nodeModulesPath],
+    extensions: ['.js', '.jsx', '.json'],
+    modules: [appConfig.paths.nodeModulesPath, appConfig.paths.srcPath],
     alias: {
       Components: appConfig.paths.srcPath + '/components',
       Containers: appConfig.paths.srcPath + '/containers',
@@ -173,10 +174,8 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      // Options similar to the same options in webpackOptions.output
-      // both options are optional
-      filename: '[name].[contenthash].css',
-      chunkFilename: '[id].[contenthash].css',
+      filename: 'styles/[name].[contenthash].css',
+      chunkFilename: 'styles/[name].[contenthash].css',
     }),
 
     new HtmlWebpackPlugin({
@@ -195,11 +194,6 @@ module.exports = {
       moment: 'moment',
     }),
 
-    // Makes some environment variables available to the JS code
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(env),
-    }),
-
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
 
     // TODO: Make this conditional, based on a flag or something.
@@ -213,11 +207,5 @@ module.exports = {
     net: 'empty',
     tls: 'empty',
     child_process: 'empty',
-  },
-  // Turn off performance hints during development because we don't do any
-  // splitting or minification in interest of speed. These warnings become
-  // cumbersome.
-  performance: {
-    hints: false,
   },
 };

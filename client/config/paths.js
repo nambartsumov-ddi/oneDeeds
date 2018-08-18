@@ -13,7 +13,7 @@ const resolve = (relativePath) => path.resolve(appDir, relativePath);
 module.exports = {
   rootPath: resolve('.'),
   indexHtmlPath: resolve('src/index.html'),
-  buildPath: resolve(`build/${env}`),
+  buildPath: resolve(`build/`),
   buildStaticPath: resolve('build/static'),
   publicPath: ASSET_URL || '/',
   srcPath: resolve('src'),
