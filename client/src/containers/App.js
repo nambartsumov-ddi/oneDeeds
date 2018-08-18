@@ -7,7 +7,7 @@ import { hot } from 'react-hot-loader';
 import Routes from '../Routes';
 
 // module styles
-import 'normalize.css/normalize.css';
+import 'normalize.css';
 // Global styles
 import '../styles/index.scss';
 

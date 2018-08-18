@@ -6,6 +6,10 @@
 
 ## Client:
 
+- [ ] Public URL
+
+- [ ] InterpolateHtmlPlugin
+
 - [ ] Setup env
 
 - [x] split webpack config
@@ -13,6 +17,12 @@
 - [ ] configure redux/store/saga/reducers/actions/middleware
 
 - [ ] images loader (file loader and url loader)
+
+- [ ] Tree shaking
+
+- [ ] Code splitting
+
+- [ ] Lazy Loading
 
 * [x] eslint + prettier
 
@@ -23,7 +33,7 @@
 * [x] postcss with autoprefixer
 
 * [x] stylelint
-* [ ] stylelint - intergrat with webpack
+* [x] stylelint - intergrat with webpack
 
 * [x] split scripts to app.js and vendor.js
 

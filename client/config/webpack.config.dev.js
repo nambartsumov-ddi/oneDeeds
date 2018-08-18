@@ -2,27 +2,28 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
 // const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages'); //TODO: Implement
+const StyleLintPlugin = require('stylelint-webpack-plugin');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
 const autoprefixer = require('autoprefixer');
 const postcssFlexbugsFixes = require('postcss-flexbugs-fixes');
 
 const appConfig = require('./config');
 
-const env = process.env.NODE_ENV;
+// const env = process.env.NODE_ENV;
 
 module.exports = {
   name: 'client',
   mode: 'development',
   target: 'web',
   devtool: 'inline-source-map',
-  context: appConfig.paths.srcPath, // the home directory for webpack
+  // the home directory for webpack
+  context: appConfig.paths.appSrc,
   stats: 'normal',
   entry: {
-    app: appConfig.paths.srcEntryPath,
+    app: appConfig.paths.appIndexJs,
   },
   output: {
-    path: appConfig.paths.buildPath,
-    pathinfo: true,
+    path: appConfig.paths.appBuild,
     filename: '[name].js',
     publicPath: '/',
   },
@@ -31,7 +32,7 @@ module.exports = {
       {
         enforce: 'pre',
         test: /\.(js|jsx)$/,
-        include: appConfig.paths.srcPath,
+        include: appConfig.paths.appSrc,
         use: [
           {
             loader: 'eslint-loader',
@@ -52,13 +53,13 @@ module.exports = {
         },
       },
       {
-        test: /\.(css"scss)$/,
-        exclude: [appConfig.paths.srcStylesPath, /\.module.(css|scss)$/],
+        test: /\.(css|scss)$/,
+        include: /(node_modules)/,
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
         test: /\.module.(css|scss)$/,
-        exclude: [appConfig.paths.srcStylesPath],
+        exclude: [/(node_modules)/, appConfig.paths.srcStyles],
         use: [
           'style-loader',
           {
@@ -88,7 +89,8 @@ module.exports = {
       },
       {
         test: /\.(css|scss)$/,
-        include: [appConfig.paths.srcStylesPath],
+        include: [appConfig.paths.srcStyles],
+        exclude: /node_modules/,
         use: [
           'style-loader',
           {
@@ -143,15 +145,15 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx'],
-    modules: [appConfig.paths.srcPath, appConfig.paths.nodeModulesPath],
+    modules: [appConfig.paths.appSrc, appConfig.paths.appNodeModules],
     alias: {
-      Components: appConfig.paths.srcPath + '/components',
-      Containers: appConfig.paths.srcPath + '/containers',
-      Pages: appConfig.paths.srcPath + '/pages',
-      Actions: appConfig.paths.srcPath + '/actions',
-      Reducers: appConfig.paths.srcPath + '/reducers',
-      Store: appConfig.paths.srcPath + '/store',
-      Styles: appConfig.paths.srcPath + '/styles',
+      Components: appConfig.paths.appSrc + '/components',
+      Containers: appConfig.paths.appSrc + '/containers',
+      Pages: appConfig.paths.appSrc + '/pages',
+      Actions: appConfig.paths.appSrc + '/actions',
+      Reducers: appConfig.paths.appSrc + '/reducers',
+      Store: appConfig.paths.appSrc + '/store',
+      Styles: appConfig.paths.srcStyles,
     },
   },
   serve: {
@@ -160,8 +162,9 @@ module.exports = {
     open: true,
   },
   plugins: [
+    new StyleLintPlugin(),
     new HtmlWebpackPlugin({
-      template: appConfig.paths.indexHtmlPath,
+      template: appConfig.paths.appHtml,
       filename: 'index.html',
     }),
 

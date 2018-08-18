@@ -5,13 +5,14 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
 // const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages'); //TODO: Implement
+const StyleLintPlugin = require('stylelint-webpack-plugin');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
 const autoprefixer = require('autoprefixer');
 const postcssFlexbugsFixes = require('postcss-flexbugs-fixes');
 
 const appConfig = require('./config');
 
-const env = process.env.NODE_ENV;
+// const env = process.env.NODE_ENV;
 
 module.exports = {
   name: 'client',
@@ -19,14 +20,14 @@ module.exports = {
   target: 'web',
   devtool: 'source-map',
   bail: true,
-  context: appConfig.paths.srcPath, // the home directory for webpack
+  // the home directory for webpack
+  context: appConfig.paths.appSrc,
   stats: 'normal',
   entry: {
-    app: appConfig.paths.srcEntryPath,
+    app: appConfig.paths.appIndexJs,
   },
   output: {
-    path: appConfig.paths.buildPath,
-    pathinfo: true,
+    path: appConfig.paths.appBuild,
     filename: 'scripts/[name].[chunkhash].js',
     publicPath: '/',
   },
@@ -35,7 +36,7 @@ module.exports = {
       {
         enforce: 'pre',
         test: /\.(js|jsx)$/,
-        include: appConfig.paths.srcPath,
+        include: appConfig.paths.appSrc,
         use: [
           {
             loader: 'eslint-loader',
@@ -58,12 +59,12 @@ module.exports = {
       },
       {
         test: /\.(css|scss)$/,
-        include: [/(node_modules)/],
+        include: /(node_modules)/,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
       {
         test: /\.module.(css|scss)$/,
-        exclude: [/(node_modules)/, appConfig.paths.srcStylesPath],
+        exclude: [/(node_modules)/, appConfig.paths.srcStyles],
         use: [
           MiniCssExtractPlugin.loader,
           {
@@ -93,7 +94,7 @@ module.exports = {
       },
       {
         test: /\.(css|scss)$/,
-        include: [appConfig.paths.srcStylesPath],
+        include: [appConfig.paths.srcStyles],
         exclude: /node_modules/,
         use: [
           MiniCssExtractPlugin.loader,
@@ -161,25 +162,26 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
-    modules: [appConfig.paths.nodeModulesPath, appConfig.paths.srcPath],
+    modules: [appConfig.paths.appNodeModules, appConfig.paths.appSrc],
     alias: {
-      Components: appConfig.paths.srcPath + '/components',
-      Containers: appConfig.paths.srcPath + '/containers',
-      Pages: appConfig.paths.srcPath + '/pages',
-      Actions: appConfig.paths.srcPath + '/actions',
-      Reducers: appConfig.paths.srcPath + '/reducers',
-      Store: appConfig.paths.srcPath + '/store',
-      Styles: appConfig.paths.srcPath + '/styles',
+      Components: appConfig.paths.appSrc + '/components',
+      Containers: appConfig.paths.appSrc + '/containers',
+      Pages: appConfig.paths.appSrc + '/pages',
+      Actions: appConfig.paths.appSrc + '/actions',
+      Reducers: appConfig.paths.appSrc + '/reducers',
+      Store: appConfig.paths.appSrc + '/store',
+      Styles: appConfig.paths.srcStyles,
     },
   },
   plugins: [
+    new StyleLintPlugin(),
     new MiniCssExtractPlugin({
       filename: 'styles/[name].[contenthash].css',
       chunkFilename: 'styles/[name].[contenthash].css',
     }),
 
     new HtmlWebpackPlugin({
-      template: appConfig.paths.indexHtmlPath,
+      template: appConfig.paths.appHtml,
       filename: 'index.html',
     }),
 
