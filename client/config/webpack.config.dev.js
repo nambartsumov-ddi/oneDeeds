@@ -13,6 +13,8 @@ const publicPath = '/';
 // const publicUrl = '';
 // const env = getClientEnvironment(publicUrl);
 
+const isWindows = process.platform === 'win32';
+
 module.exports = {
   name: 'client',
   mode: 'development',
@@ -177,7 +179,7 @@ module.exports = {
 module.exports.serve = {
   port: 3000,
   hmr: true,
-  open: false,
+  open: isWindows,
   add: (app, middleware, options) => {
     const historyOptions = {
       verbose: false,
@@ -190,6 +192,9 @@ module.exports.serve = {
   },
   on: {
     listening: () => {
+      if (isWindows) {
+        return;
+      }
       execSync('ps cax | grep "Google Chrome"');
       execSync(`osascript chrome.applescript "${encodeURI(`http://localhost:3000`)}"`, {
         cwd: __dirname,
