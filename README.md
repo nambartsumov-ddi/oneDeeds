@@ -3,17 +3,18 @@
 ## TODO:
 
 ### Server:
+- [ ] Get started
 
 ### Client:
-
+- [ ] Fix "import/no-unresolved" issues with webpacl aliases
 - [x] fix webpack-serve historyApiFallback
 - [ ] Setup env/rules like react/interpolateHtmlPlugin
 - [ ] images loader (file loader and url loader)
 - [ ] Public URL
 - [x] Copy static files to build
 - [ ] configure redux/store/saga/reducers/actions/middleware
-- [ ] sourcemap Node modules in prod
-- [ ] compression-webpack-plugin
+- [x] sourcemap Node modules in prod
+- [ ] gzip
 - [x] split webpack config
 - [x] Tree shaking
 - [x] Code splitting

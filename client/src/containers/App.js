@@ -4,15 +4,15 @@ import PropTypes from 'prop-types';
 import { hot } from 'react-hot-loader';
 
 // App routes
-import Routes from '../Routes';
+import Routes from '../routes';
 
 // module styles
 import 'normalize.css';
 // Global styles
-import '../styles/index.scss';
+import 'Styles/global.scss';
 
 const App = ({ history }) => (
-  <div className="App">
+  <div className="app">
     <ConnectedRouter history={history}>
       <Routes />
     </ConnectedRouter>

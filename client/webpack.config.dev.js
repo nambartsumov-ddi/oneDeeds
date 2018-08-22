@@ -1,11 +1,11 @@
 const webpack = require('webpack');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const eslintFormatterPretty = require('eslint-formatter-pretty');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const history = require('connect-history-api-fallback');
+const convert = require('koa-connect');
+const proxy = require('http-proxy-middleware');
+const { execSync } = require('child_process');
 
 const appConfig = require('./config');
 
@@ -13,15 +13,13 @@ const publicPath = '/';
 // const publicUrl = '';
 // const env = getClientEnvironment(publicUrl);
 
-// if (env.stringified['process.env'].NODE_ENV !== '"production"') {
-//   throw new Error('Production builds must have NODE_ENV=production.');
-// }
+const isWindows = process.platform === 'win32';
 
 module.exports = {
   name: 'client',
-  mode: 'production',
-  devtool: 'source-map',
-  bail: true,
+  mode: 'development',
+  devtool: 'eval-source-map',
+  // the home directory for webpack
   context: appConfig.paths.appSrc,
   stats: 'normal',
   entry: {
@@ -29,8 +27,8 @@ module.exports = {
   },
   output: {
     path: appConfig.paths.appBuild,
-    filename: 'scripts/[name].[chunkhash:8].js',
-    chunkFilename: 'scripts/[name].[chunkhash:8].chunk.js',
+    filename: '[name].js',
+    chunkFilename: '[name].chunk.js',
     publicPath: publicPath,
   },
   module: {
@@ -44,6 +42,8 @@ module.exports = {
             loader: 'eslint-loader',
             options: {
               formatter: eslintFormatterPretty,
+              failOnError: false,
+              cache: false,
             },
           },
         ],
@@ -55,31 +55,50 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             cacheDirectory: true,
-            compact: true,
           },
         },
       },
       {
         test: /\.(css|scss)$/,
         include: /(node_modules)/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+        use: [
+          { loader: 'style-loader', options: { sourceMap: true } },
+          { loader: 'css-loader', options: { sourceMap: true } },
+          { loader: 'sass-loader', options: { sourceMap: true } },
+        ],
       },
       {
         test: /\.module.(css|scss)$/,
         exclude: [/(node_modules)/, appConfig.paths.srcStyles],
         use: [
-          MiniCssExtractPlugin.loader,
+          {
+            loader: 'style-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
           {
             loader: 'css-loader',
             options: {
+              sourceMap: true,
               importLoaders: 2,
               camelCase: true,
               modules: true,
-              localIdentName: '[hash:base64:5]-[emoji:2]',
+              localIdentName: '[path][name]__[local]--[hash:base64:5]',
             },
           },
-          'postcss-loader',
-          'sass-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
         ],
       },
       {
@@ -87,16 +106,32 @@ module.exports = {
         include: [appConfig.paths.srcStyles],
         exclude: /node_modules/,
         use: [
-          MiniCssExtractPlugin.loader,
+          {
+            loader: 'style-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
           {
             loader: 'css-loader',
             options: {
+              sourceMap: true,
               importLoaders: 2,
               modules: false,
             },
           },
-          'postcss-loader',
-          'sass-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
         ],
       },
       {
@@ -110,41 +145,25 @@ module.exports = {
     ],
   },
   optimization: {
-    minimizer: [
-      new UglifyJsPlugin({
-        cache: true,
-        parallel: true,
-        sourceMap: true,
-        uglifyOptions: {
-          compress: {
-            warnings: false,
-            comparisons: false,
-          },
-          output: {
-            comments: false,
-          },
-        },
-      }),
-      new OptimizeCSSAssetsPlugin({}),
-    ],
     splitChunks: {
       cacheGroups: {
         commons: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
+          test: /(node_modules)/,
+          name: 'vendor',
           chunks: 'all',
+        },
+        styles: {
+          name: 'styles',
+          test: /\.(css)$/,
+          chunks: 'all',
+          enforce: true,
         },
       },
     },
   },
-  performance: {
-    hints: 'warning',
-    maxEntrypointSize: 400000,
-    maxAssetSize: 300000,
-  },
   resolve: {
-    extensions: ['.js', '.jsx', '.json'],
-    modules: [appConfig.paths.appNodeModules, appConfig.paths.appSrc],
+    extensions: ['.js', '.jsx'],
+    modules: [appConfig.paths.appSrc, appConfig.paths.appNodeModules],
     alias: {
       Components: appConfig.paths.appSrc + '/components',
       Containers: appConfig.paths.appSrc + '/containers',
@@ -157,37 +176,12 @@ module.exports = {
       Images: appConfig.paths.appImages,
     },
   },
-  serve: {
-    content: appConfig.paths.appBuild,
-  },
   plugins: [
     new StyleLintPlugin(),
-    new CopyWebpackPlugin([
-      {
-        from: appConfig.paths.appStatic,
-        to: appConfig.paths.appBuildStatic,
-        cache: true,
-      },
-    ]),
-    new MiniCssExtractPlugin({
-      filename: 'styles/[name].[contenthash].css',
-      chunkFilename: 'styles/[name].[contenthash].css',
-    }),
-    // new InterpolateHtmlPlugin(env.raw),
     new HtmlWebpackPlugin({
       inject: true,
       template: appConfig.paths.appHtml,
       filename: 'index.html',
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true,
-        removeRedundantAttributes: true,
-        useShortDoctype: true,
-        removeEmptyAttributes: true,
-        removeStyleLinkTypeAttributes: true,
-        keepClosingSlash: true,
-        minifyURLs: true,
-      },
     }),
 
     // new InterpolateHtmlPlugin({
@@ -211,5 +205,39 @@ module.exports = {
     net: 'empty',
     tls: 'empty',
     child_process: 'empty',
+  },
+  // Turn off performance hints during development because we don't do any
+  // splitting or minification in interest of speed. These warnings become
+  // cumbersome.
+  performance: {
+    hints: false,
+  },
+};
+
+module.exports.serve = {
+  port: 3000,
+  hmr: true,
+  open: isWindows,
+  add: (app, middleware, options) => {
+    const historyOptions = {
+      verbose: false,
+    };
+
+    // To remove the "/api" prefix when proxying the API requests, just add
+    // "pathRewrite: { '^/api': '' }" to proxy's options.
+    app.use(convert(proxy('/api', { target: require(appConfig.paths.appPackageJson).proxy })));
+    app.use(convert(history(historyOptions)));
+  },
+  on: {
+    listening: () => {
+      if (isWindows) {
+        return;
+      }
+      execSync('ps cax | grep "Google Chrome"');
+      execSync(`osascript chrome.applescript "${encodeURI(`http://localhost:3000`)}"`, {
+        cwd: __dirname,
+        stdio: 'ignore',
+      });
+    },
   },
 };
