@@ -93,6 +93,7 @@
   "browserslist": "> 5%, not ie 11, not op_mini all, not dead",
   "postcss": {
     "ident": "postcss",
+    "sourceMap": true,
     "plugins": {
       "postcss-flexbugs-fixes": {},
       "autoprefixer": {
