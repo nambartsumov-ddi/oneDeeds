@@ -1,30 +1,31 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
+import { createStore, applyMiddleware } from 'redux';
 import { createBrowserHistory } from 'history';
-import { createLogger } from 'redux-logger';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
+import { createLogger } from 'redux-logger';
+import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProduction';
 
 import rootReducer from '../reducers';
 
-// const preloadedState = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {}
-const preloadedState = {};
+export const history = createBrowserHistory();
 
+// const preloadedState = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {}
+const initialState = {};
 // Configure the logger middleware
 const loggerMiddleware = createLogger();
 
-export const history = createBrowserHistory();
-
-const middleware = [thunk, routerMiddleware(history)];
+const middleware = [routerMiddleware(history)];
 
 if (process.env.NODE_ENV === 'development') {
   middleware.push(loggerMiddleware);
 }
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = composeWithDevTools({
+  // Specify name here, actionsBlacklist, actionsCreators and other options if needed
+});
 
 const store = createStore(
   connectRouter(history)(rootReducer),
-  preloadedState,
+  initialState,
   composeEnhancers(applyMiddleware(...middleware))
 );
 
