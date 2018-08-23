@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const eslintFormatterPretty = require('eslint-formatter-pretty');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
@@ -18,7 +19,7 @@ const isWindows = process.platform === 'win32';
 module.exports = {
   name: 'client',
   mode: 'development',
-  devtool: 'eval-source-map',
+  devtool: 'module-source-map',
   // the home directory for webpack
   context: appConfig.paths.appSrc,
   stats: 'normal',
@@ -30,6 +31,7 @@ module.exports = {
     filename: '[name].js',
     chunkFilename: '[name].chunk.js',
     publicPath: publicPath,
+    devtoolModuleFilenameTemplate: (info) => 'file://' + path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
   },
   module: {
     rules: [
@@ -235,7 +237,7 @@ module.exports.serve = {
       }
       execSync('ps cax | grep "Google Chrome"');
       execSync(`osascript chrome.applescript "${encodeURI(`http://localhost:3000`)}"`, {
-        cwd: __dirname,
+        cwd: __dirname + '/config',
         stdio: 'ignore',
       });
     },
