@@ -3,10 +3,12 @@
 ## TODO:
 
 ### Server:
+
 - [ ] Get started
 
 ### Client:
-- [ ] Fix "import/no-unresolved" issues with webpacl aliases
+
+- [ ] Fix "import/no-unresolved" issues with webpack aliases
 - [x] fix webpack-serve historyApiFallback
 - [ ] Setup env/rules like react/interpolateHtmlPlugin
 - [ ] images loader (file loader and url loader)

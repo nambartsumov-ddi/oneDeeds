@@ -6,11 +6,6 @@ import { hot } from 'react-hot-loader';
 // App routes
 import Routes from '../routes';
 
-// module styles
-import 'normalize.css';
-// Global styles
-import 'Styles/global.scss';
-
 const App = ({ history }) => (
   <div className="app">
     <ConnectedRouter history={history}>

@@ -9,20 +9,20 @@ const appDir = fs.realpathSync(process.cwd());
 const resolveApp = (relativePath) => path.resolve(appDir, relativePath);
 
 module.exports = {
-  dotenv: resolveApp('.env'),
+  publicPath: '/',
   appClient: resolveApp(''),
   appHtml: resolveApp('src/index.html'),
+  appSrc: resolveApp('src'),
   appBuild: resolveApp('build'),
   appBuildStatic: resolveApp('build/static'),
   appStatic: resolveApp('src/static'),
   appMedia: resolveApp('src/static/media'),
   appImages: resolveApp('src/static/media/images'),
-  publicPath: '/',
-  appSrc: resolveApp('src'),
   srcStyles: resolveApp('src/styles'),
   appIndexJs: resolveApp('src/index.js'),
-  appNodeModules: resolveApp('node_modules'),
+  dotenv: resolveApp('.env'),
   babelrcPath: resolveApp('.babelrc'),
+  appNodeModules: resolveApp('node_modules'),
   appPackageJson: resolveApp('package.json'),
   yarnLockFile: resolveApp('yarn.lock'),
 };
