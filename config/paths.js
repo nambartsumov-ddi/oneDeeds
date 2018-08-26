@@ -21,7 +21,7 @@ module.exports = {
     indexJs: resolveApp('src/client/index.js'),
 
     // Assets
-    images: resolveApp('src/client/static/images'),
+    images: resolveApp('src/client/assets/images'),
     styles: resolveApp('src/client/styles'),
 
     // Folders
