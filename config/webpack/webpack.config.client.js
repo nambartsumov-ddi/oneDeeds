@@ -41,7 +41,7 @@ module.exports = {
       {
         enforce: 'pre',
         test: /\.(js|jsx)$/,
-        include: appConfig.paths.client.appClient,
+        include: appConfig.paths.client.root,
         use: [
           {
             loader: 'eslint-loader',
@@ -55,7 +55,7 @@ module.exports = {
       },
       {
         test: /\.(js|jsx)$/,
-        exclude: /(node_modules|build)/,
+        exclude: /(node_modules|build|server)/,
         use: {
           loader: 'babel-loader',
           options: {

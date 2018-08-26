@@ -36,5 +36,13 @@ module.exports = {
     build: resolveApp('build/client'),
     buildPublicPath: resolveApp('build/client/public'),
   },
-  server: {},
+  server: {
+    // Entry
+    root: resolveApp('src/server'),
+    indexJs: resolveApp('src/server/index.js'),
+
+    // Build
+    build: resolveApp('build/server'),
+    buildPublicPath: resolveApp('build/server'),
+  },
 };
