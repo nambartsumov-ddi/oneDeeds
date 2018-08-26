@@ -34,7 +34,6 @@ module.exports = {
 
     // Build
     build: resolveApp('build/client'),
-    buildPublicPath: resolveApp('build/client/public'),
   },
   server: {
     // Entry

@@ -19,7 +19,7 @@
     "prebuild": "yarn clean",
     "build": "yarn build:client",
     "build:client": "cross-env NODE_ENV=production CLIENT=true webpack",
-    "browser-sync": "browser-sync start --server \"build/public\" --port 3001",
+    "browser-sync": "browser-sync start --server \"build/client\" --port 3001",
     "debug": "ndb ."
   },
   "dependencies": {

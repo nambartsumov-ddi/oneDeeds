@@ -33,7 +33,7 @@ module.exports = {
     path: appConfig.paths.client.build,
     filename: isDevelopment ? '[name].js' : 'scripts/[name].[chunkhash:8].js',
     chunkFilename: isDevelopment ? '[name].chunk.js' : 'scripts/[name].[chunkhash:8].chunk.js',
-    publicPath: isDevelopment ? '/' : appConfig.paths.client.buildPublicPath,
+    publicPath: '/',
     // devtoolModuleFilenameTemplate: (info) => 'file://' + path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
   },
   module: {
@@ -92,7 +92,7 @@ module.exports = {
               importLoaders: 2,
               camelCase: true,
               modules: true,
-              localIdentName: '[path][name]__[local]--[hash:base64:5]',
+              localIdentName: isDevelopment ? '[path][name]__[local]--[hash:base64:5]' : '[hash:base64:5]-[emoji:2]',
             },
           },
           {
@@ -259,7 +259,7 @@ module.exports = {
   },
 };
 
-if (isDevelopment) {
+if (isProduction) {
   module.exports.plugins.unshift(
     new CopyWebpackPlugin([
       // {
@@ -273,6 +273,9 @@ if (isDevelopment) {
       chunkFilename: 'styles/[name].[contenthash].css',
     })
   );
+}
+
+if (isDevelopment) {
   module.exports.serve = {
     port: 3000,
     hmr: true,
