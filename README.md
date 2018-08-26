@@ -4,12 +4,24 @@
 
 ### Server:
 
-- [ ] Get started
+- [ ] Insure the server auto restart - PM2/Forever
+- [ ] logging - winston
+- [ ] Database - mongodb
+- [ ] Server
+- [ ] nginx - reverse proxy, load balancer, serve static files, handle TLS, gzip. // https://www.nginx.com/resources/wiki/start/
+- [ ] rate limiting
+- [ ] Monitoring?
+- [ ] Utilize all CPU cores
+- [ ] dumper.js
+- [ ] Error management (https://goldbergyoni.com/checklist-best-practices-of-node-js-error-handling/)
+- [ ] Security checklist (https://blog.risingstack.com/node-js-security-checklist/)
+- [ ] 12 factor app https://12factor.net/
 
 ### Client:
 
 - [ ] Fix "import/no-unresolved" issues with webpack aliases
 - [x] fix webpack-serve historyApiFallback
+- [ ] HTML template with html webpack plugin
 - [ ] Setup env/rules like react/interpolateHtmlPlugin
 - [ ] images loader (file loader and url loader)
 - [ ] Public URL
