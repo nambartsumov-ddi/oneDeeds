@@ -1,3 +1,7 @@
+'use strict';
+
+require('./config');
+
 const clientConfig = require('./config/webpack/webpack.config.client');
 const serverConfig = require('./config/webpack/webpack.config.server');
 
