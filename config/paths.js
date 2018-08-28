@@ -3,8 +3,6 @@
 const path = require('path');
 const fs = require('fs');
 
-// const env = process.env.NODE_ENV;
-
 const appDir = fs.realpathSync(process.cwd());
 const resolveApp = (relativePath) => path.resolve(appDir, relativePath);
 
@@ -14,15 +12,18 @@ module.exports = {
   dotenv: resolveApp('.env'),
   packageJson: resolveApp('package.json'),
   yarnLock: resolveApp('yarn.lock'),
+  public: resolveApp('public'),
   client: {
     // Entry
     root: resolveApp('src/client'),
     indexHtml: resolveApp('src/client/index.html'),
     indexJs: resolveApp('src/client/index.js'),
+    styles: resolveApp('src/client/styles'),
+    favicon: resolveApp('src/client/favicon.ico'),
 
     // Assets
+    assets: resolveApp('src/client/assets'),
     images: resolveApp('src/client/assets/images'),
-    styles: resolveApp('src/client/styles'),
 
     // Folders
     components: resolveApp('src/client/components'),
@@ -34,6 +35,7 @@ module.exports = {
 
     // Build
     build: resolveApp('build/client'),
+    buildAssets: resolveApp('build/client/assets'),
   },
   server: {
     // Entry
