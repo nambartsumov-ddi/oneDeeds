@@ -1,0 +1,24 @@
+@import '../../styles/variables';
+
+// Layout buton
+.LayoutButton {
+  font-size: 1rem;
+  background: transparent;
+  border: 1px solid white;
+  padding: 0.8rem 3.8rem;
+  color: white;
+  cursor: pointer;
+  font-weight: bolder;
+  border-radius: 2em;
+  line-height: inherit;
+  text-decoration: none;
+  outline: none;
+  transform: scale(0.95);
+  transition: background 0.3s ease-in, border 0.3s ease-in, transform 0.1s cubic-bezier(0.91, 0.8, 0.54, 1);
+
+  &:hover {
+    border: 1px solid $LayoutButtonOnHover;
+    background: $LayoutButtonOnHover;
+    transform: scale(1);
+  }
+}

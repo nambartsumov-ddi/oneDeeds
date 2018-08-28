@@ -1,0 +1,64 @@
+@import '../../styles/variables';
+
+.Nav {
+  position: absolute;
+  width: 34rem;
+  right: 54rem * -1;
+
+  > div {
+    padding: 2.5rem 4.5rem;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    height: 100vh;
+    box-sizing: border-box;
+    transition: transform ease 250ms;
+    background-color: white;
+    color: #b3b3b3;
+    /*padding: 2.5rem 4.5rem;
+    font-size: 1.85rem;
+    line-height: 1.4;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: -1;
+    text-transform: none;*/
+
+    // &.visible {
+    //   transform: translate3d(54rem * -1, 0, 0);
+    // }
+
+    > .mainLinks {
+      font-weight: bold;
+      line-height: 2;
+      font-size: 2.25rem;
+      padding-top: 60px;
+      height: 70%;
+
+      .link {
+        float: left;
+        width: 51%;
+        cursor: pointer;
+        box-sizing: border-box;
+        transition: margin-left 0.3s ease, opacity 0.3s ease, color 0.1s linear;
+        opacity: 0;
+        margin-left: 6rem;
+
+        &:first-child {
+          transition-delay: 0.2s;
+        }
+
+        &:nth-child(2) {
+          transition-delay: 0.3s;
+        }
+
+        &:nth-child(3) {
+          transition-delay: 0.4s;
+        }
+
+        &:hover {
+          color: #ff5a60;
+        }
+      }
+    }
+  }
+}
