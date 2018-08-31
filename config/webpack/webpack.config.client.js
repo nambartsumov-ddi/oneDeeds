@@ -1,7 +1,6 @@
 'use strict';
 
 const webpack = require('webpack');
-const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const eslintFormatterPretty = require('eslint-formatter-pretty');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -36,8 +35,9 @@ module.exports = {
     filename: isDevelopment ? '[name].js' : 'scripts/[name].[chunkhash:8].js',
     chunkFilename: isDevelopment ? '[name].js' : 'scripts/[name].[chunkhash:8].js',
     publicPath: '/',
-    // TODO: FIX THIS
-    devtoolModuleFilenameTemplate: (info) => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
+    devtoolModuleFilenameTemplate(info) {
+      return `file:///${info.absoluteResourcePath.replace(/\\/g, '/')}`;
+    },
   },
   module: {
     rules: [

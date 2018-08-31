@@ -1,13 +1,12 @@
-const initialState = null;
+import { SET_USER } from 'Actions';
 
-export default function(state = initialState, action) {
+export default function(state = {}, action) {
   switch (action.type) {
-    case 'SET_USER':
-      return Object.assign({}, state, {
-        user: action.user,
-      });
-    case 'CLEAR_USER':
-      return (state = undefined);
+    case SET_USER:
+      return {
+        ...state,
+        user: state.user,
+      };
     default:
       return state;
   }
