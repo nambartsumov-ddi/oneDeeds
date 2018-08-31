@@ -1,10 +1,6 @@
 import { TOGGLE_NAVIGATION } from 'Actions';
 
-const initialState = {
-  isNavOpen: false,
-};
-
-export default function(state = initialState, action) {
+export default function(state = {}, action) {
   switch (action.type) {
     case TOGGLE_NAVIGATION:
       return {

@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import user from './user';
-import nav from './nav';
+import ui from './ui';
 
-const rootReducer = combineReducers({ user, nav });
+const rootReducer = combineReducers({ user, ui });
 
 export default rootReducer;
