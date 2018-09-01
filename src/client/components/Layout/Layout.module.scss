@@ -5,13 +5,14 @@
   flex-direction: row;
   height: 100vh;
   transition: transform ease 0.25s;
+  font-size: 2.5em;
 
   &.navOpen {
     transform: translateX(-34rem);
   }
 
   .left {
-    background: $leftLayoutBackground;
+    // background: $leftLayoutBackground;
     flex: 1.5;
   }
 
@@ -22,16 +23,34 @@
     height: 100vh;
 
     .rightHalfTop {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: $rightHalfTopLayoutBackground;
+      // background: $rightHalfTopLayoutBackground;
       flex: 1;
     }
 
     .rightBottom {
-      background: $rightBottomLayoutBackground;
+      // background: $rightBottomLayoutBackground;
       flex: 1;
     }
   }
+}
+
+.Description {
+  font-size: 0.6em;
+}
+
+.Panel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+
+  cursor: pointer;
+
+  transition-duration: 1.5s;
+  transition-timing-function: cubic-bezier(0, 0.62, 0.41, 1);
 }
