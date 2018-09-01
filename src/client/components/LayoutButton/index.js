@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import styles from './LayoutButton.module.scss';
 
@@ -7,13 +8,15 @@ class LayoutButton extends Component {
     return (
       <div className={styles.LayoutButtonWrapper}>
         <button className={styles.LayoutButton}>
-          <span>Act Now</span>
+          <span>{this.props.text}</span>
         </button>
       </div>
     );
   }
 }
 
-LayoutButton.propTypes = {};
+LayoutButton.propTypes = {
+  text: PropTypes.string,
+};
 
 export default LayoutButton;
