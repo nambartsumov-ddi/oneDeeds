@@ -1,20 +1,21 @@
-{
-  "presets": [
+
+module.exports = {
+  presets: [
     [
       "@babel/preset-env",
       {
         "useBuiltIns": "usage",
         "debug": false,
         "modules": false,
-        "loose": true
+        "loose": true,
       }
     ],
     "@babel/react"
   ],
-  "env": {
-    "development": {
-      "plugins": ["react-hot-loader/babel"]
+  env: {
+    development: {
+      plugins: process.env.CLIENT ? ["react-hot-loader/babel"] : []
     },
-    "production": {}
+    production: {}
   }
 }

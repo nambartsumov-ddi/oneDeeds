@@ -18,6 +18,7 @@
 
 ### Client:
 
+- [ ] Optimize imported images with imagemin
 - [ ] Fix "import/no-unresolved" issues with webpack aliases
 - [x] fix webpack-serve historyApiFallback
 - [x] HTML template with html webpack plugin

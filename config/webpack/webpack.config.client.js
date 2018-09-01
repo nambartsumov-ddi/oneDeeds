@@ -33,8 +33,8 @@ module.exports = {
   output: {
     pathinfo: isDevelopment,
     path: appConfig.paths.build.public,
-    filename: isDevelopment ? '[name].js' : 'scripts/[name].[chunkhash:8].js',
-    chunkFilename: isDevelopment ? '[name].js' : 'scripts/[name].[chunkhash:8].js',
+    filename: isDevelopment ? '[name].js' : 'scripts/[name].[chunkhash:6].js',
+    chunkFilename: isDevelopment ? '[name].js' : 'scripts/[name].[chunkhash:6].js',
     publicPath: isDevelopment ? '/' : '/public',
     devtoolModuleFilenameTemplate(info) {
       return isMac
@@ -62,15 +62,15 @@ module.exports = {
       {
         oneOf: [
           {
-            test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+            test: /\.(png|svg|jpe?g|gif)/,
             loader: require.resolve('url-loader'),
             options: {
               limit: 10000,
-              name: 'assets/images/[name].[hash:8].[ext]',
+              name: isDevelopment ? 'assets/images/[name].[ext]' : 'assets/images/[name].[hash:6].[ext]',
             },
           },
           {
-            test: /\.(js|jsx)$/,
+            test: /\.(js)$/,
             exclude: /(node_modules|build|server)/,
             use: {
               loader: 'babel-loader',
@@ -163,11 +163,19 @@ module.exports = {
               },
             ],
           },
+          // TODO: Implement fonts
           {
-            exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/],
-            loader: require.resolve('file-loader'),
+            include: /\.(woff|woff2|eot|ttf|otf)$/,
+            loader: 'file-loader',
             options: {
-              name: 'assets/images/[name].[hash:8].[ext]',
+              name: isDevelopment ? 'assets/fonts/[name].[ext]' : 'assets/fonts/[name].[hash:6].[ext]',
+            },
+          },
+          {
+            exclude: /\.(js|html|json)/,
+            loader: 'file-loader',
+            options: {
+              name: isDevelopment ? 'assets/images/[name].[ext]' : 'assets/images/[name].[hash:6].[ext]',
             },
           },
           // ** STOP ** Are you adding a new loader?
@@ -256,10 +264,6 @@ module.exports = {
 if (isProduction) {
   module.exports.plugins.unshift(
     new CopyWebpackPlugin([
-      {
-        from: appConfig.paths.client.assets,
-        to: appConfig.paths.build.publicAssets,
-      },
       {
         from: appConfig.paths.public,
         to: appConfig.paths.build.public,
