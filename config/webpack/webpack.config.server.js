@@ -8,12 +8,13 @@ const appConfig = require('../index');
 const env = process.env.NODE_ENV;
 const isProduction = env === 'production';
 const isDevelopment = env === 'development';
+const isMac = process.platform === 'darwin';
 
 module.exports = {
   name: 'server',
   mode: env,
   target: 'node',
-  devtool: isDevelopment ? 'module-source-map' : 'source-map',
+  devtool: isDevelopment ? 'inline-source-map' : 'source-map',
   bail: isProduction,
   // the home directory for webpack
   context: appConfig.paths.server.root,
@@ -24,8 +25,12 @@ module.exports = {
 
   output: {
     filename: '[name].js',
-    path: appConfig.paths.server.build,
-    publicPath: appConfig.paths.server.buildPublicPath,
+    path: appConfig.paths.build.root,
+    devtoolModuleFilenameTemplate(info) {
+      return isMac
+        ? `file://${info.absoluteResourcePath.replace(/\\/g, '/')}`
+        : `file:///${info.absoluteResourcePath.replace(/\\/g, '/')}`;
+    },
   },
 
   module: {
@@ -48,14 +53,16 @@ module.exports = {
       {
         test: /\.(js)$/,
         exclude: /(node_modules|build|client)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'],
-          },
-        },
+        include: /(server)/,
+        use: 'babel-loader',
       },
     ],
+  },
+
+  resolve: {
+    alias: {
+      Config: appConfig.paths.appConfig,
+    },
   },
 
   externals: [webpackNodeExternals()],

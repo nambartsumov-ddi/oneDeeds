@@ -8,11 +8,21 @@ const resolveApp = (relativePath) => path.resolve(appDir, relativePath);
 
 module.exports = {
   root: resolveApp(''),
+  appConfig: resolveApp('config'),
   nodeModules: resolveApp('node_modules'),
   dotenv: resolveApp('.env'),
   packageJson: resolveApp('package.json'),
   yarnLock: resolveApp('yarn.lock'),
   public: resolveApp('public'),
+
+  // Build
+  build: {
+    root: resolveApp('build/'),
+    public: resolveApp('build/public'),
+    indexHtml: resolveApp('build/public/index.html'),
+    publicAssets: resolveApp('build/public/assets'),
+  },
+
   client: {
     // Entry
     root: resolveApp('src/client'),
@@ -32,18 +42,10 @@ module.exports = {
     actions: resolveApp('src/client/actions'),
     reducers: resolveApp('src/client/reducers'),
     store: resolveApp('src/client/store'),
-
-    // Build
-    build: resolveApp('build/client'),
-    buildAssets: resolveApp('build/client/assets'),
   },
   server: {
     // Entry
     root: resolveApp('src/server'),
     indexJs: resolveApp('src/server/index.js'),
-
-    // Build
-    build: resolveApp('build/server'),
-    buildPublicPath: resolveApp('build/server'),
   },
 };
