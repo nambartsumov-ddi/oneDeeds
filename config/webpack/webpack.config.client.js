@@ -16,6 +16,7 @@ const appConfig = require('../index');
 const env = process.env.NODE_ENV;
 const isProduction = env === 'production';
 const isDevelopment = env === 'development';
+const isMac = process.platform === 'darwin';
 
 module.exports = {
   name: 'client',
@@ -31,12 +32,14 @@ module.exports = {
   },
   output: {
     pathinfo: isDevelopment,
-    path: appConfig.paths.client.build,
+    path: appConfig.paths.build.public,
     filename: isDevelopment ? '[name].js' : 'scripts/[name].[chunkhash:8].js',
     chunkFilename: isDevelopment ? '[name].js' : 'scripts/[name].[chunkhash:8].js',
-    publicPath: '/',
+    publicPath: isDevelopment ? '/' : '/public',
     devtoolModuleFilenameTemplate(info) {
-      return `file:///${info.absoluteResourcePath.replace(/\\/g, '/')}`;
+      return isMac
+        ? `file://${info.absoluteResourcePath.replace(/\\/g, '/')}`
+        : `file:///${info.absoluteResourcePath.replace(/\\/g, '/')}`;
     },
   },
   module: {
@@ -204,15 +207,6 @@ module.exports = {
       chunks: 'all',
       name: 'vendors',
     },
-    // splitChunks: {
-    //   cacheGroups: {
-    //     commons: {
-    //       test: /(node_modules)/,
-    //       name: 'vendor',
-    //       chunks: 'all',
-    //     },
-    //   },
-    // },
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
@@ -264,11 +258,11 @@ if (isProduction) {
     new CopyWebpackPlugin([
       {
         from: appConfig.paths.client.assets,
-        to: appConfig.paths.client.buildAssets,
+        to: appConfig.paths.build.publicAssets,
       },
       {
         from: appConfig.paths.public,
-        to: appConfig.paths.build,
+        to: appConfig.paths.build.public,
       },
     ]),
     new MiniCssExtractPlugin({
@@ -305,7 +299,7 @@ if (isDevelopment) {
   );
 
   module.exports.serve = {
-    port: process.env.CLIENT_PORT,
+    port: process.env.CLIENT_DEV_PORT || 3000,
     hmr: true,
     open: true,
     add: (app, middleware, options) => {
@@ -315,7 +309,7 @@ if (isDevelopment) {
 
       // To remove the "/api" prefix when proxying the API requests, just add
       // "pathRewrite: { '^/api': '' }" to proxy's options.
-      app.use(convert(proxy('/api', { target: require(appConfig.paths.packageJson).proxy })));
+      app.use(convert(proxy('/api', { target: `${process.env.HOST}:${process.env.API_PORT}` })));
       app.use(convert(history(historyOptions)));
     },
   };
