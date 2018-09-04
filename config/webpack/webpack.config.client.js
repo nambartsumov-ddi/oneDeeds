@@ -60,10 +60,29 @@ module.exports = {
         ],
       },
       {
+        test: /\.(png|svg|jpe?g|gif)/,
+        enforce: 'pre',
+        loader: 'image-webpack-loader',
+        options: {
+          // disable: isDevelopment,
+          mozjpeg: {
+            progressive: true,
+            quality: 55,
+          },
+          pngquant: {
+            quality: '65-90',
+            speed: 4,
+          },
+          gifsicle: {
+            interlaced: false,
+          },
+        },
+      },
+      {
         oneOf: [
           {
             test: /\.(png|svg|jpe?g|gif)/,
-            loader: require.resolve('url-loader'),
+            loader: 'url-loader',
             options: {
               limit: 10000,
               name: isDevelopment ? 'assets/images/[name].[ext]' : 'assets/images/[name].[hash:6].[ext]',

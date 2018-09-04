@@ -47,15 +47,13 @@ if (isProduction) {
   });
 }
 
-// In dev mode, we throw
-app.get('/', (req, res, next) => {
-  throw new Error('No API route found..');
-});
-
 // Error handling
 app.use(function(err, req, res, next) {
-  res.status(500);
-  res.json({ message: err.message });
+  res.status(err.status || 500).json({
+    type: 'InternalServerError',
+    message: err.message,
+    stack: err.stack,
+  });
 });
 
 app.listen(port, () => {
