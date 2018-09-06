@@ -1,0 +1,28 @@
+.Panel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  cursor: pointer;
+}
+
+.Full {
+
+}
+
+.Half {
+
+}
+
+.Title {
+
+}
+
+.Description {
+  font-size: 1em;
+}
