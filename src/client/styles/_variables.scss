@@ -7,11 +7,16 @@ $lg: 992px;
 $xl: 1200px;
 
 // Layout
+$body-bg: #eec8b9;
+$menu-links: #b3b3b3;
+$menu-links-hover: #ff5a60;
+$nav-width: 34rem;
 $leftLayoutBackground: #eec8b9;
 $rightBottomLayoutBackground: #e9b69f;
 $rightHalfTopLayoutBackground: #000;
 $LayoutButtonOnHover: #ff646a;
 
 // z-index
+$nav-zindex: 5;
 $nav-toggle-zindex: 10;
 $logo-zindex: 10;
