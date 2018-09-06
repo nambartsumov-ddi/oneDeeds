@@ -1,8 +1,17 @@
 
-// Layout vars
+// Media Queries
+$xs: 320px;
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
+
+// Layout
 $leftLayoutBackground: #eec8b9;
 $rightBottomLayoutBackground: #e9b69f;
 $rightHalfTopLayoutBackground: #000;
-
-// Layout Button
 $LayoutButtonOnHover: #ff646a;
+
+// z-index
+$nav-toggle-zindex: 10;
+$logo-zindex: 10;

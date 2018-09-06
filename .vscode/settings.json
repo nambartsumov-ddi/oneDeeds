@@ -20,5 +20,7 @@
     "**/.DS_Store": true
   },
   "editor.renderWhitespace": "none",
-  "eslint.packageManager": "yarn"
+  "eslint.packageManager": "yarn",
+  "material-icon-theme.activeIconPack": "react_redux",
+  "workbench.editor.labelFormat": "short",
 }
