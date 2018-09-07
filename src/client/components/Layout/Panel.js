@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -13,10 +13,22 @@ const Panel = ({ size, title, description, imageSrc, children }) => {
     [styles.Half]: size === 'Half',
   });
 
+  const IsPlaceHolderPanel = () => {
+    if (!title && !description) {
+      return null;
+    }
+
+    return (
+      <Fragment>
+        <div className={styles.Title}>{title}</div>
+        <div className={styles.Description}>{description}</div>
+      </Fragment>
+    );
+  };
+
   return (
-    <div className={panelClasses} style={{ backgroundImage: `url(${imageSrc})` }}>
-      <div className={styles.Title}>{title}</div>
-      <div className={styles.Description}>{description}</div>
+    <div className={panelClasses} style={{ backgroundImage: imageSrc ? `url(${imageSrc})` : null }}>
+      <IsPlaceHolderPanel />
       {children}
     </div>
   );

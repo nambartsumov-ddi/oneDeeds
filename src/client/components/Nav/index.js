@@ -9,29 +9,37 @@ import styles from './Nav.module.scss';
 // Because we use css-modules we need to bind styles to classNames utilitie
 const stylesCtx = classNames.bind(styles);
 
-const Nav = ({ isOpen, ...rest }) => {
+const Nav = ({ isOpen }) => {
   const navClasses = stylesCtx(styles.Nav, {
     [styles.navOpen]: isOpen,
   });
 
-  console.log(rest);
-
   return (
-    <div className={navClasses}>
+    <aside className={navClasses}>
+      {/*
+      NavMenu
+        NavMenuLink title="..."
+        NavMenuLink
+        NavMenuLink
+        NavMenuLink
+        NavMenuLink
+
+      NavFooter
+        NavMenuLink title="Legal..." size="small"
+
+
+    */}
+
       {/* TODO: Add <NavMenu /> */}
-      <div className={styles.Menu}>
+      <nav className={styles.Menu}>
         {/* TODO: Add <NavMenuItem /> */}
-        <NavLink
-          className={styles.MenuLink}
-          isActive={() => true}
-          activeClassName={styles.MenuLinkActive}
-          to={`/about-the-cause`}>
+        <NavLink className={styles.Link} activeClassName={styles.LinkActive} to={`/about-the-cause`}>
           About Page
         </NavLink>
-        <div className={styles.MenuLink}>Second Page</div>
-        <div className={styles.MenuLink}>Third Page</div>
-      </div>
-    </div>
+        <div className={styles.Link}>Second Page</div>
+        <div className={styles.Link}>Third Page</div>
+      </nav>
+    </aside>
   );
 };
 
@@ -45,7 +53,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  null
-)(Nav);
+export default connect(mapStateToProps)(Nav);

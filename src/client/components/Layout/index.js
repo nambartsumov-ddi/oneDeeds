@@ -23,18 +23,19 @@ const Layout = ({ isOpen }) => {
 
   return (
     <div className={layoutClasses}>
-      <Panel size="full" title="Section 1" description="Description for section 1" imageSrc={ArtBeach}>
+      <Panel size="Full" title="Section 1" description="Description for section 1" imageSrc={ArtBeach}>
         {/* TODO: <MainVideo /> */}
+        {/* TODO: <Registration /> */}
       </Panel>
-      <div className={window.screen.width < 576 ? 'mobile' : 'desktop'}>
-        <Panel size="half" title="Section 2" description="Description for section 2" imageSrc={AgedBaby}>
+      <Panel size="Full">
+        <Panel size="Half" title="Section 2" description="Description for section 2" imageSrc={AgedBaby}>
           <LayoutButton text="Act Now" />
         </Panel>
 
-        <Panel size="half" title="Section 3" description="Description for section 3" imageSrc={Adult}>
+        <Panel size="Half" title="Section 3" description="Description for section 3" imageSrc={Adult}>
           <LayoutButton text="Get Started" />
         </Panel>
-      </div>
+      </Panel>
     </div>
   );
 };

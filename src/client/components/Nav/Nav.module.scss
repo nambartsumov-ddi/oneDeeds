@@ -21,7 +21,8 @@
   padding-top: 60px;
 }
 
-.MenuLink {
+.Link {
+  color: #b3b3b3;
   font-weight: bold;
   line-height: 2;
   text-decoration: none;
@@ -32,7 +33,7 @@
   }
 }
 
-.MenuLinkActive {
+.LinkActive {
   color: $menu-links-hover;
   text-decoration: none;
 }
