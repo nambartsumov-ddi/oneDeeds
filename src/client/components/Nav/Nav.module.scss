@@ -2,52 +2,50 @@
 
 .Nav {
   position: absolute;
-  width: 34rem;
-  right: 54rem * -1;
-  padding: 2.5rem 4.5rem;
-  z-index: 2;
+  width: 100%;
+  left: 100%;
+  padding: 1.5rem 2.5rem;
+  z-index: $nav-zindex;
   top: 0;
-  height: 100vh;
-  box-sizing: border-box;
-  transition: transform ease 0.25s;
+  transition: transform 0.25s ease;
   background-color: white;
-  color: #b3b3b3;
+  color: $menu-links;
+  height: 100vh;
 
   &.navOpen {
-    transform: translate3d(54rem * -1, 0, 0);
+    transform: translateX(-100%);
   }
+}
 
-  .mainLinks {
-    font-weight: bold;
-    line-height: 2;
-    font-size: 2rem;
-    padding-top: 60px;
-    height: 70%;
+.Menu {
+  padding-top: 60px;
+}
 
-    .link {
-      float: left;
-      width: 51%;
-      cursor: pointer;
-      box-sizing: border-box;
-      transition: margin-left 0.3s ease, opacity 0.3s ease, color 0.1s linear;
-      opacity: 0;
-      margin-left: 6rem;
+.Link {
+  color: #b3b3b3;
+  font-weight: bold;
+  line-height: 2;
+  text-decoration: none;
+  font-size: 2rem;
 
-      &:first-child {
-        transition-delay: 0.2s;
-      }
+  &:hover {
+    color: $menu-links-hover;
+  }
+}
 
-      &:nth-child(2) {
-        transition-delay: 0.3s;
-      }
+.LinkActive {
+  color: $menu-links-hover;
+  text-decoration: none;
+}
 
-      &:nth-child(3) {
-        transition-delay: 0.4s;
-      }
+@media (min-width: $lg) {
+  .Nav {
+    width: $nav-width;
+    padding: 2.5rem 4.5rem;
 
-      &:hover {
-        color: #ff5a60;
-      }
+    &.navOpen {
+      transform: translateX(-$nav-width);
+      padding: 2.5rem 4.5rem;
     }
   }
 }

@@ -1,14 +1,16 @@
-html,
-body {
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  background: $body-bg;
+  font-family: 'Times New Roman', serif;
   font-size: 1rem;
-  line-height: 1.4;
+  line-height: 1.141;
   font-style: normal;
   font-weight: 400;
   letter-spacing: 0;
   text-transform: none;
-  color: white;
-  background: transparent;
-  font-family: 'Nunito', sans-serif;
-  font-family: 'Marcellus SC', serif;
   overflow-x: hidden;
+  touch-action: manipulation;
 }

@@ -1,22 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import styles from './Home.module.scss';
+import styles from './About.module.scss';
 
 import NavToggle from 'Components/NavToggle';
-import Layout from 'Components/Layout';
 import Nav from 'Components/Nav';
 import Logo from 'Components/Logo';
 
-const Home = () => {
+const About = () => {
   return (
-    <div className={styles.Home}>
+    <div className={styles.About}>
       <NavToggle />
       <Logo />
       <Nav />
-      <Layout />
+      <div>Hello About Page!</div>
     </div>
   );
 };
 
-export default connect()(Home);
+export default connect()(About);

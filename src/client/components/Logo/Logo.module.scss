@@ -1,0 +1,8 @@
+@import '../../styles/variables';
+
+.Logo {
+  position: absolute;
+  left: 30px;
+  top: 20px;
+  z-index: $logo-zindex;
+}
