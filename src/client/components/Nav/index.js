@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -8,27 +9,27 @@ import styles from './Nav.module.scss';
 // Because we use css-modules we need to bind styles to classNames utilitie
 const stylesCtx = classNames.bind(styles);
 
-const Nav = ({ isOpen }) => {
-  const styleLink = isOpen ? { opacity: '1', marginLeft: '0' } : {};
-
-  const NavClasses = stylesCtx(styles.Nav, {
+const Nav = ({ isOpen, ...rest }) => {
+  const navClasses = stylesCtx(styles.Nav, {
     [styles.navOpen]: isOpen,
   });
 
+  console.log(rest);
+
   return (
-    <div className={NavClasses}>
+    <div className={navClasses}>
       {/* TODO: Add <NavMenu /> */}
-      <div className={styles.mainLinks}>
+      <div className={styles.Menu}>
         {/* TODO: Add <NavMenuItem /> */}
-        <div className={styles.link} style={styleLink}>
-          First Page
-        </div>
-        <div className={styles.link} style={styleLink}>
-          Second Page
-        </div>
-        <div className={styles.link} style={styleLink}>
-          Third Page
-        </div>
+        <NavLink
+          className={styles.MenuLink}
+          isActive={() => true}
+          activeClassName={styles.MenuLinkActive}
+          to={`/about-the-cause`}>
+          About Page
+        </NavLink>
+        <div className={styles.MenuLink}>Second Page</div>
+        <div className={styles.MenuLink}>Third Page</div>
       </div>
     </div>
   );

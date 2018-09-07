@@ -7,7 +7,7 @@
   padding: 1.5rem 2.5rem;
   z-index: $nav-zindex;
   top: 0;
-  transition: transform 0.25s ease ;
+  transition: transform 0.25s ease;
   background-color: white;
   color: $menu-links;
   height: 100vh;
@@ -15,20 +15,26 @@
   &.navOpen {
     transform: translateX(-100%);
   }
+}
 
-  .mainLinks {
-    font-weight: bold;
-    line-height: 2;
-    font-size: 2rem;
-    padding-top: 60px;
+.Menu {
+  padding-top: 60px;
+}
 
-    .link {
+.MenuLink {
+  font-weight: bold;
+  line-height: 2;
+  text-decoration: none;
+  font-size: 2rem;
 
-      &:hover {
-        color: $menu-links-hover;
-      }
-    }
+  &:hover {
+    color: $menu-links-hover;
   }
+}
+
+.MenuLinkActive {
+  color: $menu-links-hover;
+  text-decoration: none;
 }
 
 @media (min-width: $lg) {
@@ -42,4 +48,3 @@
     }
   }
 }
-

@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+
 import styles from './NavToggle.module.scss';
 import { toggleNav } from 'Actions';
 
