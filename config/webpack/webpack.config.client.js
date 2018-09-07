@@ -237,7 +237,7 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
-    modules: [appConfig.paths.nodeModules, appConfig.paths.client.root],
+    modules: ['node_modules', appConfig.paths.client.root],
     alias: {
       Components: appConfig.paths.client.components,
       Containers: appConfig.paths.client.containers,
