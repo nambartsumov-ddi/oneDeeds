@@ -27,7 +27,7 @@ const Panel = ({ size, title, description, imageSrc, children }) => {
   };
 
   return (
-    <div className={panelClasses} style={{ backgroundImage: imageSrc ? `url(${imageSrc})` : null }}>
+    <div className={panelClasses} /* style={{ backgroundImage: imageSrc ? `url(${imageSrc})` : null }}*/>
       <IsPlaceHolderPanel />
       {children}
     </div>

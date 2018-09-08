@@ -1,0 +1,32 @@
+.NavFooter {
+  position: absolute;
+  bottom: 27px;
+  width: 75%;
+  color: #ccc;
+
+  .BottomRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .Rights {
+      letter-spacing: -1px;
+      font-size: 0.6em;
+      font-weight: bold;
+    }
+
+    .SocialIcons {
+      display: flex;
+
+      .Icon {
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        stroke-width: 0;
+        stroke: currentColor;
+        fill: currentColor;
+        margin: 0 0.4rem;
+      }
+    }
+  }
+}
