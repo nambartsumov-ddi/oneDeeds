@@ -19,10 +19,23 @@
   text-decoration: none;
 }
 
-.SmallFont {
-  font-size: 0.9rem;
+.Small {
+  font-size: 0.87rem;
   color: #ccc;
   display: block;
   margin-bottom: 2.25rem;
   padding: 0;
+}
+
+@media (min-width: $lg) {
+  .NavMenuLink {
+    font-size: 1.75rem;
+    padding: 0.9rem 0;
+  }
+
+  .Small {
+    font-size: 0.9rem;
+    margin-bottom: 2.5rem;
+    padding: 0;
+  }
 }

@@ -10,7 +10,7 @@ const stylesCtx = classNames.bind(styles);
 
 const NavMenuLink = ({ title, size }) => {
   const navMenuLinkClasses = stylesCtx(styles.NavMenuLink, {
-    [styles.SmallFont]: size === 'SmallFont',
+    [styles.Small]: size === 'Small',
   });
 
   return (

@@ -10,22 +10,22 @@
   user-select: none;
   transition: transform 0.2s ease;
   cursor: pointer;
-
-  &:hover :not(.Open) {
-    .Bar:first-child {
-      width: 21px;
-    }
-
-    .Bar:nth-child(2) {
-      width: 23px;
-    }
-  }
 }
 
 @media (min-width: $lg) {
   .NavToggle {
     right: 40px;
     top: 40px;
+
+    &:hover :not(.Open) {
+      .Bar:first-child {
+        width: 21px;
+      }
+
+      .Bar:nth-child(2) {
+        width: 23px;
+      }
+    }
   }
 }
 

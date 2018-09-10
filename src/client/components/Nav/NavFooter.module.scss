@@ -1,8 +1,10 @@
+@import '../../styles/variables';
+
 .NavFooter {
-  position: absolute;
-  bottom: 27px;
-  width: 75%;
   color: #ccc;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 
   .BottomRow {
     display: flex;
@@ -26,6 +28,11 @@
         stroke: currentColor;
         fill: currentColor;
         margin: 0 0.4rem;
+        cursor: pointer;
+
+        &:hover {
+          color: $menu-links-hover;
+        }
       }
     }
   }

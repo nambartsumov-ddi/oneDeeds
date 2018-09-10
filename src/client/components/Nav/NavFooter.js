@@ -19,8 +19,8 @@ const NavFooter = ({ children }) => {
           <svg
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
-            width="15"
-            height="30"
+            width="32"
+            height="32"
             viewBox="0 0 32 32"
             className={styles.Icon}>
             <use xlinkHref="#icon-facebook" />

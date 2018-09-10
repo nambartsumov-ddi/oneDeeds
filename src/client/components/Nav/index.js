@@ -27,7 +27,7 @@ const Nav = ({ isOpen }) => {
         <NavMenuLink title="Fifth Page" />
         <NavMenuLink title="Sixth Page" />
         <NavFooter>
-          <NavMenuLink title="Legal Terms" size="SmallFont" />
+          <NavMenuLink title="Legal Terms" size="Small" />
         </NavFooter>
       </NavMenu>
     </aside>
