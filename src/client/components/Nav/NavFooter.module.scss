@@ -1,0 +1,39 @@
+@import '../../styles/variables';
+
+.NavFooter {
+  color: #ccc;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+
+  .BottomRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .Rights {
+      letter-spacing: -1px;
+      font-size: 0.6em;
+      font-weight: bold;
+    }
+
+    .SocialIcons {
+      display: flex;
+
+      .Icon {
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        stroke-width: 0;
+        stroke: currentColor;
+        fill: currentColor;
+        margin: 0 0.4rem;
+        cursor: pointer;
+
+        &:hover {
+          color: $menu-links-hover;
+        }
+      }
+    }
+  }
+}

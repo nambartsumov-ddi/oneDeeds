@@ -1,8 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+
+import NavMenu from './NavMenu';
+import NavMenuLink from './NavMenuLink';
+import NavFooter from './NavFooter';
 
 import styles from './Nav.module.scss';
 
@@ -16,29 +19,17 @@ const Nav = ({ isOpen }) => {
 
   return (
     <aside className={navClasses}>
-      {/*
-      NavMenu
-        NavMenuLink title="..."
-        NavMenuLink
-        NavMenuLink
-        NavMenuLink
-        NavMenuLink
-
-      NavFooter
-        NavMenuLink title="Legal..." size="small"
-
-
-    */}
-
-      {/* TODO: Add <NavMenu /> */}
-      <nav className={styles.Menu}>
-        {/* TODO: Add <NavMenuItem /> */}
-        <NavLink className={styles.Link} activeClassName={styles.LinkActive} to={`/about-the-cause`}>
-          About Page
-        </NavLink>
-        <div className={styles.Link}>Second Page</div>
-        <div className={styles.Link}>Third Page</div>
-      </nav>
+      <NavMenu>
+        <NavMenuLink title="The Acceptance Ring" />
+        <NavMenuLink title="Share Your Acceptance" />
+        <NavMenuLink title="Third Page" />
+        <NavMenuLink title="Fourth Page" />
+        <NavMenuLink title="Fifth Page" />
+        <NavMenuLink title="Sixth Page" />
+        <NavFooter>
+          <NavMenuLink title="Legal Terms" size="Small" />
+        </NavFooter>
+      </NavMenu>
     </aside>
   );
 };

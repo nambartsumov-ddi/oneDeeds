@@ -17,27 +17,6 @@
   }
 }
 
-.Menu {
-  padding-top: 60px;
-}
-
-.Link {
-  color: #b3b3b3;
-  font-weight: bold;
-  line-height: 2;
-  text-decoration: none;
-  font-size: 2rem;
-
-  &:hover {
-    color: $menu-links-hover;
-  }
-}
-
-.LinkActive {
-  color: $menu-links-hover;
-  text-decoration: none;
-}
-
 @media (min-width: $lg) {
   .Nav {
     width: $nav-width;

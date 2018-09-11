@@ -11,10 +11,13 @@
   background-repeat: no-repeat;
 
   cursor: pointer;
+
+  border: 1px solid black;
 }
 
 .Full {
   height: 100vh;
+  position: relative;
 }
 
 .Half {
@@ -23,14 +26,20 @@
 }
 
 .Title {
-  font-size: 2em;
+  font-size: 1.7em;
 }
 
 .Description {
   font-size: 1em;
+  margin: 15px 0;
 }
 
 @media (min-width: $lg) {
+  .Half:hover button {
+    background: $LayoutButtonOnHover;
+    border: none;
+  }
+
   .Full:first-child {
     width: 60%;
   }
