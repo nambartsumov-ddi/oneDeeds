@@ -1,20 +1,22 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import styles from './NavMenu.module.scss';
+import NavMenuLink from './NavMenuLink';
 
-// Because we use css-modules we need to bind styles to classNames utilitie
+// Because we use css-modules we need to bind styles to classNames utilities
 const stylesCtx = classNames.bind(styles);
 
-const NavMenu = ({ children }) => {
+const NavMenu = () => {
   const navMenuClasses = stylesCtx(styles.NavMenu);
 
-  return <nav className={navMenuClasses}>{children}</nav>;
+  return (
+    <nav className={navMenuClasses}>
+      <NavMenuLink title="The Acceptance Ring" to={`/about-the-cause`} />
+    </nav>
+  );
 };
 
-NavMenu.propTypes = {
-  children: PropTypes.any,
-};
+NavMenu.propTypes = {};
 
 export default NavMenu;

@@ -11,8 +11,6 @@
   background-repeat: no-repeat;
 
   cursor: pointer;
-
-  border: 1px solid black;
 }
 
 .Full {
@@ -26,18 +24,30 @@
 }
 
 .Title {
-  font-size: 1.7em;
+  font-size: 1.5rem;
+  letter-spacing: -1px;
+  line-height: 1.235;
+  color: #fff;
 }
 
 .Description {
-  font-size: 1em;
   margin: 15px 0;
 }
 
 @media (min-width: $lg) {
+
+  .Title {
+    font-size: 2.3rem;
+  }
+
+  .Full:hover svg {
+    fill: $menu-links-hover;
+  }
+
   .Half:hover button {
+    // transition: background 0.3s ease-in, border 0.3s ease-out, transform 0.1s cubic-bezier(0.91, 0.8, 0.54, 1);
     background: $LayoutButtonOnHover;
-    border: none;
+    border-color: transparent;
   }
 
   .Full:first-child {

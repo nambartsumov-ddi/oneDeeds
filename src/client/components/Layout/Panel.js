@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import styles from './Panel.module.scss';
 
-// Because we use css-modules we need to bind styles to classNames utilitie
+// Because we use css-modules we need to bind styles to classNames utilities
 const stylesCtx = classNames.bind(styles);
 
 const Panel = ({ size, title, description, imageSrc, children }) => {
@@ -18,6 +18,14 @@ const Panel = ({ size, title, description, imageSrc, children }) => {
       return null;
     }
 
+    if (!description) {
+      return (
+        <Fragment>
+          <div className={styles.Title}>{title}</div>
+        </Fragment>
+      );
+    }
+
     return (
       <Fragment>
         <div className={styles.Title}>{title}</div>
@@ -27,7 +35,7 @@ const Panel = ({ size, title, description, imageSrc, children }) => {
   };
 
   return (
-    <div className={panelClasses} /* style={{ backgroundImage: imageSrc ? `url(${imageSrc})` : null }}*/>
+    <div className={panelClasses} style={{ backgroundImage: imageSrc ? `url(${imageSrc})` : null }}>
       <IsPlaceHolderPanel />
       {children}
     </div>

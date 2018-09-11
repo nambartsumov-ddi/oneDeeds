@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import styles from './NavToggle.module.scss';
 import { toggleNav } from 'Actions';
 
-// Because we use css-modules we need to bind styles to classNames utilitie
+// Because we use css-modules we need to bind styles to classNames utilities
 const stylesCtx = classNames.bind(styles);
 
 const NavToggle = ({ isNavOpen, toggleNav }) => {

@@ -7,20 +7,14 @@
 html,
 body {
   background: $body-bg;
-  font-family: 'Muli', sans-serif;
-  font-family: 'Fira Sans', sans-serif;
-  font-family: 'Acme', sans-serif;
-  font-family: 'Asap', sans-serif;
-  font-family: 'Marcellus', serif;
-  font-family: 'Eczar', serif;
-  font-family: 'Sawarabi Gothic', sans-serif;
-  font-family: 'Averia Serif Libre', cursive;
-  font-size: 1rem;
+
+  font-size: .9rem;
   line-height: 1.141;
   font-style: normal;
   font-weight: 400;
   letter-spacing: 0;
   text-transform: none;
+  color: #fff;
   overflow-x: hidden;
   touch-action: manipulation;
 }

@@ -12,19 +12,13 @@
   }
 }
 
-.Icon {
+.PlayIcon {
   display: inline-block;
-  width: 3.5em;
-  height: 3.5em;
   stroke-width: 0;
   stroke: currentColor;
   fill: currentColor;
   margin: 0 0.4rem;
   cursor: pointer;
-
-  &:hover {
-    color: $menu-links-hover;
-  }
 }
 
 @media (min-width: $lg) {
