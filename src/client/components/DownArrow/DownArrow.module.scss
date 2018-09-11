@@ -5,13 +5,13 @@
   display: block;
   bottom: 60px;
   z-index: 10;
+  animation: upDown 2.5s infinite;
 }
 
 .DownIcon {
   display: block;
   width: 2.5em;
   height: 2.5em;
-  animation: upDown 2.5s infinite;
 }
 
 @keyframes upDown {
@@ -20,13 +20,13 @@
   50%,
   80%,
   100% {
-    margin-bottom: 0;
+    bottom: 60px;
   }
   40% {
-    margin-bottom: 25px;
+    bottom: 85px;
   }
   60% {
-    margin-bottom: 10px;
+    bottom: 70px;
   }
 }
 

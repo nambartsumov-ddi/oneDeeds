@@ -11,6 +11,7 @@ const Panel = ({ size, title, description, imageSrc, children }) => {
   const panelClasses = stylesCtx(styles.Panel, {
     [styles.Full]: size === 'Full',
     [styles.Half]: size === 'Half',
+    [styles.WithDesc]: description !== undefined,
   });
 
   const IsPlaceHolderPanel = () => {
