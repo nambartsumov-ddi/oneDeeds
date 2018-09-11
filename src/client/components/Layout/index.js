@@ -25,7 +25,7 @@ const Layout = ({ isOpen }) => {
 
   return (
     <div className={layoutClasses}>
-      <Panel className={panelHover} size="Full" title="Section 1" imageSrc={ArtBeach}>
+      <Panel className={panelHover} size="Full" title="One is Powerful, Many are Unstoppable" imageSrc={ArtBeach}>
         {/* TODO: <MainVideo /> */}
         <svg width="62" height="62" viewBox="0 0 153 153" className={styles.PlayIcon}>
           <path d="M98.3 73.4L65 52.2c-1.4-.9-3.2-.9-4.6-.1-1.5.8-2.4 2.3-2.4 4v40.7c0 1.6.9 3.1 2.3 3.9.7.4 1.5.6 2.3.6s1.6-.2 2.3-.6l33.3-19.5c1.4-.8 2.2-2.2 2.2-3.8.1-1.7-.7-3.1-2.1-4z" />
@@ -35,7 +35,13 @@ const Layout = ({ isOpen }) => {
         {/* TODO: <Registration /> */}
       </Panel>
       <Panel id="second-section" size="Full">
-        <Panel size="Half" title="Section 2" description="Description for section 2" imageSrc={AgedBaby}>
+        <Panel
+          size="Half"
+          title="Section 2"
+          description="
+                        Wear this ring and show your acceptance of marriage equality.
+                    "
+          imageSrc={AgedBaby}>
           <LayoutButton text="Act Now" />
         </Panel>
 

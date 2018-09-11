@@ -9,8 +9,6 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
-  cursor: pointer;
 }
 
 .Full {
@@ -24,20 +22,42 @@
 }
 
 .Title {
-  font-size: 1.5rem;
+  font-size: 1.9rem;
   letter-spacing: -1px;
   line-height: 1.235;
   color: #fff;
+  margin: 0 10px 25px 10px;
+  font-weight: 700;
+  text-align: center;
 }
 
-.Description {
-  margin: 15px 0;
+.WithDesc {
+  .Title {
+    font-size: 1.5rem;
+    margin-bottom: 0;
+  }
+
+  .Description {
+    margin: 15px 0 25px 0;
+    font-size: 1.2rem;
+    text-align: center;
+  }
 }
 
 @media (min-width: $lg) {
+  .Panel {
+    cursor: pointer;
+  }
 
   .Title {
     font-size: 2.3rem;
+    margin: 0 10px 40px 10px;
+  }
+
+  .WithDesc {
+    .Description {
+      margin: 15px 10px 25px 10px;
+    }
   }
 
   .Full:hover svg {
