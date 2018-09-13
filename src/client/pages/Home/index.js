@@ -5,7 +5,6 @@ import styles from './Home.module.scss';
 
 import NavToggle from 'Components/NavToggle';
 import Layout from 'Components/Layout';
-import Nav from 'Components/Nav';
 import Logo from 'Components/Logo';
 
 const Home = () => {
@@ -13,7 +12,6 @@ const Home = () => {
     <div className={styles.Home}>
       <NavToggle />
       <Logo />
-      <Nav />
       <Layout />
     </div>
   );

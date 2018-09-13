@@ -1,5 +1,8 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { NavLink, withRouter } from 'react-router-dom';
+import { closeNav } from 'Actions';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -8,13 +11,13 @@ import styles from './NavMenuLink.module.scss';
 // Because we use css-modules we need to bind styles to classNames utilities
 const stylesCtx = classNames.bind(styles);
 
-const NavMenuLink = ({ title, size, to }) => {
+const NavMenuLink = ({ title, size, to, closeNav }) => {
   const navMenuLinkClasses = stylesCtx(styles.NavMenuLink, {
     [styles.Small]: size === 'Small',
   });
 
   return (
-    <NavLink className={navMenuLinkClasses} activeClassName={styles.LinkActive} to={to}>
+    <NavLink className={navMenuLinkClasses} onClick={() => closeNav()} activeClassName={styles.LinkActive} to={to}>
       {title}
     </NavLink>
   );
@@ -24,6 +27,18 @@ NavMenuLink.propTypes = {
   title: PropTypes.string,
   size: PropTypes.string,
   to: PropTypes.string,
+  history: PropTypes.object,
+  closeNav: PropTypes.func,
+  onClick: PropTypes.func,
 };
 
-export default NavMenuLink;
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ closeNav }, dispatch);
+};
+
+export default withRouter(
+  connect(
+    undefined,
+    mapDispatchToProps
+  )(NavMenuLink)
+);

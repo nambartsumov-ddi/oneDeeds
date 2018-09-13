@@ -33,6 +33,11 @@
   }
 }
 
+.LinkActive {
+  color: $menu-links-hover;
+  text-decoration: none;
+}
+
 @media (min-width: $lg) {
   .Nav {
     width: $nav-width;

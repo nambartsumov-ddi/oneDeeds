@@ -1,4 +1,4 @@
-import { TOGGLE_NAVIGATION } from 'Actions';
+import { TOGGLE_NAVIGATION, CLOSE_NAVIGATION } from 'Actions';
 
 export default function(state = {}, action) {
   switch (action.type) {
@@ -6,6 +6,11 @@ export default function(state = {}, action) {
       return {
         ...state,
         isNavOpen: !state.isNavOpen,
+      };
+    case CLOSE_NAVIGATION:
+      return {
+        ...state,
+        isNavOpen: false,
       };
     default:
       return state;
