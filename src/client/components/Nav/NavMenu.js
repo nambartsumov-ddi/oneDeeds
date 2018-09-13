@@ -17,6 +17,4 @@ const NavMenu = () => {
   );
 };
 
-NavMenu.propTypes = {};
-
 export default NavMenu;

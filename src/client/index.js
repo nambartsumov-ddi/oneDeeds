@@ -8,11 +8,11 @@ import 'normalize.css';
 import 'Styles/global.scss';
 
 import App from 'Containers/App';
-import store, { history } from 'Store';
+import store from 'Store';
 
 ReactDOM.render(
   <Provider store={store}>
-    <App history={history} />
+    <App />
   </Provider>,
   document.getElementById('root')
 );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { NavLink, withRouter } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { closeNav } from 'Actions';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -27,18 +27,14 @@ NavMenuLink.propTypes = {
   title: PropTypes.string,
   size: PropTypes.string,
   to: PropTypes.string,
-  history: PropTypes.object,
   closeNav: PropTypes.func,
-  onClick: PropTypes.func,
 };
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ closeNav }, dispatch);
 };
 
-export default withRouter(
-  connect(
-    undefined,
-    mapDispatchToProps
-  )(NavMenuLink)
-);
+export default connect(
+  undefined,
+  mapDispatchToProps
+)(NavMenuLink);
