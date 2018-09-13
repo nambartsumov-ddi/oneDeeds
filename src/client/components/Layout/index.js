@@ -21,10 +21,16 @@ const Layout = ({ isOpen }) => {
     [styles.navOpen]: isOpen,
   });
 
+  // const overlayClasses = stylesCtx(styles.Overlay, {
+  //   [styles.overlayOpen]: isOpen,
+  // });
+
   const panelHover = stylesCtx(styles.PanelHover);
 
   return (
     <div className={layoutClasses}>
+      {/* <Overlay /> */}
+      {/* <div className={overlayClasses} onClick={() => closeNav()} /> */}
       <Panel className={panelHover} size="Full" title="One is Powerful, Many are Unstoppable" imageSrc={handsFull}>
         {/* TODO: <MainVideo /> */}
         <svg width="62" height="62" viewBox="0 0 153 153" className={styles.PlayIcon}>
@@ -49,7 +55,7 @@ const Layout = ({ isOpen }) => {
           <LayoutButton text="Get Started" />
         </Panel>
       </Panel>
-      <a id="second-section" />
+      <div id="second-section" />
     </div>
   );
 };

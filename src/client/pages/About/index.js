@@ -16,7 +16,7 @@ const About = () => {
         <img className={styles.AboutImg} />
         <div className={styles.AboutPageContent}>
           <h2>
-            About <span>Us</span>
+            About The <span>Cause</span>
           </h2>
           <div className={styles.BottomLine} />
           <p>
