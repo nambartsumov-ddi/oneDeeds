@@ -9,9 +9,9 @@ import DownArrow from 'Components/DownArrow';
 
 import styles from './Layout.module.scss';
 
-import ArtBeach from 'Images/art-beach.jpg';
-import AgedBaby from 'Images/adult-aged-baby.jpg';
-import Adult from 'Images/abstract-adult.jpg';
+import handsFull from 'Images/hands-full2.jpg';
+import handHalf1 from 'Images/hand-half1.jpg';
+import handHalf from 'Images/hand-half.jpg';
 
 // Because we use css-modules we need to bind styles to classNames utilities
 const stylesCtx = classNames.bind(styles);
@@ -25,7 +25,7 @@ const Layout = ({ isOpen }) => {
 
   return (
     <div className={layoutClasses}>
-      <Panel className={panelHover} size="Full" title="One is Powerful, Many are Unstoppable" imageSrc={ArtBeach}>
+      <Panel className={panelHover} size="Full" title="One is Powerful, Many are Unstoppable" imageSrc={handsFull}>
         {/* TODO: <MainVideo /> */}
         <svg width="62" height="62" viewBox="0 0 153 153" className={styles.PlayIcon}>
           <path d="M98.3 73.4L65 52.2c-1.4-.9-3.2-.9-4.6-.1-1.5.8-2.4 2.3-2.4 4v40.7c0 1.6.9 3.1 2.3 3.9.7.4 1.5.6 2.3.6s1.6-.2 2.3-.6l33.3-19.5c1.4-.8 2.2-2.2 2.2-3.8.1-1.7-.7-3.1-2.1-4z" />
@@ -41,11 +41,11 @@ const Layout = ({ isOpen }) => {
           description="
                         Wear this ring and show your acceptance of marriage equality.
                     "
-          imageSrc={AgedBaby}>
+          imageSrc={handHalf1}>
           <LayoutButton text="Act Now" />
         </Panel>
 
-        <Panel size="Half" title="Section 3" description="Description for section 3" imageSrc={Adult}>
+        <Panel size="Half" title="Section 3" description="Description for section 3" imageSrc={handHalf}>
           <LayoutButton text="Get Started" />
         </Panel>
       </Panel>
