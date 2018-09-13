@@ -1,18 +1,19 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { NavLink } from 'react-router-dom';
 
+import { closeNav } from 'Actions';
 import NavMenu from './NavMenu';
 import NavFooter from './NavFooter';
-
 import styles from './Nav.module.scss';
 
 // Because we use css-modules we need to bind styles to classNames utilities
 const stylesCtx = classNames.bind(styles);
 
-const Nav = ({ isOpen }) => {
+const Nav = ({ isOpen, closeNav }) => {
   const navClasses = stylesCtx(styles.Nav, {
     [styles.navOpen]: isOpen,
   });
@@ -21,7 +22,7 @@ const Nav = ({ isOpen }) => {
     <aside className={navClasses}>
       <NavMenu />
       <NavFooter>
-        <NavLink className={styles.Small} to={`/`}>
+        <NavLink className={styles.Small} onClick={() => closeNav()} to={`/`} activeClassName={styles.LinkActive}>
           Legal Terms
         </NavLink>
       </NavFooter>
@@ -31,6 +32,7 @@ const Nav = ({ isOpen }) => {
 
 Nav.propTypes = {
   isOpen: PropTypes.bool,
+  closeNav: PropTypes.func,
 };
 
 const mapStateToProps = (state) => {
@@ -39,4 +41,11 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Nav);
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ closeNav }, dispatch);
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Nav);
