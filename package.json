@@ -11,8 +11,8 @@
   },
   "private": true,
   "scripts": {
-    "postinstall": "npm-run-all --sequential clean build:server",
-    "start": "pm2 start -i 0 build/server.js && pm2 monit",
+    "postinstall": "npm-run-all --sequential clean build",
+    "start": "node build/server.js",
     "dev": "npm-run-all --parallel dev:*",
     "dev:client": "cross-env CLIENT=true webpack-serve",
     "dev:server": "npm-run-all --parallel dev:server:*",
@@ -27,8 +27,7 @@
     "deploy": "",
     "postdeploy": "",
     "debug": "ndb yarn dev:server",
-    "debug:prod": "ndb build/server.js",
-    "browser-sync": "browser-sync start --server \"build/public\" --port 3001"
+    "debug:prod": "ndb build/server.js"
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
@@ -69,7 +68,6 @@
     "autoprefixer": "^9.1.5",
     "babel-eslint": "^9.0.0",
     "babel-loader": "^8.0.2",
-    "browser-sync": "^2.24.7",
     "connect-history-api-fallback": "^1.5.0",
     "copy-webpack-plugin": "^4.5.2",
     "css-loader": "^1.0.0",

@@ -38,9 +38,7 @@ const Layout = ({ isOpen }) => {
         <Panel
           size="Half"
           title="Section 2"
-          description="
-                        Wear this ring and show your acceptance of marriage equality.
-                    "
+          description="Wear this ring and show your acceptance of marriage equality."
           imageSrc={handHalf1}>
           <LayoutButton text="Act Now" />
         </Panel>

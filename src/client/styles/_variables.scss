@@ -17,6 +17,7 @@ $rightHalfTopLayoutBackground: #000;
 $LayoutButtonOnHover: #ff646a;
 
 // z-index
-$nav-zindex: 5;
-$nav-toggle-zindex: 10;
 $logo-zindex: 10;
+$overlay-zindex: 15;
+$nav-zindex: 25;
+$nav-toggle-zindex: 25;

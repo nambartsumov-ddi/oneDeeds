@@ -1,14 +1,24 @@
-.Overlay {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  transition: opacity 0.3s ease, background 0.3s ease;
+@import '../../styles/variables';
 
-  &.overlayOpen {
-    opacity: 0.5;
-    background: black;
-    transform: opacity;
-    z-index: 4;
+.Overlay {
+ display: none;
+}
+
+
+@media (min-width: $lg) {
+  .Overlay {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: rgba(0, 0, 0, 0);
+    transition: background .3s ease;
+
+    &.overlayOpen {
+      background: rgba(0, 0, 0, .65);
+      transition: background .3s ease;
+      z-index: $overlay-zindex;
+    }
   }
 }
