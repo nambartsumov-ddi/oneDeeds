@@ -21,14 +21,6 @@
   cursor: pointer;
 }
 
-.Overlay {
-  position: absolute;
-}
-
-.overlayOpen {
- background: red
-}
-
 @media (min-width: $lg) {
   .Layout {
     flex-direction: row;
