@@ -34,7 +34,7 @@ const Layout = ({ isOpen }) => {
         <DownArrow />
         {/* TODO: <Registration /> */}
       </Panel>
-      <Panel size="Full">
+      <Panel id="second-section" size="Full">
         <Panel
           size="Half"
           title="Section 2"
@@ -49,7 +49,6 @@ const Layout = ({ isOpen }) => {
           <LayoutButton text="Get Started" />
         </Panel>
       </Panel>
-      <div id="second-section" />
     </div>
   );
 };

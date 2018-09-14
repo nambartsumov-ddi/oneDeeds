@@ -1,6 +1,7 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Switch, Redirect } from 'react-router-dom';
 
+import ScrollToTopRoute from 'Components/ScrollToTopRoute';
 import Home from 'Pages/Home';
 import About from 'Pages/About';
 import Nav from 'Components/Nav';
@@ -11,8 +12,8 @@ const Routes = () => (
     <Nav />
     <Overlay />
     <Switch>
-      <Route path="/" exact component={Home} />
-      <Route path="/about-the-cause" exact component={About} />
+      <ScrollToTopRoute path="/" exact component={Home} />
+      <ScrollToTopRoute path="/about-the-cause" component={About} />
       <Redirect to="/" />
     </Switch>
   </>
