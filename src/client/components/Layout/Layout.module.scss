@@ -8,7 +8,7 @@
   transition: transform 0.25s ease;
 
   &.navOpen {
-    transform: translateX(-$nav-width);
+    transform: translateX(-100%);
   }
 }
 
@@ -24,5 +24,9 @@
 @media (min-width: $lg) {
   .Layout {
     flex-direction: row;
+
+    &.navOpen {
+      transform: translateX(-$nav-width);
+    }
   }
 }

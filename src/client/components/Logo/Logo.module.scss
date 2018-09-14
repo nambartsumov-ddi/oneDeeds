@@ -2,7 +2,22 @@
 
 .Logo {
   position: fixed;
-  left: 30px;
-  top: 20px;
+  left: 15px;
+  top: 25px;
   z-index: $logo-zindex;
+}
+
+img {
+  max-width: 100px;
+}
+
+@media (min-width: $lg) {
+  .Logo {
+    left: 50px;
+    top: 55px;
+  }
+
+  img {
+    max-width: 150px;
+  }
 }

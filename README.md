@@ -18,28 +18,6 @@
 
 ### Client:
 
-####oneDeeds features
-- [ ] Complete Nav menu links and routes and social media links (Animate menu after this is done)
-- [ ] Sections panels Router
-- [ ] Main section Panel Video
-- [ ] Logo optimizaion for mobile and desktop
-- [ ] REGISTRATION COMPONENT - social buttons (email, facebook, google)
-- [ ] PAYPAL - where should it be (descision is to be made)
-- [ ] Content - What content should be in panels, where does it route
-- [ ] Images - optimize for mobile - maybe decide on desktop image and mobile image.
-- [ ] Route transition and Loader - start animation?
-- [ ] Overlay close menu
-- [ ]
-- [ ]
-
-
-####oneDeeds bugs
-- [ ] In mobile, the nav menu overflows layout and body backgroudn is showing.
-- [ ]
-- [ ]
-- [ ]
-
-
 - [ ] Optimize imported images with imagemin
 - [ ] Fix "import/no-unresolved" issues with webpack aliases
 - [x] fix webpack-serve historyApiFallback
@@ -68,3 +46,25 @@
 - [x] expose process.env webpack to client
 - [ ] react-router-dom scrollTop() feature ?
 - [ ] Class properties, object rest spread
+
+
+####oneDeeds features
+- [ ] Complete Nav menu links and routes and social media links (Animate menu after this is done)
+- [ ] Sections panels Routes
+- [ ] Main section Panel Video
+- [x] Logo optimizaion for mobile and desktop
+- [ ] REGISTRATION COMPONENT - social buttons (email, facebook, google)
+- [ ] PAYPAL - where should it be (descision is to be made)
+- [ ] Content - What content should be in panels, where does it route
+- [ ] Images - optimize for mobile - maybe decide on desktop image and mobile image.
+- [ ] Route transition and Loader - start animation?
+- [x] Overlay close menu
+- [ ]
+- [ ]
+
+
+####oneDeeds bugs
+- [x] In mobile, the nav menu overflows layout and body backgroudn is showing.
+- [ ]
+- [ ]
+- [ ]
