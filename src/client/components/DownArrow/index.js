@@ -1,17 +1,18 @@
 import React from 'react';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
 import styles from './DownArrow.module.scss';
 
 // Because we use css-modules we need to bind styles to classNames utilities
 const stylesCtx = classNames.bind(styles);
 
-const DownArrow = () => {
+const DownArrow = ({ onClick }) => {
   const downArrowSVGClasses = stylesCtx(styles.Icon, styles.DownIcon);
 
   return (
-    <div className={styles.DownIconWrapper}>
-      <a href="#second-section" className={downArrowSVGClasses}>
+    <div className={styles.DownIconWrapper} onClick={() => onClick()}>
+      <a className={downArrowSVGClasses}>
         <svg width="38" viewBox="0 0 140 141.8" height="38" focusable="false" aria-hidden="true" tabIndex="-1">
           <path
             fill="#fff"
@@ -25,6 +26,10 @@ const DownArrow = () => {
       </a>
     </div>
   );
+};
+
+DownArrow.propTypes = {
+  onClick: PropTypes.func,
 };
 
 export default DownArrow;

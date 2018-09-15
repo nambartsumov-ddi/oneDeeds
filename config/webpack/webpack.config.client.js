@@ -322,6 +322,7 @@ if (isDevelopment) {
   );
 
   module.exports.serve = {
+    host: process.env.HOST,
     port: 3000,
     hmr: true,
     open: true,

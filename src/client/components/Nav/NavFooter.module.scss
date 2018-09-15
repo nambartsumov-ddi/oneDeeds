@@ -3,35 +3,43 @@
 .NavFooter {
   color: #ccc;
   width: 100%;
+  padding-bottom: 80px;
+}
 
-  .BottomRow {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.BottomRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-    .Rights {
-      letter-spacing: -1px;
-      font-size: 0.8rem;
-      font-weight: bold;
+  .Rights {
+    letter-spacing: -1px;
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+
+}
+
+.SocialIcons {
+  display: flex;
+
+  .Icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    stroke-width: 0;
+    stroke: currentColor;
+    fill: currentColor;
+    margin: 0 0.4rem;
+    cursor: pointer;
+
+    &:hover {
+      color: $menu-links-hover;
     }
+  }
+}
 
-    .SocialIcons {
-      display: flex;
-
-      .Icon {
-        display: inline-block;
-        width: 1em;
-        height: 1em;
-        stroke-width: 0;
-        stroke: currentColor;
-        fill: currentColor;
-        margin: 0 0.4rem;
-        cursor: pointer;
-
-        &:hover {
-          color: $menu-links-hover;
-        }
-      }
-    }
+@media (min-width: $lg) {
+  .NavFooter {
+    padding-bottom: 0;
   }
 }

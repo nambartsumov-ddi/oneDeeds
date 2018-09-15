@@ -10,14 +10,12 @@ import { toggleNav } from 'Actions';
 // Because we use css-modules we need to bind styles to classNames utilities
 const stylesCtx = classNames.bind(styles);
 
-const NavToggle = ({ isNavOpen, toggleNav, isClickedPlayButton }) => {
+const NavToggle = ({ isNavOpen, toggleNav }) => {
   const barWrapperClasses = stylesCtx(styles.BarWrapper, {
     [styles.Open]: isNavOpen,
   });
 
-  const navToggleClasses = stylesCtx(styles.NavToggle, {
-    [styles.videoOpen]: isClickedPlayButton,
-  });
+  const navToggleClasses = stylesCtx(styles.NavToggle);
 
   return (
     <div className={navToggleClasses} onClick={toggleNav}>
@@ -33,13 +31,12 @@ const NavToggle = ({ isNavOpen, toggleNav, isClickedPlayButton }) => {
 NavToggle.propTypes = {
   toggleNav: PropTypes.func,
   isNavOpen: PropTypes.bool,
-  isClickedPlayButton: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => {
   return {
     isNavOpen: state.ui.isNavOpen,
-    isClickedPlayButton: state.ui.isClickedPlayButton,
+    isVideodPlaying: state.ui.isVideodPlaying,
   };
 };
 
