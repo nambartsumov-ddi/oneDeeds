@@ -17,6 +17,11 @@
     right: 40px;
     top: 40px;
 
+    &.videoOpen {
+      padding: 0;
+      display: none;
+    }
+
     &:hover :not(.Open) {
       .Bar:first-child {
         width: 21px;
