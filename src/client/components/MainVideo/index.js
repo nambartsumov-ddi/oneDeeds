@@ -21,9 +21,10 @@ class MainVideo extends React.Component {
 
     const opts = {
       playerVars: {
-        autoPlay: 1,
+        autoplay: 1,
         showinfo: 0,
         color: 'white',
+        origin: process.env.HOST,
       },
     };
 
@@ -48,11 +49,6 @@ class MainVideo extends React.Component {
         <YouTube className={videoClasses} videoId="nI8n20UpaBY" opts={opts} />
       </div>
     );
-  }
-
-  _onReady(event) {
-    // access to player in all event handlers via event.target
-    event.target.pauseVideo();
   }
 }
 
