@@ -13,7 +13,7 @@ const initialState = {
   user: null,
   ui: {
     isNavOpen: false,
-    isClickedPlayButton: false,
+    isVideodPlaying: false,
   },
 };
 

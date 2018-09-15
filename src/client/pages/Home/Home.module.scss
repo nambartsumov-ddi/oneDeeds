@@ -1,3 +1,11 @@
 .Home {
   height: 100vh;
 }
+
+.PlayIcon {
+  display: inline-block;
+  stroke-width: 0;
+  margin: 0 0.4rem;
+  cursor: pointer;
+  fill: white;
+}

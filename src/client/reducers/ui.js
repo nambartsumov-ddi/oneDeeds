@@ -15,12 +15,12 @@ export default function(state = {}, action) {
     case PLAY_VIDEO:
       return {
         ...state,
-        isClickedPlayButton: true,
+        isVideodPlaying: true,
       };
     case CLOSE_VIDEO:
       return {
         ...state,
-        isClickedPlayButton: false,
+        isVideodPlaying: false,
       };
     default:
       return state;

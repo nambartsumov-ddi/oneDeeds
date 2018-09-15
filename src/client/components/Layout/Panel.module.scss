@@ -64,10 +64,6 @@
     fill: $menu-links-hover;
   }
 
-  .videoLayout.Full:hover svg {
-    fill: white;
-  }
-
   .Half:hover button {
     // transition: background 0.3s ease-in, border 0.3s ease-out, transform 0.1s cubic-bezier(0.91, 0.8, 0.54, 1);
     background: $LayoutButtonOnHover;
@@ -76,25 +72,9 @@
 
   .Full:first-child {
     width: 60%;
-
-    &.videoLayout {
-      width: 100%;
-      transition: width 0.5s ease;
-      background: rgb(235, 235, 235);
-
-      .Title {
-        display: none;
-      }
-    }
   }
 
   .Full:nth-child(2) {
     width: 40%;
-
-    &.videoLayout {
-      width: 0;
-      opacity: 0;
-      transition: opacity 0.3s ease, width 0.5s ease;
-    }
   }
 }

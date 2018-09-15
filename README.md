@@ -6,9 +6,9 @@
 
 - [ ] Insure the server auto restart - PM2
 - [x] logging - morgan
-- [ ] Setup deploy
+- [x] Setup deploy
 - [ ] Database - mongodb
-- [ ] nginx - reverse proxy, load balancer, serve static files, handle TLS, gzip. // https://www.nginx.com/resources/wiki/start/
+- [x] nginx - reverse proxy, load balancer, serve static files, handle TLS, gzip. // https://www.nginx.com/resources/wiki/start/
 - [ ] rate limiting
 - [ ] Monitoring?
 - [ ] dumper.js
@@ -18,7 +18,7 @@
 
 ### Client:
 
-- [ ] Optimize imported images with imagemin
+- [x] Optimize imported images with imagemin
 - [ ] Fix "import/no-unresolved" issues with webpack aliases
 - [x] fix webpack-serve historyApiFallback
 - [x] HTML template with html webpack plugin
@@ -44,14 +44,14 @@
 - [x] PropTypes
 - [x] redux-logger, redux devtools
 - [x] expose process.env webpack to client
-- [ ] react-router-dom scrollTop() feature ?
+- [x] react-router-dom scrollTop() feature ?
 - [ ] Class properties, object rest spread
 
 
 ####oneDeeds features
 - [ ] Complete Nav menu links and routes and social media links (Animate menu after this is done)
 - [ ] Sections panels Routes
-- [ ] Main section Panel Video
+- [x] Main section Panel Video
 - [x] Logo optimizaion for mobile and desktop
 - [ ] REGISTRATION COMPONENT - social buttons (email, facebook, google)
 - [ ] PAYPAL - where should it be (descision is to be made)
@@ -65,6 +65,6 @@
 
 ####oneDeeds bugs
 - [x] In mobile, the nav menu overflows layout and body backgroudn is showing.
-- [ ]
+- [ ] Layout scroll issues
 - [ ]
 - [ ]

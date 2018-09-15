@@ -12,15 +12,6 @@
   }
 }
 
-.PlayIcon {
-  display: inline-block;
-  stroke-width: 0;
-  stroke: currentColor;
-  fill: currentColor;
-  margin: 0 0.4rem;
-  cursor: pointer;
-}
-
 @media (min-width: $lg) {
   .Layout {
     flex-direction: row;
