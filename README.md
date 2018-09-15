@@ -4,7 +4,7 @@
 
 ### Server:
 
-- [ ] Insure the server auto restart - PM2
+- [ ] Ensure the server auto restart - PM2
 - [x] logging - morgan
 - [x] Setup deploy
 - [ ] Database - mongodb
@@ -65,6 +65,6 @@
 
 ####oneDeeds bugs
 - [x] In mobile, the nav menu overflows layout and body backgroudn is showing.
-- [ ] Layout scroll issues
+- [x] Layout scroll issues
 - [ ]
 - [ ]

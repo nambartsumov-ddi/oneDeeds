@@ -207,7 +207,6 @@ module.exports = {
     minimizer: isProduction
       ? [
           new UglifyJsPlugin({
-            cache: true,
             parallel: true,
             sourceMap: true,
             uglifyOptions: {

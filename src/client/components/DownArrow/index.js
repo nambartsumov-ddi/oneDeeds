@@ -1,18 +1,12 @@
 import React from 'react';
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 import styles from './DownArrow.module.scss';
 
-// Because we use css-modules we need to bind styles to classNames utilities
-const stylesCtx = classNames.bind(styles);
-
 const DownArrow = ({ onClick }) => {
-  const downArrowSVGClasses = stylesCtx(styles.Icon, styles.DownIcon);
-
   return (
     <div className={styles.DownIconWrapper} onClick={() => onClick()}>
-      <a className={downArrowSVGClasses}>
+      <div className={styles.DownIcon}>
         <svg width="38" viewBox="0 0 140 141.8" height="38" focusable="false" aria-hidden="true" tabIndex="-1">
           <path
             fill="#fff"
@@ -23,7 +17,7 @@ const DownArrow = ({ onClick }) => {
             d="M46.8 58.7c-1.4 1.4-1.3 3.6 0 4.9L66.4 83l.2.2c1 .8 2.2 1.3 3.5 1.3s2.5-.4 3.5-1.3l.2-.2 19.6-19.4c.7-.7 1-1.5 1-2.5 0-.9-.4-1.8-1-2.5-1.4-1.4-3.6-1.4-4.9 0L70.1 76.8 51.7 58.6c-1.4-1.3-3.6-1.3-4.9.1z"
           />
         </svg>
-      </a>
+      </div>
     </div>
   );
 };
