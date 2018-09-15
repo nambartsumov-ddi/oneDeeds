@@ -322,7 +322,7 @@ if (isDevelopment) {
   );
 
   module.exports.serve = {
-    port: process.env.CLIENT_DEV_PORT || 3000,
+    port: 3000,
     hmr: true,
     open: true,
     add: (app, middleware, options) => {
