@@ -1,0 +1,22 @@
+.MainVideo {
+  position: absolute;
+  width: 0;
+
+  &.videoOpen {
+    position: relative;
+    display: block;
+    width: 100vw;
+    height: 100vh;
+  }
+}
+
+.closeVideo {
+  position: absolute;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: white;
+  z-index: 9;
+  width: 50px;
+  top: 50px;
+  right: 50px;
+}

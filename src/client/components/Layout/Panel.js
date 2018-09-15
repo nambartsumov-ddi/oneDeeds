@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -7,11 +8,12 @@ import styles from './Panel.module.scss';
 // Because we use css-modules we need to bind styles to classNames utilities
 const stylesCtx = classNames.bind(styles);
 
-const Panel = ({ size, title, description, imageSrc, id, children }) => {
+const Panel = ({ size, title, description, imageSrc, id, children, isClickedPlayButton }) => {
   const panelClasses = stylesCtx(styles.Panel, {
     [styles.Full]: size === 'Full',
     [styles.Half]: size === 'Half',
     [styles.WithDesc]: description !== undefined,
+    [styles.videoLayout]: isClickedPlayButton,
   });
 
   const IsPlaceHolderPanel = () => {
@@ -36,7 +38,10 @@ const Panel = ({ size, title, description, imageSrc, id, children }) => {
   };
 
   return (
-    <div id={id} className={panelClasses} style={{ backgroundImage: imageSrc ? `url(${imageSrc})` : null }}>
+    <div
+      id={id}
+      className={panelClasses}
+      style={{ backgroundImage: imageSrc && !isClickedPlayButton ? `url(${imageSrc})` : null }}>
       <IsPlaceHolderPanel />
       {children}
     </div>
@@ -50,6 +55,16 @@ Panel.propTypes = {
   imageSrc: PropTypes.string,
   id: PropTypes.string,
   children: PropTypes.any,
+  isClickedPlayButton: PropTypes.bool,
 };
 
-export default Panel;
+const mapStateToProps = (state) => {
+  return {
+    isClickedPlayButton: state.ui.isClickedPlayButton,
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)(Panel);
