@@ -16,7 +16,7 @@
     transition: background .3s ease;
 
     &.overlayOpen {
-      background: rgba(0, 0, 0, .65);
+      background: rgba(0, 0, 0, 0.2);
       transition: background .3s ease;
       z-index: $overlay-zindex;
     }

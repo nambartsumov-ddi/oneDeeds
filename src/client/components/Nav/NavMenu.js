@@ -12,6 +12,7 @@ const NavMenu = () => {
 
   return (
     <nav className={navMenuClasses}>
+      <NavMenuLink title="Home" to={`/`} />
       <NavMenuLink title="About The Cause" to={`/about-the-cause`} />
     </nav>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import { closeNav } from 'Actions';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -17,7 +17,12 @@ const NavMenuLink = ({ title, size, to, closeNav }) => {
   });
 
   return (
-    <NavLink className={navMenuLinkClasses} onClick={() => closeNav()} activeClassName={styles.LinkActive} to={to}>
+    <NavLink
+      className={navMenuLinkClasses}
+      onClick={() => closeNav()}
+      exact
+      activeClassName={styles.LinkActive}
+      to={to}>
       {title}
     </NavLink>
   );
@@ -34,7 +39,9 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ closeNav }, dispatch);
 };
 
-export default connect(
-  undefined,
-  mapDispatchToProps
-)(NavMenuLink);
+export default withRouter(
+  connect(
+    undefined,
+    mapDispatchToProps
+  )(NavMenuLink)
+);

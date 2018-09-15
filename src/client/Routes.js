@@ -14,8 +14,8 @@ const Routes = () => (
     <Overlay />
     <Switch>
       <ScrollToTopRoute path="/" exact component={Home} />
-      <ScrollToTopRoute path="/about-the-cause" component={About} />
-      <ScrollToTopRoute path="/video" component={Player} />
+      <ScrollToTopRoute path="/about-the-cause" exact component={About} />
+      <ScrollToTopRoute path="/video" exact component={Player} />
       <Redirect to="/" />
     </Switch>
   </>
