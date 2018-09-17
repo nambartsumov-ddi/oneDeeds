@@ -10,9 +10,10 @@ import { toggleNav } from 'Actions';
 // Because we use css-modules we need to bind styles to classNames utilities
 const stylesCtx = classNames.bind(styles);
 
-const NavToggle = ({ isNavOpen, toggleNav }) => {
+const NavToggle = ({ isNavOpen, toggleNav, page }) => {
   const barWrapperClasses = stylesCtx(styles.BarWrapper, {
     [styles.Open]: isNavOpen,
+    [styles.AboutPageActive]: page === 'about',
   });
 
   const navToggleClasses = stylesCtx(styles.NavToggle);
@@ -31,6 +32,7 @@ const NavToggle = ({ isNavOpen, toggleNav }) => {
 NavToggle.propTypes = {
   toggleNav: PropTypes.func,
   isNavOpen: PropTypes.bool,
+  page: PropTypes.string,
 };
 
 const mapStateToProps = (state) => {

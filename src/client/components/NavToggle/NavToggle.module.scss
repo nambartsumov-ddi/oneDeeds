@@ -62,6 +62,12 @@
   }
 }
 
+.AboutPageActive {
+  .Bar {
+    background: #44ac3a;
+  }
+}
+
 .BarWrapper {
   width: 27px;
   height: 100%;
@@ -72,6 +78,12 @@
 }
 
 .Open {
+  &.AboutPageActive {
+    .Bar {
+      background: #44ac3a;
+    }
+  }
+
   .Bar {
     background: #000;
     transition: margin 0.15s, width 0.15s, background 0.1s 0.1s;
