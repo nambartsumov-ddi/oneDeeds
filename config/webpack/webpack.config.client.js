@@ -35,7 +35,7 @@ module.exports = {
     path: appConfig.paths.build.public,
     filename: isDevelopment ? '[name].js' : 'scripts/[name].[chunkhash:6].js',
     chunkFilename: isDevelopment ? '[name].js' : 'scripts/[name].[chunkhash:6].js',
-    publicPath: isDevelopment ? '/' : '/public',
+    publicPath: isDevelopment ? '/' : 'https://www.onedeeds.com/',
     devtoolModuleFilenameTemplate(info) {
       return isMac
         ? `file://${info.absoluteResourcePath.replace(/\\/g, '/')}`
@@ -85,7 +85,7 @@ module.exports = {
             loader: 'url-loader',
             options: {
               limit: 10000,
-              name: isDevelopment ? 'assets/images/[name].[ext]' : '/assets/images/[name].[hash:6].[ext]',
+              name: isDevelopment ? 'assets/images/[name].[ext]' : 'assets/images/[name].[hash:6].[ext]',
             },
           },
           {
@@ -187,14 +187,14 @@ module.exports = {
             include: /\.(woff|woff2|eot|ttf|otf)$/,
             loader: 'file-loader',
             options: {
-              name: isDevelopment ? 'assets/fonts/[name].[ext]' : '/assets/fonts/[name].[hash:6].[ext]',
+              name: isDevelopment ? 'assets/fonts/[name].[ext]' : 'assets/fonts/[name].[hash:6].[ext]',
             },
           },
           {
             exclude: /\.(js|html|json)/,
             loader: 'file-loader',
             options: {
-              name: isDevelopment ? 'assets/images/[name].[ext]' : '/assets/images/[name].[hash:6].[ext]',
+              name: isDevelopment ? 'assets/images/[name].[ext]' : 'assets/images/[name].[hash:6].[ext]',
             },
           },
           // ** STOP ** Are you adding a new loader?

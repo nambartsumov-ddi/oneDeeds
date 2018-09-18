@@ -17,7 +17,7 @@ class MainVideo extends React.Component {
         autoplay: 1,
         showinfo: 0,
         color: 'white',
-        origin: process.env.HOST,
+        origin: window.location.protocol + '//' + window.location.host,
       },
     };
 

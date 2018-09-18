@@ -2,6 +2,10 @@
 
 ## TODO:
 
+- [x] Split deployes for client and server
+- [ ] Split client and api with it's own packages.json
+- [ ] Change build to build/production/client and build/production/server
+
 ### Server:
 
 - [ ] Ensure the server auto restart - PM2
@@ -59,7 +63,6 @@
 - [ ] Images - optimize for mobile - maybe decide on desktop image and mobile image.
 - [ ] Route transition and Loader - start animation?
 - [x] Overlay close menu
-- [ ]
 - [ ]
 
 
