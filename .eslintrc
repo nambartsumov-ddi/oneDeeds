@@ -23,6 +23,7 @@
   },
   "plugins": [],
   "rules": {
+    "new-cap": "off",
     "no-unused-vars": "warn",
     "linebreak-style": "off",
     "import/no-unresolved": "off",

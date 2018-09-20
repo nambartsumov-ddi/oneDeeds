@@ -5,7 +5,13 @@ import createDebug from 'debug';
 import cors from 'cors';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
+import api, { handleError } from './api';
+
 dotenv.config();
+
+// const { PRODUCTION_URL_APP, PRODUCTION_URL_API } = process.env;
+// const ROOT_URL = dev ? `http://localhost:${port}` : PRODUCTION_URL_API;
+// const MONGO_URL = isDevelopment ? process.env.MONGO_URL_DEVELOPMENT : process.env.MONGO_URL_PROPDUCTION;
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 const debug = createDebug('server');
@@ -17,19 +23,31 @@ const app = express();
 if (isDevelopment) {
   app.use(cors({ origin: true }));
 }
-app.use(morgan('dev')); // tiny, dev, short
+app.use(morgan(isDevelopment ? 'dev' : 'tiny')); // tiny, dev, short
 app.use(helmet());
 app.use(express.json());
 
 // Routes
-app.get('/', (req, res) => {
-  res.json([
-    {
-      name: 'API',
-      version: 'v1',
-      Description: 'Welcome to API development',
+app.get('/', api, handleError);
+
+// if we are here then the specified request is not found
+app.use((req, res, next) => {
+  debug('404 - Request Not Found');
+  const err = new Error('404 - Request Not Found');
+  err.status = 404;
+  next(err);
+});
+
+// all other requests are not implemented.
+app.use((err, req, res, next) => {
+  debug('501 - Request Not Implemented');
+  res.status(err.status || 501);
+  res.json({
+    error: {
+      code: err.status || 501,
+      message: err.message,
     },
-  ]);
+  });
 });
 
 app.listen(port, () => {
