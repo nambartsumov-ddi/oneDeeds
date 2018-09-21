@@ -7,7 +7,7 @@
 html,
 body {
   font-family: 'Open Sans', sans-serif;
-  font-size: .9rem;
+  font-size: 0.9rem;
   line-height: 1.141;
   font-style: normal;
   font-weight: 400;
@@ -15,4 +15,6 @@ body {
   text-transform: none;
   color: #fff;
   touch-action: manipulation;
+  max-width: 100%;
+  overflow-x: hidden;
 }

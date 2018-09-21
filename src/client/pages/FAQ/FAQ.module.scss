@@ -51,7 +51,7 @@
 
     .BottomLine {
       width: 85px;
-      height: 0.5px;
+      height: 2px;
       background: black;
       margin-top: 0.3em;
     }
@@ -68,20 +68,21 @@
     margin: 2em 0;
     position: relative;
   }
+}
 
-  .Content {
-    font-size: 1.25em;
-    line-height: 1.2em;
-    margin: 0;
-    padding: 0 2em;
+.Content {
+  font-size: 1.25em;
+  line-height: 1.2em;
+  padding: 0 2em;
+  margin-bottom: 30px;
+  color: #000;
 
-    .Answer {
-      margin-bottom: 2em;
-    }
+  .Answer {
+    margin-bottom: 2em;
+  }
 
-    span {
-      font-weight: 700;
-    }
+  span {
+    font-weight: 700;
   }
 }
 
@@ -102,18 +103,19 @@
   }
 
   .FAQPageContent {
-    height: 100%;
     position: relative;
+    padding: 3em 0;
+    height: 100%;
+    max-width: 65vw;
+    margin: 0 auto;
     display: flex;
     flex-direction: row;
     width: 100%;
 
     .FAQTitle {
       position: absolute;
-      bottom: 50%;
-      left: 50%;
-      margin-bottom: 11.7rem;
-      margin-left: -30rem;
+      left: -150px;
+      top: 120px;
       z-index: 1;
       font-size: 1.5em;
       padding: 0;
@@ -129,40 +131,14 @@
 
     .FAQImg {
       opacity: 1;
-      width: 45em;
-      height: 70vh;
-      margin: auto;
-    }
-
-    .Content {
-      position: absolute;
-      width: 16em;
-      top: 4em;
-      left: 56%;
-      margin-left: 14.5rem;
+      width: 100%;
+      height: auto;
     }
   }
-}
 
-@media (max-width: 1120px) and (min-width: $lg) {
-  .FAQ {
-    .FAQPageContent {
-      .FAQImg {
-        opacity: 0.4;
-        transition: 0.2s ease;
-      }
-
-      .FAQTitle h1 {
-        font-size: 2em;
-      }
-
-      .Content {
-        left: 50%;
-        font-size: 15px;
-        width: 18em;
-        transition: 0.2s ease;
-        top: 9em;
-      }
-    }
+  .Content {
+    padding: 0 2em 3em 2em;
+    max-width: 70vw;
+    margin: 0 auto;
   }
 }

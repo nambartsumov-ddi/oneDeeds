@@ -29,8 +29,9 @@
 
 .AboutPageContent {
   position: relative;
-  padding: 3em 0;
+  padding-top: 3em;
   color: black;
+  max-width: 100vw;
 
   .AboutTitle {
     display: flex;
@@ -61,8 +62,9 @@
     background-position: center;
     background-repeat: no-repeat;
     opacity: 0.8;
-    width: 100vw;
-    height: 40vh;
+    width: auto;
+    height: auto;
+    min-height: 30vh;
     margin: 1em 0;
     position: relative;
   }
@@ -72,10 +74,18 @@
     line-height: 1.2em;
     margin: 0;
     padding: 0 2em;
+  }
+}
 
-    .BottomContent h3 {
-      margin-top: 2em;
-    }
+.BottomContent {
+  font-size: 1.25em;
+  line-height: 1.2em;
+  padding: 0 2em;
+  margin-bottom: 30px;
+  color: #000;
+
+  h3 {
+    margin-top: 2em;
   }
 
   .TeamWrapper h4 {
@@ -101,8 +111,9 @@
 
   .AboutPageContent {
     position: relative;
+    padding: 3em 0;
     height: 100%;
-    max-width: 70vw;
+    max-width: 65vw;
     margin: 0 auto;
     display: flex;
     flex-direction: row;
@@ -132,9 +143,9 @@
 
     .AboutUsContent {
       position: absolute;
-      right: -50px;
-      top: 100px;
-      width: 14em;
+      right: -140px;
+      top: 80px;
+      width: 16em;
 
       p {
         margin-bottom: 1em;
@@ -143,14 +154,9 @@
   }
 
   .BottomContent {
-    font-size: 1.25em;
-    line-height: 1.2em;
-    margin: 0;
-    padding: 0 2em;
-    color: #000;
+    padding: 0 2em 3em 2em;
     max-width: 70vw;
     margin: 0 auto;
-    margin-bottom: 20px;
 
     h3 {
       margin-top: 3em;
@@ -163,10 +169,6 @@
 
   .TeamWrapper {
     display: flex;
-
-    h4 {
-      text-decoration: underline;
-    }
 
     div:first-child {
       margin-right: 65px;
@@ -183,11 +185,11 @@
       }
 
       .AboutUsContent {
-        left: 50%;
+        left: 70%;
         font-size: 15px;
         width: 18em;
         transition: 0.2s ease;
-        top: 9em;
+        top: 7em;
       }
     }
   }

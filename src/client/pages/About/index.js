@@ -85,7 +85,7 @@ const About = ({ isNavOpen }) => {
                     companies on their marketing strategies.
                   </p>
                 </div>
-                <div className={styles.Team1}>
+                <div className={styles.Team2}>
                   <h4>David Zak</h4>
 
                   <p>
@@ -99,6 +99,13 @@ const About = ({ isNavOpen }) => {
                   </p>
                 </div>
               </div>
+            </div>
+            <div className={styles.Contact}>
+              <h3>Contact</h3>
+              <p>Got a question? We’d love to hear from you!</p>
+              <a href="mailto:Info@onedeeds.com" rel="noopener noreferrer" target="_blank">
+                Info@onedeeds.com
+              </a>
             </div>
           </div>
         </div>
