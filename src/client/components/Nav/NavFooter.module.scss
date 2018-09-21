@@ -7,35 +7,48 @@
 }
 
 .BottomRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-  .Rights {
-    letter-spacing: -1px;
-    font-size: 0.8rem;
-    font-weight: bold;
-  }
+    .Rights {
+      letter-spacing: -1px;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
 
 }
 
 .SocialIcons {
-  display: flex;
+      display: flex;
 
-  .Icon {
-    display: inline-block;
-    width: 1em;
-    height: 1em;
-    stroke-width: 0;
-    stroke: currentColor;
-    fill: currentColor;
-    margin: 0 0.4rem;
-    cursor: pointer;
+      .Icon {
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        stroke-width: 0;
+        stroke: currentColor;
+        fill: currentColor;
+        margin: 0 0.4rem;
+        cursor: pointer;
+        color: #ccc;
 
-    &:hover {
-      color: $menu-links-hover;
-    }
-  }
+        &.Facebook:hover {
+          color: #3b5999;
+        }
+
+        &.Twitter:hover {
+          color: #55acee;
+        }
+
+        &.Instagram:hover {
+          color: #e4405f;
+      }
+
+        &.Medium:hover {
+          color: #02b875;
+        }
+      }
 }
 
 @media (min-width: $lg) {

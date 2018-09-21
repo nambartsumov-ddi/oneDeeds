@@ -20,8 +20,8 @@ const NavMenuLink = ({ title, size, to, closeNav }) => {
     <NavLink
       className={navMenuLinkClasses}
       onClick={() => closeNav()}
-      exact
       activeClassName={styles.LinkActive}
+      exact
       to={to}>
       {title}
     </NavLink>

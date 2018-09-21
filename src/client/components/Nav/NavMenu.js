@@ -13,7 +13,11 @@ const NavMenu = () => {
   return (
     <nav className={navMenuClasses}>
       <NavMenuLink title="Home" to={`/`} />
+      <NavMenuLink title="Activity" to={`/activity`} />
+      <NavMenuLink title="Our Community" to={`/our-community`} />
       <NavMenuLink title="About The Cause" to={`/about-the-cause`} />
+      <NavMenuLink title="Donations" to={`/Donations`} />
+      <NavMenuLink title="FAQ" to={`/FAQ`} />
     </nav>
   );
 };
