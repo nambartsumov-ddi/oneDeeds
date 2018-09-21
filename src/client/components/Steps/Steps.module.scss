@@ -1,0 +1,32 @@
+.Steps {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 0 auto;
+  color: #000;
+  margin-top: 77px;
+
+  .StepsWrapper {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.2em;
+  }
+}
+
+.Step {
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+
+  .StepNumber {
+    background: #e9b69f;
+    border: 1px solid #e9b69f;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+  }
+}
