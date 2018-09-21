@@ -23,18 +23,6 @@
     &.Open {
       transform: translateX(-100%);
     }
-
-    .AboutImg {
-      background-image: url('Images/about.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      opacity: 0.8;
-      width: 100vw;
-      height: 40vh;
-      margin: 1em 0;
-      position: relative;
-    }
   }
 }
 
@@ -42,7 +30,6 @@
   position: relative;
   padding: 3em;
   color: black;
-  overflow: hidden;
   padding: 3em 0;
 
   .AboutTitle {
@@ -68,11 +55,31 @@
     }
   }
 
-  p {
+  .AboutImg {
+    background-image: url('Images/about.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.8;
+    width: 100vw;
+    height: 40vh;
+    margin: 1em 0;
+    position: relative;
+  }
+
+  .Content {
     font-size: 1.25em;
     line-height: 1.2em;
     margin: 0;
     padding: 0 2em;
+
+    .BottomContent h3 {
+      margin-top: 2em;
+    }
+  }
+
+  .TeamWrapper h4 {
+    text-decoration: underline;
   }
 }
 
@@ -93,33 +100,94 @@
   }
 
   .AboutPageContent {
-    padding: 0 3em;
     height: 100%;
-    margin-left: auto;
-    margin-right: auto;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
 
     .AboutTitle {
       position: absolute;
-      margin-top: 4em;
-      margin-left: 3em;
+      bottom: 50%;
+      left: 50%;
+      margin-bottom: 11.7rem;
+      margin-left: -30rem;
       z-index: 1;
       font-size: 1.5em;
+      padding: 0;
+
+      h1 {
+        font-weight: bold;
+        span {
+          font-weight: normal;
+        }
+      }
     }
 
-    p {
-      padding: 0 2em;
+    .AboutImg {
+      opacity: 1;
+      width: 45em;
+      height: 70vh;
+      margin: auto;
+    }
+
+    .AboutUsContent {
       position: absolute;
-      width: 18em;
-      margin-left: 45em;
+      width: 14em;
       top: 4em;
+      left: 56%;
+      margin-left: 14.5rem;
+
+      p {
+        margin-bottom: 1em;
+      }
     }
   }
 
-  .About .ContentWrapper .AboutImg {
-    opacity: 1;
-    width: 45em;
-    height: 70vh;
-    margin: 3em 20em;
+  .BottomContent {
     position: absolute;
+    left: 23%;
+    top: 36em;
+    margin-bottom: 5em;
+    width: 35em;
+
+    h3 {
+      margin-top: 3em;
+    }
+  }
+
+  .Team h3 {
+    margin-bottom: 0;
+  }
+
+  .TeamWrapper {
+    display: flex;
+
+    h4 {
+      text-decoration: underline;
+    }
+
+    div:first-child {
+      margin-right: 65px;
+    }
+  }
+}
+
+@media (max-width: 1120px) and (min-width: $lg) {
+  .About {
+    .AboutPageContent {
+      .AboutImg {
+        opacity: 0.4;
+        transition: 0.2s ease;
+      }
+
+      .AboutUsContent {
+        left: 50%;
+        font-size: 15px;
+        width: 18em;
+        transition: 0.2s ease;
+        top: 9em;
+      }
+    }
   }
 }

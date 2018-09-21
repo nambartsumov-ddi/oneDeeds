@@ -13,7 +13,7 @@ const stylesCtx = classNames.bind(styles);
 const NavToggle = ({ isNavOpen, toggleNav, page }) => {
   const barWrapperClasses = stylesCtx(styles.BarWrapper, {
     [styles.Open]: isNavOpen,
-    [styles.AboutPageActive]: page === 'about',
+    [styles.LinkActive]: page !== undefined,
   });
 
   const navToggleClasses = stylesCtx(styles.NavToggle);
