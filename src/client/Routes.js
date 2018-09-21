@@ -9,6 +9,9 @@ import Activity from 'Pages/Activity';
 import Community from 'Pages/Community';
 import Donations from 'Pages/Donations';
 import FAQ from 'Pages/FAQ';
+import Steps from 'Components/Steps';
+import Registration from 'Components/Registration';
+import Email from 'Components/Email';
 import Nav from 'Components/Nav';
 import Overlay from 'Components/Overlay';
 
@@ -24,6 +27,9 @@ const Routes = () => (
       <ScrollToTopRoute path="/our-community" exact component={Community} />
       <ScrollToTopRoute path="/donations" exact component={Donations} />
       <ScrollToTopRoute path="/FAQ" exact component={FAQ} />
+      <ScrollToTopRoute path="/steps" exact component={Steps} />
+      <ScrollToTopRoute path="/registration" exact component={Registration} />
+      <ScrollToTopRoute path="/email" exact component={Email} />
       <Redirect to="/" />
     </Switch>
   </>

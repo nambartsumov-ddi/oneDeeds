@@ -1,0 +1,17 @@
+.Email {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+  margin: 40px 0;
+  font-size: 1.5em;
+
+  .Title {
+    padding-right: 20px;
+  }
+
+  input {
+    margin-right: 30px;
+  }
+}
