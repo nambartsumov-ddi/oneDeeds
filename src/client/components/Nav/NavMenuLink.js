@@ -41,7 +41,7 @@ const mapDispatchToProps = (dispatch) => {
 
 export default withRouter(
   connect(
-  undefined,
-  mapDispatchToProps
+    undefined,
+    mapDispatchToProps
   )(NavMenuLink)
 );
