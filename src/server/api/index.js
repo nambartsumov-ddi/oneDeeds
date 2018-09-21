@@ -4,7 +4,7 @@ import createDebug from 'debug';
 const debug = createDebug('api');
 const apiRouter = express.Router();
 
-export const handleError = function(err, _, res, __) {
+export const handleApiError = function(err, _, res, __) {
   debug(err.stack);
   res.json({ error: err.message || err.toString() });
 };

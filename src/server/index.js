@@ -2,67 +2,49 @@ import express from 'express';
 import helmet from 'helmet';
 import chalk from 'chalk';
 import createDebug from 'debug';
-import cors from 'cors';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
-import mongoSessionStore from 'connect-mongo';
-import session from 'express-session';
 import mongoose from 'mongoose';
-import api, { handleError } from './api';
+import api, { handleApiError } from './api';
+import auth, { handleAuthError } from './auth';
 
 dotenv.config();
+const debug = createDebug('server');
 
 const isDevelopment = process.env.NODE_ENV === 'development';
-const debug = createDebug('server');
-const port = process.env.API_PORT || 8000;
-const { PRODUCTION_URL_API, HOST, MONGO_URL_DEVELOPMENT, MONGO_URL_PROPDUCTION } = process.env;
-const ROOT_URL = isDevelopment ? `${HOST}:${port}` : PRODUCTION_URL_API;
-const MONGO_URL = isDevelopment ? MONGO_URL_DEVELOPMENT : MONGO_URL_PROPDUCTION;
+const { PRODUCTION_URL_API, API_PORT, HOST, MONGO_URL_DEVELOPMENT, MONGO_URL_PROPDUCTION } = process.env;
+const ROOT_URL = isDevelopment ? `${HOST}:${API_PORT}` : PRODUCTION_URL_API;
+const MONGO_URI = isDevelopment ? MONGO_URL_DEVELOPMENT : MONGO_URL_PROPDUCTION;
 
+// Database
+mongoose.Promise = global.Promise;
 mongoose.connect(
-  MONGO_URL,
+  MONGO_URI,
   { useNewUrlParser: true }
 );
 
+const db = mongoose.connection;
+db.on('error', (err) => {
+  debug(`🚩 Error while connecting to DB: ${err.message}`);
+});
+
+db.once('open', () => {
+  debug('🔗 mongodb connected successfully!');
+});
+
+// App server
 const app = express();
 
 // Middlewares
 if (isDevelopment) {
-  const origin = `${HOST}:${port}`;
-  app.use(cors({ origin }));
+  app.use(morgan('dev'));
 }
-app.use(morgan(isDevelopment ? 'dev' : 'tiny')); // tiny, dev, short
 app.use(helmet());
 app.use(express.json());
 
-// Database
-const MongoStore = mongoSessionStore(session);
-const sessionOptions = {
-  name: process.env.SESSION_NAME,
-  secret: process.env.SESSION_SECRET,
-  store: new MongoStore({
-    mongooseConnection: mongoose.connection,
-    ttl: 14 * 24 * 60 * 60, // save session 14 days
-  }),
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    httpOnly: true,
-    maxAge: 14 * 24 * 60 * 60 * 1000, // expires in 14 days
-    domain: isDevelopment ? HOST : PRODUCTION_URL_API,
-  },
-};
-
-if (!isDevelopment) {
-  server.set('trust proxy', 1); // sets req.hostname, req.ip
-  sessionOptions.cookie.secure = true; // sets cookie over HTTPS only
-}
-
-const sessionMiddleware = session(sessionOptions);
-app.use(sessionMiddleware);
-
 // Routes
-app.get('/', api, handleError);
+app.use('/auth', auth, handleAuthError);
+app.use('/', api, handleApiError);
 
 // if we are here then the specified request is not found
 app.use((req, res, next) => {
@@ -84,6 +66,6 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(port, () => {
+app.listen(API_PORT, () => {
   debug(`🚀  Server started in ${chalk.gray(process.env.NODE_ENV)} mode on: ${chalk.blue(ROOT_URL)}...`);
 });
