@@ -26,7 +26,7 @@ export const setup = (passport) => {
     new LocalStrategy.Strategy({ usernameField: 'email' }, function(req, email, done) {
       const newUser = new User({
         email: email,
-        varified: false,
+        verified: false,
       });
 
       User.findOne({ email }, function(err, user) {
@@ -61,7 +61,7 @@ export const setup = (passport) => {
           accessToken: accessToken,
           refreshToken: refreshToken,
         };
-        newUser.varified = true;
+        newUser.verified = true;
 
         User.findOne({ email: profile.emails[0].value }, function(err, user) {
           if (err) return done(err);
@@ -95,7 +95,7 @@ export const setup = (passport) => {
           accessToken: accessToken,
           refreshToken: refreshToken,
         };
-        newUser.varified = true;
+        newUser.verified = true;
 
         User.findOne({ email: profile.emails[0].value }, function(err, user) {
           if (err) return done(err);

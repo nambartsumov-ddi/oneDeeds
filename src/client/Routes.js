@@ -8,8 +8,8 @@ import Player from 'Pages/Player';
 import Activity from 'Pages/Activity';
 import Community from 'Pages/Community';
 import Donations from 'Pages/Donations';
+import Registration from 'Pages/Registration';
 import FAQ from 'Pages/FAQ';
-import Registration from 'Components/Registration';
 import Nav from 'Components/Nav';
 import Overlay from 'Components/Overlay';
 
@@ -19,13 +19,13 @@ const Routes = () => (
     <Overlay />
     <Switch>
       <ScrollToTopRoute path="/" exact component={Home} />
-      <ScrollToTopRoute path="/about-the-cause" exact component={About} />
       <ScrollToTopRoute path="/video" exact component={Player} />
-      <ScrollToTopRoute path="/activity" exact component={Activity} />
+      <ScrollToTopRoute path="/act-now" exact component={Registration} />
       <ScrollToTopRoute path="/our-community" exact component={Community} />
+      <ScrollToTopRoute path="/about-the-cause" exact component={About} />
+      <ScrollToTopRoute path="/activity" exact component={Activity} />
       <ScrollToTopRoute path="/donations" exact component={Donations} />
       <ScrollToTopRoute path="/FAQ" exact component={FAQ} />
-      <ScrollToTopRoute path="/registration" exact component={Registration} />
       <Redirect to="/" />
     </Switch>
   </>

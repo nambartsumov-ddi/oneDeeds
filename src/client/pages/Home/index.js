@@ -64,12 +64,18 @@ class Home extends Component {
             <Panel
               size="Half"
               title="Section 2"
+              goTo={'/act-now'}
               description="Wear this ring and show your acceptance of marriage equality."
               imageSrc={handHalf1}>
               <LayoutButton text="Act Now" />
             </Panel>
 
-            <Panel size="Half" title="Section 3" description="Description for section 3" imageSrc={handHalf}>
+            <Panel
+              size="Half"
+              goTo={'/our-community'}
+              title="Section 3"
+              description="Description for section 3"
+              imageSrc={handHalf}>
               <LayoutButton text="Get Started" />
             </Panel>
             {/* ref div for scrolling */}
