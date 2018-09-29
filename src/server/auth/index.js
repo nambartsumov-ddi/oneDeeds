@@ -13,10 +13,6 @@ export const handleAuthError = function(err, _, res, __) {
 
 setup(passport);
 
-authRouter.get('/local', passport.authenticate('local'), (req, res) => {
-  res.json({ user: req.user });
-});
-
 authRouter.get('/facebook', passport.authenticate('facebook', { scope: ['email'] }));
 authRouter.get(
   '/facebook/callback',

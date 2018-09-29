@@ -23,4 +23,11 @@
   "eslint.packageManager": "yarn",
   "material-icon-theme.activeIconPack": "react_redux",
   "workbench.editor.labelFormat": "short",
+  "cSpell.words": [
+    "asaf",
+    "onedeeds",
+    "recanati",
+    "rozengarten"
+  ],
+  "cSpell.language": "en",
 }

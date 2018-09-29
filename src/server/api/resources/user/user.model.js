@@ -4,45 +4,42 @@ const { Schema } = mongoose;
 
 const userSchema = new Schema(
   {
-    name: String,
-    verified: Boolean,
-    email: {
-      type: String,
-      required: true,
-      trim: true,
-      unique: true,
+    local: {
+      email: {
+        type: String,
+        require: true,
+        index: true,
+        unique: true,
+        sparse: true,
+      },
+      isVerified: { type: Boolean, default: false },
     },
-    googleId: {
-      type: String,
-      unique: true,
+    facebook: {
+      name: String,
+      facebookId: {
+        type: String,
+        unique: true,
+      },
+      facebookToken: {
+        accessToken: String,
+        refreshToken: String,
+      },
+      isVerified: Boolean,
     },
-    googleToken: {
-      accessToken: String,
-      refreshToken: String,
-    },
-    facebookId: {
-      type: String,
-      unique: true,
-    },
-    facebookToken: {
-      accessToken: String,
-      refreshToken: String,
+    google: {
+      name: String,
+      googleId: {
+        type: String,
+        unique: true,
+      },
+      googleToken: {
+        accessToken: String,
+        refreshToken: String,
+      },
+      isVerified: Boolean,
     },
   },
   { timestamps: true }
 );
 
 export default mongoose.model('User', userSchema);
-
-// google: {
-//   createdAt: {
-//     type: Date,
-//     default: Date.now,
-//   },
-// },
-// instagram: {
-//   createdAt: {
-//     type: Date,
-//     default: Date.now,
-//   },
-// },

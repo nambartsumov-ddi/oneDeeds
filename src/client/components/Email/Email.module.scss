@@ -48,7 +48,7 @@
   color: #aaaaaa;
 }
 
-.EmailInputWrapper input[type='text'] {
+.EmailInputWrapper input[type='email'] {
   padding-left: 40px;
 
   &:focus {
@@ -56,7 +56,7 @@
   }
 }
 
-.EmailInputWrapper input[type='text']:focus + svg {
+.EmailInputWrapper input[type='email']:focus + svg {
   fill: dodgerblue;
 }
 
@@ -67,15 +67,14 @@
   padding: 0.5em;
   font-size: 0.7em;
   color: #fff;
-  font-weight: bold;
   cursor: pointer;
   background: dodgerblue;
   border: 1px solid dodgerblue;
   border-radius: 0.2em;
-
-  &:focus {
-    opacity: 1;
-  }
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media (min-width: $lg) {

@@ -39,6 +39,7 @@ module.exports = {
     components: resolveApp('src/client/components'),
     containers: resolveApp('src/client/containers'),
     pages: resolveApp('src/client/pages'),
+    api: resolveApp('src/client/api'),
     actions: resolveApp('src/client/actions'),
     reducers: resolveApp('src/client/reducers'),
     store: resolveApp('src/client/store'),

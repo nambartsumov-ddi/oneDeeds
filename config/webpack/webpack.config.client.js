@@ -244,6 +244,7 @@ module.exports = {
       Store: appConfig.paths.client.store,
       Styles: appConfig.paths.client.styles,
       Images: appConfig.paths.client.images,
+      Api: appConfig.paths.client.api,
     },
   },
   plugins: [
@@ -326,9 +327,10 @@ if (isDevelopment) {
     historyApiFallback: true,
     // Send API requests on localhost to API server get around CORS.
     proxy: {
-      '/api': {
-        target: `http://${HOST}:${API_PORT}`,
-        pathRewrite: { '^/api': '' },
+      '/api/**': {
+        target: 'http://localhost:8080/',
+        pathRewrite: { '^/api/': '' },
+        changeOrigin: true,
       },
     },
   };
