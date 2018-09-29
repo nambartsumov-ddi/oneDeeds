@@ -1,3 +1,5 @@
+@import '../../styles/variables';
+
 .Home {
   height: 100vh;
 }
@@ -8,4 +10,15 @@
   margin: 0 0.4rem;
   cursor: pointer;
   fill: white;
+}
+
+
+.PanelImagePosition {
+  background-position-x: -150px;
+}
+
+@media (min-width: $lg) {
+  .PanelImagePosition {
+    background-position-x: -50px;
+  }
 }

@@ -19,16 +19,26 @@ const Registration = () => {
     <div className={styles.Registration}>
       <NavToggle page="registration" />
       <Logo />
-      <Steps />
-      <Email />
-      <span className={styles.Or}>OR</span>
-      <div className={styles.SocialBtnWrapper}>
-        <a href="/auth/facebook" className={facebookClasses}>
-          Login with Facebook
-        </a>
-        <a href="/auth/google" className={googleClasses}>
-          Login with Google
-        </a>
+      <div className={styles.Container}>
+        <Steps />
+        <div className={styles.SignupWrap}>
+          <Email />
+          <span className={styles.Or}>or</span>
+          <div className={styles.SocialBtnWrapper}>
+            <a href="/auth/facebook" className={facebookClasses}>
+              Continue with Facebook
+            </a>
+            <a href="/auth/google" className={googleClasses}>
+              Continue with Google
+            </a>
+          </div>
+        </div>
+        <span className={styles.Policy}>
+          By creating an account, you are agreeing to our <a href="">Terms of Service</a> and
+          <a href=""> Privacy Policy</a>.
+        </span>
+
+        <span className={styles.NotShare}>* We&#39;ll never post anything without your permission.</span>
       </div>
     </div>
   );
