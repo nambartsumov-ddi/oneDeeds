@@ -1,17 +1,79 @@
+@import '../../styles/variables';
+
 .Email {
-  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   color: #000;
-  margin: 40px 0;
   font-size: 1.5em;
+  margin: 0 auto;
 
   .Title {
     padding-right: 20px;
   }
+}
 
-  input {
-    margin-right: 30px;
+.Icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: #aaa;
+  position: absolute;
+  top: 11px;
+  left: 10px;
+  transition: 0.3s ease;
+}
+
+.EmailInputWrapper {
+  position: relative;
+}
+
+.EmailInput {
+  background: transparent;
+  border: transparent;
+  outline: none;
+  padding: 10px;
+  border-bottom: 1px solid #aaa;
+  width: 65vw;
+}
+
+.EmailInputWrapper input[type='text'] {
+  padding-left: 40px;
+
+  &:focus {
+    border-bottom-color: dodgerblue;
+  }
+}
+
+.EmailInputWrapper input[type='text']:focus + svg {
+  fill: dodgerblue;
+}
+
+.Subscribe {
+  margin-top: 1.8em;
+  text-transform: uppercase;
+  padding: 0.5em;
+  font-size: 0.8em;
+  font-weight: bold;
+  width: 65vw;
+  cursor: pointer;
+  background: #aaa;
+  border-color: #aaa;
+}
+
+@media (min-width: $lg) {
+  .Email {
+    width: 33vw;
+  }
+
+  .EmailInput {
+    width: 27vw;
+  }
+
+  .Subscribe {
+    width: 27vw;
   }
 }
