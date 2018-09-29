@@ -1,5 +1,8 @@
 {
-  "watch": ["src/server/**/*.js"],
-  "ignore": ["node_modules/"],
-  "delay": 2500
+  "watch": [
+    "src/server/**/*.js"
+  ],
+  "ignore": [
+    "node_modules/"
+  ]
 }

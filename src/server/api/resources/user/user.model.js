@@ -2,40 +2,47 @@ import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
-const userSchema = new Schema({
-  local: {
+const userSchema = new Schema(
+  {
+    name: String,
+    varified: Boolean,
     email: {
       type: String,
       required: true,
+      trim: true,
       unique: true,
     },
-    createdAt: {
-      type: Date,
-      default: Date.now,
+    googleId: {
+      type: String,
+      unique: true,
+    },
+    googleToken: {
+      accessToken: String,
+      refreshToken: String,
+    },
+    facebookId: {
+      type: String,
+      unique: true,
+    },
+    facebookToken: {
+      accessToken: String,
+      refreshToken: String,
     },
   },
-  facebook: {
-    id: String,
-    token: String,
-    email: String,
-    name: String,
-    createdAt: {
-      type: Date,
-      default: Date.now,
-    },
-  },
-  google: {
-    createdAt: {
-      type: Date,
-      default: Date.now,
-    },
-  },
-  instagram: {
-    createdAt: {
-      type: Date,
-      default: Date.now,
-    },
-  },
-});
+  { timestamps: true }
+);
 
 export default mongoose.model('User', userSchema);
+
+// google: {
+//   createdAt: {
+//     type: Date,
+//     default: Date.now,
+//   },
+// },
+// instagram: {
+//   createdAt: {
+//     type: Date,
+//     default: Date.now,
+//   },
+// },

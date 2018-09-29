@@ -7,13 +7,11 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const history = require('connect-history-api-fallback');
-const convert = require('koa-connect');
-const proxy = require('http-proxy-middleware');
 
 const appConfig = require('../index');
 
 const env = process.env.NODE_ENV;
+const { HOST, API_PORT } = process.env;
 const isProduction = env === 'production';
 const isDevelopment = env === 'development';
 const isMac = process.platform === 'darwin';
@@ -320,20 +318,18 @@ if (isDevelopment) {
     })
   );
 
-  module.exports.serve = {
-    host: process.env.HOST,
+  module.exports.devServer = {
+    host: HOST,
     port: 3000,
-    hmr: true,
     open: true,
-    add: (app, middleware, options) => {
-      const historyOptions = {
-        verbose: false,
-      };
-
-      // To remove the "/api" prefix when proxying the API requests, just add
-      // "pathRewrite: { '^/api': '' }" to proxy's options.
-      app.use(convert(proxy('/api', { target: `${process.env.HOST}:${process.env.API_PORT}` })));
-      app.use(convert(history(historyOptions)));
+    overlay: true,
+    historyApiFallback: true,
+    // Send API requests on localhost to API server get around CORS.
+    proxy: {
+      '/api': {
+        target: `http://${HOST}:${API_PORT}`,
+        pathRewrite: { '^/api': '' },
+      },
     },
   };
 }

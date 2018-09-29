@@ -22,6 +22,6 @@ export function closeMainVideo() {
   return { type: CLOSE_VIDEO };
 }
 
-export function setUser() {
-  return { type: SET_USER };
+export function setUser(user) {
+  return { type: SET_USER, payload: user };
 }
