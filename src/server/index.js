@@ -1,34 +1,66 @@
 import express from 'express';
+import mongoose from 'mongoose';
+import session from 'express-session';
+import mongoSessionStore from 'connect-mongo';
+import passport from 'passport';
 import helmet from 'helmet';
 import chalk from 'chalk';
 import createDebug from 'debug';
 import cors from 'cors';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
-import api, { handleError } from './api';
+import connectDb from './db';
+import api, { handleApiError } from './api';
+import auth, { handleAuthError } from './auth';
+import config from './config';
 
 dotenv.config();
-
-// const { PRODUCTION_URL_APP, PRODUCTION_URL_API } = process.env;
-// const ROOT_URL = dev ? `http://localhost:${port}` : PRODUCTION_URL_API;
-// const MONGO_URL = isDevelopment ? process.env.MONGO_URL_DEVELOPMENT : process.env.MONGO_URL_PROPDUCTION;
-
-const isDevelopment = process.env.NODE_ENV === 'development';
 const debug = createDebug('server');
-const port = process.env.API_PORT || 8000;
+const isDevelopment = process.env.NODE_ENV === 'development';
 
+// Database
+connectDb(config.database.connectionURI);
+
+// App server
 const app = express();
 
 // Middlewares
 if (isDevelopment) {
-  app.use(cors({ origin: true }));
+  app.use(morgan('dev'));
 }
-app.use(morgan(isDevelopment ? 'dev' : 'tiny')); // tiny, dev, short
+
+app.use(cors());
 app.use(helmet());
 app.use(express.json());
 
+const MongoStore = mongoSessionStore(session);
+const sessionOptions = {
+  name: config.sessionName,
+  secret: config.sessionSecret,
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 14 * 24 * 60 * 60, // save session 14 days
+  }),
+  resave: true,
+  saveUninitialized: true,
+  cookie: {
+    httpOnly: true,
+    maxAge: 14 * 24 * 60 * 60 * 1000, // expires in 14 days
+  },
+};
+
+if (!isDevelopment) {
+  server.set('trust proxy', 1); // sets req.hostname, req.ip
+  sessionOptions.cookie.secure = true; // sets cookie over HTTPS only
+}
+
+app.use(session(sessionOptions));
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Routes
-app.get('/', api, handleError);
+app.use('/auth', auth, handleAuthError);
+app.use('/', api, handleApiError);
 
 // if we are here then the specified request is not found
 app.use((req, res, next) => {
@@ -50,6 +82,6 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(port, () => {
-  debug(`🚀  Server started in ${chalk.gray(process.env.NODE_ENV)} mode on port ${chalk.blue(port)}...`);
+app.listen(config.apiPort, () => {
+  debug(`🚀  Server started in ${chalk.gray(process.env.NODE_ENV)} mode on: ${chalk.blue(config.rootURL)}...`);
 });

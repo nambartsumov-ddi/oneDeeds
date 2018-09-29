@@ -8,11 +8,12 @@ import styles from './Panel.module.scss';
 // Because we use css-modules we need to bind styles to classNames utilities
 const stylesCtx = classNames.bind(styles);
 
-const Panel = ({ size, title, description, imageSrc, id, goTo, history, children }) => {
+const Panel = ({ size, title, description, imageSrc, id, goTo, history, className, children }) => {
   const panelClasses = stylesCtx(styles.Panel, {
     [styles.Full]: size === 'Full',
     [styles.Half]: size === 'Half',
     [styles.WithDesc]: description !== undefined,
+    [className]: className,
   });
 
   const IsPlaceHolderPanel = () => {
@@ -60,6 +61,7 @@ Panel.propTypes = {
   id: PropTypes.string,
   goTo: PropTypes.string,
   history: PropTypes.object,
+  className: PropTypes.string,
   children: PropTypes.any,
 };
 

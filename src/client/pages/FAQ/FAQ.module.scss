@@ -9,7 +9,7 @@
 
   .FixedHeader {
     width: 100%;
-    height: 100px;
+    height: 60px;
     position: fixed;
     background: white;
     z-index: 3;
@@ -17,7 +17,7 @@
   }
 
   .ContentWrapper {
-    padding-top: 110px;
+    padding-top: 80px;
     width: 100vw;
     transition: transform 0.3s ease;
 
@@ -29,9 +29,8 @@
 
 .FAQPageContent {
   position: relative;
-  padding: 3em;
   color: black;
-  padding: 3em 0 1em 0;
+  padding: 0 0 1em 0;
   max-width: 100vw;
 
   .FAQTitle {
@@ -91,6 +90,7 @@
 @media (min-width: $lg) {
   .FAQ {
     .FixedHeader {
+      height: 110px;
       border-bottom: 0;
     }
 

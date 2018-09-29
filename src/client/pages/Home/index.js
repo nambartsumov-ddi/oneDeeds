@@ -34,10 +34,14 @@ class Home extends Component {
       window.requestAnimationFrame(step);
     };
 
+    const isMobile = () => window.screen.width < 992;
+
     // Because we use css-modules we need to bind styles to classNames utilities
     const stylesCtx = classNames.bind(styles);
 
-    const panelHover = stylesCtx(styles.PanelHover);
+    const imagePosition = stylesCtx({
+      [styles.PanelImagePosition]: isMobile(),
+    });
 
     return (
       <div className={styles.Home}>
@@ -46,7 +50,7 @@ class Home extends Component {
         <DownArrow onClick={() => scrollToAnimated(this.SecondSectionRef.offsetTop, 600)} />
         <Layout>
           <Panel
-            className={panelHover}
+            className={imagePosition}
             goTo={'/video'}
             size="Full"
             title="One is Powerful, Many are Unstoppable"
