@@ -27,10 +27,10 @@ const Registration = () => {
             <Email />
             <span className={styles.Or}>or</span>
             <div className={styles.SocialBtnWrapper}>
-              <a href="/auth/facebook" className={facebookClasses}>
+              <a href="/api/auth/facebook" className={facebookClasses}>
                 Continue with Facebook
               </a>
-              <a href="/auth/google" className={googleClasses}>
+              <a href="/api/auth/google" className={googleClasses}>
                 Continue with Google
               </a>
             </div>

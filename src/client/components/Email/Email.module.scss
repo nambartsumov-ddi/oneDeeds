@@ -54,10 +54,29 @@
   &:focus {
     border-color: dodgerblue;
   }
+
+  &.InvalidEmail:focus {
+    border-color: #f86767;
+  }
 }
 
 .EmailInputWrapper input[type='email']:focus + svg {
   fill: dodgerblue;
+}
+
+.EmailInputWrapper input[type='email']:focus.InvalidEmail + svg {
+  fill: #f86767;
+}
+
+.InvalidEmail {
+  color: #f86767;
+}
+
+.InvalidText {
+  color: #f86767;
+  font-weight: bold;
+  font-size: 0.7em;
+  margin-top: 25px;
 }
 
 .Subscribe {
@@ -75,6 +94,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.DisableButton {
+  background: #ccc;
+  opacity: 0.85;
+  border: 1px solid #ccc;
 }
 
 @media (min-width: $lg) {
