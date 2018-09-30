@@ -17,14 +17,7 @@ authRouter.get('/facebook', passport.authenticate('facebook', { scope: ['email']
 authRouter.get(
   '/facebook/callback',
   passport.authenticate('facebook', {
-    successRedirect:
-      process.env.NODE_ENV === 'development'
-        ? `http://${process.env.HOST}:3000/act-now`
-        : `${process.env.PRODUCTION_URL_APP}/act-now`,
-    failureRedirect:
-      process.env.NODE_ENV === 'development'
-        ? `${process.env.HOST}:3000/act-now`
-        : `${process.env.PRODUCTION_URL_APP}/act-now`,
+    successRedirect: 'http://localhost:3000/act-now/success',
   })
 );
 
@@ -32,8 +25,7 @@ authRouter.get('/google', passport.authenticate('google', { scope: ['profile', '
 authRouter.get(
   '/google/callback',
   passport.authenticate('google', {
-    successRedirect: '/',
-    failureRedirect: '/',
+    successRedirect: 'http://localhost:3000/act-now/success',
   })
 );
 

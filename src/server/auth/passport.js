@@ -43,6 +43,7 @@ export const setup = (passport) => {
           const newUser = new User({
             local: {
               email: email,
+              isVerified: false,
             },
           });
 
@@ -70,9 +71,9 @@ export const setup = (passport) => {
               });
 
               const mailOptions = {
-                from: 'yotamelkaslasy@gmail.com',
+                from: '"ondeDeeds.com"',
                 to: newUser.local.email,
-                subject: 'oneDeeds Access Link',
+                subject: 'Access Link',
                 text: `
 Hello,
 
@@ -106,14 +107,14 @@ Enjoy the ride.
       },
       function(accessToken, refreshToken, profile, done) {
         const newUser = new User();
-        newUser.name = profile.displayName;
-        newUser.email = profile.emails[0].value;
-        newUser.facebookId = profile.id;
-        newUser.facebookToken = {
+        newUser.facebook.name = profile.displayName;
+        newUser.facebook.email = profile.emails[0].value;
+        newUser.facebook.facebookId = profile.id;
+        newUser.facebook.facebookToken = {
           accessToken: accessToken,
           refreshToken: refreshToken,
         };
-        newUser.verified = true;
+        newUser.facebook.isVerified = true;
 
         User.findOne({ email: profile.emails[0].value }, function(err, user) {
           if (err) return done(err);
@@ -140,14 +141,14 @@ Enjoy the ride.
       },
       function(accessToken, refreshToken, profile, done) {
         const newUser = new User();
-        newUser.name = profile.displayName;
-        newUser.email = profile.emails[0].value;
-        newUser.googleId = profile.id;
-        newUser.googleToken = {
+        newUser.google.name = profile.displayName;
+        newUser.google.email = profile.emails[0].value;
+        newUser.google.googleId = profile.id;
+        newUser.google.googleToken = {
           accessToken: accessToken,
           refreshToken: refreshToken,
         };
-        newUser.verified = true;
+        newUser.google.isVerified = true;
 
         User.findOne({ email: profile.emails[0].value }, function(err, user) {
           if (err) return done(err);

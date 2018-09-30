@@ -22,7 +22,7 @@ apiRouter.post('/login', (req, res, next) => {
   })(req, res, next);
 });
 
-apiRouter.get('login/:accessToken', (req, res, next) => {
+apiRouter.get('/login/:accessToken', (req, res, next) => {
   // Find a matching token
   Token.findOne({ accessToken: req.params.accessToken }, function(err, accessToken) {
     if (err) {
@@ -39,7 +39,7 @@ apiRouter.get('login/:accessToken', (req, res, next) => {
       },
     };
 
-    // If we found a token, find a matching user
+    // If we found a token, find a matching user and update as a verified email
     User.findByIdAndUpdate(accessToken._userId, updatedUser, { new: true }, function(err, user) {
       if (!user) {
         return res.send({ message: 'We were unable to find a user for this token.' });

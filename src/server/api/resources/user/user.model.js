@@ -8,14 +8,21 @@ const userSchema = new Schema(
       email: {
         type: String,
         require: true,
-        index: true,
         unique: true,
+        index: true,
         sparse: true,
       },
-      isVerified: { type: Boolean, default: false },
+      isVerified: { type: Boolean },
     },
     facebook: {
       name: String,
+      email: {
+        type: String,
+        require: true,
+        unique: true,
+        index: true,
+        sparse: true,
+      },
       facebookId: {
         type: String,
         unique: true,
@@ -28,6 +35,13 @@ const userSchema = new Schema(
     },
     google: {
       name: String,
+      email: {
+        type: String,
+        require: true,
+        unique: true,
+        index: true,
+        sparse: true,
+      },
       googleId: {
         type: String,
         unique: true,
