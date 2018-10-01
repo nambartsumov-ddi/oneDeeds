@@ -12,8 +12,7 @@ import LayoutButton from 'Components/LayoutButton';
 import DownArrow from 'Components/DownArrow';
 
 import handsFull from 'Images/hands-full2.jpg';
-import handHalf1 from 'Images/hand-half1.jpg';
-import handHalf from 'Images/hand-half.jpg';
+import handHalf from 'Images/hands-half2.jpg';
 
 class Home extends Component {
   render() {
@@ -53,7 +52,16 @@ class Home extends Component {
             className={imagePosition}
             goTo={'/video'}
             size="Full"
-            title="One is Powerful, Many are Unstoppable"
+            title={
+              <div className={styles.TitleWrapper}>
+                <div className={styles.FirstLine}>
+                  One is <span className={styles.Powerful}>Powerful, </span>
+                </div>
+                <div className={styles.SecondLine}>
+                  Many are <span className={styles.Unstoppable}>Unstoppable</span>
+                </div>
+              </div>
+            }
             imageSrc={handsFull}>
             <svg width="62" height="62" viewBox="0 0 153 153" className={styles.PlayIcon}>
               <path d="M98.3 73.4L65 52.2c-1.4-.9-3.2-.9-4.6-.1-1.5.8-2.4 2.3-2.4 4v40.7c0 1.6.9 3.1 2.3 3.9.7.4 1.5.6 2.3.6s1.6-.2 2.3-.6l33.3-19.5c1.4-.8 2.2-2.2 2.2-3.8.1-1.7-.7-3.1-2.1-4z" />
@@ -63,10 +71,12 @@ class Home extends Component {
           <Panel size="Full">
             <Panel
               size="Half"
-              title="Section 2"
+              title="Make a change"
               goTo={'/act-now'}
-              description="Wear this ring and show your acceptance of marriage equality."
-              imageSrc={handHalf1}>
+              description="We believe that all it takes to make an impact is One Deed within One community.
+              Join us Today !
+              "
+              imageSrc={handHalf}>
               <LayoutButton text="Act Now" />
             </Panel>
 
@@ -75,7 +85,8 @@ class Home extends Component {
               goTo={'/our-community'}
               title="Section 3"
               description="Description for section 3"
-              imageSrc={handHalf}>
+              /* imageSrc={handHalf}*/
+              className={styles.OurCommunityPanel}>
               <LayoutButton text="Get Started" />
             </Panel>
             {/* ref div for scrolling */}

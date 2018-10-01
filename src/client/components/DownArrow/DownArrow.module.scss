@@ -14,6 +14,10 @@
   display: block;
   width: 2.5em;
   height: 2.5em;
+
+  .Svg:focus {
+    outline: none;
+  }
 }
 
 @keyframes upDown {

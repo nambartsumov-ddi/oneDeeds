@@ -12,13 +12,72 @@
   fill: white;
 }
 
-
 .PanelImagePosition {
-  background-position-x: -150px;
+  background-position-x: -120px;
+}
+
+.TitleWrapper {
+  position: relative;
+  height: 15vh;
+  width: 100vw;
+}
+
+.Powerful,
+.Unstoppable {
+  display: block;
+}
+
+.FirstLine {
+  position: absolute;
+  top: 0;
+  left: 32px;
+}
+
+.SecondLine {
+  position: absolute;
+  right: 13px;
+  top: 25px;
+}
+
+.OurCommunityPanel {
+  background: #252525;
 }
 
 @media (min-width: $lg) {
   .PanelImagePosition {
     background-position-x: -50px;
+  }
+}
+
+@media (min-width: $md) and (max-width: $lg) {
+  .TitleWrapper {
+    font-size: 1.3em;
+  }
+}
+
+@media (min-width: $md) {
+  .Powerful,
+  .Unstoppable {
+    display: inline;
+  }
+
+  .FirstLine {
+    position: relative;
+    display: inline;
+    top: 0;
+    left: 0;
+  }
+
+  .SecondLine {
+    position: relative;
+    display: inline;
+    right: 0;
+    top: 0;
+  }
+
+  .TitleWrapper {
+    position: relative;
+    height: inherit;
+    width: inherit;
   }
 }

@@ -8,7 +8,6 @@ import PropTypes from 'prop-types';
 import styles from './Player.module.scss';
 
 import Layout from 'Components/Layout';
-import NavToggle from 'Components/NavToggle';
 import Logo from 'Components/Logo';
 import MainVideo from 'Components/MainVideo';
 
@@ -20,7 +19,6 @@ class Player extends Component {
   render() {
     return (
       <div className={styles.Player}>
-        <NavToggle />
         <Logo />
         {this.props.isVideodPlaying && (
           <Link to={'/'} className={styles.CloseVideo} onClick={this.props.closeMainVideo}>
