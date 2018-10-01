@@ -76,7 +76,6 @@
     font-size: 1em;
     color: #fff;
     width: 100%;
-    max-width: 250px;
 
     &:before {
       content: '';
@@ -92,14 +91,15 @@
       outline: none;
     }
 
-    &:active, &:focus {
+    &:active,
+    &:focus {
       box-shadow: inset 0 0 0 32px rgba(0, 0, 0, 0.1);
     }
   }
 
   /* Facebook */
   .Facebook {
-    background-color: #4267B2;
+    background-color: #4267b2;
     text-shadow: 0 -1px 0 #354c8c;
   }
 
@@ -121,7 +121,6 @@
   }
 }
 
-
 .NotShare {
   margin-top: 5px;
   font-size: 1em;
@@ -141,9 +140,13 @@
 }
 
 @media (min-width: $lg) {
-
   .Container {
-    max-width: 600px;
+    max-width: 980px;
+  }
+
+  .SignupWrap {
+    width: 450px;
+    margin: 0 auto;
   }
 
   .Registration .Or {

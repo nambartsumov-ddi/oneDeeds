@@ -8,7 +8,6 @@ const userSchema = new Schema(
       email: {
         type: String,
         require: true,
-        unique: true,
         index: true,
         sparse: true,
       },
@@ -19,7 +18,6 @@ const userSchema = new Schema(
       email: {
         type: String,
         require: true,
-        unique: true,
         index: true,
         sparse: true,
       },
@@ -38,7 +36,6 @@ const userSchema = new Schema(
       email: {
         type: String,
         require: true,
-        unique: true,
         index: true,
         sparse: true,
       },

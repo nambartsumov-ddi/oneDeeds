@@ -25,7 +25,7 @@ const Routes = () => (
       <ScrollToTopRoute path="/about-the-cause" exact component={About} />
       <ScrollToTopRoute path="/activity" exact component={Activity} />
       <ScrollToTopRoute path="/donations" exact component={Donations} />
-      <ScrollToTopRoute path="/FAQ" exact component={FAQ} />
+      <ScrollToTopRoute path="/frequently-asked-questions" exact component={FAQ} />
       <Redirect to="/" />
     </Switch>
   </>

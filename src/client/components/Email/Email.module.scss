@@ -102,9 +102,37 @@
   border: 1px solid #ccc;
 }
 
+.LoadingButton {
+  pointer-events: none;
+  // TODO: animation
+}
+
+.SuccessButton,
+.SuccessInputWrapper {
+  display: none;
+}
+
+.SuccesWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #2bb673;
+}
+
+.SuccesText {
+  color: #656565;
+  font-size: 0.6em;
+  margin-top: 25px;
+  font-weight: 400;
+  text-align: center;
+}
+
 @media (min-width: $lg) {
   .Subscribe {
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       opacity: 0.8;
     }
 

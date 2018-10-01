@@ -17,7 +17,7 @@ const NavMenu = () => {
       <NavMenuLink title="Our Community" to={`/our-community`} />
       <NavMenuLink title="About The Cause" to={`/about-the-cause`} />
       <NavMenuLink title="Donations" to={`/Donations`} />
-      <NavMenuLink title="FAQ" to={`/FAQ`} />
+      <NavMenuLink title="FAQ" to={`/frequently-asked-questions`} />
     </nav>
   );
 };

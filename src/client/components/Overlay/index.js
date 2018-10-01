@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import { closeNav } from 'Actions';
-
 import styles from './Overlay.module.scss';
 
 // Because we use css-modules we need to bind styles to classNames utilities
