@@ -56,15 +56,27 @@
   .WithDesc {
     .Description {
       margin: 15px 10px 25px 10px;
+      max-width: 51%;
     }
   }
 
-  .Full:hover svg {
+  .Full:hover svg,
+  .Full:focus svg {
     fill: $menu-links-hover;
   }
 
-  .Half:hover button {
-    // transition: background 0.3s ease-in, border 0.3s ease-out, transform 0.1s cubic-bezier(0.91, 0.8, 0.54, 1);
+  .Full:hover,
+  .Full:focus {
+    outline-width: 0;
+  }
+
+  .Half:hover,
+  .Half:focus {
+    outline-width: 0;
+  }
+  .Half:hover button,
+  .Half:focus button {
+    transition: background 0.3s ease-in, border 0.3s ease-out, transform 0.1s cubic-bezier(0.91, 0.8, 0.54, 1);
     background: $LayoutButtonOnHover;
     border-color: transparent;
   }

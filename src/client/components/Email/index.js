@@ -22,6 +22,12 @@ class Email extends Component {
     this.setState({ email: emailValue, isValidEmail: !!isValidEmail });
   }
 
+  handleEnterPress(event) {
+    if (event.key === 'Enter') {
+      this.signInHandler();
+    }
+  }
+
   signInHandler() {
     this.setState({ loading: true });
 
@@ -64,9 +70,11 @@ class Email extends Component {
         <div className={emailInputWrapperClasses}>
           <input
             type="email"
+            name="email"
             value={this.state.email}
             className={emailInputClasses}
             onChange={(e) => this.onInputChange(e)}
+            onKeyPress={(e) => this.handleEnterPress(e)}
             autoComplete="on"
             placeholder="Email address"
           />

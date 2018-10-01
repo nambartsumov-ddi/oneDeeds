@@ -13,16 +13,22 @@ export const handleApiError = function(err, _, res, __) {
   res.json({ error: err.message || err.toString() });
 };
 
+debug('Inside api route...');
+
 apiRouter.post('/login', (req, res, next) => {
+  debug('Inside /login route...');
+
   passport.authenticate('local', function(err, user, info) {
     if (err) {
       return next(err);
     }
-    res.json({ user, message: info.message });
+    res.json({ user, message: info });
   })(req, res, next);
 });
 
 apiRouter.get('/login/:accessToken', (req, res, next) => {
+  debug('Inside /login/:accessToken route...');
+
   // Find a matching token
   Token.findOne({ accessToken: req.params.accessToken }, function(err, accessToken) {
     if (err) {
@@ -30,7 +36,7 @@ apiRouter.get('/login/:accessToken', (req, res, next) => {
     }
 
     if (!accessToken) {
-      return res.send({ message: 'We were unable to find a valid token. Your token my have expired.' });
+      return res.status(404).send({ message: 'We were unable to find a valid token. Your token my have expired.' });
     }
 
     const updatedUser = {
@@ -40,22 +46,28 @@ apiRouter.get('/login/:accessToken', (req, res, next) => {
     };
 
     // If we found a token, find a matching user and update as a verified email
-    User.findByIdAndUpdate(accessToken._userId, updatedUser, { new: true }, function(err, user) {
-      if (!user) {
-        return res.send({ message: 'We were unable to find a user for this token.' });
-      }
-
-      req.logIn(user, function(err) {
-        if (err) {
-          return next(err);
+    User.findByIdAndUpdate(
+      accessToken._userId,
+      updatedUser,
+      { fields: { provider: 1, email: 1, isVerified: 1 }, new: true },
+      function(err, user) {
+        if (!user) {
+          return res.send({ message: 'We were unable to find a user for this token.' });
         }
-        return res.json({ user, message: 'The access token has been verified. You are logged in.' });
-      });
-    });
+
+        req.logIn(user, function(err) {
+          if (err) {
+            return next(err);
+          }
+          return res.json({ user, message: 'The access token has been verified. You are logged in.' });
+        });
+      }
+    );
   });
 });
 
 apiRouter.get('/', (req, res, next) => {
+  debug('/ requested...');
   res.status(200).json({
     message: 'Welcome to oneDeeds API.',
     version: 'v1',

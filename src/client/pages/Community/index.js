@@ -1,10 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-
-import styles from './Community.module.scss';
 import classNames from 'classnames';
 
+import styles from './Community.module.scss';
 import Layout from 'Components/Layout';
 import NavToggle from 'Components/NavToggle';
 import Logo from 'Components/Logo';
@@ -12,10 +9,8 @@ import Logo from 'Components/Logo';
 // Because we use css-modules we need to bind styles to classNames utilities
 const stylesCtx = classNames.bind(styles);
 
-const Community = ({ isNavOpen }) => {
-  const CommunityContentClasses = stylesCtx(styles.ContentWrapper, {
-    [styles.Open]: isNavOpen,
-  });
+const Community = () => {
+  const CommunityContentClasses = stylesCtx(styles.ContentWrapper);
 
   return (
     <div className={styles.Community}>
@@ -31,7 +26,6 @@ const Community = ({ isNavOpen }) => {
               </h1>
               <div className={styles.BottomLine} />
             </div>
-            <div className={styles.CommunityImg} />
             <div className={styles.Content}>
               <p>
                 Our world is made up of 8 billion people. That’s 8 billion individuals with jobs, families,
@@ -48,6 +42,7 @@ const Community = ({ isNavOpen }) => {
                 OneDeeds community?
               </p>
             </div>
+            <div className={styles.CommunityImg} />
           </div>
         </div>
       </Layout>
@@ -55,17 +50,4 @@ const Community = ({ isNavOpen }) => {
   );
 };
 
-Community.propTypes = {
-  isNavOpen: PropTypes.bool,
-};
-
-const mapStateToProps = (state) => {
-  return {
-    isNavOpen: state.ui.isNavOpen,
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  null
-)(Community);
+export default Community;

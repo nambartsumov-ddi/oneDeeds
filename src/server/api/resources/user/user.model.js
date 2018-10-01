@@ -4,12 +4,11 @@ const { Schema } = mongoose;
 
 const userSchema = new Schema(
   {
+    provider: String,
     local: {
       email: {
         type: String,
-        require: true,
-        index: true,
-        sparse: true,
+        unique: true,
       },
       isVerified: { type: Boolean },
     },
@@ -17,9 +16,7 @@ const userSchema = new Schema(
       name: String,
       email: {
         type: String,
-        require: true,
-        index: true,
-        sparse: true,
+        unique: true,
       },
       facebookId: {
         type: String,
@@ -35,9 +32,7 @@ const userSchema = new Schema(
       name: String,
       email: {
         type: String,
-        require: true,
-        index: true,
-        sparse: true,
+        unique: true,
       },
       googleId: {
         type: String,

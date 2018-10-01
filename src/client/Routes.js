@@ -20,7 +20,9 @@ const Routes = () => (
     <Switch>
       <ScrollToTopRoute path="/" exact component={Home} />
       <ScrollToTopRoute path="/video" exact component={Player} />
+      {/** TODO: Change act-now to login route */}
       <ScrollToTopRoute path="/act-now" exact component={Registration} />
+      <ScrollToTopRoute path="/act-now/:accessToken" exact component={Registration} />
       <ScrollToTopRoute path="/our-community" exact component={Community} />
       <ScrollToTopRoute path="/about-the-cause" exact component={About} />
       <ScrollToTopRoute path="/activity" exact component={Activity} />

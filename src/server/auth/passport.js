@@ -11,14 +11,41 @@ import config from '../config';
 
 const debug = createDebug('passport');
 
+// Send the email
+// const transporter = nodemailer.createTransport({
+//   service: 'Gmail',
+//   auth: {
+//     user: 'yotamelkaslasy@gmail.com',
+//     pass: 'nqrwnpyqiustpzct',
+//   },
+// });
+
+// const getMailOptions = (origin, accessToken, email) => {
+//   return {
+//     from: '"ondeDeeds.com"',
+//     to: email,
+//     subject: 'Access Link',
+//     text: `
+//   Hello,
+
+//   Access your account by clicking the following link:
+//   ${origin}/act-now/${accessToken}.
+
+//   Enjoy the ride.
+//   `,
+//   };
+// };
+
 export const setup = (passport) => {
-  debug('setup started...');
+  debug('Setup started...');
 
   passport.serializeUser(function(user, done) {
+    debug('Serialize User...');
     done(null, user.id);
   });
 
   passport.deserializeUser(function(id, done) {
+    debug('Deserialize User...');
     User.findById(id, (err, user) => {
       done(null, user);
     });
@@ -32,6 +59,8 @@ export const setup = (passport) => {
         passReqToCallback: true,
       },
       function(req, email, password, done) {
+        debug('Inside Local Strategy...');
+
         User.findOne({ 'local.email': email }, (err, user) => {
           if (err) return done(err);
 
@@ -42,6 +71,7 @@ export const setup = (passport) => {
 
           const newUser = new User({
             local: {
+              provider: 'local',
               email: email,
               isVerified: false,
             },
@@ -106,27 +136,30 @@ Enjoy the ride.
         profileFields: ['id', 'displayName', 'emails'],
       },
       function(accessToken, refreshToken, profile, done) {
-        const newUser = new User();
-        newUser.facebook.name = profile.displayName;
-        newUser.facebook.email = profile.emails[0].value;
-        newUser.facebook.facebookId = profile.id;
-        newUser.facebook.facebookToken = {
-          accessToken: accessToken,
-          refreshToken: refreshToken,
-        };
-        newUser.facebook.isVerified = true;
+        debug('Inside Facebook Strategy...');
 
         User.findOne({ email: profile.emails[0].value }, function(err, user) {
           if (err) return done(err);
 
           if (user) {
             return done(null, user);
-          } else {
-            newUser.save(function(err) {
-              if (err) throw err;
-              return done(null, newUser);
-            });
           }
+
+          const newUser = new User();
+          newUser.provider = 'facebook';
+          newUser.facebook.name = profile.displayName;
+          newUser.facebook.email = profile.emails[0].value;
+          newUser.facebook.facebookId = profile.id;
+          newUser.facebook.facebookToken = {
+            accessToken: accessToken,
+            refreshToken: refreshToken,
+          };
+          newUser.facebook.isVerified = true;
+
+          newUser.save(function(err) {
+            if (err) throw err;
+            return done(null, newUser);
+          });
         });
       }
     )
@@ -140,27 +173,29 @@ Enjoy the ride.
         callbackURL: config.auth.google.callbackURL,
       },
       function(accessToken, refreshToken, profile, done) {
-        const newUser = new User();
-        newUser.google.name = profile.displayName;
-        newUser.google.email = profile.emails[0].value;
-        newUser.google.googleId = profile.id;
-        newUser.google.googleToken = {
-          accessToken: accessToken,
-          refreshToken: refreshToken,
-        };
-        newUser.google.isVerified = true;
+        debug('Inside Google Strategy...');
 
         User.findOne({ email: profile.emails[0].value }, function(err, user) {
           if (err) return done(err);
 
           if (user) {
             return done(null, user);
-          } else {
-            newUser.save(function(err) {
-              if (err) throw err;
-              return done(null, newUser);
-            });
           }
+
+          const newUser = new User();
+          newUser.provider = 'google';
+          newUser.google.name = profile.displayName;
+          newUser.google.email = profile.emails[0].value;
+          newUser.google.googleId = profile.id;
+          newUser.google.googleToken = {
+            accessToken: accessToken,
+            refreshToken: refreshToken,
+          };
+          newUser.google.isVerified = true;
+          newUser.save(function(err) {
+            if (err) throw err;
+            return done(null, newUser);
+          });
         });
       }
     )

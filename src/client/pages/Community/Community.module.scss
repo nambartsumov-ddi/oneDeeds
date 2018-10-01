@@ -1,11 +1,7 @@
 @import '../../styles/variables';
 
 .Community {
-  height: 100vh;
-
-  .Open {
-    height: 100vh;
-  }
+  min-height: 100vh;
 
   .FixedHeader {
     width: 100%;
@@ -19,11 +15,6 @@
   .ContentWrapper {
     padding-top: 80px;
     width: 100vw;
-    transition: transform 0.3s ease;
-
-    &.Open {
-      transform: translateX(-100%);
-    }
   }
 
   a {
@@ -36,11 +27,14 @@
   padding-top: 0;
   color: black;
   max-width: 100vw;
+  display: flex;
+  flex-direction: column;
 
   .CommunityTitle {
     display: flex;
     flex-direction: column;
     padding: 0 2em;
+    order: 1;
 
     h1 {
       margin: 0;
@@ -53,7 +47,7 @@
     }
 
     .BottomLine {
-      width: 85px;
+      width: 57px;
       height: 2px;
       background: black;
       margin-top: 0.3em;
@@ -71,6 +65,7 @@
     min-height: 30vh;
     margin: 1em 0;
     position: relative;
+    order: 2;
   }
 
   .Content {
@@ -78,6 +73,7 @@
     line-height: 1.2em;
     margin: 0;
     padding: 0 2em;
+    order: 3;
   }
 }
 
@@ -90,11 +86,6 @@
 
     .ContentWrapper {
       height: 100vh;
-      transition: none;
-
-      &.Open {
-        transform: none;
-      }
     }
   }
 
@@ -105,15 +96,10 @@
     max-width: 65vw;
     margin: 0 auto;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 100%;
 
     .CommunityTitle {
-      position: absolute;
-      top: 40px;
-      left: -18px;
-      z-index: 1;
-      font-size: 1.5em;
       padding: 0;
 
       h1 {
@@ -122,22 +108,23 @@
           font-weight: normal;
         }
       }
+
+      .BottomLine {
+        width: 57px;
+      }
     }
 
     .CommunityImg {
       opacity: 1;
       width: 100%;
-      height: 60vh;
-      margin: 250px auto 100px auto;
+      height: auto;
+      margin-top: 10px;
+      flex: 3;
     }
 
     .Content {
-      position: absolute;
-      left: 2px;
-      top: 96px;
-      width: 83%;
-      padding: 0;
-
+      padding: 10px 0 0 0;
+      order: 2;
       p {
         margin-bottom: 1em;
       }

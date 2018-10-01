@@ -1,10 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-
-import styles from './About.module.scss';
 import classNames from 'classnames';
 
+import styles from './About.module.scss';
 import Layout from 'Components/Layout';
 import NavToggle from 'Components/NavToggle';
 import Logo from 'Components/Logo';
@@ -12,10 +9,8 @@ import Logo from 'Components/Logo';
 // Because we use css-modules we need to bind styles to classNames utilities
 const stylesCtx = classNames.bind(styles);
 
-const About = ({ isNavOpen }) => {
-  const AboutContentClasses = stylesCtx(styles.ContentWrapper, {
-    [styles.Open]: isNavOpen,
-  });
+const About = () => {
+  const AboutContentClasses = stylesCtx(styles.ContentWrapper);
 
   return (
     <div className={styles.About}>
@@ -114,17 +109,4 @@ const About = ({ isNavOpen }) => {
   );
 };
 
-About.propTypes = {
-  isNavOpen: PropTypes.bool,
-};
-
-const mapStateToProps = (state) => {
-  return {
-    isNavOpen: state.ui.isNavOpen,
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  null
-)(About);
+export default About;

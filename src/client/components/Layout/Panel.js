@@ -8,6 +8,7 @@ import styles from './Panel.module.scss';
 // Because we use css-modules we need to bind styles to classNames utilities
 const stylesCtx = classNames.bind(styles);
 
+let i = 1;
 const Panel = ({ size, title, description, imageSrc, id, goTo, history, className, children }) => {
   const panelClasses = stylesCtx(styles.Panel, {
     [styles.Full]: size === 'Full',
@@ -44,10 +45,11 @@ const Panel = ({ size, title, description, imageSrc, id, goTo, history, classNam
   return (
     <div
       id={id}
+      tabIndex={i++}
       className={panelClasses}
       onClick={() => onClick(goTo)}
       style={{ backgroundImage: imageSrc ? `url(${imageSrc})` : null }}>
-      <IsPlaceHolderPanel />
+      <IsPlaceHolderPanel tabIndex="-1" />
       {children}
     </div>
   );

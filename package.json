@@ -14,7 +14,7 @@
     "start": "node build/server.js",
     "dev": "npm-run-all --parallel dev:*",
     "dev:client": "cross-env CLIENT=true webpack-dev-server --hot --inline",
-    "dev:server": "npm-run-all --parallel dev:server:*",
+    "dev:server": "npm-run-all --parallel dev:server:watch dev:server:restart",
     "dev:server:restart": "nodemon --require dotenv/config build/server.js",
     "dev:server:watch": "webpack --watch",
     "build": "npm-run-all --sequential clean build:*",

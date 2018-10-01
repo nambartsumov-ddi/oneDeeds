@@ -73,9 +73,7 @@ class Home extends Component {
               size="Half"
               title="Make a change"
               goTo={'/act-now'}
-              description="We believe that all it takes to make an impact is One Deed within One community.
-              Join us Today !
-              "
+              description="We believe that all it takes to make an impact is one deed."
               imageSrc={handHalf}>
               <LayoutButton text="Act Now" />
             </Panel>

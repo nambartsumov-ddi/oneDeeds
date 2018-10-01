@@ -24,15 +24,6 @@ connectDb(config.database.connectionURI);
 // App server
 const app = express();
 
-// Middlewares
-if (isDevelopment) {
-  app.use(morgan('dev'));
-}
-
-app.use(cors());
-app.use(helmet());
-app.use(express.json());
-
 const MongoStore = mongoSessionStore(session);
 const sessionOptions = {
   name: config.sessionName,
@@ -48,6 +39,15 @@ const sessionOptions = {
     maxAge: 14 * 24 * 60 * 60 * 1000, // expires in 14 days
   },
 };
+
+// Middlewares
+if (isDevelopment) {
+  app.use(morgan('dev'));
+}
+
+app.use(cors());
+app.use(helmet());
+app.use(express.json());
 
 if (!isDevelopment) {
   server.set('trust proxy', 1); // sets req.hostname, req.ip

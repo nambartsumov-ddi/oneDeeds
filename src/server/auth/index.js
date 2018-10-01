@@ -11,6 +11,7 @@ export const handleAuthError = function(err, _, res, __) {
   res.json({ error: err.message || err.toString() });
 };
 
+debug('Inside auth route...');
 setup(passport);
 
 authRouter.get('/facebook', passport.authenticate('facebook', { scope: ['email'] }));
@@ -30,6 +31,7 @@ authRouter.get(
 );
 
 authRouter.get('/', (req, res, next) => {
+  debug('/auth requested...');
   res.status(200).json({
     message: 'Welcome to auth.',
     version: 'v1',

@@ -88,7 +88,7 @@
     }
 
     &:focus {
-      outline: none;
+      outline-width: 0;
     }
 
     &:active,
@@ -142,6 +142,12 @@
 @media (min-width: $lg) {
   .Container {
     max-width: 980px;
+  }
+
+  .SocialBtnWrapper .Login {
+    &:focus {
+      outline-width: 3px;
+    }
   }
 
   .SignupWrap {

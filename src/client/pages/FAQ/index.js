@@ -1,10 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-
-import styles from './FAQ.module.scss';
 import classNames from 'classnames';
 
+import styles from './FAQ.module.scss';
 import Layout from 'Components/Layout';
 import NavToggle from 'Components/NavToggle';
 import Logo from 'Components/Logo';
@@ -12,10 +9,8 @@ import Logo from 'Components/Logo';
 // Because we use css-modules we need to bind styles to classNames utilities
 const stylesCtx = classNames.bind(styles);
 
-const FAQ = ({ isNavOpen }) => {
-  const FAQContentClasses = stylesCtx(styles.ContentWrapper, {
-    [styles.Open]: isNavOpen,
-  });
+const FAQ = () => {
+  const FAQContentClasses = stylesCtx(styles.ContentWrapper);
 
   return (
     <div className={styles.FAQ}>
@@ -75,17 +70,4 @@ const FAQ = ({ isNavOpen }) => {
   );
 };
 
-FAQ.propTypes = {
-  isNavOpen: PropTypes.bool,
-};
-
-const mapStateToProps = (state) => {
-  return {
-    isNavOpen: state.ui.isNavOpen,
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  null
-)(FAQ);
+export default FAQ;

@@ -6,10 +6,16 @@ const debug = createDebug('db');
 export default (MONGO_URI) => {
   const db = mongoose.connection;
 
+  // https://stackoverflow.com/a/51918795/4426149
+  mongoose.set('useCreateIndex', true);
+  mongoose.set('useFindAndModify', false);
+
   mongoose.Promise = global.Promise;
   mongoose.connect(
     MONGO_URI,
-    { useNewUrlParser: true }
+    {
+      useNewUrlParser: true,
+    }
   );
 
   db.on('error', (err) => {
@@ -21,7 +27,9 @@ export default (MONGO_URI) => {
     debug(`🚩 Reconnecting...`);
     mongoose.connect(
       MONGO_URI,
-      { useNewUrlParser: true }
+      {
+        useNewUrlParser: true,
+      }
     );
   });
 
