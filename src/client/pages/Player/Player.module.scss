@@ -12,15 +12,14 @@
   fill: white;
   z-index: 9;
   width: 30px;
-  top: 1.3em;
-  right: 60px;
+  top: 4em;
+  right: 20px;
 }
-
 
 @media (min-width: $lg) {
   .CloseVideo {
     width: 50px;
     top: 45px;
-    right: 150px;
+    right: 50px;
   }
 }
