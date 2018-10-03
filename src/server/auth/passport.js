@@ -46,11 +46,9 @@ export default (passport) => {
           }
 
           const newUser = new User({
-            local: {
-              provider: 'local',
-              email: email,
-              isVerified: false,
-            },
+            provider: 'local',
+            email: email,
+            isVerified: false,
           });
 
           newUser.save((err) => {

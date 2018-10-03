@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { isEmail } from 'validator';
 
 const { Schema } = mongoose;
 
@@ -10,16 +11,10 @@ const UserSchema = new Schema(
     },
     email: {
       type: String,
-      // unique: true,
-      // trim: true,
-      // lowercase: true,
-      // validate: {
-      //   validator: function(email) {
-      //     return /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i.test(email);
-      //   },
-      //   message: (props) => `${props.value} is not a valid email.`,
-      // },
-      // required: [true, 'User email is required'],
+      unique: true,
+      trim: true,
+      lowercase: true,
+      validate: [isEmail, 'invalid email'],
     },
     isVerified: { type: Boolean },
     provider: {
@@ -50,5 +45,9 @@ const UserSchema = new Schema(
   },
   { timestamps: true }
 );
+
+// UserSchema.path('provider').validate((value) => {
+//   return !!value.length;
+// }, 'Missing provider in UserSchema');
 
 export default mongoose.model('User', UserSchema);

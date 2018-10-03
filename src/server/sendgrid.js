@@ -1,9 +1,11 @@
-import sgMail from '@sendgrid/mail';
+const sgMail = require('@sendgrid/mail');
+
 import createDebug from 'debug';
+import config from './config';
 
 const debug = createDebug('sendgrid');
-debug(process.env.SENDGRID_API_KEY);
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+debug(config.sendgridKey);
+sgMail.setApiKey(config.sendgridKey);
 
 const sendTokenEmail = (origin, accessToken, toEmail) => {
   const emailOptions = {

@@ -22,7 +22,7 @@ apiRouter.post('/login', (req, res, next) => {
     if (err) {
       return next(err);
     }
-    res.json({ user, message: info });
+    res.json({ user });
   })(req, res, next);
 });
 
@@ -40,9 +40,7 @@ apiRouter.get('/login/:accessToken', (req, res, next) => {
     }
 
     const updatedUser = {
-      local: {
-        isVerified: true,
-      },
+      isVerified: true,
     };
 
     // If we found a token, find a matching user and update as a verified email

@@ -12,6 +12,7 @@ const {
   API_PORT,
   SESSION_NAME,
   SESSION_SECRET,
+  SENDGRID_API_KEY,
 } = process.env;
 
 const { FACEBOOK_APP_ID, FACEBOOK_CLIENT_SECRET, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = process.env;
@@ -25,6 +26,7 @@ export default {
   sessionName: SESSION_NAME,
   sessionSecret: SESSION_SECRET,
   redirectURL: redirectURL,
+  sendgridKey: SENDGRID_API_KEY,
   auth: {
     facebook: {
       clientId: FACEBOOK_APP_ID,
