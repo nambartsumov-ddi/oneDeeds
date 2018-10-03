@@ -46,8 +46,4 @@ const UserSchema = new Schema(
   { timestamps: true }
 );
 
-// UserSchema.path('provider').validate((value) => {
-//   return !!value.length;
-// }, 'Missing provider in UserSchema');
-
 export default mongoose.model('User', UserSchema);

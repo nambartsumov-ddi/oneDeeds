@@ -12,7 +12,7 @@ import config from '../config';
 const debug = createDebug('passport');
 
 export default (passport) => {
-  debug('Inside passport setup...');
+  debug('Setup...');
 
   passport.serializeUser(function(user, done) {
     debug('Serialize User...');
@@ -34,8 +34,7 @@ export default (passport) => {
         passReqToCallback: true,
       },
       function(req, email, password, done) {
-        debug('Inside Local Strategy...');
-        debug(email);
+        debug('Local Strategy...');
 
         User.findOne({ email: email }, (err, user) => {
           if (err) return done(err);
@@ -82,7 +81,7 @@ export default (passport) => {
         profileFields: ['id', 'displayName', 'emails'],
       },
       function(accessToken, refreshToken, profile, done) {
-        debug('Inside Facebook Strategy...');
+        debug('Facebook Strategy...');
 
         User.findOne({ email: profile.emails[0].value }, function(err, user) {
           if (err) return done(err);
@@ -119,7 +118,7 @@ export default (passport) => {
         callbackURL: config.auth.google.callbackURL,
       },
       function(accessToken, refreshToken, profile, done) {
-        debug('Inside Google Strategy...');
+        debug('Google Strategy...');
 
         User.findOne({ email: profile.emails[0].value }, function(err, user) {
           if (err) return done(err);

@@ -10,9 +10,9 @@ sgMail.setApiKey(config.sendgridKey);
 const sendTokenEmail = (origin, accessToken, toEmail) => {
   const emailOptions = {
     to: toEmail,
-    from: 'oneDeeds.com',
+    from: 'yotamelkaslasy@gmail.com',
     subject: 'Access Link',
-    html: `
+    text: `
 Hello,
 
 Access your account by clicking the following link:

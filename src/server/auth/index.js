@@ -12,7 +12,7 @@ export const handleAuthError = function(err, _, res, __) {
   res.json({ error: err.message || err.toString() });
 };
 
-debug('Inside auth route...');
+debug('/auth route...');
 passportSetup(passport);
 
 authRouter.get('/facebook', passport.authenticate('facebook', { scope: ['email'] }));

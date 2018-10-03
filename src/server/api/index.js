@@ -13,10 +13,10 @@ export const handleApiError = function(err, _, res, __) {
   res.json({ error: err.message || err.toString() });
 };
 
-debug('Inside api route...');
+debug('api route...');
 
 apiRouter.post('/login', (req, res, next) => {
-  debug('Inside /login route...');
+  debug('/login route...');
 
   passport.authenticate('local', function(err, user, info) {
     if (err) {
@@ -27,7 +27,7 @@ apiRouter.post('/login', (req, res, next) => {
 });
 
 apiRouter.get('/login/:accessToken', (req, res, next) => {
-  debug('Inside /login/:accessToken route...');
+  debug('/login/:accessToken route...');
 
   // Find a matching token
   Token.findOneAndDelete({ accessToken: req.params.accessToken }, function(err, accessToken) {
