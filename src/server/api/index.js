@@ -30,7 +30,7 @@ apiRouter.get('/login/:accessToken', (req, res, next) => {
   debug('Inside /login/:accessToken route...');
 
   // Find a matching token
-  Token.findOne({ accessToken: req.params.accessToken }, function(err, accessToken) {
+  Token.findOneAndDelete({ accessToken: req.params.accessToken }, function(err, accessToken) {
     if (err) {
       return next(err);
     }
@@ -49,27 +49,36 @@ apiRouter.get('/login/:accessToken', (req, res, next) => {
     User.findByIdAndUpdate(
       accessToken._userId,
       updatedUser,
-      { fields: { provider: 1, email: 1, isVerified: 1 }, new: true },
+      { fields: { name: 1, provider: 1, email: 1, isVerified: 1, google: 1, facebook: 1 }, new: true },
       function(err, user) {
         if (!user) {
           return res.send({ message: 'We were unable to find a user for this token.' });
         }
 
-        req.logIn(user, function(err) {
+        // Note: passport.authenticate() middleware invokes req.login() automatically.
+        // This function is primarily used when users sign up, during which req.login() can be invoked to automatically
+        // log in the newly registered user.
+
+        req.login(user, function(err) {
           if (err) {
             return next(err);
           }
-          return res.json({ user, message: 'The access token has been verified. You are logged in.' });
+          return res.json({ user });
         });
       }
     );
   });
 });
 
+apiRouter.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/');
+});
+
 apiRouter.get('/', (req, res, next) => {
   debug('/ requested...');
   res.status(200).json({
-    message: 'Welcome to oneDeeds API.',
+    message: 'OK',
     version: 'v1',
   });
 });

@@ -13,9 +13,7 @@ export default (MONGO_URI) => {
   mongoose.Promise = global.Promise;
   mongoose.connect(
     MONGO_URI,
-    {
-      useNewUrlParser: true,
-    }
+    { useNewUrlParser: true }
   );
 
   db.on('error', (err) => {
@@ -27,9 +25,7 @@ export default (MONGO_URI) => {
     debug(`🚩 Reconnecting...`);
     mongoose.connect(
       MONGO_URI,
-      {
-        useNewUrlParser: true,
-      }
+      { useNewUrlParser: true }
     );
   });
 

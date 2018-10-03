@@ -30,13 +30,13 @@ const sessionOptions = {
   secret: config.sessionSecret,
   store: new MongoStore({
     mongooseConnection: mongoose.connection,
-    ttl: 14 * 24 * 60 * 60, // save session 14 days
+    ttl: 3 * 31 * 24 * 60 * 60 * 1000, // expires in 3 months
   }),
   resave: true,
   saveUninitialized: true,
   cookie: {
     httpOnly: true,
-    maxAge: 14 * 24 * 60 * 60 * 1000, // expires in 14 days
+    maxAge: 3 * 31 * 24 * 60 * 60 * 1000, // expires in 3 months
   },
 };
 
@@ -44,7 +44,7 @@ const sessionOptions = {
 if (isDevelopment) {
   app.use(morgan('dev'));
 }
-
+// FIXME: in prod {origin: www.onedeeds.com}, in dev { origin: localhost:3000 }
 app.use(cors());
 app.use(helmet());
 app.use(express.json());
@@ -72,11 +72,12 @@ app.use((req, res, next) => {
 
 // all other requests are not implemented.
 app.use((err, req, res, next) => {
-  debug('501 - Request Not Implemented');
-  res.status(err.status || 501);
+  debug('500 - Request Not Implemented');
+  debug(err.stack);
+  res.status(err.status || 500);
   res.json({
     error: {
-      code: err.status || 501,
+      code: err.status || 500,
       message: err.message,
     },
   });

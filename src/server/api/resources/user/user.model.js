@@ -2,22 +2,32 @@ import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
-const userSchema = new Schema(
+const UserSchema = new Schema(
   {
-    provider: String,
-    local: {
-      email: {
-        type: String,
-        unique: true,
-      },
-      isVerified: { type: Boolean },
+    name: {
+      type: String,
+      trim: true,
+    },
+    email: {
+      type: String,
+      // unique: true,
+      // trim: true,
+      // lowercase: true,
+      // validate: {
+      //   validator: function(email) {
+      //     return /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i.test(email);
+      //   },
+      //   message: (props) => `${props.value} is not a valid email.`,
+      // },
+      // required: [true, 'User email is required'],
+    },
+    isVerified: { type: Boolean },
+    provider: {
+      type: String,
+      enum: ['local', 'facebook', 'google'],
+      required: true,
     },
     facebook: {
-      name: String,
-      email: {
-        type: String,
-        unique: true,
-      },
       facebookId: {
         type: String,
         unique: true,
@@ -26,14 +36,8 @@ const userSchema = new Schema(
         accessToken: String,
         refreshToken: String,
       },
-      isVerified: Boolean,
     },
     google: {
-      name: String,
-      email: {
-        type: String,
-        unique: true,
-      },
       googleId: {
         type: String,
         unique: true,
@@ -42,10 +46,9 @@ const userSchema = new Schema(
         accessToken: String,
         refreshToken: String,
       },
-      isVerified: Boolean,
     },
   },
   { timestamps: true }
 );
 
-export default mongoose.model('User', userSchema);
+export default mongoose.model('User', UserSchema);

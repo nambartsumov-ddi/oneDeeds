@@ -19,12 +19,12 @@ class Email extends Component {
     const emailValue = event.target.value;
     const isValidEmail = emailValue.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
 
-    this.setState({ email: emailValue, isValidEmail: !!isValidEmail });
+    this.setState({ email: emailValue, isValidEmail: !!isValidEmail, success: undefined });
   }
 
   handleEnterPress(event) {
-    if (event.key === 'Enter') {
-      this.signInHandler();
+    if (event.key === 'Enter' && !this.state.loading) {
+      this.state.isValidEmail && this.signInHandler();
     }
   }
 
@@ -38,11 +38,12 @@ class Email extends Component {
     api
       .post('/login', email)
       .then((res) => {
+        // TODO: Trigger redux user log in action
         this.setState({ email: '', loading: false, success: true });
         console.log(res.data);
       })
       .catch((err) => {
-        this.setState({ loading: false, success: true });
+        this.setState({ loading: false, success: false });
         console.log('error', err);
       });
   }
@@ -52,7 +53,7 @@ class Email extends Component {
     const stylesCtx = classNames.bind(styles);
 
     const subscribeClasses = stylesCtx(styles.Subscribe, {
-      [styles.DisableButton]: !this.state.isValidEmail,
+      [styles.DisableButton]: !this.state.isValidEmail || this.state.loading,
       [styles.LoadingButton]: this.state.loading,
       [styles.SuccessButton]: this.state.success,
     });
@@ -84,10 +85,11 @@ class Email extends Component {
         </div>
         <button
           type="button"
-          disabled={!this.state.isValidEmail}
+          disabled={!this.state.isValidEmail || this.state.loading}
           className={subscribeClasses}
           onClick={() => this.signInHandler()}>
-          Get Access
+          {!this.state.loading && <span>Get Access</span>}
+          {this.state.loading && <span>Loading...</span>}
         </button>
         {this.state.success && (
           <div>
@@ -129,6 +131,13 @@ class Email extends Component {
         )}
         {this.state.isValidEmail !== null &&
           this.state.isValidEmail === false && <div className={styles.InvalidText}>Email address is not valid.</div>}
+
+        {this.state.success === false && (
+          <div className={styles.ErrorWrap}>
+            Error!
+            <br /> Something went wrong. Please try again.
+          </div>
+        )}
       </div>
     );
   }

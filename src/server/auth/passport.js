@@ -3,7 +3,7 @@ import FacebookStrategy from 'passport-facebook';
 import GoogleStrategy from 'passport-google-oauth20';
 import createDebug from 'debug';
 import randomstring from 'randomstring';
-import nodemailer from 'nodemailer';
+import sendTokenEmail from '../sendgrid';
 
 import User from '../api/resources/user/user.model';
 import Token from '../api/resources/token/token.model';
@@ -11,33 +11,8 @@ import config from '../config';
 
 const debug = createDebug('passport');
 
-// Send the email
-// const transporter = nodemailer.createTransport({
-//   service: 'Gmail',
-//   auth: {
-//     user: 'yotamelkaslasy@gmail.com',
-//     pass: 'nqrwnpyqiustpzct',
-//   },
-// });
-
-// const getMailOptions = (origin, accessToken, email) => {
-//   return {
-//     from: '"ondeDeeds.com"',
-//     to: email,
-//     subject: 'Access Link',
-//     text: `
-//   Hello,
-
-//   Access your account by clicking the following link:
-//   ${origin}/act-now/${accessToken}.
-
-//   Enjoy the ride.
-//   `,
-//   };
-// };
-
-export const setup = (passport) => {
-  debug('Setup started...');
+export default (passport) => {
+  debug('Inside passport setup...');
 
   passport.serializeUser(function(user, done) {
     debug('Serialize User...');
@@ -60,8 +35,9 @@ export const setup = (passport) => {
       },
       function(req, email, password, done) {
         debug('Inside Local Strategy...');
+        debug(email);
 
-        User.findOne({ 'local.email': email }, (err, user) => {
+        User.findOne({ email: email }, (err, user) => {
           if (err) return done(err);
 
           if (user) {
@@ -90,36 +66,8 @@ export const setup = (passport) => {
 
             newToken.save((err) => {
               if (err) return done(err);
-
-              // Send the email
-              const transporter = nodemailer.createTransport({
-                service: 'Gmail',
-                auth: {
-                  user: 'yotamelkaslasy@gmail.com',
-                  pass: 'nqrwnpyqiustpzct',
-                },
-              });
-
-              const mailOptions = {
-                from: '"ondeDeeds.com"',
-                to: newUser.local.email,
-                subject: 'Access Link',
-                text: `
-Hello,
-
-Access your account by clicking the following link:
-http://${req.headers.host}/login/${newToken.accessToken}.
-
-Enjoy the ride.
-`,
-              };
-
-              transporter.sendMail(mailOptions, function(err, info) {
-                if (err) return done(err);
-                debug(`Message ${info.messageId} sent: ${info.response}`);
-              });
-
-              return done(null, newUser, { message: `An access email link was sent to: ${newUser.local.email}.` });
+              sendTokenEmail(req.headers.origin, newToken.accessToken, email);
+              return done(null, newUser);
             });
           });
         });
@@ -147,17 +95,17 @@ Enjoy the ride.
 
           const newUser = new User();
           newUser.provider = 'facebook';
-          newUser.facebook.name = profile.displayName;
-          newUser.facebook.email = profile.emails[0].value;
+          newUser.name = profile.displayName;
+          newUser.email = profile.emails[0].value;
+          newUser.isVerified = true;
           newUser.facebook.facebookId = profile.id;
           newUser.facebook.facebookToken = {
             accessToken: accessToken,
             refreshToken: refreshToken,
           };
-          newUser.facebook.isVerified = true;
 
           newUser.save(function(err) {
-            if (err) throw err;
+            if (err) done(err);
             return done(null, newUser);
           });
         });
@@ -184,16 +132,16 @@ Enjoy the ride.
 
           const newUser = new User();
           newUser.provider = 'google';
-          newUser.google.name = profile.displayName;
-          newUser.google.email = profile.emails[0].value;
+          newUser.name = profile.displayName;
+          newUser.email = profile.emails[0].value;
+          newUser.isVerified = true;
           newUser.google.googleId = profile.id;
           newUser.google.googleToken = {
             accessToken: accessToken,
             refreshToken: refreshToken,
           };
-          newUser.google.isVerified = true;
           newUser.save(function(err) {
-            if (err) throw err;
+            if (err) done(err);
             return done(null, newUser);
           });
         });

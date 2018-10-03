@@ -18,37 +18,17 @@
     }
 
 }
+.Small {
+  font-size: 0.87rem;
+  color: #ccc;
+  display: block;
+  padding: 0;
+  text-decoration: none;
+  font-weight: 600;
 
-.SocialIcons {
-      display: flex;
-
-      .Icon {
-        display: inline-block;
-        width: 1em;
-        height: 1em;
-        stroke-width: 0;
-        stroke: currentColor;
-        fill: currentColor;
-        margin: 0 0.4rem;
-        cursor: pointer;
-        color: #ccc;
-
-        &.Facebook:hover {
-          color: #3b5999;
-        }
-
-        &.Twitter:hover {
-          color: #55acee;
-        }
-
-        &.Instagram:hover {
-          color: #e4405f;
-      }
-
-        &.Medium:hover {
-          color: #02b875;
-        }
-      }
+  &:hover {
+    color: $menu-links-hover;
+  }
 }
 
 @media (min-width: $lg) {

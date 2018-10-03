@@ -76,6 +76,8 @@
     font-size: 1em;
     color: #fff;
     width: 100%;
+    transform: scale(1);
+    transition: box-shadow .3s ease, transform .3s ease;
 
     &:before {
       content: '';
@@ -91,9 +93,10 @@
       outline-width: 0;
     }
 
-    &:active,
+    &:hover,
     &:focus {
-      box-shadow: inset 0 0 0 32px rgba(0, 0, 0, 0.1);
+      box-shadow: 2px 2px 6px -1px rgba(0, 0, 0, 0.55);
+      transform: scale(1.02);
     }
   }
 
@@ -151,7 +154,7 @@
   }
 
   .SignupWrap {
-    width: 450px;
+    width: 350px;
     margin: 0 auto;
   }
 
