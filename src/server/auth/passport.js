@@ -56,10 +56,10 @@ export default (passport) => {
                 if (err) return done(err);
                 sendTokenEmail(req.headers.origin, newToken.accessToken, email)
                   .then(() => {
-                    debug('Email sent!');
+                    debug(`Email sent to ${email}! Token: ${newToken.accessToken}`);
                     return done(null, false);
                   })
-                  .catch((err) => debug(err));
+                  .catch((err) => done(err));
               });
             } else {
               // Create user and send access token
@@ -84,10 +84,10 @@ export default (passport) => {
                   if (err) return done(err);
                   sendTokenEmail(req.headers.origin, newToken.accessToken, email)
                     .then(() => {
-                      debug('Email sent!');
+                      debug(`Email sent to ${email}! Token: ${newToken.accessToken}`);
                       return done(null, false);
                     })
-                    .catch((err) => debug(err));
+                    .catch((err) => done(err));
                 });
               });
             }

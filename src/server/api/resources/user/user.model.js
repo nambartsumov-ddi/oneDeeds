@@ -14,7 +14,8 @@ const UserSchema = new Schema(
       unique: true,
       trim: true,
       lowercase: true,
-      validate: [isEmail, 'invalid email'],
+      required: true,
+      validate: [isEmail, 'Invalid email'],
     },
     isVerified: { type: Boolean },
     provider: {
