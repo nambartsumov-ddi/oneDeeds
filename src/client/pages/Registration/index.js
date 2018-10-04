@@ -19,7 +19,7 @@ class Registration extends Component {
     const accessToken = this.props.match.params.accessToken;
 
     if (accessToken) {
-      api(`/login/${accessToken}`)
+      api(`/auth/login/${accessToken}`)
         .then((res) => {
           console.log(res.data);
         })

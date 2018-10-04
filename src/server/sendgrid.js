@@ -9,21 +9,21 @@ sgMail.setApiKey(config.sendgridKey);
 
 const sendTokenEmail = (origin, accessToken, toEmail) => {
   const emailOptions = {
+    from: 'info@oneDeeds.com',
     to: toEmail,
-    from: 'yotamelkaslasy@gmail.com',
     subject: 'Access Link',
     text: `
 Hello,
 
 Access your account by clicking the following link:
-${origin}/act-now/${accessToken}.
+${origin}/act-now/${accessToken}. (dev: ${origin}/act-now/${accessToken})
 
 Enjoy the ride.
 `,
   };
 
   debug('Sendin token via email...');
-  sgMail.send(emailOptions).catch((err) => debug(err));
+  return sgMail.send(emailOptions);
 };
 
 export default sendTokenEmail;

@@ -36,7 +36,7 @@ class Email extends Component {
     };
 
     api
-      .post('/login', email)
+      .post('/auth/login', email)
       .then((res) => {
         // TODO: Trigger redux user log in action
         this.setState({ email: '', loading: false, success: true });

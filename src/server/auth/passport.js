@@ -39,34 +39,59 @@ export default (passport) => {
         User.findOne({ email: email }, (err, user) => {
           if (err) return done(err);
 
-          if (user) {
-            // TODO: // Existing user. Send access token.
-            return done(null, false, { message: 'Existing user. Please check your email and click the access link.' });
+          // Login user from session
+          if (req.user) {
+            done(null, req.user);
+          } else {
+            if (user) {
+              // Create a access token for existing user
+              const newToken = new Token({
+                _userId: user.id,
+                accessToken: randomstring.generate({
+                  length: 64,
+                }),
+              });
+
+              newToken.save((err) => {
+                if (err) return done(err);
+                sendTokenEmail(req.headers.origin, newToken.accessToken, email)
+                  .then(() => {
+                    debug('Email sent!');
+                    return done(null, false);
+                  })
+                  .catch((err) => debug(err));
+              });
+            } else {
+              // Create user and send access token
+              const newUser = new User({
+                provider: 'local',
+                email: email,
+                isVerified: false,
+              });
+
+              newUser.save((err) => {
+                if (err) return done(err);
+
+                // Create a access token for this user
+                const newToken = new Token({
+                  _userId: newUser.id,
+                  accessToken: randomstring.generate({
+                    length: 64,
+                  }),
+                });
+
+                newToken.save((err) => {
+                  if (err) return done(err);
+                  sendTokenEmail(req.headers.origin, newToken.accessToken, email)
+                    .then(() => {
+                      debug('Email sent!');
+                      return done(null, false);
+                    })
+                    .catch((err) => debug(err));
+                });
+              });
+            }
           }
-
-          const newUser = new User({
-            provider: 'local',
-            email: email,
-            isVerified: false,
-          });
-
-          newUser.save((err) => {
-            if (err) return done(err);
-
-            // Create a verification token for this user
-            const newToken = new Token({
-              _userId: newUser.id,
-              accessToken: randomstring.generate({
-                length: 64,
-              }),
-            });
-
-            newToken.save((err) => {
-              if (err) return done(err);
-              sendTokenEmail(req.headers.origin, newToken.accessToken, email);
-              return done(null, newUser);
-            });
-          });
         });
       }
     )
