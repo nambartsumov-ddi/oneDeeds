@@ -80,12 +80,13 @@
 @media (min-width: $lg) {
   .Community {
     .FixedHeader {
-      height: 110px;
+      height: 130px;
       border-bottom: 0;
     }
 
     .ContentWrapper {
       height: 100vh;
+      padding-top: 110px;
     }
   }
 

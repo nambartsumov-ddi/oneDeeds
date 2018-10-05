@@ -4,13 +4,28 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  padding-top: 6rem;
+  margin-top: 6rem;
   flex: 1;
 }
 
+.PosedItems {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.PosedItem {
+  width: 100%;
+  font-size: 1.85rem;
+  padding: 0.9rem 0px;
+  list-style: none;
+}
 
 @media (min-width: $lg) {
   .NavMenu {
-    padding-top: 5rem;
+    margin-top: 5rem;
   }
 }
