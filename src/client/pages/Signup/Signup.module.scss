@@ -3,12 +3,21 @@
 .Container {
   width: 100%;
   margin: 0 auto;
-  padding-top: 110px;
+  padding-top: 80px;
 }
 
-.Registration {
+.Signup {
   min-height: 100vh;
   color: #000;
+
+  .FixedHeader {
+    width: 100%;
+    height: 60px;
+    position: fixed;
+    background: white;
+    z-index: 3;
+    border-bottom: 1px solid #eae6e6;
+  }
 
   .Or {
     display: block;
@@ -77,7 +86,7 @@
     color: #fff;
     width: 100%;
     transform: scale(1);
-    transition: box-shadow .3s ease, transform .3s ease;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
 
     &:before {
       content: '';
@@ -143,8 +152,15 @@
 }
 
 @media (min-width: $lg) {
+  .Signup {
+    .FixedHeader {
+      height: 130px;
+      border-bottom: 0;
+    }
+  }
   .Container {
     max-width: 980px;
+    padding-top: 130px;
   }
 
   .SocialBtnWrapper .Login {
@@ -158,7 +174,7 @@
     margin: 0 auto;
   }
 
-  .Registration .Or {
+  .Signup .Or {
     margin: 1.5em 0;
   }
 }

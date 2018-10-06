@@ -15,6 +15,7 @@ const Donations = () => {
 
   return (
     <div className={styles.Donations}>
+      <div className={styles.FixedHeader} />
       <NavToggle page="donations" />
       <Logo />
       <Layout>

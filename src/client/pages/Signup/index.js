@@ -9,12 +9,12 @@ import Email from 'Components/Email';
 import NavToggle from 'Components/NavToggle';
 import Logo from 'Components/Logo';
 
-import styles from './Registration.module.scss';
+import styles from './Signup.module.scss';
 
 // Because we use css-modules we need to bind styles to classNames utilities
 const stylesCtx = classNames.bind(styles);
 
-class Registration extends Component {
+class Signup extends Component {
   componentDidMount() {
     const accessToken = this.props.match.params.accessToken;
 
@@ -34,12 +34,13 @@ class Registration extends Component {
     const googleClasses = stylesCtx(styles.Login, styles.Google);
 
     return (
-      <div className={styles.Registration}>
-        <NavToggle page="registration" />
+      <div className={styles.Signup}>
+        <div className={styles.FixedHeader} />
+        <NavToggle page="signup" />
         <Logo />
         <Layout>
           <div className={styles.Container}>
-            <Steps />
+            {/** <Steps />**/}
             <div className={styles.SignupWrap}>
               <Email />
               <span className={styles.Or}>or</span>
@@ -65,7 +66,7 @@ class Registration extends Component {
   }
 }
 
-Registration.propTypes = {
+Signup.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
       accessToken: PropTypes.any,
@@ -73,4 +74,4 @@ Registration.propTypes = {
   }),
 };
 
-export default Registration;
+export default Signup;

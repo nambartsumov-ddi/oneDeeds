@@ -15,6 +15,7 @@ const Activity = () => {
 
   return (
     <div className={styles.Activity}>
+      <div className={styles.FixedHeader} />
       <NavToggle page="activity" />
       <Logo />
       <Layout>
