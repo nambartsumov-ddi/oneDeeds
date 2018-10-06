@@ -17,10 +17,11 @@ const UserSchema = new Schema(
       required: true,
       validate: [isEmail, 'Invalid email'],
     },
+    isActive: { type: Boolean },
     isVerified: { type: Boolean },
     provider: {
       type: String,
-      enum: ['local', 'facebook', 'google'],
+      enum: ['email', 'facebook', 'google'],
       required: true,
     },
     facebook: {

@@ -16,7 +16,7 @@ const sendTokenEmail = (origin, accessToken, toEmail) => {
 Hello,
 
 Access your account by clicking the following link:
-${origin}/act-now/${accessToken}. (dev: ${origin}/act-now/${accessToken})
+${origin}/signup/${accessToken}. (dev: ${origin}/signup/${accessToken})
 
 Enjoy the ride.
 `,

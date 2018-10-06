@@ -1,101 +1,14 @@
-import LocalStrategy from 'passport-local';
 import FacebookStrategy from 'passport-facebook';
 import GoogleStrategy from 'passport-google-oauth20';
 import createDebug from 'debug';
-import randomstring from 'randomstring';
-import sendTokenEmail from '../sendgrid';
 
 import User from '../api/resources/user/user.model';
-import Token from '../api/resources/token/token.model';
 import config from '../config';
 
 const debug = createDebug('passport');
 
 export default (passport) => {
   debug('Setup...');
-
-  passport.serializeUser(function(user, done) {
-    debug('Serialize User...');
-    done(null, user.id);
-  });
-
-  passport.deserializeUser(function(id, done) {
-    debug('Deserialize User...');
-    User.findById(id, (err, user) => {
-      done(null, user);
-    });
-  });
-
-  passport.use(
-    new LocalStrategy.Strategy(
-      {
-        usernameField: 'email',
-        passwordField: 'email',
-        passReqToCallback: true,
-      },
-      function(req, email, password, done) {
-        debug('Local Strategy...');
-
-        User.findOne({ email: email }, (err, user) => {
-          if (err) return done(err);
-
-          // Login user from session
-          if (req.user) {
-            done(null, req.user);
-          } else {
-            if (user) {
-              // Create a access token for existing user
-              const newToken = new Token({
-                _userId: user.id,
-                accessToken: randomstring.generate({
-                  length: 64,
-                }),
-              });
-
-              newToken.save((err) => {
-                if (err) return done(err);
-                sendTokenEmail(req.headers.origin, newToken.accessToken, email)
-                  .then(() => {
-                    debug(`Email sent to ${email}! Token: ${newToken.accessToken}`);
-                    return done(null, false);
-                  })
-                  .catch((err) => done(err));
-              });
-            } else {
-              // Create user and send access token
-              const newUser = new User({
-                provider: 'local',
-                email: email,
-                isVerified: false,
-              });
-
-              newUser.save((err) => {
-                if (err) return done(err);
-
-                // Create a access token for this user
-                const newToken = new Token({
-                  _userId: newUser.id,
-                  accessToken: randomstring.generate({
-                    length: 64,
-                  }),
-                });
-
-                newToken.save((err) => {
-                  if (err) return done(err);
-                  sendTokenEmail(req.headers.origin, newToken.accessToken, email)
-                    .then(() => {
-                      debug(`Email sent to ${email}! Token: ${newToken.accessToken}`);
-                      return done(null, false);
-                    })
-                    .catch((err) => done(err));
-                });
-              });
-            }
-          }
-        });
-      }
-    )
-  );
 
   passport.use(
     new FacebookStrategy.Strategy(

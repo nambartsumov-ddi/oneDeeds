@@ -3,9 +3,11 @@ import createDebug from 'debug';
 import passport from 'passport';
 import passportSetup from './passport';
 import config from '../config';
+import randomstring from 'randomstring';
 
 import User from '../api/resources/user/user.model';
 import Token from '../api/resources/token/token.model';
+import sendTokenEmail from '../sendgrid';
 
 const debug = createDebug('auth');
 const authRouter = express.Router();
@@ -18,19 +20,61 @@ export const handleAuthError = function(err, _, res, __) {
 debug('/auth route...');
 passportSetup(passport);
 
-authRouter.post(
-  '/login',
-  passport.authenticate('local', {
-    successRedirect: `${config.redirectURL}/act-now`,
-    failureRedirect: `${config.redirectURL}/act-now`,
-  }),
-  (req, res, next) => {
-    res.json(req.user);
-  }
-);
+authRouter.post('/signup', (req, res, next) => {
+  User.findOne({ email: req.body.email }, (err, existingUser) => {
+    if (err) return next(err);
 
-authRouter.get('/login/:accessToken', (req, res, next) => {
-  debug('/auth/login/:accessToken route...');
+    if (existingUser) {
+      // Create a access token for existing user
+      const newToken = new Token({
+        _userId: existingUser.id,
+        accessToken: randomstring.generate({
+          length: 64,
+        }),
+      });
+
+      newToken.save((err) => {
+        if (err) return done(err);
+        sendTokenEmail(req.headers.origin, newToken.accessToken, email)
+          .then(() => {
+            debug(`Email sent to ${email}! Token: ${newToken.accessToken}`);
+          })
+          .catch((err) => next(err));
+      });
+    } else {
+      // Create user and send access token
+      const newUser = new User({
+        provider: 'email',
+        email: email,
+        isVerified: false,
+      });
+
+      newUser.save((err) => {
+        if (err) return done(err);
+
+        // Create a access token for this user
+        const newToken = new Token({
+          _userId: newUser.id,
+          accessToken: randomstring.generate({
+            length: 64,
+          }),
+        });
+
+        newToken.save((err) => {
+          if (err) return done(err);
+          sendTokenEmail(req.headers.origin, newToken.accessToken, email)
+            .then(() => {
+              debug(`Email sent to ${email}! Token: ${newToken.accessToken}`);
+            })
+            .catch((err) => next(err));
+        });
+      });
+    }
+  });
+});
+
+authRouter.get('/signup/:accessToken', (req, res, next) => {
+  debug('/auth/signup/:accessToken route...');
 
   // Find a matching token
   Token.findOneAndDelete({ accessToken: req.params.accessToken }, function(err, accessToken) {
@@ -73,17 +117,12 @@ authRouter.get('/login/:accessToken', (req, res, next) => {
   });
 });
 
-authRouter.get('/logout', (req, res) => {
-  req.logout();
-  res.redirect(`${config.redirectURL}/act-now`);
-});
-
 authRouter.get('/facebook', passport.authenticate('facebook', { scope: ['email'] }));
 authRouter.get(
   '/facebook/callback',
   passport.authenticate('facebook', {
-    successRedirect: `${config.redirectURL}/act-now`,
-    failureRedirect: `${config.redirectURL}/act-now`,
+    successRedirect: `${config.redirectURL}/signup`,
+    failureRedirect: `${config.redirectURL}/signup`,
   })
 );
 
@@ -91,8 +130,8 @@ authRouter.get('/google', passport.authenticate('google', { scope: ['profile', '
 authRouter.get(
   '/google/callback',
   passport.authenticate('google', {
-    successRedirect: `${config.redirectURL}/act-now`,
-    failureRedirect: `${config.redirectURL}/act-now`,
+    successRedirect: `${config.redirectURL}/signup`,
+    failureRedirect: `${config.redirectURL}/signup`,
   })
 );
 

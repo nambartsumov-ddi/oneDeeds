@@ -1,7 +1,4 @@
 import express from 'express';
-import mongoose from 'mongoose';
-import session from 'express-session';
-import mongoSessionStore from 'connect-mongo';
 import passport from 'passport';
 import helmet from 'helmet';
 import chalk from 'chalk';
@@ -9,6 +6,7 @@ import createDebug from 'debug';
 import cors from 'cors';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
+
 import connectDb from './db';
 import api, { handleApiError } from './api';
 import auth, { handleAuthError } from './auth';
@@ -24,22 +22,6 @@ connectDb(config.database.connectionURI);
 // App server
 const app = express();
 
-const MongoStore = mongoSessionStore(session);
-const sessionOptions = {
-  name: config.sessionName,
-  secret: config.sessionSecret,
-  store: new MongoStore({
-    mongooseConnection: mongoose.connection,
-    ttl: 3 * 31 * 24 * 60 * 60 * 1000, // expires in 3 months
-  }),
-  resave: true,
-  saveUninitialized: true,
-  cookie: {
-    httpOnly: true,
-    maxAge: 3 * 31 * 24 * 60 * 60 * 1000, // expires in 3 months
-  },
-};
-
 // Middlewares
 if (isDevelopment) {
   app.use(morgan('dev'));
@@ -51,12 +33,9 @@ app.use(express.json());
 
 if (!isDevelopment) {
   server.set('trust proxy', 1); // sets req.hostname, req.ip
-  sessionOptions.cookie.secure = true; // sets cookie over HTTPS only
 }
 
-app.use(session(sessionOptions));
 app.use(passport.initialize());
-app.use(passport.session());
 
 // Routes
 app.use('/auth', auth, handleAuthError);

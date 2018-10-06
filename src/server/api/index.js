@@ -12,10 +12,6 @@ export const handleApiError = function(err, _, res, __) {
 
 debug('api route...');
 
-apiRouter.post('/paypal', requireLogin, (req, res) => {
-  debug('/paypal route...');
-});
-
 apiRouter.get('/', (req, res, next) => {
   debug('/ requested...');
   res.status(200).json({
