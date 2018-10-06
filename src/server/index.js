@@ -32,7 +32,7 @@ app.use(helmet());
 app.use(express.json());
 
 if (!isDevelopment) {
-  server.set('trust proxy', 1); // sets req.hostname, req.ip
+  app.set('trust proxy', 1); // sets req.hostname, req.ip
 }
 
 app.use(passport.initialize());

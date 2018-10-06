@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import api from 'Api';
 
 import Layout from 'Components/Layout';
-import Steps from 'Components/Steps';
 import Email from 'Components/Email';
 import NavToggle from 'Components/NavToggle';
 import Logo from 'Components/Logo';
@@ -13,6 +12,9 @@ import styles from './Signup.module.scss';
 
 // Because we use css-modules we need to bind styles to classNames utilities
 const stylesCtx = classNames.bind(styles);
+
+const isDevelopment = process.env.NODE_ENV === 'development';
+const basePath = isDevelopment ? '/api' : 'https://api.onedeeds.com';
 
 class Signup extends Component {
   componentDidMount() {
@@ -45,10 +47,10 @@ class Signup extends Component {
               <Email />
               <span className={styles.Or}>or</span>
               <div className={styles.SocialBtnWrapper}>
-                <a href="/api/auth/facebook" className={facebookClasses}>
+                <a href={`${basePath}/auth/facebook`} className={facebookClasses}>
                   Continue with Facebook
                 </a>
-                <a href="/api/auth/google" className={googleClasses}>
+                <a href={`${basePath}/auth/google`} className={googleClasses}>
                   Continue with Google
                 </a>
               </div>

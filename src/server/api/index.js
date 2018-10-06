@@ -1,7 +1,6 @@
 import express from 'express';
 import createDebug from 'debug';
 
-import requireLogin from '../middlewares/requireLogin';
 const debug = createDebug('api');
 const apiRouter = express.Router();
 
