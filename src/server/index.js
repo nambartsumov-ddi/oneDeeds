@@ -63,5 +63,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(config.apiPort, () => {
-  debug(`🚀  Server started in ${chalk.gray(process.env.NODE_ENV)} mode on: ${chalk.blue(config.rootURL)}...`);
+  debug(`🚀  Server started in ${chalk.gray(process.env.NODE_ENV)} mode on: ${chalk.blue(config.rootServerURL)}...`);
 });

@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import api from 'Api';
+import Step from '@material-ui/core/Stepper';
+import Stepper from '@material-ui/core/Stepper';
+// import StepIcon from '@material-ui/core/StepIcon';
+import StepLabel from '@material-ui/core/StepLabel';
+// import StepContent from '@material-ui/core/StepContent';
+// import StepConnector from '@material-ui/core/StepConnector';
 
+import api from 'Api';
 import Layout from 'Components/Layout';
 import Email from 'Components/Email';
 import NavToggle from 'Components/NavToggle';
@@ -17,6 +23,15 @@ const isDevelopment = process.env.NODE_ENV === 'development';
 const basePath = isDevelopment ? '/api' : 'https://api.onedeeds.com';
 
 class Signup extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: false,
+      activeStep: 1,
+      skipped: new Set(),
+    };
+  }
+
   componentDidMount() {
     const accessToken = this.props.match.params.accessToken;
 
@@ -35,6 +50,8 @@ class Signup extends Component {
     const facebookClasses = stylesCtx(styles.Login, styles.Facebook);
     const googleClasses = stylesCtx(styles.Login, styles.Google);
 
+    const { activeStep } = this.state;
+
     return (
       <div className={styles.Signup}>
         <div className={styles.FixedHeader} />
@@ -42,7 +59,18 @@ class Signup extends Component {
         <Logo />
         <Layout>
           <div className={styles.Container}>
-            {/** <Steps />**/}
+            <Stepper activeStep={activeStep} alternativeLabel={true} orientation="horizontal">
+              <Step>
+                <StepLabel>1</StepLabel>
+              </Step>
+              <Step>
+                <StepLabel>2</StepLabel>
+              </Step>
+              <Step>
+                <StepLabel>3</StepLabel>
+              </Step>
+            </Stepper>
+
             <div className={styles.SignupWrap}>
               <Email />
               <span className={styles.Or}>or</span>

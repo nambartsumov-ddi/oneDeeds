@@ -117,21 +117,23 @@ authRouter.get('/signup/:accessToken', (req, res, next) => {
   });
 });
 
-authRouter.get('/facebook', passport.authenticate('facebook', { session: false, scope: ['email'] }));
+authRouter.get('/facebook', passport.authenticate('facebook', { scope: ['email'] }));
 authRouter.get(
   '/facebook/callback',
   passport.authenticate('facebook', {
-    successRedirect: `${config.redirectURL}/signup/payment`,
-    failureRedirect: `${config.redirectURL}/signup/payment`,
+    successRedirect: `${config.rootClientURL}/signup/payment/`,
+    failureRedirect: `${config.rootClientURL}/signup/payment/`,
+    session: false,
   })
 );
 
-authRouter.get('/google', passport.authenticate('google', { session: false, scope: ['profile', 'email'] }));
+authRouter.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 authRouter.get(
   '/google/callback',
   passport.authenticate('google', {
-    successRedirect: `${config.redirectURL}/signup/payment`,
-    failureRedirect: `${config.redirectURL}/signup/payment`,
+    successRedirect: `${config.rootClientURL}/signup/payment/`,
+    failureRedirect: `${config.rootClientURL}/signup/payment/`,
+    session: false,
   })
 );
 

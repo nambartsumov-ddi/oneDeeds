@@ -11,7 +11,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const appConfig = require('../index');
 
 const env = process.env.NODE_ENV;
-const { HOST, API_PORT } = process.env;
+const { HOST } = process.env;
 const isProduction = env === 'production';
 const isDevelopment = env === 'development';
 const isMac = process.platform === 'darwin';

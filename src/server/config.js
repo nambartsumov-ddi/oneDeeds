@@ -10,22 +10,18 @@ const {
   MONGO_URL_DEVELOPMENT,
   HOST,
   API_PORT,
-  SESSION_NAME,
-  SESSION_SECRET,
   SENDGRID_API_KEY,
 } = process.env;
 
 const { FACEBOOK_APP_ID, FACEBOOK_CLIENT_SECRET, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = process.env;
 const MONGO_URI = isDevelopment ? MONGO_URL_DEVELOPMENT : MONGO_URL_PRODUCTION;
-const ROOT_URL = isDevelopment ? `http://${HOST}:${API_PORT}` : PRODUCTION_URL_API;
-const redirectURL = isDevelopment ? `http://${HOST}:3000` : PRODUCTION_URL_APP;
+const ROOT_SERVER_URL = isDevelopment ? `http://${HOST}:${API_PORT}` : PRODUCTION_URL_API;
+const ROOT_CLIENT_URL = isDevelopment ? `http://${HOST}:3000` : PRODUCTION_URL_APP;
 
 export default {
-  rootURL: ROOT_URL,
+  rootServerURL: ROOT_SERVER_URL,
+  rootClientURL: ROOT_CLIENT_URL,
   apiPort: API_PORT,
-  sessionName: SESSION_NAME,
-  sessionSecret: SESSION_SECRET,
-  redirectURL: redirectURL,
   sendgridKey: SENDGRID_API_KEY,
   auth: {
     facebook: {
