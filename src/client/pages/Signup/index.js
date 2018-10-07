@@ -40,6 +40,22 @@ class Signup extends Component {
     }
   }
 
+  goToStep(index = 0) {
+    this.setState({ activeStep: index });
+  }
+
+  previousStep() {
+    if (this.state.activeStep > 0) {
+      this.setState({ activeStep: this.state.activeStep - 1 });
+    }
+  }
+
+  nextStep() {
+    if (this.state.activeStep < 3) {
+      this.setState({ activeStep: this.state.activeStep + 1 });
+    }
+  }
+
   render() {
     const facebookClasses = stylesCtx(styles.Login, styles.Facebook);
     const googleClasses = stylesCtx(styles.Login, styles.Google);
@@ -53,32 +69,40 @@ class Signup extends Component {
         <Logo />
         <Layout>
           <div className={styles.Container}>
-            <div className={styles.SignupWrap}>
-              <Stepper
-                steps={[{ title: 'Subscribe' }, { title: 'Donate' }, { title: 'Verification' }]}
-                activeStep={activeStep}
-              />
-              <br />
-              <br />
-              <br />
-              <br />
-              <Email />
-              <span className={styles.Or}>or</span>
-              <div className={styles.SocialBtnWrapper}>
-                <a href={`${basePath}/auth/facebook`} className={facebookClasses}>
-                  Continue with Facebook
-                </a>
-                <a href={`${basePath}/auth/google`} className={googleClasses}>
-                  Continue with Google
-                </a>
+            <Stepper
+              steps={[
+                { title: 'Subscribe', completedTitle: 'Subscribed' },
+                { title: 'Donate', completedTitle: 'Donated' },
+                { title: 'Verification', completedTitle: 'Verified' },
+              ]}
+              activeStep={activeStep}
+            />
+            <button onClick={() => this.previousStep()}>Prev</button>
+            <button onClick={() => this.nextStep()}>Next</button>
+            {this.state.activeStep === 0 && (
+              <div>
+                <div className={styles.SignupWrap}>
+                  <Email />
+                  <span className={styles.Or}>or</span>
+                  <div className={styles.SocialBtnWrapper}>
+                    <a href={`${basePath}/auth/facebook`} className={facebookClasses}>
+                      Continue with Facebook
+                    </a>
+                    <a href={`${basePath}/auth/google`} className={googleClasses}>
+                      Continue with Google
+                    </a>
+                  </div>
+                </div>
+                <span className={styles.Policy}>
+                  By creating an account, you are agreeing to our <a href="">Terms of Service</a> and
+                  <a href=""> Privacy Policy</a>.
+                </span>
+                <span className={styles.NotShare}>* We&#39;ll never post anything without your permission.</span>
               </div>
-            </div>
-            <span className={styles.Policy}>
-              By creating an account, you are agreeing to our <a href="">Terms of Service</a> and
-              <a href=""> Privacy Policy</a>.
-            </span>
-
-            <span className={styles.NotShare}>* We&#39;ll never post anything without your permission.</span>
+            )}
+            {this.state.activeStep === 1 && <div>step 2 content</div>}
+            {this.state.activeStep === 2 && <div>step 3 content</div>}
+            {this.state.activeStep === 3 && <div>Thanks You !!! </div>}
           </div>
         </Layout>
       </div>

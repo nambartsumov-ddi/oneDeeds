@@ -4,13 +4,15 @@ import { PropTypes } from 'prop-types';
 
 import Step from './Step';
 import styles from './Stepper.module.scss';
+import svgIcon from 'Assets/icons/green-succes.svg';
 
 // Because we use css-modules we need to bind styles to classNames utilities
 const stylesCtx = classNames.bind(styles);
 
-// TODO: Add completedTitle (Subscrive => Subscribed)
-// TODO: Add completedIcon
+// TODO: Bar and SVG animation
 // TODO: Promise support?
+// TODO: Error step? status: success, error, wait (for promise), process (default)
+// TODO: Icons: success, error
 
 const Stepper = ({ activeStep, steps }) => {
   const RootClasses = stylesCtx(styles.Root);
@@ -22,11 +24,13 @@ const Stepper = ({ activeStep, steps }) => {
         {steps.map((step, index) => (
           <Step
             key={index}
+            completedIcon={svgIcon}
             title={step.title}
-            icon={step.icon}
+            completedTitle={step.completedTitle}
             index={index}
             isActive={index === activeStep}
             isCompleted={index < activeStep}
+            isDefault={!(index === activeStep || index < activeStep)}
             isFirst={index === 0}
             isLast={index === steps.length - 1}
           />

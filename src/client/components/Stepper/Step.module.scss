@@ -15,17 +15,14 @@
   font-size: 16px;
   color: #fff;
   display: block;
-  border: 1px solid #e0e0e0;
 }
 
 .CompletedCircle {
   background-color: #2BB673;
-  border: 1px solid #2BB673;
 }
 
 .ActiveCircle {
   background-color: orange;
-  border: 1px solid orange;
 }
 
 .Index {
@@ -53,11 +50,12 @@
 .LeftBar {
   position: absolute;
   top: 16px;
-  height: 1;
+  height: 1px;
   border: 1px solid #E0E0E0;
+  background-color: #E0E0E0;
   left: 0;
   right: 50%;
-  margin-right: 20px;
+  margin-right: 2em;
 }
 
 .RightBar {
@@ -65,12 +63,14 @@
   top: 16px;
   height: 1px;
   border: 1px solid #E0E0E0;
+  background-color: #E0E0E0;
   right: 0;
   left: 50%;
-  margin-left: 20px;
+  margin-left: 2em;
 }
 
 .CompletedBar {
-  border: 1px solid #2BB673
+  border: 1px solid #2BB673;
+  background-color: #2BB673;
 }
 

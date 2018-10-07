@@ -13,7 +13,17 @@ export default class Step extends Component {
   }
 
   render() {
-    const { title, icon, index, isActive, isCompleted, isFirst, isLast } = this.props;
+    const {
+      title,
+      completedTitle,
+      completedIcon,
+      index,
+      isActive,
+      isCompleted,
+      isDefault,
+      isFirst,
+      isLast,
+    } = this.props;
 
     const stepClasses = stylesCtx(styles.Step);
 
@@ -37,22 +47,18 @@ export default class Step extends Component {
       [styles.CompletedBar]: isCompleted ? true : false,
     });
 
-    const stepContent = icon ? <img src={icon} alt={index + 1} /> : index + 1;
+    const circleContent = isCompleted ? <img src={completedIcon} alt={index + 1} /> : index + 1;
 
     return (
       <div className={stepClasses}>
         <div className={circleClasses}>
-          {isActive || isCompleted ? (
-            <span className={indexClass}>{stepContent}</span>
-          ) : (
-            <span className={indexClass}>{stepContent}</span>
-          )}
+          {isCompleted && <span className={indexClass}>{circleContent}</span>}
+          {isActive && <span className={indexClass}>{circleContent}</span>}
+          {isDefault && <span className={indexClass}>{circleContent}</span>}
         </div>
-        {isActive || isCompleted ? (
-          <span className={titleClasses}>{title}</span>
-        ) : (
-          <div className={titleClasses}>{title}</div>
-        )}
+        {isCompleted && <span className={titleClasses}>{completedTitle}</span>}
+        {isActive && <span className={titleClasses}>{title}</span>}
+        {isDefault && <div className={titleClasses}>{title}</div>}
         {!isFirst && <div className={leftClasses} />}
         {!isLast && <div className={rightClasses} />}
       </div>
@@ -62,10 +68,12 @@ export default class Step extends Component {
 
 Step.propTypes = {
   title: PropTypes.string,
-  icon: PropTypes.string,
+  completedTitle: PropTypes.string,
+  completedIcon: PropTypes.string,
   index: PropTypes.number,
   isActive: PropTypes.bool,
   isCompleted: PropTypes.bool,
+  isDefault: PropTypes.bool,
   isFirst: PropTypes.bool,
   isLast: PropTypes.bool,
 };
