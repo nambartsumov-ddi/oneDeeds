@@ -1,0 +1,76 @@
+.Step {
+  width: 100%;
+  position: relative;
+  padding-top: 0;
+}
+
+.Circle {
+  width: 32px;
+  height: 32px;
+  margin: 0 auto;
+  background-color: #e0e0e0;
+  border-radius: 50%;
+  text-align: center;
+  padding: 0;
+  font-size: 16px;
+  color: #fff;
+  display: block;
+  border: 1px solid #e0e0e0;
+}
+
+.CompletedCircle {
+  background-color: #2BB673;
+  border: 1px solid #2BB673;
+}
+
+.ActiveCircle {
+  background-color: orange;
+  border: 1px solid orange;
+}
+
+.Index {
+  line-height: 32px;
+  color: #fff;
+}
+
+.Title {
+  margin-top: 8px;
+  font-size: 16px;
+  font-weight: 400;
+  text-align: center;
+  display: block;
+  color: #757575;
+}
+
+.ActiveTitle {
+  color: orange;
+}
+
+.CompletedTitle {
+  color: #2BB673;
+}
+
+.LeftBar {
+  position: absolute;
+  top: 16px;
+  height: 1;
+  border: 1px solid #E0E0E0;
+  left: 0;
+  right: 50%;
+  margin-right: 20px;
+}
+
+.RightBar {
+  position: absolute;
+  top: 16px;
+  height: 1px;
+  border: 1px solid #E0E0E0;
+  right: 0;
+  left: 50%;
+  margin-left: 20px;
+}
+
+.CompletedBar {
+  border: 1px solid #2BB673
+}
+
