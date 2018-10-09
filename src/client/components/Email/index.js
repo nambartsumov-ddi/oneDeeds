@@ -38,7 +38,7 @@ class Email extends Component {
       return;
     }
 
-    if (this.state.email === event.target.value) {
+    if (this.state.email.toLowerCase() === event.target.value.toLowerCase()) {
       this.setState({
         emailCompare: emailCompareValue,
         isCompareSuccess: true,
@@ -67,7 +67,7 @@ class Email extends Component {
       return;
     }
 
-    if (this.state.emailCompare === event.target.value) {
+    if (this.state.emailCompare.toLowerCase() === event.target.value.toLowerCase()) {
       this.setState({ email: emailValue, isCompareSuccess: true, isValidEmail: !!isValidEmail });
     } else {
       this.setState({ email: emailValue, isCompareSuccess: false, isValidEmail: !!isValidEmail });
