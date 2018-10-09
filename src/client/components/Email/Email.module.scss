@@ -25,11 +25,58 @@
   top: 11px;
   left: 10px;
 }
+.NameInputWrapper {
+  width: 100%;
+  height: 40px;
+  position: relative;
+  margin-top: 5px;
+}
 
 .EmailInputWrapper {
   width: 100%;
   height: 40px;
   position: relative;
+  margin-top: 5px;
+}
+
+.CheckboxInputWrapper {
+  position: relative;
+  padding: 1em 0;
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+
+  .CheckboxInput {
+    width: 2rem;
+    height: 1.6rem;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+
+  .Label {
+    display: flex;
+  }
+
+  .TermsText {
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+}
+
+.NameInput {
+  width: 100%;
+  outline: none;
+  padding: 10px;
+  border: 1px solid #d8d8d8;
+  border-radius: 0.2em;
+  color: #585858;
+  font-size: 0.7em;
+  line-height: 0.7em;
+}
+
+.NameInput::placeholder {
+  color: #aaaaaa;
 }
 
 .EmailInput {
@@ -51,7 +98,7 @@
   padding-left: 40px;
 
   &:focus {
-    border-color: dodgerblue;
+    border-color: #f18340;
   }
 
   &.InvalidEmail:focus {
@@ -59,8 +106,20 @@
   }
 }
 
+.NameInputWrapper input[type='text'] {
+  padding-left: 40px;
+
+  &:focus {
+    border-color: #f18340;
+  }
+}
+
+.NameInputWrapper input[type='text']:focus + svg {
+  fill: #f18340;
+}
+
 .EmailInputWrapper input[type='email']:focus + svg {
-  fill: dodgerblue;
+  fill: #f18340;
 }
 
 .EmailInputWrapper input[type='email']:focus.InvalidEmail + svg {
@@ -72,10 +131,12 @@
 }
 
 .InvalidText {
+  width: 100%;
   color: #f86767;
   font-weight: bold;
   font-size: 0.7em;
-  margin-top: 25px;
+  margin-top: 10px;
+  line-height: 13px;
 }
 
 .ErrorText {
@@ -95,21 +156,13 @@
   font-size: 0.7em;
   color: #fff;
   cursor: pointer;
-  background: dodgerblue;
-  border: 1px solid dodgerblue;
+  background: #f18340;
+  border: 1px solid #f18340;
   border-radius: 0.2em;
   text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: scale(1);
-  transition: box-shadow .3s ease, transform .3s ease;
-
-  &:hover,
-  &:focus {
-    box-shadow: 2px 2px 6px -1px rgba(0, 0, 0, 0.55);
-    transform: scale(1.02);
-  }
 }
 
 .DisableButton {
@@ -119,20 +172,9 @@
   transition: none;
   cursor: not-allowed;
 
-  &:hover,
-  &:focus {
-    box-shadow: none;
-    transform: scale(1);
+  &:active {
+    background: #ccc;
   }
-}
-
-.LoadingButton {
-
-}
-
-.SuccessButton,
-.SuccessInputWrapper {
-  display: none;
 }
 
 .ErrorWrap {
@@ -146,29 +188,23 @@
   color: #f86767;
 }
 
-.SuccesWrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-weight: bold;
-  font-size: 1.2em;
-  color: #2bb673;
-}
-
-.SuccesText {
-  color: #656565;
-  font-size: 0.6em;
-  margin-top: 25px;
-  font-weight: 400;
-  text-align: center;
-}
-
 @media (min-width: $lg) {
   .Subscribe {
     &:active {
-      background: #3d73da;
-      border-color: #3d73da;
+      background: #f56d1b;
+      border-color: #f56d1b;
       outline: 0;
+    }
+  }
+
+  .CheckboxInputWrapper {
+    .CheckboxInput {
+      height: 1.4rem;
+      margin-right: 5px;
+    }
+
+    .TermsText {
+      font-size: 0.9rem;
     }
   }
 }

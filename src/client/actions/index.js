@@ -7,10 +7,12 @@ export const CLOSE_VIDEO = 'CLOSE_VIDEO';
 
 // action creators
 export function toggleNav() {
+  document.body.classList.toggle('modal-open');
   return { type: TOGGLE_NAVIGATION };
 }
 
 export function closeNav() {
+  document.body.classList.remove('modal-open');
   return { type: CLOSE_NAVIGATION };
 }
 

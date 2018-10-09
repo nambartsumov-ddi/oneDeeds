@@ -16,4 +16,9 @@ body {
   text-transform: none;
   color: #fff;
   touch-action: manipulation;
+  -webkit-overflow-scrolling: touch;
+}
+
+body.modal-open {
+  overflow: hidden;
 }

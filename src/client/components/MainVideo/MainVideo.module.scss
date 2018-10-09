@@ -3,20 +3,24 @@
 .PlayerContainer {
   position: relative;
   width: 100%;
-  height: 100vh;
+  overflow: hidden;
+  margin-top: 70px;
+  height: calc(100vh - 70px);
   overflow: hidden;
 }
 
 .MainVideo {
-  margin-top: 15vh;
   width: 100%;
 }
 
-
 @media (min-width: $lg) {
+  .PlayerContainer {
+    margin-top: 80px;
+    height: calc(100vh - 80px);
+    overflow: hidden;
+  }
+
   .MainVideo {
-    margin-top: 0;
-    width: 100%;
-    height: 100vh;
+    height: 100%;
   }
 }

@@ -19,13 +19,16 @@
 
 .PosedItem {
   width: 100%;
-  font-size: 1.85rem;
-  padding: 0.9rem 0px;
+  padding: 0.7rem 0px;
   list-style: none;
 }
 
 @media (min-width: $lg) {
   .NavMenu {
     margin-top: 5rem;
+  }
+
+  .PosedItem {
+    padding: 0.9rem 0px;
   }
 }

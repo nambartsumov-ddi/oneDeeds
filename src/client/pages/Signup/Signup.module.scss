@@ -3,12 +3,14 @@
 .Container {
   width: 100%;
   margin: 0 auto;
-  padding-top: 80px;
+  padding: 80px 0 0;
 }
 
 .Signup {
   min-height: 100vh;
+  font-size: 14px;
   color: #000;
+  background: #fbfbfb;
 
   .FixedHeader {
     width: 100%;
@@ -19,13 +21,20 @@
     border-bottom: 1px solid #eae6e6;
   }
 
+  .StepsTips {
+    text-align: center;
+    font-size: 1em;
+    line-height: 1.4em;
+    margin: 2em 0;
+  }
+
   .Or {
     display: block;
     font-size: 1em;
     margin: 1em 0;
     width: 100%;
     text-align: center;
-    background-color: #ffffff;
+    background: #fbfbfb;
     position: relative;
     color: #ababab;
     z-index: 1;
@@ -85,8 +94,6 @@
     font-size: 1em;
     color: #fff;
     width: 100%;
-    transform: scale(1);
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
 
     &:before {
       content: '';
@@ -100,12 +107,6 @@
 
     &:focus {
       outline-width: 0;
-    }
-
-    &:hover,
-    &:focus {
-      box-shadow: 2px 2px 6px -1px rgba(0, 0, 0, 0.55);
-      transform: scale(1.02);
     }
   }
 
@@ -152,15 +153,16 @@
 }
 
 @media (min-width: $lg) {
-  .Signup {
-    .FixedHeader {
-      height: 130px;
-      border-bottom: 0;
-    }
-  }
   .Container {
     max-width: 980px;
-    padding-top: 130px;
+    padding-top: 110px;
+  }
+
+  .Signup {
+    .FixedHeader {
+      height: 80px;
+      border-bottom: 0;
+    }
   }
 
   .SocialBtnWrapper .Login {

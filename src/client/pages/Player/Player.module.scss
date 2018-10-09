@@ -11,15 +11,15 @@
   stroke: currentColor;
   fill: white;
   z-index: 9;
-  width: 30px;
-  top: 4em;
+  width: 40px;
+  top: 13px;
   right: 20px;
 }
 
 @media (min-width: $lg) {
   .CloseVideo {
     width: 50px;
-    top: 45px;
+    top: 15px;
     right: 50px;
   }
 }

@@ -47,7 +47,7 @@
     }
 
     .BottomLine {
-      width: 57px;
+      width: 51px;
       height: 2px;
       background: black;
       margin-top: 0.3em;
@@ -80,13 +80,13 @@
 @media (min-width: $lg) {
   .Community {
     .FixedHeader {
-      height: 130px;
+      height: 80px;
       border-bottom: 0;
     }
 
     .ContentWrapper {
       height: 100vh;
-      padding-top: 110px;
+      padding-top: 80px;
     }
   }
 

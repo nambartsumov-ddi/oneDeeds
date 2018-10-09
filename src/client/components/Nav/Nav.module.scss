@@ -11,9 +11,11 @@
   transition: transform 0.25s ease;
   background-color: white;
   color: $menu-links;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 
   &.navOpen {
     transform: translateX(-100%);
@@ -43,6 +45,7 @@
   .Nav {
     width: $nav-width;
     padding: 2.5rem 4.5rem;
+    overflow-y: hidden;
 
     &.navOpen {
       transform: translateX(-$nav-width);
