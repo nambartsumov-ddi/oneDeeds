@@ -121,8 +121,8 @@ authRouter.get('/facebook', passport.authenticate('facebook', { scope: ['email']
 authRouter.get(
   '/facebook/callback',
   passport.authenticate('facebook', {
-    successRedirect: `${config.rootClientURL}/signup/payment/`,
-    failureRedirect: `${config.rootClientURL}/signup/payment/`,
+    successRedirect: `${config.rootClientURL}/signup/donate/`,
+    failureRedirect: `${config.rootClientURL}/signup/donate/error`,
     session: false,
   })
 );
@@ -131,8 +131,8 @@ authRouter.get('/google', passport.authenticate('google', { scope: ['profile', '
 authRouter.get(
   '/google/callback',
   passport.authenticate('google', {
-    successRedirect: `${config.rootClientURL}/signup/payment/`,
-    failureRedirect: `${config.rootClientURL}/signup/payment/`,
+    successRedirect: `${config.rootClientURL}/signup/donate/`,
+    failureRedirect: `${config.rootClientURL}/signup/donate/error`,
     session: false,
   })
 );
