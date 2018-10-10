@@ -79,11 +79,11 @@ class Email extends Component {
   }
 
   subscribeHandler() {
-    const email = {
-      email: this.state.email,
-    };
-
-    this.props.subscribe(email);
+    this.setState({ loading: true });
+    this.props.subscribe(this.state.email, this.state.name);
+    setTimeout(() => {
+      this.setState({ loading: false });
+    }, 3000);
   }
 
   render() {
@@ -197,7 +197,7 @@ class Email extends Component {
           disabled={isSubscribeDisabled()}
           className={subscribeClasses}
           onClick={() => this.subscribeHandler()}>
-          {!this.state.loading && <span>Get Access</span>}
+          {!this.state.loading && <span>Subscribe</span>}
           {this.state.loading && <span>Loading...</span>}
         </button>
 

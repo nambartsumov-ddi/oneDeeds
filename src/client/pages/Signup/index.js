@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import { parse } from 'cookie';
 import { decode } from 'jsonwebtoken';
 
-// import { Route } from 'react-router-dom';
-
 import api from 'Api';
 import Layout from 'Components/Layout';
 import Stepper from 'Components/Stepper';
@@ -28,11 +26,12 @@ class Signup extends Component {
     this.state = {
       loading: false,
       activeStep: 3,
+      error: '',
     };
   }
 
   componentDidMount() {
-    const accessToken = this.props.match.params.accessToken;
+    const { accessToken } = this.props.match.params;
 
     if (accessToken) {
       api(`/auth/signup/verification/${accessToken}`)
@@ -42,6 +41,7 @@ class Signup extends Component {
         })
         .catch((err) => {
           console.log('There was a problem with the accessToken', err);
+          this.setState({ error: 'There was a problem with the accessToken' });
           this.routeStep();
         });
     } else {
@@ -50,7 +50,8 @@ class Signup extends Component {
   }
 
   logout() {
-    document.cookie = 'token=delete; Max-Age=-1';
+    const cookieName = 'token';
+    document.cookie = cookieName + '=; Path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     this.routeStep();
   }
 
@@ -58,7 +59,7 @@ class Signup extends Component {
     const { token } = parse(document.cookie);
     const user = decode(token);
 
-    console.log(`Routing to step according to user ${JSON.stringify(user)}`);
+    console.log(`Routing to step according to user: ${JSON.stringify(user)}`);
 
     if (!user) {
       this.goToStep(0);
@@ -71,18 +72,20 @@ class Signup extends Component {
     }
   }
 
-  // TODO: Send form data and not just email
-  subscribe() {
-    const { email, name } = this.emailControl.state;
+  subscribe(email, name) {
+    this.setState({ loading: true });
 
     api
       .post('/auth/signup', { email, name })
       .then((res) => {
+        this.setState({ loading: false, error: '' });
         // TODO: Trigger redux signup step
+        console.log('res', res);
         this.routeStep();
       })
       .catch((err) => {
-        console.log('error', err);
+        console.log('Failed to subscribe', err);
+        this.setState({ loading: false, error: 'Failed to subscribe' });
         this.logout();
       });
   }
@@ -147,8 +150,7 @@ class Signup extends Component {
         <Logo />
         <Layout>
           <div className={styles.Container}>
-            <button onClick={() => this.logout()}>Logout</button>
-            {/* <Route path="/signup/:step" component={Child} /> */}
+            {/* <button onClick={() => this.logout()}>Logout</button> */}
             <Stepper
               steps={[
                 { title: 'Subscribe', completedTitle: 'Subscribed' },
@@ -161,7 +163,7 @@ class Signup extends Component {
             {this.state.activeStep === 0 && (
               <div>
                 <div className={styles.SignupWrap}>
-                  <Email ref={(ref) => (this.emailControl = ref)} subscribe={() => this.subscribe()} />
+                  <Email subscribe={(email, name) => this.subscribe(email, name)} />
                   <span className={styles.Or}>or</span>
                   <div className={styles.SocialBtnWrapper}>
                     <a href={`${basePath}/auth/facebook`} className={facebookClasses}>
