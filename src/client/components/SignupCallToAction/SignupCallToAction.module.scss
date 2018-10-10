@@ -1,0 +1,27 @@
+@import '../../styles/variables';
+
+.SignupCallToAction {
+  text-align: center;
+  margin: 20px 0 30px 0;
+}
+
+.LinkToSignUp {
+  font-size: 1em;
+  text-decoration: none;
+  background: #ff5a60;
+  padding: 8px 45px;
+  border-radius: 2em;
+  color: white;
+}
+
+@media (min-width: $lg) {
+  .SignupCallToAction {
+    position: absolute;
+    top: 25px;
+    right: 0;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}

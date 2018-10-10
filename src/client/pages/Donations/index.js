@@ -6,6 +6,7 @@ import styles from './Donations.module.scss';
 import NavToggle from 'Components/NavToggle';
 import Logo from 'Components/Logo';
 import Layout from 'Components/Layout';
+import SignupCallToAction from 'Components/SignupCallToAction';
 
 // Because we use css-modules we need to bind styles to classNames utilities
 const stylesCtx = classNames.bind(styles);
@@ -42,6 +43,13 @@ const Donations = () => {
                 <li>Save the Children </li>
                 <li>ALSAC - St. Jude Children&#39;s Research Hospital </li>
               </ul>
+
+              <p>
+                This list is just the beginning. Our community members can offer more charities that you&#39;d like us
+                to donate to. Information on the monthly donation will be shared in an email to each of our community
+                members.
+              </p>
+              <SignupCallToAction />
             </div>
             <div className={styles.DonationsImg} />
           </div>

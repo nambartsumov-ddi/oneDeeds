@@ -41,7 +41,15 @@
 }
 
 .OurCommunityPanel {
-  background: #252525;
+  background: #e9b69f;
+}
+
+.ThirdPanelDesc {
+  text-align: left;
+
+  ul {
+    list-style-type: decimal;
+  }
 }
 
 @media (min-width: $lg) {

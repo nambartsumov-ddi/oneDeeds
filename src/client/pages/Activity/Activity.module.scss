@@ -15,10 +15,8 @@
   .ContentWrapper {
     padding-top: 80px;
     width: 100vw;
-  }
-
-  a {
-    text-decoration: underline;
+    display: flex;
+    flex-direction: column;
   }
 }
 
@@ -31,8 +29,7 @@
   flex-direction: column;
 
   .ActivityTitle {
-    display: flex;
-    flex-direction: column;
+    display: block;
     padding: 0 2em;
     order: 1;
 

@@ -58,7 +58,7 @@ const Panel = ({ size, title, description, imageSrc, id, goTo, history, classNam
 Panel.propTypes = {
   size: PropTypes.string,
   title: PropTypes.any,
-  description: PropTypes.string,
+  description: PropTypes.any,
   imageSrc: PropTypes.string,
   id: PropTypes.string,
   goTo: PropTypes.string,

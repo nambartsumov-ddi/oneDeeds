@@ -5,6 +5,7 @@ import styles from './About.module.scss';
 import Layout from 'Components/Layout';
 import NavToggle from 'Components/NavToggle';
 import Logo from 'Components/Logo';
+import SignupCallToAction from 'Components/SignupCallToAction';
 
 // Because we use css-modules we need to bind styles to classNames utilities
 const stylesCtx = classNames.bind(styles);
@@ -39,7 +40,7 @@ const About = () => {
                 <p>This common misconception is where we got the idea for OneDeeds.</p>
 
                 <p>
-                  Here at OneDeeds, we believe that all it takes to change the world is community. By building a
+                  Here at OneDeeds, we believe that all it takes to change the world is a community. By building a
                   community of people and giving every individual member the same good deed to complete every month,
                   we’re making a huge overall impact.
                 </p>
@@ -95,12 +96,21 @@ const About = () => {
                 </div>
               </div>
             </div>
+            <p className={styles.BoldSentence}>
+              Together with our community who are an inseparable part of who we are, we will make the change.
+            </p>
+            <SignupCallToAction className={styles.AboutSignup} page="about" />
             <div className={styles.Contact}>
               <h3>Contact</h3>
               <p>Got a question? We’d love to hear from you!</p>
-              <a href="mailto:Info@onedeeds.com" rel="noopener noreferrer" target="_blank">
+              <a
+                href="mailto:Info@onedeeds.com"
+                rel="noopener noreferrer"
+                target="_blank"
+                className={styles.OnedeedsMail}>
                 Info@onedeeds.com
               </a>
+              <p>Valley Cottage, NY 10989</p>
             </div>
           </div>
         </div>

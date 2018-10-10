@@ -10,6 +10,7 @@ import styles from './Player.module.scss';
 import Layout from 'Components/Layout';
 import Logo from 'Components/Logo';
 import MainVideo from 'Components/MainVideo';
+import SignupCallToAction from 'Components/SignupCallToAction';
 
 class Player extends Component {
   componentDidMount() {
@@ -30,6 +31,7 @@ class Player extends Component {
         )}
         <Layout>
           <MainVideo />
+          <SignupCallToAction className={styles.SignUpInVideo} />
         </Layout>
       </div>
     );

@@ -54,14 +54,22 @@ const FAQ = () => {
               <span>Q</span>: Can I suggest good deeds for the community?
             </div>
             <div className={styles.Answer}>
-              <span>A</span>: Yes, please send us any suggestions that you have – we’re all ears!
+              <span>A</span>: Yes, please send us your suggestions - we&#39;re all ears!
             </div>
             <div>
               <span>Q</span>: How do I unsubscribe?
             </div>
             <div className={styles.Answer}>
-              <span>A</span>: Simply enter the email address you have subscribed to and you will receive an email to
-              unsubscribe
+              <span>A</span>: You can easily unsubscribe directly from the Emails you get from us (Through the
+              unsubscribe link at the button of the mails we send you). You can also send us a request to
+              info@onedeeds.com and we will handle it.
+            </div>
+            <div className={styles.Question}>
+              <span>Q</span>: How can I stop paying the membership fee?
+            </div>
+            <div className={styles.Answer}>
+              <span>A</span>: The membership fee goes partly to donations and the rest to support our activity. If you
+              wish to stop paying simply …..
             </div>
           </div>
         </div>
