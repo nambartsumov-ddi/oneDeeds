@@ -127,7 +127,7 @@ class Email extends Component {
           <input
             type="text"
             name="name"
-            autoComplete="on"
+            autoComplete="off"
             value={this.state.name}
             onChange={(e) => this.onNameChange(e)}
             className={nameInputClasses}

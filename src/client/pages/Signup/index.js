@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import { parse } from 'cookie';
+import { decode } from 'jsonwebtoken';
+
 // import { Route } from 'react-router-dom';
 
 import api from 'Api';
@@ -29,47 +32,58 @@ class Signup extends Component {
   }
 
   componentDidMount() {
-    const { step } = this.props.match.params;
+    const accessToken = this.props.match.params.accessToken;
 
-    switch (step) {
-      case 'donate': {
-        this.goToStep(1);
-        break;
-      }
-      case 'verification': {
-        this.goToStep(2);
-        break;
-      }
-      case 'success': {
-        this.goToStep(3);
-        break;
-      }
-      default: {
-        this.goToStep(0);
-      }
+    if (accessToken) {
+      api(`/auth/signup/verification/${accessToken}`)
+        .then((res) => {
+          console.log(res);
+          this.routeStep();
+        })
+        .catch((err) => {
+          console.log('There was a problem with the accessToken', err);
+          this.routeStep();
+        });
+    } else {
+      this.routeStep();
     }
-    // const accessToken = this.props.match.params.accessToken;
+  }
 
-    // if (accessToken) {
-    //   api(`/auth/signup/${accessToken}`)
-    //     .then((res) => {
-    //       console.log(res.data);
-    //     })
-    //     .catch((err) => {
-    //       console.log('There was a problem with the accessToken', err);
-    //     });
-    // }
+  logout() {
+    document.cookie = 'token=delete; Max-Age=-1';
+    this.routeStep();
+  }
+
+  routeStep() {
+    const { token } = parse(document.cookie);
+    const user = decode(token);
+
+    console.log(`Routing to step according to user ${JSON.stringify(user)}`);
+
+    if (!user) {
+      this.goToStep(0);
+    } else if (!user.isPaid) {
+      this.goToStep(1);
+    } else if (!user.isVerified) {
+      this.goToStep(2);
+    } else {
+      this.goToStep(3);
+    }
   }
 
   // TODO: Send form data and not just email
-  subscribe(email) {
+  subscribe() {
+    const { email, name } = this.emailControl.state;
+
     api
-      .post('/auth/signup', email)
+      .post('/auth/signup', { email, name })
       .then((res) => {
         // TODO: Trigger redux signup step
+        this.routeStep();
       })
       .catch((err) => {
         console.log('error', err);
+        this.logout();
       });
   }
 
@@ -133,6 +147,7 @@ class Signup extends Component {
         <Logo />
         <Layout>
           <div className={styles.Container}>
+            <button onClick={() => this.logout()}>Logout</button>
             {/* <Route path="/signup/:step" component={Child} /> */}
             <Stepper
               steps={[
@@ -146,7 +161,7 @@ class Signup extends Component {
             {this.state.activeStep === 0 && (
               <div>
                 <div className={styles.SignupWrap}>
-                  <Email subscribe={this.subscribe} />
+                  <Email ref={(ref) => (this.emailControl = ref)} subscribe={() => this.subscribe()} />
                   <span className={styles.Or}>or</span>
                   <div className={styles.SocialBtnWrapper}>
                     <a href={`${basePath}/auth/facebook`} className={facebookClasses}>

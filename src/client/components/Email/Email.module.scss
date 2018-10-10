@@ -22,7 +22,7 @@
   stroke: currentColor;
   fill: #aaa;
   position: absolute;
-  top: 9px;
+  top: 10px;
   left: 10px;
 }
 .NameInputWrapper {
@@ -191,6 +191,13 @@
       background: #f56d1b;
       border-color: #f56d1b;
       outline: 0;
+    }
+  }
+
+  .DisableButton {
+    &:active {
+      background: #ccc;
+      border-color: #ccc;
     }
   }
 

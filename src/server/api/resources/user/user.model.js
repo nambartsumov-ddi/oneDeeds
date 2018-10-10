@@ -17,7 +17,7 @@ const UserSchema = new Schema(
       required: true,
       validate: [isEmail, 'Invalid email'],
     },
-    isActive: { type: Boolean },
+    isPaid: { type: Boolean },
     isVerified: { type: Boolean },
     provider: {
       type: String,
@@ -27,7 +27,6 @@ const UserSchema = new Schema(
     facebook: {
       facebookId: {
         type: String,
-        unique: true,
       },
       facebookToken: {
         accessToken: String,
@@ -37,7 +36,6 @@ const UserSchema = new Schema(
     google: {
       googleId: {
         type: String,
-        unique: true,
       },
       googleToken: {
         accessToken: String,

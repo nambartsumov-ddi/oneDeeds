@@ -4,6 +4,7 @@ dotenv.config();
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 const {
+  ROOT_DOMAIN_PROD,
   PRODUCTION_URL_APP,
   PRODUCTION_URL_API,
   MONGO_URL_PRODUCTION,
@@ -21,6 +22,7 @@ const ROOT_CLIENT_URL = isDevelopment ? `http://${HOST}:3000` : PRODUCTION_URL_A
 export default {
   rootServerURL: ROOT_SERVER_URL,
   rootClientURL: ROOT_CLIENT_URL,
+  rootDomainProd: ROOT_DOMAIN_PROD,
   apiPort: API_PORT,
   sendgridKey: SENDGRID_API_KEY,
   auth: {
@@ -38,4 +40,5 @@ export default {
   database: {
     connectionURI: MONGO_URI,
   },
+  isDevelopment,
 };

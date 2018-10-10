@@ -21,8 +21,7 @@ const Routes = () => (
       <ScrollToTopRoute path="/" exact component={Home} />
       <ScrollToTopRoute path="/video" exact component={Player} />
       <ScrollToTopRoute path="/signup" exact component={Signup} />
-      <ScrollToTopRoute path="/signup/:step" exact component={Signup} />
-      <ScrollToTopRoute path="/signup/:step/:accessToken" exact component={Signup} />
+      <ScrollToTopRoute path="/signup/verification/:accessToken" exact component={Signup} />
       <ScrollToTopRoute path="/our-community" exact component={Community} />
       <ScrollToTopRoute path="/about-the-cause" exact component={About} />
       <ScrollToTopRoute path="/activity" exact component={Activity} />

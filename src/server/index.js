@@ -1,6 +1,7 @@
 import express from 'express';
 import passport from 'passport';
 import helmet from 'helmet';
+import cookieParser from 'cookie-parser';
 import chalk from 'chalk';
 import createDebug from 'debug';
 import cors from 'cors';
@@ -8,8 +9,6 @@ import morgan from 'morgan';
 import dotenv from 'dotenv';
 
 import connectDb from './db';
-import api, { handleApiError } from './api';
-import auth, { handleAuthError } from './auth';
 import config from './config';
 
 dotenv.config();
@@ -29,6 +28,8 @@ if (isDevelopment) {
 // FIXME: in prod {origin: www.onedeeds.com}, in dev { origin: localhost:3000 }
 app.use(cors());
 app.use(helmet());
+// TODO: Why do I need this?
+app.use(cookieParser());
 app.use(express.json());
 
 if (!isDevelopment) {
@@ -38,8 +39,8 @@ if (!isDevelopment) {
 app.use(passport.initialize());
 
 // Routes
-app.use('/auth', auth, handleAuthError);
-app.use('/', api, handleApiError);
+app.use('/auth', auth);
+app.use('/', api);
 
 // if we are here then the specified request is not found
 app.use((req, res, next) => {

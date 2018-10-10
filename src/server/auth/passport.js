@@ -10,6 +10,17 @@ const debug = createDebug('passport');
 export default (passport) => {
   debug('Setup...');
 
+  passport.serializeUser(function(user, done) {
+    debug('Serialize User...');
+    done(null, user.id);
+  });
+  passport.deserializeUser(function(id, done) {
+    debug('Deserialize User...');
+    User.findById(id, (err, user) => {
+      done(null, user);
+    });
+  });
+
   passport.use(
     new FacebookStrategy.Strategy(
       {
@@ -24,24 +35,23 @@ export default (passport) => {
         User.findOne({ email: profile.emails[0].value }, function(err, user) {
           if (err) return done(err);
 
-          if (user) {
-            return done(null, user);
+          if (!user) {
+            user = new User();
           }
 
-          const newUser = new User();
-          newUser.provider = 'facebook';
-          newUser.name = profile.displayName;
-          newUser.email = profile.emails[0].value;
-          newUser.isVerified = true;
-          newUser.facebook.facebookId = profile.id;
-          newUser.facebook.facebookToken = {
+          user.provider = 'facebook';
+          user.name = profile.displayName;
+          user.email = profile.emails[0].value;
+          user.isVerified = true;
+          user.facebook.facebookId = profile.id;
+          user.facebook.facebookToken = {
             accessToken: accessToken,
             refreshToken: refreshToken,
           };
 
-          newUser.save(function(err) {
+          user.save(function(err) {
             if (err) done(err);
-            return done(null, newUser);
+            return done(null, user);
           });
         });
       }
@@ -61,23 +71,22 @@ export default (passport) => {
         User.findOne({ email: profile.emails[0].value }, function(err, user) {
           if (err) return done(err);
 
-          if (user) {
-            return done(null, user);
+          if (!user) {
+            user = new User();
           }
 
-          const newUser = new User();
-          newUser.provider = 'google';
-          newUser.name = profile.displayName;
-          newUser.email = profile.emails[0].value;
-          newUser.isVerified = true;
-          newUser.google.googleId = profile.id;
-          newUser.google.googleToken = {
+          user.provider = 'google';
+          user.name = profile.displayName;
+          user.email = profile.emails[0].value;
+          user.isVerified = true;
+          user.google.googleId = profile.id;
+          user.google.googleToken = {
             accessToken: accessToken,
             refreshToken: refreshToken,
           };
-          newUser.save(function(err) {
+          user.save(function(err) {
             if (err) done(err);
-            return done(null, newUser);
+            return done(null, user);
           });
         });
       }
