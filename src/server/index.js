@@ -8,6 +8,8 @@ import cors from 'cors';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
 
+import auth from './auth';
+import api from './api';
 import connectDb from './db';
 import config from './config';
 
