@@ -5,6 +5,7 @@ import styles from './Community.module.scss';
 import Layout from 'Components/Layout';
 import NavToggle from 'Components/NavToggle';
 import Logo from 'Components/Logo';
+import SignupCallToAction from 'Components/SignupCallToAction';
 
 // Because we use css-modules we need to bind styles to classNames utilities
 const stylesCtx = classNames.bind(styles);
@@ -37,10 +38,15 @@ const Community = () => {
                 cause extreme change.
               </p>
 
+              <p>Our community brings individual forces together to multiply that power.</p>
+
               <p>
-                Our community brings individual forces together to multiply that power. Are you ready to join the
-                OneDeeds community?
+                We believe that every one of us needs to behave a little bit more like a bee society, were each of our
+                individual actions can contribute to a grand solution, an emergent property, that is much greater than
+                our mere sum of our individual actions. So, let the small deed each of us does, be the driver of
+                large-scale change.
               </p>
+              <SignupCallToAction />
             </div>
             <div className={styles.CommunityImg} />
           </div>

@@ -75,19 +75,27 @@ class Home extends Component {
               size="Half"
               title="Make a change"
               goTo={'/signup'}
-              description="We believe that all it takes to make an impact is one deed."
+              description="We believe that all it takes to make an impact is One Deed within One community."
               imageSrc={handHalf}>
-              <LayoutButton text="Act Now" />
+              <LayoutButton text="Join OneDeeds Today !" />
             </Panel>
 
             <Panel
               size="Half"
               goTo={'/our-community'}
-              title="Section 3"
-              description="Description for section 3"
+              title="How it works?"
+              description={
+                <div className={styles.ThirdPanelDesc}>
+                  <ul>
+                    <li>Join our community.</li>
+                    <li>Complete your monthly deed.</li>
+                    <li>Share your deed with #onedeeds.</li>
+                  </ul>
+                </div>
+              }
               /* imageSrc={handHalf}*/
               className={styles.OurCommunityPanel}>
-              <LayoutButton text="Get Started" />
+              <LayoutButton text="Help us make a change !" />
             </Panel>
             {/* ref div for scrolling */}
             <div style={{ visibility: 'hidden' }} ref={(section) => (this.SecondSectionRef = section)} />
