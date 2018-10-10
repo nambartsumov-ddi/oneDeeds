@@ -25,6 +25,7 @@ export function setCookie(user, response) {
   response.cookie(cookieName, sign(user, secret), cookieOptions);
 }
 
+// TODO: This will be used when a user will pay. It will be used as the callback so I know who is the paying user.
 export function getUserFromCookie(request) {
   try {
     const cookie = request.cookies[cookieName];

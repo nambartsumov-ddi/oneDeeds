@@ -7,7 +7,7 @@ const debug = createDebug('sendgrid');
 debug(config.sendgridKey);
 sgMail.setApiKey(config.sendgridKey);
 
-const sendTokenEmail = (origin, accessToken, toEmail) => {
+const sendEmail = (origin, accessToken, toEmail) => {
   const emailOptions = {
     from: 'info@oneDeeds.com',
     to: toEmail,
@@ -16,7 +16,10 @@ const sendTokenEmail = (origin, accessToken, toEmail) => {
 Hello,
 
 Access your account by clicking the following link:
-${origin}/signup/${accessToken}. (dev: ${origin}/signup/${accessToken})
+https://www.onedeeds.com/signup/verification/${accessToken}.
+
+
+(dev: Origin: ${origin} Token: ${accessToken})
 
 Enjoy the ride.
 `,
@@ -26,4 +29,4 @@ Enjoy the ride.
   return sgMail.send(emailOptions);
 };
 
-export default sendTokenEmail;
+export default sendEmail;

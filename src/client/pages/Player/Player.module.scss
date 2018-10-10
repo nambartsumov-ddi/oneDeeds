@@ -16,6 +16,15 @@
   right: 20px;
 }
 
+.SignUpInVideo {
+  display: block;
+  height: 30px;
+  line-height: 30px;
+  padding: 0;
+  margin: 40px auto;
+  width: 100%;
+}
+
 @media (min-width: $lg) {
   .CloseVideo {
     width: 50px;
