@@ -35,9 +35,7 @@ module.exports = {
     chunkFilename: isDevelopment ? '[name].js' : 'scripts/[name].[chunkhash:6].js',
     publicPath: isDevelopment ? '/' : 'https://www.onedeeds.com/',
     devtoolModuleFilenameTemplate(info) {
-      return isMac
-        ? `file://${info.absoluteResourcePath.replace(/\\/g, '/')}`
-        : `file:///${info.absoluteResourcePath.replace(/\\/g, '/')}`;
+      return `file:///${info.absoluteResourcePath.replace(/\\/g, '/')}`;
     },
   },
   module: {

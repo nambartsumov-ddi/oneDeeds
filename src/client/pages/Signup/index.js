@@ -39,8 +39,8 @@ class Signup extends Component {
           console.log(res);
           this.routeStep();
         })
-        .catch((err) => {
-          console.log('There was a problem with the accessToken', err);
+        .catch(({ response }) => {
+          console.log('There was a problem with the accessToken: ', response.data.err);
           this.setState({ error: 'There was a problem with the accessToken' });
           this.routeStep();
         });
@@ -80,7 +80,8 @@ class Signup extends Component {
       .then((res) => {
         this.setState({ loading: false, error: '' });
         // TODO: Trigger redux signup step
-        console.log('res', res);
+        const user = res.data;
+        console.log(user);
         this.routeStep();
       })
       .catch((err) => {
@@ -150,7 +151,7 @@ class Signup extends Component {
         <Logo />
         <Layout>
           <div className={styles.Container}>
-            {/* <button onClick={() => this.logout()}>Logout</button> */}
+            <button onClick={() => this.logout()}>Logout</button>
             <Stepper
               steps={[
                 { title: 'Subscribe', completedTitle: 'Subscribed' },

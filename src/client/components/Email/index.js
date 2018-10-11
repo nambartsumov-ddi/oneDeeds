@@ -203,11 +203,11 @@ class Email extends Component {
 
         {this.state.isValidEmail !== undefined &&
           this.state.isValidEmail === false && (
-            <div className={styles.InvalidText}>&laquo; Email address is not valid</div>
+            <div className={styles.InvalidText}>&raquo; Email address is not valid</div>
           )}
 
         {this.state.isCompareSuccess !== undefined &&
-          !this.state.isCompareSuccess && <div className={styles.InvalidText}>&laquo; Email addresses must match</div>}
+          !this.state.isCompareSuccess && <div className={styles.InvalidText}>&raquo; Email addresses must match</div>}
       </div>
     );
   }
