@@ -44,7 +44,7 @@ authRouter.post('/signup', (req, res, next) => {
     if (err) return next(err);
 
     if (existingUser) {
-      // Create a access token for existing user
+      // Create an access token for existing user
       sendTokenEmail(existingUser);
     } else {
       // Create user and send access token
@@ -59,7 +59,7 @@ authRouter.post('/signup', (req, res, next) => {
       newUser.save((err) => {
         if (err) return next(err);
 
-        // Create a access token for this user
+        // Create an access token for this user
         sendTokenEmail(newUser);
       });
     }
@@ -76,7 +76,7 @@ authRouter.get('/signup/verification/:accessToken', (req, res, next) => {
     }
 
     if (!accessToken) {
-      return res.status(404).json({ err: 'No token found' });
+      return res.status(404).json({ err: 'No token found.' });
     }
 
     const updatedUser = {
@@ -91,7 +91,7 @@ authRouter.get('/signup/verification/:accessToken', (req, res, next) => {
       if (err) res.json({ err });
 
       if (!user) {
-        return res.json({ err: 'We were unable to find a user for this token' });
+        return res.json({ err: 'We were unable to find a user for this token.' });
       }
 
       setCookie(user, res);

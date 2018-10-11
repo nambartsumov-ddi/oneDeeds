@@ -79,11 +79,8 @@ class Email extends Component {
   }
 
   subscribeHandler() {
-    this.setState({ loading: true });
+    // this.setState({ loading: true });
     this.props.subscribe(this.state.email, this.state.name);
-    setTimeout(() => {
-      this.setState({ loading: false });
-    }, 3000);
   }
 
   render() {
