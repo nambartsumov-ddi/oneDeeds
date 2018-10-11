@@ -11,13 +11,11 @@ const cookieName = 'token';
 const cookieOptions = config.isDevelopment
   ? {
       maxAge: 365 * 24 * 60 * 60 * 1000, // Year in milliseconds
-      path: '/',
     }
   : {
       secure: true,
       domain: config.rootDomainProd,
       maxAge: 365 * 24 * 60 * 60 * 1000, // Year in milliseconds
-      path: '/',
     };
 
 export function setCookie(user, response) {

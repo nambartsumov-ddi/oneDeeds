@@ -51,7 +51,11 @@ class Signup extends Component {
 
   logout() {
     const cookieName = 'token';
-    document.cookie = cookieName + '=; Path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    if (isDevelopment) {
+      document.cookie = cookieName + '=; Max-Age=-1;';
+    } else {
+      document.cookie = cookieName + '=; Max-Age=-1; Domain=onedeeds.com';
+    }
     this.routeStep();
   }
 
