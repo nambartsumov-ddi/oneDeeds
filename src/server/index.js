@@ -27,8 +27,8 @@ const app = express();
 if (isDevelopment) {
   app.use(morgan('dev'));
 }
-// FIXME: in prod {origin: www.onedeeds.com}, in dev { origin: localhost:3000 }
-app.use(cors());
+// TODO: Upload server version with this origin cors change and check if axios login email with credentials works in production
+app.use(cors({ origin: isDevelopment ? 'localhost:3000' : 'www.onedeeds.com' }));
 app.use(helmet());
 // TODO: Why do I need this?
 app.use(cookieParser());
@@ -40,9 +40,12 @@ if (!isDevelopment) {
 
 app.use(passport.initialize());
 
+// Options (for pre-flight)
+app.options('/auth', cors({ origin: isDevelopment ? 'localhost:3000' : 'www.onedeeds.com' }));
+app.options('/', cors({ origin: isDevelopment ? 'localhost:3000' : 'www.onedeeds.com' }));
 // Routes
-app.use('/auth', auth);
-app.use('/', api);
+app.use('/auth', auth, cors({ origin: isDevelopment ? 'localhost:3000' : 'www.onedeeds.com' }));
+app.use('/', api, cors({ origin: isDevelopment ? 'localhost:3000' : 'www.onedeeds.com' }));
 
 // if we are here then the specified request is not found
 app.use((req, res, next) => {
