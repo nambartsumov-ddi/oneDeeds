@@ -37,6 +37,8 @@ export default (passport) => {
 
           if (!user) {
             user = new User();
+            user.isPaid = false;
+            user.isActive = false;
           }
 
           user.provider = 'facebook';
@@ -73,6 +75,8 @@ export default (passport) => {
 
           if (!user) {
             user = new User();
+            user.isPaid = false;
+            user.isActive = false;
           }
 
           user.provider = 'google';

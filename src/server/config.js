@@ -11,10 +11,19 @@ const {
   MONGO_URL_DEVELOPMENT,
   HOST,
   API_PORT,
-  SENDGRID_API_KEY,
+  GOOGLE_CLIENT_ID,
+  GOOGLE_CLIENT_SECRET,
+  FACEBOOK_APP_ID_PROD,
+  FACEBOOK_CLIENT_SECRET_PROD,
+  FACEBOOK_APP_ID_DEV,
+  FACEBOOK_CLIENT_SECRET_DEV,
+  SENDGRID_API_KEY_PROD,
+  SENDGRID_API_KEY_DEV,
+  MAILCHIMP_API_KEY_PROD,
+  MAILCHIMP_API_KEY_DEV,
+  MAILCHIMP_LIST_ACTIVE_USERS,
 } = process.env;
 
-const { FACEBOOK_APP_ID, FACEBOOK_CLIENT_SECRET, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = process.env;
 const MONGO_URI = isDevelopment ? MONGO_URL_DEVELOPMENT : MONGO_URL_PRODUCTION;
 const ROOT_SERVER_URL = isDevelopment ? `http://${HOST}:${API_PORT}` : PRODUCTION_URL_API;
 const ROOT_CLIENT_URL = isDevelopment ? `http://${HOST}:3000` : PRODUCTION_URL_APP;
@@ -24,11 +33,13 @@ export default {
   rootClientURL: ROOT_CLIENT_URL,
   rootDomainProd: ROOT_DOMAIN_PROD,
   apiPort: API_PORT,
-  sendgridKey: SENDGRID_API_KEY,
+  sendgridKey: isDevelopment ? SENDGRID_API_KEY_DEV : SENDGRID_API_KEY_PROD,
+  mailchimpApiKey: isDevelopment ? MAILCHIMP_API_KEY_DEV : MAILCHIMP_API_KEY_PROD,
+  maillchimpListActiveUsers: MAILCHIMP_LIST_ACTIVE_USERS,
   auth: {
     facebook: {
-      clientId: FACEBOOK_APP_ID,
-      clientSecret: FACEBOOK_CLIENT_SECRET,
+      clientId: isDevelopment ? FACEBOOK_APP_ID_DEV : FACEBOOK_APP_ID_PROD,
+      clientSecret: isDevelopment ? FACEBOOK_CLIENT_SECRET_DEV : FACEBOOK_CLIENT_SECRET_PROD,
       callbackURL: `/auth/facebook/callback`,
     },
     google: {

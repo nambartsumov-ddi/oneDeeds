@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import ReactLoading from 'react-loading';
 
 import styles from './Email.module.scss';
 
@@ -79,8 +80,16 @@ class Email extends Component {
   }
 
   subscribeHandler() {
-    // this.setState({ loading: true });
+    this.setState({ loading: true });
     this.props.subscribe(this.state.email, this.state.name);
+    this.timerHandle = setTimeout(() => this.setState({ loading: false }), 1000);
+  }
+
+  componentWillUnmount() {
+    if (this.timerHandle) {
+      clearTimeout(this.timerHandle);
+      this.timerHandle = 0;
+    }
   }
 
   render() {
@@ -195,7 +204,18 @@ class Email extends Component {
           className={subscribeClasses}
           onClick={() => this.subscribeHandler()}>
           {!this.state.loading && <span>Subscribe</span>}
-          {this.state.loading && <span>Loading...</span>}
+          {this.state.loading && (
+            <ReactLoading
+              style={{
+                position: 'absolute',
+                width: '64px',
+                height: '64px',
+                fill: '#fff',
+              }}
+              type={'bubbles'}
+              color="#fff"
+            />
+          )}
         </button>
 
         {this.state.isValidEmail !== undefined &&

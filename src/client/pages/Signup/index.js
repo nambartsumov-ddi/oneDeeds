@@ -25,7 +25,7 @@ class Signup extends Component {
     super(props);
     this.state = {
       loading: false,
-      activeStep: 3,
+      activeStep: 0,
       error: '',
     };
   }

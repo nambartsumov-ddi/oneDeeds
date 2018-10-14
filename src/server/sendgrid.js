@@ -4,29 +4,31 @@ import createDebug from 'debug';
 import config from './config';
 
 const debug = createDebug('sendgrid');
-debug(config.sendgridKey);
 sgMail.setApiKey(config.sendgridKey);
 
-const sendEmail = (origin, accessToken, toEmail) => {
+const sendTransactionalEmail = (origin, accessToken, toEmail, toName) => {
   const emailOptions = {
-    from: 'info@oneDeeds.com',
-    to: toEmail,
-    subject: 'Access Link',
-    text: `
-Hello,
-
-Access your account by clicking the following link:
-https://www.onedeeds.com/signup/verification/${accessToken}.
-
-
-(dev: Origin: ${origin} Token: ${accessToken})
-
-Enjoy the ride.
-`,
+    from: {
+      name: 'Asaf from oneDeeds',
+      email: 'info@oneDeeds.com',
+    },
+    to: {
+      name: toName,
+      email: toEmail,
+    },
+    replyTo: 'info@oneDeeds.com',
+    subject: 'Please Verify Your Email Address',
+    templateId: 'd-4b47ed3c434b49aaa594aa7a52aa09c8',
+    dynamic_template_data: {
+      name: toName,
+      accessToken: `${accessToken}`,
+      origin: origin,
+    },
+    categories: ['transactional'],
   };
 
-  debug('Sendin token via email...');
+  debug('Sending token via email...');
   return sgMail.send(emailOptions);
 };
 
-export default sendEmail;
+export default sendTransactionalEmail;

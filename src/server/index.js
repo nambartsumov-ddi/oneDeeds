@@ -28,7 +28,12 @@ if (isDevelopment) {
   app.use(morgan('dev'));
 }
 // TODO: Upload server version with this origin cors change and check if axios login email with credentials works in production
-app.use(cors({ origin: isDevelopment ? 'localhost:3000' : 'www.onedeeds.com' }));
+const corsOptions = {
+  origin: isDevelopment ? 'localhost:3000' : 'https://www.onedeeds.com',
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 app.use(helmet());
 // TODO: Why do I need this?
 app.use(cookieParser());
@@ -41,11 +46,11 @@ if (!isDevelopment) {
 app.use(passport.initialize());
 
 // Options (for pre-flight)
-app.options('/auth', cors({ origin: isDevelopment ? 'localhost:3000' : 'www.onedeeds.com' }));
-app.options('/', cors({ origin: isDevelopment ? 'localhost:3000' : 'www.onedeeds.com' }));
+app.options('/auth', cors(corsOptions));
+app.options('/', cors(corsOptions));
 // Routes
-app.use('/auth', auth, cors({ origin: isDevelopment ? 'localhost:3000' : 'www.onedeeds.com' }));
-app.use('/', api, cors({ origin: isDevelopment ? 'localhost:3000' : 'www.onedeeds.com' }));
+app.use('/auth', auth, cors(corsOptions));
+app.use('/', api, cors(corsOptions));
 
 // if we are here then the specified request is not found
 app.use((req, res, next) => {

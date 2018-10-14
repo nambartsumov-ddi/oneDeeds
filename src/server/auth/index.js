@@ -8,7 +8,7 @@ import randomstring from 'randomstring';
 
 import User from '../api/resources/user/user.model';
 import Token from '../api/resources/token/token.model';
-import sendEmail from '../sendgrid';
+import sendTransactionalEmail from '../sendgrid';
 
 const debug = createDebug('auth');
 const authRouter = express.Router();
@@ -17,8 +17,7 @@ debug('/auth route...');
 passportSetup(passport);
 
 authRouter.post('/signup', (req, res, next) => {
-  const email = req.body.email;
-  const name = req.body.name;
+  const { email, name } = req.body;
 
   function sendTokenEmail(user) {
     const newToken = new Token({
@@ -30,7 +29,7 @@ authRouter.post('/signup', (req, res, next) => {
 
     newToken.save((err) => {
       if (err) return next(err);
-      sendEmail(req.headers.origin, newToken.accessToken, email)
+      sendTransactionalEmail(req.headers.origin, newToken.accessToken, email, name)
         .then(() => {
           debug(`Email sent to ${email}! Token: ${newToken.accessToken}`);
           setCookie(user, res);
@@ -54,6 +53,7 @@ authRouter.post('/signup', (req, res, next) => {
         provider: 'email',
         isPaid: false,
         isVerified: false,
+        isActive: false,
       });
 
       newUser.save((err) => {
