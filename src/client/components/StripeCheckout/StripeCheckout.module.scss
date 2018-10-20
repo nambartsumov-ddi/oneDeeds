@@ -1,0 +1,33 @@
+.StripCheckout {
+  margin-top: 50px;
+}
+
+.StripeElement {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  background: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.PayButton {
+  height: 40px;
+  background: #f194c7;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 600;
+  width: 50%;
+  margin: 0 auto;
+  display: block;
+  margin-top: 30px;
+  cursor: pointer;
+}
+
+.ErrorMessage {
+  text-align: center;
+  padding: 15px 10px;
+  font-size: 1.2rem;
+  color: #fd3030;
+}

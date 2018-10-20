@@ -19,7 +19,14 @@ class Email extends Component {
       isValidEmail: undefined,
       isValidCompareEmail: undefined,
       loading: false,
+      isRequestDone: false,
     };
+  }
+
+  componentDidUpdate() {
+    if (this.props.isRequestDone && !this.state.isRequestDone) {
+      this.setState({ loading: false, isRequestDone: true });
+    }
   }
 
   onNameChange(event) {
@@ -82,14 +89,6 @@ class Email extends Component {
   subscribeHandler() {
     this.setState({ loading: true });
     this.props.subscribe(this.state.email, this.state.name);
-    this.timerHandle = setTimeout(() => this.setState({ loading: false }), 1000);
-  }
-
-  componentWillUnmount() {
-    if (this.timerHandle) {
-      clearTimeout(this.timerHandle);
-      this.timerHandle = 0;
-    }
   }
 
   render() {
@@ -232,6 +231,7 @@ class Email extends Component {
 
 Email.propTypes = {
   subscribe: PropTypes.func,
+  isRequestDone: PropTypes.bool,
 };
 
 export default Email;

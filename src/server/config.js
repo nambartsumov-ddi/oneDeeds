@@ -22,6 +22,9 @@ const {
   MAILCHIMP_API_KEY_PROD,
   MAILCHIMP_API_KEY_DEV,
   MAILCHIMP_LIST_ACTIVE_USERS,
+  STRIPE_API_KEY_DEVELOPMENT,
+  STRIPE_SECRET_KEY_DEVELOPMENT,
+  STRIPE_PLAN_ID,
 } = process.env;
 
 const MONGO_URI = isDevelopment ? MONGO_URL_DEVELOPMENT : MONGO_URL_PRODUCTION;
@@ -36,6 +39,12 @@ export default {
   sendgridKey: isDevelopment ? SENDGRID_API_KEY_DEV : SENDGRID_API_KEY_PROD,
   mailchimpApiKey: isDevelopment ? MAILCHIMP_API_KEY_DEV : MAILCHIMP_API_KEY_PROD,
   maillchimpListActiveUsers: MAILCHIMP_LIST_ACTIVE_USERS,
+  payMethod: {
+    // TODO: Fill API key for production
+    stripeApiKey: isDevelopment ? STRIPE_API_KEY_DEVELOPMENT : '',
+    stripeSecretKey: isDevelopment ? STRIPE_SECRET_KEY_DEVELOPMENT : '',
+    stripePlanId: STRIPE_PLAN_ID,
+  },
   auth: {
     facebook: {
       clientId: isDevelopment ? FACEBOOK_APP_ID_DEV : FACEBOOK_APP_ID_PROD,

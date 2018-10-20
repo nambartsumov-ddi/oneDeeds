@@ -10,7 +10,9 @@ import rootReducer from 'Reducers';
 export const history = createBrowserHistory();
 
 const initialState = {
-  user: null,
+  userState: {
+    user: null,
+  },
   ui: {
     isNavOpen: false,
     isVideodPlaying: false,

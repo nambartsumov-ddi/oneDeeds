@@ -1,4 +1,7 @@
+const isDevelopment = process.env.NODE_ENV === 'development';
+
 // Action types
+export const LOGOUT_USER = 'LOGOUT_USER';
 export const SET_USER = 'SET_USER';
 export const TOGGLE_NAVIGATION = 'TOGGLE_NAVIGATION';
 export const CLOSE_NAVIGATION = 'CLOSE_NAVIGATION';
@@ -24,6 +27,16 @@ export function closeMainVideo() {
   return { type: CLOSE_VIDEO };
 }
 
-export function setUser(user) {
-  return { type: SET_USER, payload: user };
+export function setUser(user = null) {
+  return { type: SET_USER, payload: { userState: { user: user } } };
+}
+
+export function logout() {
+  const cookieName = 'token';
+  if (isDevelopment) {
+    document.cookie = cookieName + '=; Max-Age=-1;';
+  } else {
+    document.cookie = cookieName + '=; Max-Age=-1; Domain=onedeeds.com';
+  }
+  return { type: LOGOUT_USER };
 }
