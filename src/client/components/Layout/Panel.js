@@ -9,7 +9,7 @@ import styles from './Panel.module.scss';
 const stylesCtx = classNames.bind(styles);
 
 let i = 1;
-const Panel = ({ size, title, description, imageSrc, id, goTo, history, className, children }) => {
+const Panel = ({ size, title, description, imageSrc, id, goTo, history, className, children, style }) => {
   const panelClasses = stylesCtx(styles.Panel, {
     [styles.Full]: size === 'Full',
     [styles.Half]: size === 'Half',
@@ -43,14 +43,9 @@ const Panel = ({ size, title, description, imageSrc, id, goTo, history, classNam
   };
 
   return (
-    <div
-      id={id}
-      tabIndex={i++}
-      className={panelClasses}
-      onClick={() => onClick(goTo)}
-      style={{ backgroundImage: imageSrc ? `url(${imageSrc})` : null }}>
+    <div id={id} tabIndex={i++} className={panelClasses} onClick={() => onClick(goTo)} style={style}>
       <IsPlaceHolderPanel tabIndex="-1" />
-      {children}
+      <div style={{ backgroundImage: imageSrc ? `url(${imageSrc})` : null }}>{children}</div>
     </div>
   );
 };
@@ -65,6 +60,7 @@ Panel.propTypes = {
   history: PropTypes.object,
   className: PropTypes.string,
   children: PropTypes.any,
+  style: PropTypes.any,
 };
 
 export default withRouter(Panel);
