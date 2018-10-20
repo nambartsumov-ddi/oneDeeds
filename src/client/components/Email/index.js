@@ -18,14 +18,13 @@ class Email extends Component {
       isCompareSuccess: undefined,
       isValidEmail: undefined,
       isValidCompareEmail: undefined,
-      loading: false,
-      isRequestDone: false,
+      isParentLoading: false,
     };
   }
 
-  componentDidUpdate() {
-    if (this.props.isRequestDone && !this.state.isRequestDone) {
-      this.setState({ loading: false, isRequestDone: true });
+  componentDidUpdate(nextProps) {
+    if (this.state.isParentLoading !== nextProps.isParentLoading) {
+      this.setState({ isParentLoading: nextProps.isParentLoading });
     }
   }
 
@@ -87,7 +86,7 @@ class Email extends Component {
   }
 
   subscribeHandler() {
-    this.setState({ loading: true });
+    this.setState({ isParentLoading: true });
     this.props.subscribe(this.state.email, this.state.name);
   }
 
@@ -96,12 +95,15 @@ class Email extends Component {
     const stylesCtx = classNames.bind(styles);
 
     const isSubscribeDisabled = () => {
-      return !(this.state.isValidEmail && this.state.isCompareSuccess && this.state.isTermsRead) || this.state.loading;
+      return (
+        !(this.state.isValidEmail && this.state.isCompareSuccess && this.state.isTermsRead) ||
+        this.state.isParentLoading
+      );
     };
 
     const subscribeClasses = stylesCtx(styles.Subscribe, {
       [styles.DisableButton]: isSubscribeDisabled(),
-      [styles.LoadingButton]: this.state.loading,
+      [styles.LoadingButton]: this.state.isParentLoading,
     });
 
     const emailInputClasses = stylesCtx(styles.EmailInput, {
@@ -202,8 +204,8 @@ class Email extends Component {
           disabled={isSubscribeDisabled()}
           className={subscribeClasses}
           onClick={() => this.subscribeHandler()}>
-          {!this.state.loading && <span>Subscribe</span>}
-          {this.state.loading && (
+          {!this.state.isParentLoading && <span>Subscribe</span>}
+          {this.state.isParentLoading && (
             <ReactLoading
               style={{
                 position: 'absolute',
@@ -232,6 +234,7 @@ class Email extends Component {
 Email.propTypes = {
   subscribe: PropTypes.func,
   isRequestDone: PropTypes.bool,
+  isParentLoading: PropTypes.bool,
 };
 
 export default Email;

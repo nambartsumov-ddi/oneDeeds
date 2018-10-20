@@ -25,6 +25,7 @@ const {
   STRIPE_API_KEY_DEVELOPMENT,
   STRIPE_SECRET_KEY_DEVELOPMENT,
   STRIPE_PLAN_ID,
+  STRIPE_PRODUCTION_ENDPOINTSECRET,
 } = process.env;
 
 const MONGO_URI = isDevelopment ? MONGO_URL_DEVELOPMENT : MONGO_URL_PRODUCTION;
@@ -44,6 +45,7 @@ export default {
     stripeApiKey: isDevelopment ? STRIPE_API_KEY_DEVELOPMENT : '',
     stripeSecretKey: isDevelopment ? STRIPE_SECRET_KEY_DEVELOPMENT : '',
     stripePlanId: STRIPE_PLAN_ID,
+    stripeEndpointSecret: STRIPE_PRODUCTION_ENDPOINTSECRET,
   },
   auth: {
     facebook: {

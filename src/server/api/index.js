@@ -1,7 +1,7 @@
 import express from 'express';
 import createDebug from 'debug';
 import { setCookie } from '../auth/jwt';
-
+import { createCustomer } from '../stripe';
 import User from '../api/resources/user/user.model';
 
 const debug = createDebug('api');
@@ -9,26 +9,49 @@ const apiRouter = express.Router();
 
 debug('api route...');
 
+// All stripe methods takes a callback as their last parameter. The callback is called with an error code (if any) and then the response.
+// TODO: Error handling
+
+// When a subscription changes to canceled or unpaid, your webhook script should ensure the customer is no longer receiving your products or services.
+// TODO: Webhooks
 apiRouter.post('/charge-stripe', (req, res, next) => {
-  const { tokenId, userId } = req.body;
+  const { token, user } = req.body;
 
-  const updatedUser = {
-    isPaid: true,
-  };
-
-  // find a user and update as a paid user
-  User.findByIdAndUpdate(userId, updatedUser, {
-    fields: { name: 1, provider: 1, email: 1, isVerified: 1, isPaid: 1, isActive: 1, google: 1, facebook: 1 },
-    new: true,
-  }).exec((err, user) => {
+  // 1. query the user
+  User.findById(user._id).exec((err, existingUser) => {
     if (err) res.json({ err });
 
-    if (!user) {
-      return res.json({ err: 'We were unable to find a user.' });
+    if (!existingUser) {
+      return res.status(404).json({ err: 'We were unable to find a user.' });
     }
 
-    setCookie(user, res);
-    res.json(user);
+    // 2. create customer and subscription to a plan
+    createCustomer({ token, user: existingUser }).then((subscription, err) => {
+      if (err) next(err);
+
+      const updatedUser = {
+        isPaid: true,
+        isActive: existingUser.isVerified, // This will trigger mailchimp mailing list
+      };
+
+      // 3. update as a paid user
+      User.findByIdAndUpdate(user._id, updatedUser, {
+        fields: { name: 1, provider: 1, email: 1, isVerified: 1, isPaid: 1, isActive: 1, google: 1, facebook: 1 },
+        new: true,
+      }).exec((err, user) => {
+        if (err) res.json({ err });
+
+        if (!user) {
+          return res.json({ err: 'We were unable to find a user for this token.' });
+        }
+
+        // 4. if isActive, insert email to mailchimp list
+        // TODO: Update isActive on resend token (step 3) and check if paid and insert user to mailchimp there as well.
+
+        setCookie(user, res);
+        res.json(user);
+      });
+    });
   });
 });
 

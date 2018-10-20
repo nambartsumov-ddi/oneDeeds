@@ -73,19 +73,19 @@ class Signup extends Component {
   }
 
   subscribe(email, name) {
-    this.setState({ loading: true, isRequestDone: false });
+    this.setState({ loading: true });
 
     api
       .post('/auth/signup', { email, name })
       .then((res) => {
         const user = res.data;
         this.props.setUser(user);
-        this.setState({ loading: false, isRequestDone: true, error: '' });
+        this.setState({ loading: false, error: '' });
         this.routeStep();
       })
       .catch((err) => {
         console.log('Failed to subscribe', err);
-        this.setState({ loading: false, isRequestDone: true, error: 'Failed to subscribe' });
+        this.setState({ loading: false, error: err.response.data });
         this.props.logout();
         this.props.setUser();
       });
@@ -95,16 +95,18 @@ class Signup extends Component {
     this.setState({ loading: true });
 
     api
-      .post('/charge-stripe', { token, userId: this.props.user._id })
+      .post('/charge-stripe', { token, user: this.props.user })
       .then((res) => {
         const user = res.data;
         this.props.setUser(user);
         this.setState({ loading: false, error: '' });
         this.routeStep();
+        return true;
       })
       .catch((err) => {
         console.log('Failed to donate in /charge-stripe api post request', err);
-        this.setState({ loading: false, error: 'The donation failed. Please try again.' });
+        this.setState({ loading: false, error: 'Something went wrong. Please try again.' });
+        return true;
       });
   }
 
@@ -183,7 +185,9 @@ class Signup extends Component {
                   <Email
                     subscribe={(email, name) => this.subscribe(email, name)}
                     isRequestDone={this.state.isRequestDone}
+                    isParentLoading={this.state.loading}
                   />
+                  {this.state.error && <span className={styles.InvalidText}>&raquo; {this.state.error}</span>}
                   <span className={styles.Or}>or</span>
                   <div className={styles.SocialBtnWrapper}>
                     <a href={`${basePath}/auth/facebook`} className={facebookClasses}>
@@ -200,7 +204,10 @@ class Signup extends Component {
             {this.state.activeStep === 1 && (
               <StripeProvider apiKey="pk_test_AdwNPNpOST5l9yBgSlFaxYrN">
                 <Elements>
-                  <StripeCheckout donate={(email, name) => this.donate(email, name)} />
+                  <StripeCheckout
+                    donate={(email, name) => this.donate(email, name)}
+                    isParentLoading={this.state.loading}
+                  />
                 </Elements>
               </StripeProvider>
             )}

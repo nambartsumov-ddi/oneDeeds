@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 import { connect } from 'react-redux';
+import ReactLoading from 'react-loading';
 
 import styles from './StripeCheckout.module.scss';
 
@@ -13,9 +14,9 @@ class StripeCheckout extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tokenId: null,
+      token: null,
       error: null,
-      loading: false,
+      isParentLoading: false,
     };
   }
 
@@ -23,7 +24,7 @@ class StripeCheckout extends Component {
     event.preventDefault();
 
     this.setState({
-      loading: true,
+      isParentLoading: true,
     });
 
     const card = {
@@ -34,19 +35,27 @@ class StripeCheckout extends Component {
 
     if (this.props.stripe) {
       const { token, error } = await this.props.stripe.createToken(card);
-      // TODO: Charge card Stripe API request
-      console.log(token, error && error.message);
 
-      this.setState({
-        loading: false,
-        tokenId: token.id,
-        error: error && error.message,
-      });
+      if (token) {
+        this.setState({
+          token: token,
+          error: '',
+        });
 
-      this.props.donate(this.state.tokenId);
+        this.props.donate(token);
+      }
+
+      if (error) {
+        console.log(error.message);
+        this.setState({
+          isParentLoading: false,
+          token: null,
+          error: error.message,
+        });
+      }
     } else {
       this.setState({
-        loading: false,
+        isParentLoading: false,
       });
       console.log("Stripe.js hasn't loaded yet.");
     }
@@ -61,8 +70,23 @@ class StripeCheckout extends Component {
         <div className={stripeCheckoutClasses}>
           <CardElement classes={{ base: styles.StripeElement }} />
           <div>
-            <button className={payButtonClasses} type="submit">
-              {this.state.loading ? 'Processing payment...' : 'Donate'}
+            <button className={payButtonClasses} type="submit" style={{ position: 'relative' }}>
+              {!this.state.isParentLoading && <span>Donate</span>}
+              {this.state.isParentLoading && (
+                <ReactLoading
+                  style={{
+                    position: 'absolute',
+                    width: '32px',
+                    height: '32px',
+                    fill: '#fff',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                  }}
+                  type={'bubbles'}
+                  color="#fff"
+                />
+              )}
             </button>
             <div className={styles.ErrorMessage}>{this.state.error}</div>
           </div>
@@ -75,6 +99,7 @@ class StripeCheckout extends Component {
 StripeCheckout.propTypes = {
   stripe: PropTypes.object,
   donate: PropTypes.func,
+  isParentLoading: PropTypes.bool,
   name: PropTypes.string,
 };
 

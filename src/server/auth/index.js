@@ -43,8 +43,13 @@ authRouter.post('/signup', (req, res, next) => {
     if (err) return next(err);
 
     if (existingUser) {
-      // Create an access token for existing user
-      sendTokenEmail(existingUser);
+      if (!existingUser.isVerified) {
+        // Create an access token for existing user
+        sendTokenEmail(existingUser);
+      } else {
+        setCookie(existingUser, res);
+        res.json(existingUser);
+      }
     } else {
       // Create user and send access token
       const newUser = new User({
