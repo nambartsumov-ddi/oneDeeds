@@ -90,7 +90,17 @@ authRouter.get('/signup/verification/:accessToken', (req, res, next) => {
 
     // If we found a token, find a matching user and update as a verified email
     User.findByIdAndUpdate(accessToken._userId, updatedUser, {
-      fields: { name: 1, provider: 1, email: 1, isVerified: 1, isPaid: 1, isActive: 1, google: 1, facebook: 1 },
+      fields: {
+        name: 1,
+        provider: 1,
+        email: 1,
+        isVerified: 1,
+        isPaid: 1,
+        customerId: 1,
+        isActive: 1,
+        google: 1,
+        facebook: 1,
+      },
       new: true,
     }).exec((err, user) => {
       if (err) res.json({ err });

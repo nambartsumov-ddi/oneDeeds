@@ -13,6 +13,8 @@ import api from './api';
 import connectDb from './db';
 import config from './config';
 
+import 'source-map-support/register';
+
 dotenv.config();
 const debug = createDebug('server');
 const isDevelopment = process.env.NODE_ENV === 'development';

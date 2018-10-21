@@ -21,6 +21,9 @@ const UserSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    customerId: {
+      type: String,
+    },
     isVerified: {
       type: Boolean,
       default: false,
