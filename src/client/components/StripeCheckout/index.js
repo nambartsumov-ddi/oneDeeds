@@ -16,61 +16,44 @@ class StripeCheckout extends Component {
     this.state = {
       token: null,
       error: null,
-      isParentLoading: false,
+      isParentLoading: this.props.isParentLoading,
     };
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    if (props.isParentLoading !== state.isParentLoading) {
+      return {
+        isParentLoading: props.isParentLoading,
+      };
+    }
+    return null;
   }
 
   async handleStripPayment(event) {
     event.preventDefault();
-
-    this.setState({
-      isParentLoading: true,
-    });
-
-    const card = {
-      type: 'card',
-      name: this.props.name,
-      address_country: 'US',
-    };
-
-    if (this.props.stripe) {
-      const { token, error } = await this.props.stripe.createToken(card);
-
-      if (token) {
-        this.setState({
-          token: token,
-          error: '',
-        });
-
-        this.props.donate(token);
-      }
-
-      if (error) {
-        console.log(error.message);
-        this.setState({
-          isParentLoading: false,
-          token: null,
-          error: error.message,
-        });
-      }
-    } else {
-      this.setState({
-        isParentLoading: false,
-      });
-      console.log("Stripe.js hasn't loaded yet.");
-    }
+    this.props.donate(this.props.stripe);
   }
 
   render() {
+    const isDonateDisabled = () => {
+      return this.state.isParentLoading;
+    };
+
     const stripeCheckoutClasses = stylesCtx(styles.StripCheckout);
-    const payButtonClasses = stylesCtx(styles.PayButton);
+    const payButtonClasses = stylesCtx(styles.PayButton, {
+      [styles.DisableButton]: isDonateDisabled(),
+    });
 
     return (
       <form onSubmit={(e) => this.handleStripPayment(e)}>
         <div className={stripeCheckoutClasses}>
           <CardElement classes={{ base: styles.StripeElement }} />
           <div>
-            <button className={payButtonClasses} type="submit" style={{ position: 'relative' }}>
+            <button
+              disabled={isDonateDisabled()}
+              className={payButtonClasses}
+              type="submit"
+              style={{ position: 'relative' }}>
               {!this.state.isParentLoading && <span>Donate</span>}
               {this.state.isParentLoading && (
                 <ReactLoading
@@ -100,13 +83,6 @@ StripeCheckout.propTypes = {
   stripe: PropTypes.object,
   donate: PropTypes.func,
   isParentLoading: PropTypes.bool,
-  name: PropTypes.string,
 };
 
-const mapStateToProps = (state) => {
-  return {
-    name: state.userState.user.name,
-  };
-};
-
-export default connect(mapStateToProps)(injectStripe(StripeCheckout));
+export default connect()(injectStripe(StripeCheckout));

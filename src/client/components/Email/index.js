@@ -18,14 +18,17 @@ class Email extends Component {
       isCompareSuccess: undefined,
       isValidEmail: undefined,
       isValidCompareEmail: undefined,
-      isParentLoading: false,
+      isParentLoading: this.props.isParentLoading,
     };
   }
 
-  componentDidUpdate(nextProps) {
-    if (this.state.isParentLoading !== nextProps.isParentLoading) {
-      this.setState({ isParentLoading: nextProps.isParentLoading });
+  static getDerivedStateFromProps(props, state) {
+    if (props.isParentLoading !== state.isParentLoading) {
+      return {
+        isParentLoading: props.isParentLoading,
+      };
     }
+    return null;
   }
 
   onNameChange(event) {
@@ -86,7 +89,6 @@ class Email extends Component {
   }
 
   subscribeHandler() {
-    this.setState({ isParentLoading: true });
     this.props.subscribe(this.state.email, this.state.name);
   }
 

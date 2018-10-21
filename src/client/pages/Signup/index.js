@@ -91,23 +91,54 @@ class Signup extends Component {
       });
   }
 
-  donate(token) {
+  async donate(stripe) {
     this.setState({ loading: true });
 
-    api
-      .post('/charge-stripe', { token, user: this.props.user })
-      .then((res) => {
-        const user = res.data;
-        this.props.setUser(user);
-        this.setState({ loading: false, error: '' });
-        this.routeStep();
-        return true;
-      })
-      .catch((err) => {
-        console.log('Failed to donate in /charge-stripe api post request', err);
-        this.setState({ loading: false, error: 'Something went wrong. Please try again.' });
-        return true;
+    const card = {
+      type: 'card',
+      name: this.props.user.name,
+      address_country: 'US',
+    };
+
+    if (stripe) {
+      const { token, error } = await stripe.createToken(card);
+
+      if (token) {
+        this.setState({
+          token: token,
+          error: '',
+        });
+
+        api
+          .post('/charge-stripe', { token, user: this.props.user })
+          .then((res) => {
+            const user = res.data;
+            this.props.setUser(user);
+            this.setState({ loading: false, error: '' });
+            this.routeStep();
+            return true;
+          })
+          .catch((err) => {
+            console.log('Failed to donate in /charge-stripe api post request', err);
+            this.setState({ loading: false, error: 'Something went wrong. Please try again.' });
+            return true;
+          });
+      }
+
+      if (error) {
+        console.log(error.message);
+        this.setState({
+          loading: false,
+          token: null,
+          error: error.message,
+        });
+      }
+    } else {
+      this.setState({
+        loading: false,
       });
+      console.log("Stripe.js hasn't loaded yet.");
+    }
   }
 
   goToStep(index) {
@@ -204,10 +235,7 @@ class Signup extends Component {
             {this.state.activeStep === 1 && (
               <StripeProvider apiKey="pk_test_AdwNPNpOST5l9yBgSlFaxYrN">
                 <Elements>
-                  <StripeCheckout
-                    donate={(email, name) => this.donate(email, name)}
-                    isParentLoading={this.state.loading}
-                  />
+                  <StripeCheckout donate={(stripe) => this.donate(stripe)} isParentLoading={this.state.loading} />
                 </Elements>
               </StripeProvider>
             )}

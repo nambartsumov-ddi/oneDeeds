@@ -25,6 +25,18 @@
   cursor: pointer;
 }
 
+.DisableButton {
+  background: #ccc;
+  opacity: 0.85;
+  border: 1px solid #ccc;
+  transition: none;
+  cursor: not-allowed;
+
+  &:active {
+    background: #ccc;
+  }
+}
+
 .ErrorMessage {
   text-align: center;
   padding: 15px 10px;
