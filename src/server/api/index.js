@@ -31,7 +31,7 @@ apiRouter.post('/charge-stripe', (req, res, next) => {
 
     try {
       if (!existingUser.customerId) {
-        // 2. create customer if not exist
+        // 2. create customer if not exist and subscribe to a plan
         debug('No customerId found, creating stripe customer for this user');
         createCustomer(token.id, existingUser.id, user.email).then((subscription) => {
           customerId.value = subscription.customer;
@@ -40,6 +40,7 @@ apiRouter.post('/charge-stripe', (req, res, next) => {
           debug('Subscription created!');
         });
       } else {
+        // 3. Retrieve a customer and subscribe to a plan
         debug('CustomerId found, retrieve stripe customer and subscribing this user to a plan');
         retrieveCustomer(existingUser.customerId).then((subscription) => {
           customerId.value = subscription.customer;
