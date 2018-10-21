@@ -65,6 +65,44 @@
   }
 }
 
+.ResendEmailContainer {
+  width: 100%;
+  max-width: 350px;
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+}
+
+.ResendVerificationButton {
+  position: relative;
+  border: none;
+  padding: 1rem 3.2rem;
+  background: $LayoutButtonOnHover;
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+  outline: none;
+  margin: 0 auto;
+  display: block;
+  height: 40px;
+  margin-top: 0.5em;
+  font-size: 1.1em;
+  padding: 0.5em;
+  width: 100%;
+}
+
+.DisableButton {
+  background: #ccc;
+  opacity: 0.85;
+  border: 1px solid #ccc;
+  transition: none;
+  cursor: not-allowed;
+
+  &:active {
+    background: #ccc;
+  }
+}
+
 .InvalidText {
   width: 100%;
   color: #f86767;

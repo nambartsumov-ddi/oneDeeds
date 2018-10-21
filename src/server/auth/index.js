@@ -84,6 +84,7 @@ authRouter.get('/signup/verification/:accessToken', (req, res, next) => {
       return res.status(404).json({ err: 'No token found.' });
     }
 
+    // TODO: Update isActive mailchimp and customeId
     const updatedUser = {
       isVerified: true,
     };
@@ -112,6 +113,48 @@ authRouter.get('/signup/verification/:accessToken', (req, res, next) => {
       setCookie(user, res);
       res.json(user);
     });
+  });
+});
+
+authRouter.post('/signup/resend-verifiaction-email', (req, res, next) => {
+  debug('/auth/signup/resend-verifiaction-email route...');
+
+  const { email, name } = req.body;
+
+  function sendTokenEmail(user) {
+    const newToken = new Token({
+      _userId: user.id,
+      accessToken: randomstring.generate({
+        length: 64,
+      }),
+    });
+
+    newToken.save((err) => {
+      if (err) return next(err);
+      sendTransactionalEmail(req.headers.origin, newToken.accessToken, email, name)
+        .then(() => {
+          debug(`Email sent to ${email}! Token: ${newToken.accessToken}`);
+          setCookie(user, res);
+          res.json(user);
+        })
+        .catch((err) => next(err));
+    });
+  }
+
+  User.findOne({ email }).exec((err, existingUser) => {
+    if (err) return next(err);
+
+    if (!existingUser) {
+      return res.status(404).json({ err: 'No existing user found.' });
+    }
+
+    if (!existingUser.isVerified) {
+      // Create an access token for existing user
+      sendTokenEmail(existingUser);
+    } else {
+      setCookie(existingUser, res);
+      res.json(existingUser);
+    }
   });
 });
 

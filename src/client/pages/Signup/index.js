@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import { parse } from 'cookie';
 import { decode } from 'jsonwebtoken';
 import { StripeProvider, Elements } from 'react-stripe-elements';
+import ReactLoading from 'react-loading';
 
 import api from 'Api';
 import Layout from 'Components/Layout';
@@ -141,6 +142,27 @@ class Signup extends Component {
     }
   }
 
+  async resendVerificationEmail(event) {
+    event.preventDefault();
+
+    this.setState({ loading: true });
+    const email = this.props.user.email;
+    const name = this.props.user.name;
+
+    api
+      .post('/auth/signup/resend-verifiaction-email', { email, name })
+      .then((res) => {
+        const user = res.data;
+        this.props.setUser(user);
+        this.setState({ loading: false, error: '' });
+        this.routeStep();
+      })
+      .catch((err) => {
+        console.log('Failed to resend verification email', err);
+        this.setState({ loading: false, error: err.response.data });
+      });
+  }
+
   goToStep(index) {
     this.setState({ activeStep: index });
   }
@@ -148,6 +170,10 @@ class Signup extends Component {
   render() {
     const facebookClasses = stylesCtx(styles.Login, styles.Facebook);
     const googleClasses = stylesCtx(styles.Login, styles.Google);
+
+    const resendEmailClasses = stylesCtx(styles.ResendVerificationButton, {
+      [styles.DisableButton]: this.state.loading,
+    });
 
     const { activeStep } = this.state;
 
@@ -209,7 +235,9 @@ class Signup extends Component {
               ]}
               activeStep={activeStep}
             />
-            <div className={styles.StepsTips}>{getStepTip()}</div>
+            <div className={styles.StepsTips} style={{ padding: '0 20px' }}>
+              {getStepTip()}
+            </div>
             {this.state.activeStep === 0 && (
               <div>
                 <div className={styles.SignupWrap}>
@@ -239,7 +267,32 @@ class Signup extends Component {
                 </Elements>
               </StripeProvider>
             )}
-            {this.state.activeStep === 2 && <div>resend token step (3)</div>}
+            {this.state.activeStep === 2 && (
+              <div className={styles.ResendEmailContainer}>
+                <p>Can&lsquo;t find the email?</p>
+                <button
+                  className={resendEmailClasses}
+                  disabled={this.state.loading}
+                  onClick={(e) => this.resendVerificationEmail(e)}>
+                  {!this.state.loading && <span>Resend Verification Email</span>}
+                  {this.state.loading && (
+                    <ReactLoading
+                      style={{
+                        position: 'absolute',
+                        width: '32px',
+                        height: '32px',
+                        fill: '#fff',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                      }}
+                      type={'bubbles'}
+                      color="#fff"
+                    />
+                  )}
+                </button>
+              </div>
+            )}
             {this.state.activeStep === 3 && (
               <img src={completedStepsImg} style={{ width: '100%', height: 'auto', maxHeight: '600px' }} />
             )}
