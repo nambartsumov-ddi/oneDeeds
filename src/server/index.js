@@ -65,7 +65,6 @@ app.use((req, res, next) => {
 // all other requests are not implemented.
 app.use((err, req, res, next) => {
   debug('500 - Request Not Implemented');
-  debug(err.stack);
   res.status(err.status || 500);
   res.json({
     error: {

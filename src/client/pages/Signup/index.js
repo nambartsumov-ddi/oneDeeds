@@ -120,8 +120,8 @@ class Signup extends Component {
             return true;
           })
           .catch((err) => {
-            console.log('Failed to donate in /charge-stripe api post request', err);
-            this.setState({ loading: false, error: 'Something went wrong. Please try again.' });
+            console.log('err', err.response.data.message);
+            this.setState({ loading: false, error: err.response.data.message });
             return true;
           });
       }
@@ -263,7 +263,11 @@ class Signup extends Component {
             {this.state.activeStep === 1 && (
               <StripeProvider apiKey="pk_test_AdwNPNpOST5l9yBgSlFaxYrN">
                 <Elements>
-                  <StripeCheckout donate={(stripe) => this.donate(stripe)} isParentLoading={this.state.loading} />
+                  <StripeCheckout
+                    donate={(stripe) => this.donate(stripe)}
+                    isParentLoading={this.state.loading}
+                    cardError={this.state.error}
+                  />
                 </Elements>
               </StripeProvider>
             )}

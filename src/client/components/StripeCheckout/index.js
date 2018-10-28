@@ -24,6 +24,7 @@ class StripeCheckout extends Component {
     if (props.isParentLoading !== state.isParentLoading) {
       return {
         isParentLoading: props.isParentLoading,
+        cardError: props.cardError,
       };
     }
     return null;
@@ -72,6 +73,7 @@ class StripeCheckout extends Component {
               )}
             </button>
             <div className={styles.ErrorMessage}>{this.state.error}</div>
+            <div className={styles.ErrorMessage}>{this.state.cardError}</div>
           </div>
         </div>
       </form>
@@ -83,6 +85,7 @@ StripeCheckout.propTypes = {
   stripe: PropTypes.object,
   donate: PropTypes.func,
   isParentLoading: PropTypes.bool,
+  cardError: PropTypes.string,
 };
 
 export default connect()(injectStripe(StripeCheckout));

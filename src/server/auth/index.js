@@ -5,6 +5,7 @@ import passport from 'passport';
 import passportSetup from './passport';
 import config from '../config';
 import randomstring from 'randomstring';
+import { subscribeUserToList } from '../mailchimp';
 
 import User from '../api/resources/user/user.model';
 import Token from '../api/resources/token/token.model';
@@ -84,34 +85,50 @@ authRouter.get('/signup/verification/:accessToken', (req, res, next) => {
       return res.status(404).json({ err: 'No token found.' });
     }
 
-    // TODO: Update isActive mailchimp and customeId
-    const updatedUser = {
-      isVerified: true,
-    };
+    User.findById(accessToken._userId).exec((err, existingUser) => {
+      if (err) return res.status(200).json({ err });
 
-    // If we found a token, find a matching user and update as a verified email
-    User.findByIdAndUpdate(accessToken._userId, updatedUser, {
-      fields: {
-        name: 1,
-        provider: 1,
-        email: 1,
-        isVerified: 1,
-        isPaid: 1,
-        customerId: 1,
-        isActive: 1,
-        google: 1,
-        facebook: 1,
-      },
-      new: true,
-    }).exec((err, user) => {
-      if (err) res.json({ err });
-
-      if (!user) {
-        return res.json({ err: 'We were unable to find a user for this token.' });
+      if (!existingUser) {
+        return res.status(200).json({ err: 'We were unable to find a user.' });
       }
 
-      setCookie(user, res);
-      res.json(user);
+      // TODO: Update isActive mailchimp and customeId
+      const updatedUser = {
+        isVerified: true,
+        isActive: existingUser.isPaid,
+      };
+
+      // If we found a token, find a matching user and update as a verified email
+      User.findByIdAndUpdate(existingUser._id, updatedUser, {
+        fields: {
+          name: 1,
+          provider: 1,
+          email: 1,
+          isVerified: 1,
+          isPaid: 1,
+          customerId: 1,
+          isActive: 1,
+          google: 1,
+          facebook: 1,
+        },
+        new: true,
+      }).exec((err, user) => {
+        if (err) res.json({ err });
+
+        if (!user) {
+          return res.json({ err: 'We were unable to find a user for this token.' });
+        }
+
+        debug('verification token, isActive: ', user.isActive);
+
+        // if isActive, subscribe user to mailchimp list
+        if (user.isActive) {
+          subscribeUserToList(user);
+        }
+
+        setCookie(user, res);
+        res.json(user);
+      });
     });
   });
 });
