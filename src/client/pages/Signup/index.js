@@ -26,6 +26,8 @@ const stylesCtx = classNames.bind(styles);
 const isDevelopment = process.env.NODE_ENV === 'development';
 const basePath = isDevelopment ? '/api' : 'https://api.onedeeds.com';
 
+const STRIPE_PK = isDevelopment ? 'pk_test_AdwNPNpOST5l9yBgSlFaxYrN' : 'pk_live_FU83OHIhCKAoRKmCSEvqiiT3';
+
 class Signup extends Component {
   constructor(props) {
     super(props);
@@ -261,7 +263,7 @@ class Signup extends Component {
               </div>
             )}
             {this.state.activeStep === 1 && (
-              <StripeProvider apiKey="pk_test_AdwNPNpOST5l9yBgSlFaxYrN">
+              <StripeProvider apiKey={STRIPE_PK}>
                 <Elements>
                   <StripeCheckout
                     donate={(stripe) => this.donate(stripe)}

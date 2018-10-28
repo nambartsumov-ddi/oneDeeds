@@ -7,10 +7,10 @@ const debug = createDebug('hooks');
 
 const customerDeletedHook = (res, customer) => {
   User.findOne({ customerId: customer.id }).exec((err, existingUser) => {
-    if (err) return res.status(200).json({ err });
+    if (err) return res.status(500).json({ err });
 
     if (!existingUser) {
-      return res.status(200).json({ err: 'We were unable to find a user.' });
+      return res.status(404).json({ err: 'We were unable to find a user.' });
     }
 
     const updatedUser = {
@@ -29,10 +29,10 @@ const customerDeletedHook = (res, customer) => {
       },
       new: true,
     }).exec((err, user) => {
-      if (err) return res.status(200).json({ err });
+      if (err) return res.status(500).json({ err });
 
       if (!user) {
-        return res.status(200).json({ err: 'We were unable to find a user.' });
+        return res.status(404).json({ err: 'We were unable to find a user.' });
       }
 
       debug('customer deleted hook, isActive: ', user.isActive);
@@ -47,10 +47,10 @@ const customerDeletedHook = (res, customer) => {
 
 const subscriptionDeletedHook = (res, customer) => {
   User.findOne({ email: customer.email }).exec((err, existingUser) => {
-    if (err) return res.status(200).json({ err });
+    if (err) return res.status(500).json({ err });
 
     if (!existingUser) {
-      return res.status(200).json({ err: 'We were unable to find a user.' });
+      return res.status(404).json({ err: 'We were unable to find a user.' });
     }
 
     const updatedUser = {
@@ -69,10 +69,10 @@ const subscriptionDeletedHook = (res, customer) => {
       },
       new: true,
     }).exec((err, user) => {
-      if (err) return res.status(200).json({ err });
+      if (err) return res.status(500).json({ err });
 
       if (!user) {
-        return res.status(200).json({ err: 'We were unable to find a user.' });
+        return res.status(404).json({ err: 'We were unable to find a user.' });
       }
 
       debug('subsctiption deleted hook, isActive: ', user.isActive);
@@ -90,7 +90,7 @@ const chargeSuccessHook = (res, customer) => {
     if (err) return res.status(200).json({ err });
 
     if (!existingUser) {
-      return res.status(200).json({ err: 'We were unable to find a user.' });
+      return res.status(404).json({ err: 'We were unable to find a user.' });
     }
 
     const updatedUser = {
@@ -109,10 +109,10 @@ const chargeSuccessHook = (res, customer) => {
       },
       new: true,
     }).exec((err, user) => {
-      if (err) return res.status(200).json({ err });
+      if (err) return res.status(500).json({ err });
 
       if (!user) {
-        return res.status(200).json({ err: 'We were unable to find a user.' });
+        return res.status(404).json({ err: 'We were unable to find a user.' });
       }
 
       debug('charge success hook, isActive: ', user.isActive);
@@ -129,10 +129,10 @@ const chargeSuccessHook = (res, customer) => {
 
 const chargeFailedHook = (res, customer) => {
   User.findOne({ customerId: customer.id }).exec((err, existingUser) => {
-    if (err) return res.status(200).json({ err });
+    if (err) return res.status(500).json({ err });
 
     if (!existingUser) {
-      return res.status(200).json({ err: 'We were unable to find a user.' });
+      return res.status(404).json({ err: 'We were unable to find a user.' });
     }
 
     const updatedUser = {
@@ -150,10 +150,10 @@ const chargeFailedHook = (res, customer) => {
       },
       new: true,
     }).exec((err, user) => {
-      if (err) return res.status(200).json({ err });
+      if (err) return res.status(500).json({ err });
 
       if (!user) {
-        return res.status(200).json({ err: 'We were unable to find a user.' });
+        return res.status(404).json({ err: 'We were unable to find a user.' });
       }
 
       debug('charge failed hook, isActive: ', user.isActive);
