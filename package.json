@@ -79,6 +79,7 @@
     "randomstring": "^1.1.5",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
+    "react-ga": "^2.5.3",
     "react-hot-loader": "^4.3.11",
     "react-loading": "^2.0.3",
     "react-pose": "^3.3.7",

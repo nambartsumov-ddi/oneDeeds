@@ -2,6 +2,9 @@ import React from 'react';
 import { ConnectedRouter } from 'connected-react-router';
 import { hot } from 'react-hot-loader';
 import { history } from 'Store';
+import initGa from './analytics';
+
+initGa(history);
 
 // App routes
 import Routes from 'Routes';

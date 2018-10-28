@@ -77,13 +77,13 @@ class Home extends Component {
               goTo={'/signup'}
               description="We believe that all it takes to make an impact is One Deed within One community."
               imageSrc={handHalf}>
-              <LayoutButton text="Join OneDeeds Today !" />
+              <LayoutButton text="Join OneDeeds Today" />
             </Panel>
 
             <Panel
               size="Half"
               goTo={'/our-community'}
-              title="How it works?"
+              title="How does it work?"
               description={
                 <div className={styles.ThirdPanelDesc}>
                   <ul>
@@ -95,7 +95,7 @@ class Home extends Component {
               }
               /* imageSrc={handHalf}*/
               className={styles.OurCommunityPanel}>
-              <LayoutButton text="Help us make a change !" />
+              <LayoutButton text="Help us make a change" />
             </Panel>
             {/* ref div for scrolling */}
             <div style={{ visibility: 'hidden' }} ref={(section) => (this.SecondSectionRef = section)} />
