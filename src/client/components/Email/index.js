@@ -126,6 +126,8 @@ class Email extends Component {
 
     const checkboxInputClasses = stylesCtx(styles.CheckboxInput);
 
+    const labelClasses = stylesCtx(styles.Label, styles.Control);
+
     const preventDefault = (e) => {
       e.preventDefault();
     };
@@ -184,7 +186,7 @@ class Email extends Component {
         </div>
 
         <div className={checkboxInputWrapperClasses}>
-          <label htmlFor="isTermsReadCB" className={styles.Label}>
+          <label htmlFor="isTermsReadCB" className={labelClasses}>
             <input
               type="checkbox"
               name="isTermsRead"
@@ -194,6 +196,7 @@ class Email extends Component {
               className={checkboxInputClasses}
               placeholder="Verify email address"
             />
+            <div className={styles.ControlIndicator} />
 
             <span className={styles.TermsText}>
               I have read our <a href="">Terms of Service</a> and <a href=""> Privacy Policy</a>
