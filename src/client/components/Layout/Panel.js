@@ -14,6 +14,10 @@ const Panel = ({ size, title, description, imageSrc, id, goTo, history, classNam
     [styles.Full]: size === 'Full',
     [styles.Half]: size === 'Half',
     [styles.WithDesc]: description !== undefined,
+    // [className]: className,
+  });
+
+  const imgPanelClasses = stylesCtx(styles.ImgPanel, {
     [className]: className,
   });
 
@@ -42,10 +46,25 @@ const Panel = ({ size, title, description, imageSrc, id, goTo, history, classNam
     goTo ? history.push(goTo) : null;
   };
 
+  const isMobile = () => window.screen.width < 992;
+
   return (
-    <div id={id} tabIndex={i++} className={panelClasses} onClick={() => onClick(goTo)} style={style}>
-      <IsPlaceHolderPanel tabIndex="-1" />
-      <div style={{ backgroundImage: imageSrc ? `url(${imageSrc})` : null }}>{children}</div>
+    <div
+      id={id}
+      tabIndex={i++}
+      className={panelClasses}
+      onClick={() => onClick(goTo)}
+      style={isMobile() ? null : style}>
+      {/* <IsPlaceHolderPanel tabIndex="-1" /> */}
+      <div
+        className={imgPanelClasses}
+        style={{
+          backgroundImage: imageSrc ? `url(${imageSrc})` : null,
+          // backgroundPositionY: window.screen.width - 500 > 1295 ? '-75px' : null,
+        }}>
+        <IsPlaceHolderPanel tabIndex="-1" />
+        {children}
+      </div>
     </div>
   );
 };
