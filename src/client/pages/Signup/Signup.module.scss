@@ -182,6 +182,12 @@
   }
 }
 
+.ByContinueWith {
+  display: inline-block;
+  text-align: center;
+  margin: 10px 20px 0 20px;
+}
+
 .NotShare {
   margin-top: 5px;
   font-size: 1em;
@@ -226,5 +232,10 @@
 
   .Signup .Or {
     margin: 1.5em 0;
+  }
+
+  .ByContinueWith {
+    width: 100%;
+    margin: 10px 0 0 0;
   }
 }
