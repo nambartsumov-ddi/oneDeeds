@@ -9,11 +9,15 @@ import styles from './Panel.module.scss';
 const stylesCtx = classNames.bind(styles);
 
 let i = 1;
-const Panel = ({ size, title, description, imageSrc, id, goTo, history, className, children }) => {
+const Panel = ({ size, title, description, imageSrc, id, goTo, history, className, children, style }) => {
   const panelClasses = stylesCtx(styles.Panel, {
     [styles.Full]: size === 'Full',
     [styles.Half]: size === 'Half',
     [styles.WithDesc]: description !== undefined,
+    // [className]: className,
+  });
+
+  const imgPanelClasses = stylesCtx(styles.ImgPanel, {
     [className]: className,
   });
 
@@ -42,15 +46,25 @@ const Panel = ({ size, title, description, imageSrc, id, goTo, history, classNam
     goTo ? history.push(goTo) : null;
   };
 
+  const isMobile = () => window.screen.width < 992;
+
   return (
     <div
       id={id}
       tabIndex={i++}
       className={panelClasses}
       onClick={() => onClick(goTo)}
-      style={{ backgroundImage: imageSrc ? `url(${imageSrc})` : null }}>
-      <IsPlaceHolderPanel tabIndex="-1" />
-      {children}
+      style={isMobile() ? null : style}>
+      {/* <IsPlaceHolderPanel tabIndex="-1" /> */}
+      <div
+        className={imgPanelClasses}
+        style={{
+          backgroundImage: imageSrc ? `url(${imageSrc})` : null,
+          // backgroundPositionY: window.screen.width - 500 > 1295 ? '-75px' : null,
+        }}>
+        <IsPlaceHolderPanel tabIndex="-1" />
+        {children}
+      </div>
     </div>
   );
 };
@@ -65,6 +79,7 @@ Panel.propTypes = {
   history: PropTypes.object,
   className: PropTypes.string,
   children: PropTypes.any,
+  style: PropTypes.any,
 };
 
 export default withRouter(Panel);
