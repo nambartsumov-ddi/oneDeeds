@@ -259,6 +259,10 @@ class Signup extends Component {
                     </a>
                   </div>
                 </div>
+                <span className={styles.ByContinueWith}>
+                  By clicking &quot;Continue with&quot; above, you hereby accept our <a href="">Terms of Service</a> and
+                  <a href=""> Privacy Policy.</a>
+                </span>
                 <span className={styles.NotShare}>* We&#39;ll never post anything without your permission.</span>
               </div>
             )}

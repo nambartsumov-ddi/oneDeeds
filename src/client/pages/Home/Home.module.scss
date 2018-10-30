@@ -55,9 +55,11 @@
 
 .ThirdPanelDesc {
   text-align: left;
+  line-height: 1.5em;
 
   ul {
-    list-style-type: decimal;
+    // list-style-type: decimal;
+    list-style: square inside;
   }
 }
 

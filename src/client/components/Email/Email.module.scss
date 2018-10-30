@@ -57,6 +57,83 @@
     display: flex;
   }
 
+  .Control {
+    font-size: 18px;
+    position: relative;
+    display: block;
+    margin-bottom: 15px;
+    padding-left: 30px;
+    cursor: pointer;
+  }
+
+  .Control input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+  }
+
+  .ControlIndicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    background: #e6e6e6;
+    border-radius: 50%;
+  }
+
+  /* Hover and focus states */
+  .Control:hover input ~ .ControlIndicator,
+  .Control input:focus ~ .ControlIndicator {
+    background: #ccc;
+  }
+
+  /* Checked state */
+  .Control input:checked ~ .ControlIndicator {
+    background: #2aa1c0;
+  }
+
+  /* Hover state whilst checked */
+  .Control:hover input:not([disabled]):checked ~ .ControlIndicator,
+  .Control input:checked:focus ~ .ControlIndicator {
+    background: #4267b2;
+  }
+
+  /* Disabled state */
+  .Control input:disabled ~ .ControlIndicator {
+    pointer-events: none;
+    opacity: 0.6;
+    background: #e6e6e6;
+  }
+
+  /* Check mark */
+  .ControlIndicator:after {
+    position: absolute;
+    display: none;
+    content: '';
+  }
+
+  /* Show check mark */
+  .Control input:checked ~ .ControlIndicator:after {
+    display: block;
+  }
+
+  /* Checkbox tick */
+  .Control .ControlIndicator:after {
+    top: 4px;
+    left: 8px;
+    width: 5px;
+    height: 10px;
+    transform: rotate(45deg);
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+  }
+
+  /* Disabled tick colour */
+  .Control input:disabled ~ .ControlIndicator:after {
+    border-color: #7b7b7b;
+  }
+
   .TermsText {
     cursor: pointer;
     font-size: 1rem;

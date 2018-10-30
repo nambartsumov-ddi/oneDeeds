@@ -108,7 +108,7 @@ class Home extends Component {
 
     const imagePosition = stylesCtx(
       {
-      [styles.PanelImagePosition]: isMobile(),
+        [styles.PanelImagePosition]: isMobile(),
       },
       styles.VideoPanel
     );
