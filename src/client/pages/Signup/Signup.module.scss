@@ -183,17 +183,17 @@
 }
 
 .ByContinueWith {
-  width: 350px;
+  width: 290px;
   margin: 10px auto;
   display: block;
-  font-size: 14px;
-  line-height: 22px;
+  font-size: 0.9rem;
+  line-height: 1.1rem;
   text-align: center;
 }
 
 .NotShare {
   margin-top: 5px;
-  font-size: 1em;
+  font-size: 0.8em;
   color: #909090;
   display: block;
   text-align: center;
@@ -226,6 +226,10 @@
     &:focus {
       outline-width: 3px;
     }
+  }
+
+  .ByContinueWith {
+    width: 350px;
   }
 
   .SignupWrap {
