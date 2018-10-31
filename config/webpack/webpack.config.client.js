@@ -56,25 +56,6 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|svg|jpe?g|gif)/,
-        enforce: 'pre',
-        loader: 'image-webpack-loader',
-        options: {
-          // disable: isDevelopment,
-          mozjpeg: {
-            progressive: true,
-            quality: 55,
-          },
-          pngquant: {
-            quality: '65-90',
-            speed: 4,
-          },
-          gifsicle: {
-            interlaced: false,
-          },
-        },
-      },
-      {
         oneOf: [
           {
             test: /\.(png|svg|jpe?g|gif)/,

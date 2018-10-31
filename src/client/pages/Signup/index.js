@@ -16,6 +16,8 @@ import Email from 'Components/Email';
 import NavToggle from 'Components/NavToggle';
 import Logo from 'Components/Logo';
 import StripeCheckout from 'Components/StripeCheckout';
+import { trackSubscribedEvent, trackPaidEvent, trackVerifiedEvent } from 'Containers/App/analytics';
+
 import completedStepsImg from 'Images/hands-half2.jpg';
 
 import styles from './Signup.module.scss';
@@ -46,6 +48,7 @@ class Signup extends Component {
       api(`/auth/signup/verification/${accessToken}`)
         .then((res) => {
           console.log(res);
+          trackVerifiedEvent();
           this.routeStep();
         })
         .catch(({ response }) => {
@@ -84,6 +87,7 @@ class Signup extends Component {
         const user = res.data;
         this.props.setUser(user);
         this.setState({ loading: false, error: '' });
+        trackSubscribedEvent();
         this.routeStep();
       })
       .catch((err) => {
@@ -118,6 +122,7 @@ class Signup extends Component {
             const user = res.data;
             this.props.setUser(user);
             this.setState({ loading: false, error: '' });
+            trackPaidEvent();
             this.routeStep();
             return true;
           })

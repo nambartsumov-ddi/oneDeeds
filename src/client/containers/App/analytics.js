@@ -20,4 +20,32 @@ const initGa = (history) => {
   history.listen(trackPageView);
 };
 
-export { initGa as default, trackPageView };
+const trackSubscribedEvent = () => {
+  ReactGA.event({
+    category: 'User',
+    action: 'Subscribed',
+  });
+};
+
+const trackPaidEvent = () => {
+  ReactGA.event({
+    category: 'User',
+    action: 'Paid',
+  });
+};
+
+const trackVerifiedEvent = () => {
+  ReactGA.event({
+    category: 'User',
+    action: 'Verified',
+  });
+};
+
+export {
+  initGa as default,
+  trackPageView,
+  trackVerifiedEvent,
+  trackPaidEvent,
+  trackSubscribedEvent,
+  trackActivatedEvent,
+};
