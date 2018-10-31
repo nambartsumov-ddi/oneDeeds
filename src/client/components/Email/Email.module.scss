@@ -90,13 +90,13 @@
 
   /* Checked state */
   .Control input:checked ~ .ControlIndicator {
-    background: #2aa1c0;
+    background: #f18340;
   }
 
   /* Hover state whilst checked */
   .Control:hover input:not([disabled]):checked ~ .ControlIndicator,
   .Control input:checked:focus ~ .ControlIndicator {
-    background: #4267b2;
+    background: #f18340;
   }
 
   /* Disabled state */
