@@ -90,13 +90,13 @@
 
   /* Checked state */
   .Control input:checked ~ .ControlIndicator {
-    background: #f18340;
+    background: #2be4b5;
   }
 
   /* Hover state whilst checked */
   .Control:hover input:not([disabled]):checked ~ .ControlIndicator,
   .Control input:checked:focus ~ .ControlIndicator {
-    background: #f18340;
+    background: #2be4b5;
   }
 
   /* Disabled state */
@@ -173,7 +173,7 @@
   padding-left: 40px;
 
   &:focus {
-    border-color: #f18340;
+    border-color: #2be4b5;
   }
 
   &.InvalidEmail:focus {
@@ -185,16 +185,16 @@
   padding-left: 40px;
 
   &:focus {
-    border-color: #f18340;
+    border-color: #2be4b5;
   }
 }
 
 .NameInputWrapper input[type='text']:focus + svg {
-  fill: #f18340;
+  fill: #2be4b5;
 }
 
 .EmailInputWrapper input[type='email']:focus + svg {
-  fill: #f18340;
+  fill: #2be4b5;
 }
 
 .EmailInputWrapper input[type='email']:focus.InvalidEmail + svg {
@@ -231,8 +231,8 @@
   font-size: 0.7em;
   color: #fff;
   cursor: pointer;
-  background: #f18340;
-  border: 1px solid #f18340;
+  background: #2be4b5;
+  border: 1px solid #2be4b5;
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -259,14 +259,14 @@
   font-weight: bold;
   margin-top: 15px;
   font-size: 0.7em;
-  color: #f86767;
+  color: #2be4b5;
 }
 
 @media (min-width: $lg) {
   .Subscribe {
     &:active {
-      background: #f56d1b;
-      border-color: #f56d1b;
+      background: #2bd0a6;
+      border-color: #2bd0a6;
       outline: 0;
     }
   }

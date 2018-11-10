@@ -199,7 +199,21 @@ class Email extends Component {
             <div className={styles.ControlIndicator} />
 
             <span className={styles.TermsText}>
-              I have read our <a href="">Terms of Service</a> and <a href=""> Privacy Policy</a>
+              I have read our{' '}
+              <a
+                href="https://storage.googleapis.com/www.onedeeds.com/assets/Terms%20of%20Service.pdf"
+                target="_blank"
+                rel="noopener noreferrer">
+                Terms of Service
+              </a>{' '}
+              and{' '}
+              <a
+                href="https://storage.googleapis.com/www.onedeeds.com/assets/Privacy%20Policy.pdf"
+                target="_blank"
+                rel="noopener noreferrer">
+                {' '}
+                Privacy Policy
+              </a>
             </span>
           </label>
         </div>

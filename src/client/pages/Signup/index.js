@@ -190,18 +190,21 @@ class Signup extends Component {
         return (
           <span>
             <b>{tip}</b>
-            <div>Complete signup in 3 easy steps.</div>
+            <div>Complete signup in 3 easy steps. The change is on our hands.</div>
           </span>
         );
       }
 
       if (activeStep === 1) {
-        const tip = `To become a member, we ask for a donation of $1.00 a month.`;
+        const tip = `To fund our community and donate to a different charity each month, we ask each of our members for a $1/ month membership fee.`;
 
         return (
           <span>
-            <b>Thanks for subscribing.</b>
+            <b>You have completed the first step. Thank you for subscribing.</b>
             <div>{tip}</div>
+            <div>
+              Your small contribution will make a huge impact, so let&apos;s work together and make a difference!
+            </div>
           </span>
         );
       }
@@ -237,7 +240,7 @@ class Signup extends Component {
             <Stepper
               steps={[
                 { title: 'Subscribe', completedTitle: 'Subscribed' },
-                { title: 'Donate', completedTitle: 'Donated' },
+                { title: 'Become a Member', completedTitle: "You're a member" },
                 { title: 'Verification', completedTitle: 'Verified' },
               ]}
               activeStep={activeStep}
@@ -265,8 +268,21 @@ class Signup extends Component {
                   </div>
                 </div>
                 <span className={styles.ByContinueWith}>
-                  By clicking &quot;Continue with&quot; above, you hereby accept our <a href="">Terms of Service</a> and
-                  <a href=""> Privacy Policy.</a>
+                  By clicking &quot;Continue with&quot; above, you hereby accept our{' '}
+                  <a
+                    href="https://storage.googleapis.com/www.onedeeds.com/assets/Terms%20of%20Service.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    Terms of Service
+                  </a>{' '}
+                  and
+                  <a
+                    href="https://storage.googleapis.com/www.onedeeds.com/assets/Privacy%20Policy.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    {' '}
+                    Privacy Policy.
+                  </a>
                 </span>
                 <span className={styles.NotShare}>* We&#39;ll never post anything without your permission.</span>
               </div>

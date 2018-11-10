@@ -55,7 +55,7 @@ class StripeCheckout extends Component {
               className={payButtonClasses}
               type="submit"
               style={{ position: 'relative' }}>
-              {!this.state.isParentLoading && <span>Donate</span>}
+              {!this.state.isParentLoading && <span>Become a Member</span>}
               {this.state.isParentLoading && (
                 <ReactLoading
                   style={{

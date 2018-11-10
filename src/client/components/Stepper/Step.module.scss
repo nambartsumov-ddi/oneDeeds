@@ -18,7 +18,7 @@
 }
 
 .CompletedCircle {
-  background-color: #2BB673;
+  background-color: #2be4b5;
 }
 
 .ActiveCircle {
@@ -44,15 +44,15 @@
 }
 
 .CompletedTitle {
-  color: #2BB673;
+  color: #2be4b5;
 }
 
 .LeftBar {
   position: absolute;
   top: 16px;
   height: 1px;
-  border: 1px solid #E0E0E0;
-  background-color: #E0E0E0;
+  border: 1px solid #e0e0e0;
+  background-color: #e0e0e0;
   left: 0;
   right: 50%;
   margin-right: 2em;
@@ -62,15 +62,14 @@
   position: absolute;
   top: 16px;
   height: 1px;
-  border: 1px solid #E0E0E0;
-  background-color: #E0E0E0;
+  border: 1px solid #e0e0e0;
+  background-color: #e0e0e0;
   right: 0;
   left: 50%;
   margin-left: 2em;
 }
 
 .CompletedBar {
-  border: 1px solid #2BB673;
-  background-color: #2BB673;
+  border: 1px solid #2be4b5;
+  background-color: #2be4b5;
 }
-

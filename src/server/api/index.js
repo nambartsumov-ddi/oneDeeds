@@ -106,6 +106,21 @@ apiRouter.post('/charge-stripe', (req, res, next) => {
   });
 });
 
+apiRouter.post('/cancel-membership', (req, res, next) => {
+  const { user } = req.body;
+
+  // 1. query the user
+  User.findById(user._id).exec((err, existingUser) => {
+    if (err) return next(err);
+
+    if (!existingUser) {
+      return res.status(404).json({ err: 'We were unable to find a user.' });
+    }
+
+    debugger;
+  });
+});
+
 apiRouter.post('/webhooks/stripe/charge-failed/', (req, res, next) => {
   // charge.failed
   stripeInstance.events.retrieve(req.body.type, function(err, event) {

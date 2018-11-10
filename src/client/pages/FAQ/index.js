@@ -47,8 +47,8 @@ const FAQ = () => {
               <span>Q</span>: Do I need to pay to be a part of the OneDeeds community?
             </div>
             <div className={styles.Answer}>
-              <span>A</span>: It costs just $1 a month to be a part our community. A portion of that money gets donated
-              to a different charity every month – one more way we’re making the world a better place.
+              <span>A</span>: It costs just $1 a month to be a part of our community. A portion of that money gets
+              donated to a different charity every month – one more way we’re making the world a better place.
             </div>
             <div className={styles.Question}>
               <span>Q</span>: Can I suggest good deeds for the community?
@@ -69,7 +69,18 @@ const FAQ = () => {
             </div>
             <div className={styles.Answer}>
               <span>A</span>: The membership fee goes partly to donations and the rest to support our activity. If you
-              wish to stop paying simply …..
+              wish to stop paying simply do one out of the two following options:
+              <ol>
+                <li>
+                  Click on the tool bar on our site. Then click on {'"Cancel Membership"'}. If you {"don't"} have an
+                  option to click on {'"Cancel Membership"'} start the signup with the same email you signedup with, or
+                  use your facebook / Google account, then the option to {'"Cancel Membership"'} will appear.
+                </li>
+                <li>
+                  Send us an email to <a href="mailto:info@onedeeds.com">info@onedeeds.com</a> and we will cancel your
+                  membership for you.
+                </li>
+              </ol>
             </div>
           </div>
         </div>

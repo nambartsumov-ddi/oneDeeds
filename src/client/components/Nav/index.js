@@ -24,26 +24,51 @@ const Nav = ({ isOpen, user, closeNav, logout, setUser }) => {
     closeNav();
   };
 
+  const cancelMembershipHandler = () => {
+    debugger;
+  };
+
   const isUserSet = user ? !!Object.keys(user).length : false;
+
+  const isUsedPaid = user && user.isPaid;
 
   return (
     <aside className={navClasses}>
       <NavMenu />
       <NavFooter>
+        <div>
+          {isUserSet && (
+            <NavLink className={styles.Small} onClick={() => logoutHandler()} to={`/`}>
+              Restart Registration
+            </NavLink>
+          )}
+
+          {isUsedPaid && (
+            <NavLink className={styles.Small} onClick={() => cancelMembershipHandler()} to={`/`}>
+              Cancel Membership
+            </NavLink>
+          )}
+        </div>
         <div
           style={{
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
           }}>
-          <NavLink className={styles.Small} onClick={() => closeNav()} to={`/`}>
-            Legal Terms
-          </NavLink>
-          {isUserSet && (
-            <NavLink className={styles.Small} onClick={() => logoutHandler()} to={`/`}>
-              Logout
-            </NavLink>
-          )}
+          <a
+            className={styles.Small}
+            href="https://storage.googleapis.com/www.onedeeds.com/assets/Terms%20of%20Service.pdf"
+            target="_blank"
+            rel="noopener noreferrer">
+            Terms of Service
+          </a>
+          <a
+            className={styles.Small}
+            href="https://storage.googleapis.com/www.onedeeds.com/assets/Privacy%20Policy.pdf"
+            target="_blank"
+            rel="noopener noreferrer">
+            Privacy Policy
+          </a>
         </div>
       </NavFooter>
     </aside>

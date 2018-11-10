@@ -36,12 +36,36 @@ const Donations = () => {
               <p>Some of the charities we will support include:</p>
 
               <ul>
-                <li>The Nature Conservancy </li>
-                <li>World Wildlife Fund </li>
-                <li>Natural Resources Defense Council </li>
-                <li>UNICEF USA </li>
-                <li>Save the Children </li>
-                <li>ALSAC - St. Jude Children&#39;s Research Hospital </li>
+                <li>
+                  <a href="https://www.nature.org/en-us" rel="noopener noreferrer" target="_blank">
+                    The Nature Conservancy
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.worldwildlife.org" rel="noopener noreferrer" target="_blank">
+                    World Wildlife Fund
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.nrdc.org" rel="noopener noreferrer" target="_blank">
+                    Natural Resources Defense Council
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.unicefusa.org" rel="noopener noreferrer" target="_blank">
+                    UNICEF USA
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.savethechildren.org" rel="noopener noreferrer" target="_blank">
+                    Save the Children
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.stjude.org" rel="noopener noreferrer" target="_blank">
+                    ALSAC - St. Jude Children&#39;s Research Hospital
+                  </a>
+                </li>
               </ul>
 
               <p>
