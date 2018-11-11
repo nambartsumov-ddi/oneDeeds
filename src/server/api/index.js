@@ -3,7 +3,7 @@ import createDebug from 'debug';
 import { setCookie } from '../auth/jwt';
 import Stripe from 'stripe';
 import config from '../config';
-import { createCustomer, retrieveCustomer } from '../stripe';
+import { createCustomer, retrieveCustomer, retrieveCustomerAndCancelSubscription } from '../stripe';
 import User from '../api/resources/user/user.model';
 import { subscribeUserToList } from '../mailchimp';
 import { customerDeletedHook, subscriptionDeletedHook, chargeSuccessHook, chargeFailedHook } from './hooks';
@@ -44,7 +44,7 @@ const findAndUpdateUser = (res, userId, customerId, isVerified) => {
     }
 
     // 5. if isActive, insert email to mailchimp list
-    if (user.isActive) {
+    if (user.isActive || (user.isPaid && user.isVerified)) {
       subscribeUserToList(user);
     }
 
@@ -109,7 +109,6 @@ apiRouter.post('/charge-stripe', (req, res, next) => {
 apiRouter.post('/cancel-membership', (req, res, next) => {
   const { user } = req.body;
 
-  // 1. query the user
   User.findById(user._id).exec((err, existingUser) => {
     if (err) return next(err);
 
@@ -117,7 +116,18 @@ apiRouter.post('/cancel-membership', (req, res, next) => {
       return res.status(404).json({ err: 'We were unable to find a user.' });
     }
 
-    debugger;
+    retrieveCustomerAndCancelSubscription(existingUser.customerId, res)
+      .then((subscription) => {
+        if (!subscription) {
+          return;
+        }
+        debug('Subscription: ' + subscription.status);
+        res.send(`Subscription deleted for ${existingUser.customerId}`);
+      })
+      .catch(function(error) {
+        debug(error.message);
+        res.status(500).send({ error });
+      });
   });
 });
 

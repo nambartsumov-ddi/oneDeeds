@@ -9,7 +9,7 @@ sgMail.setApiKey(config.sendgridKey);
 const sendTransactionalEmail = (origin, accessToken, toEmail, toName) => {
   const emailOptions = {
     from: {
-      name: 'Asaf from oneDeeds',
+      name: 'oneDeeds',
       email: 'info@oneDeeds.com',
     },
     to: {

@@ -27,7 +27,8 @@ async function subscribeUserToList({ email, name }) {
     .then((response) => {
       // Error will be in response.errors[0].message
       if (response.errors.length) {
-        debug(response.errors[0].message);
+        debugger;
+        debug('error: ', response.errors[0].message);
         return;
       }
       debug('User successfuly added to mailchimp list');

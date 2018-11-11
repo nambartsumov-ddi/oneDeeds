@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { NavLink } from 'react-router-dom';
 
+import api from 'Api';
 import { closeNav, logout, setUser } from 'Actions';
 import NavMenu from './NavMenu';
 import NavFooter from './NavFooter';
@@ -25,7 +26,16 @@ const Nav = ({ isOpen, user, closeNav, logout, setUser }) => {
   };
 
   const cancelMembershipHandler = () => {
-    debugger;
+    api
+      .post('/cancel-membership', { user })
+      .then(() => {
+        logout();
+        setUser();
+        closeNav();
+      })
+      .catch((err) => {
+        console.log('Failed to cancel membership. Try again in a few minutes.', err);
+      });
   };
 
   const isUserSet = user ? !!Object.keys(user).length : false;
@@ -57,14 +67,14 @@ const Nav = ({ isOpen, user, closeNav, logout, setUser }) => {
           }}>
           <a
             className={styles.Small}
-            href="https://storage.googleapis.com/www.onedeeds.com/assets/Terms%20of%20Service.pdf"
+            href="https://www.onedeeds.com/toc02.pdf"
             target="_blank"
             rel="noopener noreferrer">
             Terms of Service
           </a>
           <a
             className={styles.Small}
-            href="https://storage.googleapis.com/www.onedeeds.com/assets/Privacy%20Policy.pdf"
+            href="https://www.onedeeds.com/pp02.pdf"
             target="_blank"
             rel="noopener noreferrer">
             Privacy Policy

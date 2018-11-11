@@ -25,6 +25,13 @@ const createSubscription = (customerId, customerEmail) => {
     });
 };
 
+const cancelSubscription = (subscriptionId) => {
+  return stripeInstance.subscriptions.del(subscriptionId).catch(function(error) {
+    debug(error);
+    res.status(402).json(error);
+  });
+};
+
 const createCustomer = (tokenId, userId, userEmail, res) => {
   return stripeInstance.customers
     .create({
@@ -58,4 +65,18 @@ const retrieveCustomer = (customerId, res) => {
     });
 };
 
-export { createCustomer, retrieveCustomer };
+const retrieveCustomerAndCancelSubscription = (customerId, res) => {
+  return stripeInstance.customers
+    .retrieve(customerId)
+    .then((customer) => {
+      debug('Customer retrieved!');
+      const subscriptionId = customer.subscriptions.data[0].id;
+      return cancelSubscription(subscriptionId, customer.email);
+    })
+    .catch(function(error) {
+      debug(error.message);
+      res.status(402).json(error);
+    });
+};
+
+export { createCustomer, retrieveCustomer, retrieveCustomerAndCancelSubscription };
