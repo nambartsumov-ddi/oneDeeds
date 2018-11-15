@@ -26,7 +26,7 @@ import styles from './Signup.module.scss';
 const stylesCtx = classNames.bind(styles);
 
 const isDevelopment = process.env.NODE_ENV === 'development';
-const basePath = isDevelopment ? '/api' : 'https://api.onedeeds.com';
+// const basePath = isDevelopment ? '/api' : 'https://api.onedeeds.com';
 
 const STRIPE_PK = isDevelopment ? 'pk_test_AdwNPNpOST5l9yBgSlFaxYrN' : 'pk_live_FU83OHIhCKAoRKmCSEvqiiT3';
 
@@ -175,8 +175,8 @@ class Signup extends Component {
   }
 
   render() {
-    const facebookClasses = stylesCtx(styles.Login, styles.Facebook);
-    const googleClasses = stylesCtx(styles.Login, styles.Google);
+    // const facebookClasses = stylesCtx(styles.Login, styles.Facebook);
+    // const googleClasses = stylesCtx(styles.Login, styles.Google);
 
     const resendEmailClasses = stylesCtx(styles.ResendVerificationButton, {
       [styles.DisableButton]: this.state.loading,
@@ -257,7 +257,7 @@ class Signup extends Component {
                     isParentLoading={this.state.loading}
                   />
                   {this.state.error && <span className={styles.InvalidText}>&raquo; {this.state.error}</span>}
-                  <span className={styles.Or}>or</span>
+                  {/* <span className={styles.Or}>or</span>
                   <div className={styles.SocialBtnWrapper}>
                     <a href={`${basePath}/auth/facebook`} className={facebookClasses}>
                       Continue with Facebook
@@ -265,9 +265,9 @@ class Signup extends Component {
                     <a href={`${basePath}/auth/google`} className={googleClasses}>
                       Continue with Google
                     </a>
-                  </div>
+                  </div>*/}
                 </div>
-                <span className={styles.ByContinueWith}>
+                {/* <span className={styles.ByContinueWith}>
                   By clicking &quot;Continue with&quot; above, you hereby accept our{' '}
                   <a href="https://www.onedeeds.com/toc02.pdf" target="_blank" rel="noopener noreferrer">
                     Terms of Service
@@ -278,7 +278,7 @@ class Signup extends Component {
                     Privacy Policy.
                   </a>
                 </span>
-                <span className={styles.NotShare}>* We&#39;ll never post anything without your permission.</span>
+                <span className={styles.NotShare}>* We&#39;ll never post anything without your permission.</span>*/}
               </div>
             )}
             {this.state.activeStep === 1 && (
