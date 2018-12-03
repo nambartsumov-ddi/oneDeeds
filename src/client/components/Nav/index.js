@@ -67,14 +67,14 @@ const Nav = ({ isOpen, user, closeNav, logout, setUser }) => {
           }}>
           <a
             className={styles.Small}
-            href="https://www.onedeeds.com/toc02.pdf"
+            href="https://www.onedeeds.com/toc03.pdf"
             target="_blank"
             rel="noopener noreferrer">
             Terms of Service
           </a>
           <a
             className={styles.Small}
-            href="https://www.onedeeds.com/pp02.pdf"
+            href="https://www.onedeeds.com/pp03.pdf"
             target="_blank"
             rel="noopener noreferrer">
             Privacy Policy

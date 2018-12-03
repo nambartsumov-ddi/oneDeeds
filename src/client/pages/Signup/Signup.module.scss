@@ -182,6 +182,30 @@
   }
 }
 
+.PromoVideo {
+  margin: 0 auto;
+  display: block;
+  width: 100%;
+  max-width: 640px;
+  height: 210px;
+}
+
+.SecurityInfo {
+  text-align: center;
+  font-size: 0.9rem;
+  color: gray;
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 20px;
+
+  a {
+    display: block;
+  }
+  img {
+    width: 170px;
+  }
+}
+
 .ByContinueWith {
   width: 290px;
   margin: 10px auto;
@@ -210,6 +234,31 @@
 }
 
 @media (min-width: $lg) {
+  .PromoVideo {
+    margin: 0 auto;
+    display: block;
+    width: 100%;
+    max-width: 640px;
+    height: 360px;
+  }
+
+  .SecurityInfo {
+    text-align: center;
+    font-size: 0.9rem;
+    color: gray;
+    width: 90%;
+    max-width: 450px;
+    margin: 0 auto;
+    margin-top: 20px;
+
+    a {
+      display: block;
+    }
+    img {
+      width: 170px;
+    }
+  }
+
   .Container {
     max-width: 980px;
     padding-top: 110px;

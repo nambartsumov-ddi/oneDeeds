@@ -45,6 +45,16 @@
     }
   }
 
+  .Donated {
+    font-size: 1.5rem;
+    margin-bottom: 0;
+  }
+  .BottomLineCharities {
+    width: 290px;
+    height: 2px;
+    background: black;
+    margin-top: 0.3em;
+  }
   .DonationsImg {
     background-image: url('Images/donations.jpg');
     background-size: cover;

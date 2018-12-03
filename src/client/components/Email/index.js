@@ -200,11 +200,11 @@ class Email extends Component {
 
             <span className={styles.TermsText}>
               I have read our{' '}
-              <a href="https://www.onedeeds.com/toc02.pdf" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.onedeeds.com/toc03.pdf" target="_blank" rel="noopener noreferrer">
                 Terms of Service
               </a>{' '}
               and{' '}
-              <a href="https://www.onedeeds.com/pp02.pdf" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.onedeeds.com/pp03.pdf" target="_blank" rel="noopener noreferrer">
                 {' '}
                 Privacy Policy
               </a>

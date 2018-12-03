@@ -8,6 +8,7 @@ import { parse } from 'cookie';
 import { decode } from 'jsonwebtoken';
 import { StripeProvider, Elements } from 'react-stripe-elements';
 import ReactLoading from 'react-loading';
+import YouTube from 'react-youtube';
 
 import api from 'Api';
 import Layout from 'Components/Layout';
@@ -19,6 +20,7 @@ import StripeCheckout from 'Components/StripeCheckout';
 import { trackSubscribedEvent, trackPaidEvent, trackVerifiedEvent } from 'Containers/App/analytics';
 
 import completedStepsImg from 'Images/hands-half2.jpg';
+import stripeSecure from 'Assets/Icons/stripe-security.png';
 
 import styles from './Signup.module.scss';
 
@@ -269,11 +271,11 @@ class Signup extends Component {
                 </div>
                 {/* <span className={styles.ByContinueWith}>
                   By clicking &quot;Continue with&quot; above, you hereby accept our{' '}
-                  <a href="https://www.onedeeds.com/toc02.pdf" target="_blank" rel="noopener noreferrer">
+                  <a href="https://www.onedeeds.com/toc03.pdf" target="_blank" rel="noopener noreferrer">
                     Terms of Service
                   </a>{' '}
                   and
-                  <a href="https://www.onedeeds.com/pp02.pdf" target="_blank" rel="noopener noreferrer">
+                  <a href="https://www.onedeeds.com/pp03.pdf" target="_blank" rel="noopener noreferrer">
                     {' '}
                     Privacy Policy.
                   </a>
@@ -282,15 +284,29 @@ class Signup extends Component {
               </div>
             )}
             {this.state.activeStep === 1 && (
-              <StripeProvider apiKey={STRIPE_PK}>
-                <Elements>
-                  <StripeCheckout
-                    donate={(stripe) => this.donate(stripe)}
-                    isParentLoading={this.state.loading}
-                    cardError={this.state.error}
-                  />
-                </Elements>
-              </StripeProvider>
+              <div>
+                <StripeProvider apiKey={STRIPE_PK}>
+                  <Elements>
+                    <StripeCheckout
+                      donate={(stripe) => this.donate(stripe)}
+                      isParentLoading={this.state.loading}
+                      cardError={this.state.error}
+                    />
+                  </Elements>
+                </StripeProvider>
+                <YouTube
+                  className={styles.PromoVideo}
+                  videoId="FZw5UP3Nrj8"
+                  opts={{
+                    playerVars: {
+                      autoplay: 1,
+                      showinfo: 0,
+                      color: 'white',
+                      origin: window.location.protocol + '//' + window.location.host,
+                    },
+                  }}
+                />
+              </div>
             )}
             {this.state.activeStep === 2 && (
               <div className={styles.ResendEmailContainer}>
@@ -321,6 +337,20 @@ class Signup extends Component {
             {this.state.activeStep === 3 && (
               <img src={completedStepsImg} style={{ width: '100%', height: 'auto', maxHeight: '600px' }} />
             )}
+
+            <div className={styles.SecurityInfo}>
+              <div>
+                * Remember, at any point you can unsubscribe and easily cancel your membership. See FAQ page for more
+                information.
+              </div>
+              <div>
+                OneDeeds is committed to the safety of your payment information. We work with the #1 payment service
+                provider in the world: &nbsp;
+              </div>
+              <a href="https://www.stripe.com" rel="noopener noreferrer" target="_blank">
+                <img src={stripeSecure} alt="stripe" />
+              </a>
+            </div>
           </div>
         </Layout>
       </div>

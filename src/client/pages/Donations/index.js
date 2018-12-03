@@ -73,6 +73,17 @@ const Donations = () => {
                 to donate to. Information on the monthly donation will be shared in an email to each of our community
                 members.
               </p>
+
+              <h3 className={styles.Donated}>Charities We Donated So Far :</h3>
+              <div className={styles.BottomLineCharities} />
+              <ul>
+                <li>
+                  Nov-2018 - &nbsp;
+                  <a href="https://www.onedeeds.com/redcross-donation.jpg" rel="noopener noreferrer" target="_blank">
+                    The American Red Cross for the victims of California wildfires
+                  </a>
+                </li>
+              </ul>
               <SignupCallToAction />
             </div>
             <div className={styles.DonationsImg} />

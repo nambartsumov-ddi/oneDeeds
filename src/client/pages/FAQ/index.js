@@ -64,6 +64,36 @@ const FAQ = () => {
               unsubscribe link at the button of the mails we send you). You can also send us a request to
               info@onedeeds.com and we will handle it.
             </div>
+            <div>
+              <span>Q</span>: Is my payment information secured?
+            </div>
+            <div className={styles.Answer}>
+              <span>A</span>: Absolutely, We work with a 3rd party payment system, Stripe. Stripe holds the highest
+              level of online payment security. For more information please visit{' '}
+              <a href="https://www.stripe.com" rel="noopener noreferrer" target="_blank">
+                Stripe
+              </a>
+              .
+            </div>
+            <div>
+              <span>Q</span>: You haven&#39;t received my monthly deeds or summery email?
+            </div>
+            <div className={styles.Answer}>
+              <span>A</span>: We send out the list of the monthly deeds with an email at the beginning of every month or
+              on the same day you signed up. The Summery email is sent at the end of each month. If you have not
+              received the deeds or summery email please look for it under promotions, junk or others.
+            </div>
+
+            <div>
+              <span>Q</span>: What should I look for after becoming a member?
+            </div>
+            <div className={styles.Answer}>
+              <span>A</span>: After becoming a member you should get a verification and welcome email. Each member will
+              receive a list of deeds in the monthly deed email that is sent on the same day of signing up or at the
+              begining of each month. At the end of each month each member will also receive a summery email of the
+              community&#39;s achievements.
+            </div>
+
             <div className={styles.Question}>
               <span>Q</span>: How can I stop paying the membership fee?
             </div>
@@ -73,8 +103,8 @@ const FAQ = () => {
               <ol>
                 <li>
                   Click on the tool bar on our site. Then click on {'"Cancel Membership"'}. If you {"don't"} have an
-                  option to click on {'"Cancel Membership"'} start the signup with the same email you signedup with, or
-                  use your facebook / Google account, then the option to {'"Cancel Membership"'} will appear.
+                  option to click on {'"Cancel Membership"'} start the signup with the same email you signed-up with,
+                  then the option to {'"Cancel Membership"'} will appear.
                 </li>
                 <li>
                   Send us an email to <a href="mailto:info@onedeeds.com">info@onedeeds.com</a> and we will cancel your
