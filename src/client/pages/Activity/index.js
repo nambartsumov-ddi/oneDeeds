@@ -52,7 +52,9 @@ const Activity = () => {
                 Good deeds is only part of what we do, OneDeeds also donates money to a different charity each month.
               </p>
 
-              <p>The list of charities are listed on our site.</p>
+              <a href={`/Donations`} rel="noopener noreferrer">
+                The list of charities are listed on our site.
+              </a>
               <SignupCallToAction />
             </div>
             <div className={styles.ActivityImg} />

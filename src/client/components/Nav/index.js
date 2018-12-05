@@ -1,6 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+// import Modal from 'react-responsive-modal';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { NavLink } from 'react-router-dom';
@@ -19,13 +20,28 @@ const Nav = ({ isOpen, user, closeNav, logout, setUser }) => {
     [styles.navOpen]: isOpen,
   });
 
-  const logoutHandler = () => {
-    logout();
-    setUser();
-    closeNav();
-  };
+  // const logoutHandler = () => {
+  //   logout();
+  //   setUser();
+  //   closeNav();
+  // };
+
+  // state = {
+  //   openCancelPopup: false,
+  // };
+
+  // onOpenModal = () => {
+  //   setState({ openCancelPopup: true });
+  // };
+
+  // onCloseModal = () => {
+  //   setState({ openCancelPopup: false });
+  // };
 
   const cancelMembershipHandler = () => {
+    // <Modal open={openCancelPopup} onClose={onCloseModal} center>
+    //   <h2>Are you sure?</h2>
+    // </Modal>;
     api
       .post('/cancel-membership', { user })
       .then(() => {
@@ -38,7 +54,7 @@ const Nav = ({ isOpen, user, closeNav, logout, setUser }) => {
       });
   };
 
-  const isUserSet = user ? !!Object.keys(user).length : false;
+  // const isUserSet = user ? !!Object.keys(user).length : false;
 
   const isUsedPaid = user && user.isPaid;
 
@@ -47,11 +63,11 @@ const Nav = ({ isOpen, user, closeNav, logout, setUser }) => {
       <NavMenu />
       <NavFooter>
         <div>
-          {isUserSet && (
+          {/* {isUserSet && (
             <NavLink className={styles.Small} onClick={() => logoutHandler()} to={`/`}>
               Restart Registration
             </NavLink>
-          )}
+          )} */}
 
           {isUsedPaid && (
             <NavLink className={styles.Small} onClick={() => cancelMembershipHandler()} to={`/`}>
