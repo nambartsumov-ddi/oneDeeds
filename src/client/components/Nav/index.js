@@ -91,13 +91,17 @@ class Nav extends Component {
         <Modal open={this.state.openCancelPopup} onClose={() => this.onCloseModal()} center>
           <div className={styles.ModalContentWrapper}>
             <h2 className={styles.PopupQuestion}>Are you sure?</h2>
+            <p className={styles.PopupDescription}>
+              By cancelling membership you will no longer be charged $1 a month for being a part of OneDeeds community.
+              Keep doing good deeds anyway!
+            </p>
             <div className={styles.PopupBtnWrapper}>
-              <NavLink className={styles.PopupBtn} onClick={() => this.cancelMembershipHandler()} to={`/`}>
+              <a className={styles.PopupBtn} onClick={() => this.cancelMembershipHandler()}>
                 Ok
-              </NavLink>
-              <button className={styles.PopupBtn} onClick={() => this.onCloseModal()}>
+              </a>
+              <a className={styles.PopupBtn} onClick={() => this.onCloseModal()}>
                 Cancel
-              </button>
+              </a>
             </div>
           </div>
         </Modal>
