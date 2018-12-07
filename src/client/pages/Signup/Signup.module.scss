@@ -233,6 +233,55 @@
   }
 }
 
+.SocialMediaWrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.SocialIcons {
+  text-align: center;
+  margin: 1.2em 0;
+}
+
+.Icon {
+  display: inline-block;
+  width: 2em;
+  height: 2em;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+  margin: 0 0.4rem;
+  cursor: pointer;
+
+  &.Facebook {
+    color: #3b5999;
+  }
+
+  &.Twitter {
+    color: #55acee;
+    width: 2.2em;
+  }
+
+  &.Instagram {
+    color: #e4405f;
+  }
+
+  &.Medium {
+    color: #02b875;
+  }
+}
+
+.Restart {
+  margin: 1.5em 0;
+  text-align: center;
+}
+
+.RestartLink {
+  color: gray;
+  font-size: 0.8rem;
+}
+
 @media (min-width: $lg) {
   .PromoVideo {
     margin: 0 auto;
@@ -288,5 +337,45 @@
 
   .Signup .Or {
     margin: 1.5em 0;
+  }
+
+  .Icon {
+    &.Facebook {
+      color: #686666;
+
+      :hover {
+        color: #3b5999;
+      }
+    }
+
+    &.Twitter {
+      color: #686666;
+
+      :hover {
+        color: #55acee;
+      }
+    }
+
+    &.Instagram {
+      color: #686666;
+
+      :hover {
+        color: #e4405f;
+      }
+    }
+
+    &.Medium {
+      color: #686666;
+
+      :hover {
+        color: #02b875;
+      }
+    }
+  }
+
+  .Restart {
+    &:hover {
+      opacity: 0.8;
+    }
   }
 }

@@ -19,7 +19,7 @@ const SignupCallToAction = ({ className, page }) => {
   return (
     <div className={signupClasses}>
       <Link to={'/signup'} className={styles.LinkToSignUp}>
-        Join us now
+        Join Us Now
       </Link>
     </div>
   );

@@ -76,7 +76,7 @@ const FAQ = () => {
               .
             </div>
             <div>
-              <span>Q</span>: You haven&#39;t received my monthly deeds or summery email?
+              <span>Q</span>: You haven&#39;t received your monthly deeds or summery email?
             </div>
             <div className={styles.Answer}>
               <span>A</span>: We send out the list of the monthly deeds with an email at the beginning of every month or

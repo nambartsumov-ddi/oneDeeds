@@ -173,7 +173,7 @@ class Home extends Component {
               }
               /* imageSrc={handHalf}*/
               className={styles.OurCommunityPanel}>
-              <LayoutButton text="Help us make a change" />
+              <LayoutButton text="Help Us Make A Change" />
             </Panel>
             {/* ref div for scrolling */}
             <div style={{ visibility: 'hidden' }} ref={(section) => (this.SecondSectionRef = section)} />
