@@ -277,6 +277,11 @@
   text-align: center;
 }
 
+.RestartLink {
+  color: gray;
+  font-size: 0.8rem;
+}
+
 @media (min-width: $lg) {
   .PromoVideo {
     margin: 0 auto;
@@ -365,6 +370,12 @@
       :hover {
         color: #02b875;
       }
+    }
+  }
+
+  .Restart {
+    &:hover {
+      opacity: 0.8;
     }
   }
 }

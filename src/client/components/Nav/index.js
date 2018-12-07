@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-// import Modal from 'react-responsive-modal';
+import Modal from 'react-responsive-modal';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { NavLink } from 'react-router-dom';
@@ -15,33 +15,25 @@ import styles from './Nav.module.scss';
 // Because we use css-modules we need to bind styles to classNames utilities
 const stylesCtx = classNames.bind(styles);
 
-const Nav = ({ isOpen, user, closeNav, logout, setUser }) => {
-  const navClasses = stylesCtx(styles.Nav, {
-    [styles.navOpen]: isOpen,
-  });
+class Nav extends Component {
+  constructor(props) {
+    super(props);
 
-  // const logoutHandler = () => {
-  //   logout();
-  //   setUser();
-  //   closeNav();
-  // };
+    this.state = {
+      openCancelPopup: false,
+    };
+  }
 
-  // state = {
-  //   openCancelPopup: false,
-  // };
+  onOpenModal() {
+    this.setState({ openCancelPopup: true });
+  }
 
-  // onOpenModal = () => {
-  //   setState({ openCancelPopup: true });
-  // };
+  onCloseModal() {
+    this.setState({ openCancelPopup: false });
+  }
 
-  // onCloseModal = () => {
-  //   setState({ openCancelPopup: false });
-  // };
-
-  const cancelMembershipHandler = () => {
-    // <Modal open={openCancelPopup} onClose={onCloseModal} center>
-    //   <h2>Are you sure?</h2>
-    // </Modal>;
+  cancelMembershipHandler() {
+    const { user } = this.props;
     api
       .post('/cancel-membership', { user })
       .then(() => {
@@ -52,54 +44,67 @@ const Nav = ({ isOpen, user, closeNav, logout, setUser }) => {
       .catch((err) => {
         console.log('Failed to cancel membership. Try again in a few minutes.', err);
       });
-  };
 
-  // const isUserSet = user ? !!Object.keys(user).length : false;
+    this.onCloseModal();
+  }
 
-  const isUsedPaid = user && user.isPaid;
+  render() {
+    const navClasses = stylesCtx(styles.Nav, {
+      [styles.navOpen]: this.props.isOpen,
+    });
 
-  return (
-    <aside className={navClasses}>
-      <NavMenu />
-      <NavFooter>
-        <div>
-          {/* {isUserSet && (
-            <NavLink className={styles.Small} onClick={() => logoutHandler()} to={`/`}>
-              Restart Registration
-            </NavLink>
-          )} */}
+    const isUsedPaid = this.props.user && this.props.user.isPaid;
 
-          {isUsedPaid && (
-            <NavLink className={styles.Small} onClick={() => cancelMembershipHandler()} to={`/`}>
-              Cancel Membership
-            </NavLink>
-          )}
-        </div>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}>
-          <a
-            className={styles.Small}
-            href="https://www.onedeeds.com/toc03.pdf"
-            target="_blank"
-            rel="noopener noreferrer">
-            Terms of Service
-          </a>
-          <a
-            className={styles.Small}
-            href="https://www.onedeeds.com/pp03.pdf"
-            target="_blank"
-            rel="noopener noreferrer">
-            Privacy Policy
-          </a>
-        </div>
-      </NavFooter>
-    </aside>
-  );
-};
+    return (
+      <aside className={navClasses}>
+        <NavMenu />
+        <NavFooter>
+          <div>
+            {isUsedPaid && (
+              <div className={styles.Small} onClick={this.onOpenModal.bind(this)}>
+                Cancel Membership
+              </div>
+            )}
+          </div>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}>
+            <a
+              className={styles.Small}
+              href="https://www.onedeeds.com/toc03.pdf"
+              target="_blank"
+              rel="noopener noreferrer">
+              Terms of Service
+            </a>
+            <a
+              className={styles.Small}
+              href="https://www.onedeeds.com/pp03.pdf"
+              target="_blank"
+              rel="noopener noreferrer">
+              Privacy Policy
+            </a>
+          </div>
+        </NavFooter>
+        <Modal open={this.state.openCancelPopup} onClose={() => this.onCloseModal()} center>
+          <div className={styles.ModalContentWrapper}>
+            <h2 className={styles.PopupQuestion}>Are you sure?</h2>
+            <div className={styles.PopupBtnWrapper}>
+              <NavLink className={styles.PopupBtn} onClick={() => this.cancelMembershipHandler()} to={`/`}>
+                Ok
+              </NavLink>
+              <button className={styles.PopupBtn} onClick={() => this.onCloseModal()}>
+                Cancel
+              </button>
+            </div>
+          </div>
+        </Modal>
+      </aside>
+    );
+  }
+}
 
 Nav.propTypes = {
   isOpen: PropTypes.bool,

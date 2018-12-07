@@ -320,7 +320,11 @@ class Signup extends Component {
                 />
                 <div className={styles.Restart}>
                   {isUserSet && (
-                    <a className={styles.Small} onClick={() => logoutHandler()} href={`/`} rel="noopener noreferrer">
+                    <a
+                      className={styles.RestartLink}
+                      onClick={() => logoutHandler()}
+                      href={`/`}
+                      rel="noopener noreferrer">
                       Restart Registration
                     </a>
                   )}
@@ -353,7 +357,11 @@ class Signup extends Component {
                 </button>
                 <div className={styles.Restart}>
                   {isUserSet && (
-                    <a className={styles.Small} onClick={() => logoutHandler()} href={`/`} rel="noopener noreferrer">
+                    <a
+                      className={styles.RestartLink}
+                      onClick={() => logoutHandler()}
+                      href={`/`}
+                      rel="noopener noreferrer">
                       Restart Registration
                     </a>
                   )}
@@ -391,7 +399,11 @@ class Signup extends Component {
                 <img src={completedStepsImg} style={{ width: '100%', height: 'auto', maxHeight: '600px' }} />
                 <div className={styles.Restart}>
                   {isUserSet && (
-                    <a className={styles.Small} onClick={() => logoutHandler()} href={`/`} rel="noopener noreferrer">
+                    <a
+                      className={styles.RestartLink}
+                      onClick={() => logoutHandler()}
+                      href={`/`}
+                      rel="noopener noreferrer">
                       Restart Registration
                     </a>
                   )}

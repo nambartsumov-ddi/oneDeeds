@@ -30,6 +30,7 @@
   padding: 0;
   text-decoration: none;
   font-weight: 600;
+  cursor: pointer;
 
   &:hover {
     color: $menu-links-hover;
@@ -41,6 +42,39 @@
   text-decoration: none;
 }
 
+.PopupQuestion {
+  color: black;
+  margin: 0 40px 20px 40px;
+}
+
+.PopupBtnWrapper {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.PopupBtn {
+  text-decoration: none;
+  background: #ff5a60;
+  padding: 5px;
+  border-radius: 2em;
+  color: white;
+  border: none;
+  width: 70px;
+  text-align: center;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.ModalContentWrapper {
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
 @media (min-width: $lg) {
   .Nav {
     width: $nav-width;
@@ -50,6 +84,12 @@
     &.navOpen {
       transform: translateX(-$nav-width);
       padding: 2.5rem 4.5rem;
+    }
+  }
+
+  .PopupBtn {
+    &:hover {
+      opacity: 0.8;
     }
   }
 }
