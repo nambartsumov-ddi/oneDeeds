@@ -10,7 +10,7 @@ const trackPageView = (location) => {
 };
 
 const initGa = (history) => {
-  ReactGA.initialize('UA-128243276-1', {
+  ReactGA.initialize('UA-126268381-1', {
     debug,
   });
   if (debug) {
