@@ -78,9 +78,26 @@ const Donations = () => {
               <div className={styles.BottomLineCharities} />
               <ul>
                 <li>
+                  Dec-2018 - &nbsp;
+                  <a href="https://www.savethechildren.org/" rel="noopener noreferrer" target="_blank">
+                    Save the Children
+                  </a>
+                  &nbsp; - &nbsp;
+                  <a
+                    href="https://www.onedeeds.com/save-the-children-donation.jpeg"
+                    rel="noopener noreferrer"
+                    target="_blank">
+                    Reciept
+                  </a>
+                </li>
+                <li>
                   Nov-2018 - &nbsp;
-                  <a href="https://www.onedeeds.com/redcross-donation.jpg" rel="noopener noreferrer" target="_blank">
+                  <a href="https://www.redcross.org" rel="noopener noreferrer" target="_blank">
                     The American Red Cross for the victims of California wildfires
+                  </a>
+                  &nbsp; - &nbsp;
+                  <a href="https://www.onedeeds.com/redcross-donation.jpg" rel="noopener noreferrer" target="_blank">
+                    Reciept
                   </a>
                 </li>
               </ul>
