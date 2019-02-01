@@ -84,7 +84,7 @@ const Donations = () => {
                   </a>
                   &nbsp; - &nbsp;
                   <a
-                    href="https://www.onedeeds.com/worldwildlife-reciept.jpeg"
+                    href="https://storage.googleapis.com/www.onedeeds.com/worldwildlife-reciept.jpeg"
                     rel="noopener noreferrer"
                     target="_blank">
                     Reciept
@@ -97,7 +97,7 @@ const Donations = () => {
                   </a>
                   &nbsp; - &nbsp;
                   <a
-                    href="https://www.onedeeds.com/save-the-children-donation.jpeg"
+                    href="https://storage.googleapis.com/www.onedeeds.com/save-the-children-donation.jpeg"
                     rel="noopener noreferrer"
                     target="_blank">
                     Reciept
@@ -109,7 +109,10 @@ const Donations = () => {
                     The American Red Cross for the victims of California wildfires
                   </a>
                   &nbsp; - &nbsp;
-                  <a href="https://www.onedeeds.com/redcross-donation.jpg" rel="noopener noreferrer" target="_blank">
+                  <a
+                    href="https://storage.googleapis.com/www.onedeeds.com/redcross-donation.jpg"
+                    rel="noopener noreferrer"
+                    target="_blank">
                     Reciept
                   </a>
                 </li>
