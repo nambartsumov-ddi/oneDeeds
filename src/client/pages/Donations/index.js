@@ -78,6 +78,19 @@ const Donations = () => {
               <div className={styles.BottomLineCharities} />
               <ul>
                 <li>
+                  Jan-2019 - &nbsp;
+                  <a href="https://www.worldwildlife.org/" rel="noopener noreferrer" target="_blank">
+                    World Wildlife Fund
+                  </a>
+                  &nbsp; - &nbsp;
+                  <a
+                    href="https://www.onedeeds.com/worldwildlife-reciept.jpeg"
+                    rel="noopener noreferrer"
+                    target="_blank">
+                    Reciept
+                  </a>
+                </li>
+                <li>
                   Dec-2018 - &nbsp;
                   <a href="https://www.savethechildren.org/" rel="noopener noreferrer" target="_blank">
                     Save the Children

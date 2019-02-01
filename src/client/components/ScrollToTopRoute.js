@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class ScrollToTopRoute extends Component {
   componentDidUpdate(prevProps) {
@@ -17,5 +18,13 @@ class ScrollToTopRoute extends Component {
     return <Route {...rest} render={(props) => <Component {...props} />} />;
   }
 }
+
+ScrollToTopRoute.propTypes = {
+  path: PropTypes.any,
+  location: PropTypes.shape({
+    pathname: PropTypes.any,
+  }),
+  component: PropTypes.any,
+};
 
 export default withRouter(ScrollToTopRoute);

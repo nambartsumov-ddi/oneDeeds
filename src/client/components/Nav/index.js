@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import Modal from 'react-responsive-modal';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { NavLink } from 'react-router-dom';
 
 import api from 'Api';
 import { closeNav, logout, setUser } from 'Actions';
