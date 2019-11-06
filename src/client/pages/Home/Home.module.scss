@@ -1,4 +1,4 @@
-@import '../../styles/variables';
+@import "../../styles/variables";
 
 .Home {
   height: 100vh;
@@ -52,6 +52,10 @@
   background-color: #eaeaea;
 }
 
+.GoodsPanel {
+  background-color: orange;
+}
+
 .ThirdPanelDesc {
   text-align: left;
   line-height: 1.5em;
@@ -60,6 +64,10 @@
     // list-style-type: decimal;
     list-style: square inside;
   }
+}
+
+.Goods {
+  display: flex;
 }
 
 @media (min-width: $lg) {

@@ -4,7 +4,7 @@ import { PropTypes } from 'prop-types';
 
 import Step from './Step';
 import styles from './Stepper.module.scss';
-import svgIconSuccess from 'Assets/icons/green-succes.svg';
+import svgIconSuccess from 'assets/icons/green-succes.svg';
 
 // Because we use css-modules we need to bind styles to classNames utilities
 const stylesCtx = classNames.bind(styles);

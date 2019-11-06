@@ -20,7 +20,7 @@ import StripeCheckout from 'Components/StripeCheckout';
 import { trackSubscribedEvent, trackPaidEvent, trackVerifiedEvent } from 'Containers/App/analytics';
 
 import completedStepsImg from 'Images/hands-half2.jpg';
-import stripeSecure from 'Assets/Icons/stripe-security.png';
+import stripeSecure from 'assets/icons/stripe-security.png';
 
 import styles from './Signup.module.scss';
 

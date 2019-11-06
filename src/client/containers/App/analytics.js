@@ -41,6 +41,13 @@ const trackVerifiedEvent = () => {
   });
 };
 
+const trackActivatedEvent = () => {
+  ReactGA.event({
+    category: 'User',
+    action: 'Activated',
+  });
+};
+
 export {
   initGa as default,
   trackPageView,

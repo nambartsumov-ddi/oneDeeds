@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import styles from './Logo.module.scss';
-import LogoSrc from 'Assets/Logo_transparent.png';
+import LogoSrc from 'assets/Logo_transparent.png';
 
 const Logo = ({ closeNav }) => {
   return (

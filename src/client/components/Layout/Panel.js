@@ -13,6 +13,8 @@ const Panel = ({ size, title, description, imageSrc, id, goTo, history, classNam
   const panelClasses = stylesCtx(styles.Panel, {
     [styles.Full]: size === 'Full',
     [styles.Half]: size === 'Half',
+    [styles.Third]: size === 'Third',
+    [styles.TwoThirds]: size === 'TwoThirds',
     [styles.WithDesc]: description !== undefined,
   });
 
