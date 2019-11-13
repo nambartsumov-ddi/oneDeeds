@@ -5,6 +5,8 @@ $md: 768px;
 $lg: 992px;
 $xl: 1200px;
 
+$lg-height: 800px;
+
 // Layout
 $nav-width: 34rem;
 
@@ -15,6 +17,10 @@ $leftLayoutBackground: #eec8b9;
 $rightBottomLayoutBackground: #e9b69f;
 $rightHalfTopLayoutBackground: #000;
 $LayoutButtonOnHover: #ff646a;
+// $CharityPrimaryColor: #00bf46;
+// $CharityTextColor: #1c7323;
+$CharityPrimaryColor: #444;
+$CharityTextColor: #444;
 
 // z-index
 $overlay-zindex: 15;

@@ -1,4 +1,4 @@
-@import '../../styles/variables';
+@import "../../styles/variables";
 
 .Panel {
   display: flex;
@@ -13,13 +13,15 @@
 .ImgPanel {
   background-size: cover;
   background-repeat: no-repeat;
-  width: 100%;
+  background-position: 0 40%;
+  width: 100vw;
   height: 100%;
 
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .Full {
@@ -28,25 +30,25 @@
 }
 
 .Half {
-  width: 100%;
-  height: 50vh;
+  width: 100vw;
+  height: 200vh;
 }
 
 .Third {
   width: 100%;
-  height: 33.33333333vh;
+  height: 100vh;
 }
 
 .TwoThirds {
   width: 100%;
-  height: 66.66666667vh;
+  height: 100vh;
 }
 
 .Title {
   font-size: 1.9rem;
   letter-spacing: -1px;
   line-height: 1.235;
-  color: #fff;
+  color: inherit;
   margin: 0 10px 25px 10px;
   font-weight: 700;
   text-align: center;
@@ -65,7 +67,31 @@
   }
 }
 
-@media (min-width: $lg) {
+@media (min-width: $lg) and(min-height: 800px) {
+  .ImgPanel {
+    width: 50vw;
+  }
+
+  .Full {
+    height: 100vh;
+    position: relative;
+  }
+
+  .Half {
+    width: 50vw;
+    height: 100vh;
+  }
+
+  .Third {
+    width: 100%;
+    height: 33.33333333vh;
+  }
+
+  .TwoThirds {
+    width: 100%;
+    height: 66.66666667vh;
+  }
+
   .Panel {
     cursor: pointer;
   }
@@ -96,6 +122,15 @@
   .Half:focus {
     outline-width: 0;
   }
+
+  .Half:hover .CharityPanel button,
+  .Half:focus .CharityPanel button {
+    transition: background 0.3s ease-in, border 0.3s ease-out, transform 0.1s cubic-bezier(0.91, 0.8, 0.54, 1);
+    background: $CharityPrimaryColor;
+    color: white;
+    border-color: transparent;
+  }
+
   .Half:hover button,
   .Half:focus button {
     transition: background 0.3s ease-in, border 0.3s ease-out, transform 0.1s cubic-bezier(0.91, 0.8, 0.54, 1);
