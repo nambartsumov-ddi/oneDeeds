@@ -23,6 +23,10 @@ const Panel = ({ size, title, description, imageSrc, id, goTo, history, classNam
     [className]: className,
   });
 
+  const fullImgPanelClasses = stylesCtx(styles.ImgPanelFull, {
+    [className]: className,
+  });
+
   const IsPlaceHolderPanel = () => {
     if (!title && !description) {
       return null;
@@ -58,7 +62,7 @@ const Panel = ({ size, title, description, imageSrc, id, goTo, history, classNam
       onClick={() => onClick(goTo)}
       style={isMobile() ? null : style}>
       <div
-        className={imgPanelClasses}
+        className={size === 'Full' ? fullImgPanelClasses : imgPanelClasses}
         style={{
           backgroundImage: imageSrc ? `url(${imageSrc})` : null,
         }}>

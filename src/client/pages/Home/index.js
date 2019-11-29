@@ -148,64 +148,10 @@ class Home extends Component {
               size="Half"
               title="JFCS &amp; OneDeeds"
               description="We at OneDeeds are starting a new and exciting collaboration with JFCS. Our online community will donate food and we will send it directly to JFCS and help combat hunger."
-              goTo="https://www.jfcs.org/"
+              goTo={'/jfcs'}
               className={styles.CharityPanel}
               type="Charity">
               <LayoutButton text="For more information click Here" type="Charity" />
-              <div className={styles.Charity}>
-                <div className={styles.CharityRow}>
-                  <iframe
-                    style={{ width: '120px', height: '240px' }}
-                    marginWidth={0}
-                    marginHeight={0}
-                    scrolling="no"
-                    frameBorder={0}
-                    src="//ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=US&source=ac&ref=tf_til&ad_type=product_link&tracking_id=onedeeds-20&marketplace=amazon&region=US&placement=B071FYV3WL&asins=B071FYV3WL&linkId=75710dbf7e62fef88263e969e347c9a6&show_border=false&link_opens_in_new_window=false&price_color=333333&title_color=00bf46&byg_color=ffffff"
-                  />
-                  <iframe
-                    style={{ width: '120px', height: '240px' }}
-                    marginWidth={0}
-                    marginHeight={0}
-                    scrolling="no"
-                    frameBorder={0}
-                    src="//ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=US&source=ac&ref=tf_til&ad_type=product_link&tracking_id=onedeeds-20&marketplace=amazon&region=US&placement=B07ND5HHYT&asins=B07ND5HHYT&linkId=f014b560f98a1045ab84333f7e7433e4&show_border=false&link_opens_in_new_window=false&price_color=333333&title_color=00bf46&bg_color=ffffff"
-                  />
-                  <iframe
-                    style={{ width: '120px', height: '240px' }}
-                    marginWidth={0}
-                    marginHeight={0}
-                    scrolling="no"
-                    frameBorder={0}
-                    src="//ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=US&source=ac&ref=tf_til&ad_type=product_link&tracking_id=onedeeds-20&marketplace=amazon&region=US&placement=B000FK7G16&asins=B000FK7G16&linkId=c4aa2736403571483c9b7bbad74d4ffb&show_border=false&link_opens_in_new_window=false&price_color=333333&title_color=00bf46&bg_color=ffffff"
-                  />
-                </div>
-                <div className={styles.CharityRow}>
-                  <iframe
-                    style={{ width: '120px', height: '240px' }}
-                    marginWidth={0}
-                    marginHeight={0}
-                    scrolling="no"
-                    frameBorder={0}
-                    src="//ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=US&source=ac&ref=tf_til&ad_type=product_link&tracking_id=onedeeds-20&marketplace=amazon&region=US&placement=B003WT31QQ&asins=B003WT31QQ&linkId=73a42efc6bd8d92af4c55f38a2dacd13&show_border=false&link_opens_in_new_window=false&price_color=333333&title_color=00bf46&bg_color=ffffff"
-                  />
-                  <iframe
-                    style={{ width: '120px', height: '240px' }}
-                    marginWidth={0}
-                    marginHeight={0}
-                    scrolling="no"
-                    frameBorder={0}
-                    src="//ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=US&source=ac&ref=tf_til&ad_type=product_link&tracking_id=onedeeds-20&marketplace=amazon&region=US&placement=B01FUI2I7O&asins=B01FUI2I7O&linkId=852227aa7edbbcd6986d4fe902429eda&show_border=false&link_opens_in_new_window=false&price_color=333333&title_color=00bf46&bg_color=ffffff"
-                  />
-                  <iframe
-                    style={{ width: '120px', height: '240px' }}
-                    marginWidth={0}
-                    marginHeight={0}
-                    scrolling="no"
-                    frameBorder={0}
-                    src="//ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=US&source=ac&ref=tf_til&ad_type=product_link&tracking_id=onedeeds-20&marketplace=amazon&region=US&placement=B003SBRNKI&asins=B003SBRNKI&linkId=01be29b769b280ccf8583ee4f7eae5be&show_border=false&link_opens_in_new_window=false&price_color=333333&title_color=00bf46&bg_color=ffffff"
-                  />
-                </div>
-              </div>
             </Panel>
           </Panel>
           <Panel size="Half" style={styles.StyleHalfPanel}>
@@ -235,7 +181,6 @@ class Home extends Component {
                   </ul>
                 </div>
               }
-              /* imageSrc={handHalf}*/
               className={styles.OurCommunityPanel}>
               <LayoutButton text="Help Us Make A Change" />
             </Panel>

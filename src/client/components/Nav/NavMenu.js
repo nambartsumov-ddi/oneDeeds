@@ -59,6 +59,9 @@ const NavMenu = ({ isOpen }) => {
         <PosedItem className={posedItemClass}>
           <NavMenuLink title="FAQ" to={`/frequently-asked-questions`} />
         </PosedItem>
+        <PosedItem className={posedItemClass}>
+          <NavMenuLink title="One Deeds &amp; JFCS" to={`/jfcs`} />
+        </PosedItem>
       </PosedItems>
     </nav>
   );

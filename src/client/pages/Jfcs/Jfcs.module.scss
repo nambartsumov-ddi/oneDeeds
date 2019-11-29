@@ -1,0 +1,141 @@
+@import "../../styles/variables";
+
+.Jfcs {
+  min-height: 100vh;
+
+  .FixedHeader {
+    width: 100%;
+    height: 60px;
+    position: fixed;
+    background: white;
+    z-index: 3;
+    border-bottom: 1px solid #eae6e6;
+  }
+
+  .ContentWrapper {
+    padding-top: 80px;
+    width: 100vw;
+  }
+}
+
+.JfcsButton {
+  display: flex;
+  margin-top: 3em;
+  align-items: center;
+  justify-content: center;
+}
+
+.JfcsPageContent {
+  position: relative;
+  padding-top: 0;
+  color: black;
+  max-width: 100vw;
+  display: flex;
+  flex-direction: column;
+
+  .JfcsTitle {
+    display: block;
+    padding: 0 2em;
+    order: 1;
+
+    h1 {
+      margin: 0;
+      font-weight: 300;
+      text-transform: uppercase;
+
+      span {
+        font-weight: 700;
+      }
+    }
+
+    .BottomLine {
+      width: 51px;
+      height: 2px;
+      background: black;
+      margin-top: 0.3em;
+    }
+  }
+
+  .Content {
+    font-size: 1.25em;
+    line-height: 1.2em;
+    margin: 0;
+    padding: 0 2em;
+    order: 3;
+  }
+}
+
+.Charity {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 3em;
+
+  .CharityRow {
+    display: flex;
+    height: 240px;
+    margin-bottom: 1.5em;
+    iframe {
+      margin: 1.5em;
+    }
+  }
+}
+
+@media (min-width: $lg) {
+  .Jfcs {
+    .FixedHeader {
+      height: 80px;
+      border-bottom: 0;
+    }
+
+    .ContentWrapper {
+      height: 100vh;
+      padding-top: 80px;
+    }
+  }
+
+  .JfcsPageContent {
+    position: relative;
+    padding: 3em 0;
+    height: 100%;
+    max-width: 65vw;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-items: center;
+
+    .JfcsTitle {
+      padding: 0;
+
+      h1 {
+        font-weight: bold;
+        span {
+          font-weight: normal;
+        }
+      }
+
+      .BottomLine {
+        width: 57px;
+      }
+    }
+
+    .JfcsImg {
+      opacity: 1;
+      width: 100%;
+      height: auto;
+      margin-top: 10px;
+      flex: 3;
+    }
+
+    .Content {
+      padding: 10px 0 0 0;
+      order: 2;
+      p {
+        margin-bottom: 1em;
+      }
+    }
+  }
+}

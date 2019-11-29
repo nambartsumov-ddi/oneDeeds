@@ -1,0 +1,56 @@
+@import "../../styles/variables";
+
+// Layout button wrapper
+.ButtonWrapper {
+  margin-bottom: 3rem;
+}
+
+// Layout button
+.Button {
+  font-size: 1rem;
+  border: none;
+  padding: 1rem 3.2rem;
+  &.DefaultButton {
+    background: $LayoutButtonOnHover;
+  }
+  color: white;
+  cursor: pointer;
+  border-radius: 2em;
+  line-height: inherit;
+  text-decoration: none;
+  outline: none;
+  width: auto;
+}
+
+@media (min-width: $lg) {
+  .Button {
+    padding: 0.9rem 3.8rem;
+    background: $LayoutButtonOnHover;
+    &.DefaultButton {
+      background: transparent;
+      border: 1px solid white;
+    }
+    &.CharityButton {
+      background: CharityPrimaryColor;
+      border: 1px solid $CharityPrimaryColor;
+    }
+    border: 1px solid white;
+    transform: scale(0.95);
+    transition: background 0.3s ease-in, border 0.3s ease-out, transform 0.1s cubic-bezier(0.91, 0.8, 0.54, 1);
+
+    &.DefaultButton:hover {
+      border-color: transparent;
+      background: $LayoutButtonOnHover;
+      transform: scale(1);
+      transition: transform 0.1s cubic-bezier(0.91, 0.8, 0.54, 1);
+    }
+
+    &.CharityButton:hover {
+      background: $CharityPrimaryColor;
+      color: white;
+      border-color: transparent;
+      transform: scale(1);
+      transition: transform 0.1s cubic-bezier(0.91, 0.8, 0.54, 1);
+    }
+  }
+}

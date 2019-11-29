@@ -27,7 +27,7 @@
     "deploy:client": "npm-run-all --sequential build:client deploy:cloudstorage setmeta",
     "deploy:server": "gcloud app deploy",
     "deploy:cloudstorage": "gsutil -m rsync -R build/public gs://www.onedeeds.com/",
-    "setmeta": "gsutil -m setmeta -h \"Cache-Control:public, max-age=5256000\" gs://www.onedeeds.com/**/*.*",
+    "setmeta": "gsutil -m setmeta -h \"Cache-Control:public, max-age=3600\" gs://www.onedeeds.com/**/*.*",
     "setdefaultpublic": "gsutil -m defacl set public-read gs://www.onedeeds.com/",
     "debug": "ndb .",
     "lint": ""

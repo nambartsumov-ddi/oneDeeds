@@ -12,6 +12,7 @@ import Signup from 'Pages/Signup';
 import FAQ from 'Pages/FAQ';
 import Nav from 'Components/Nav';
 import Overlay from 'Components/Overlay';
+import Jfcs from 'Pages/Jfcs';
 
 const Routes = () => (
   <>
@@ -27,6 +28,7 @@ const Routes = () => (
       <ScrollToTopRoute path="/activity" exact component={Activity} />
       <ScrollToTopRoute path="/donations" exact component={Donations} />
       <ScrollToTopRoute path="/frequently-asked-questions" exact component={FAQ} />
+      <ScrollToTopRoute path="/jfcs" exact component={Jfcs} />
       <Redirect to="/" />
     </Switch>
   </>

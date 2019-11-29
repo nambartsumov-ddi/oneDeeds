@@ -24,9 +24,24 @@
   overflow: hidden;
 }
 
+.ImgPanelFull {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 0 40%;
+  width: 100vw;
+  height: 100%;
+
+  display: flex;
+  justify-content: start;
+  margin-top: 40px;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+}
+
 .Full {
-  height: 100vh;
-  position: relative;
+  width: 100vw;
+  height: 400vh;
 }
 
 .Half {
@@ -40,8 +55,8 @@
 }
 
 .TwoThirds {
-  width: 100%;
-  height: 100vh;
+  width: 100vw;
+  height: 300vh;
 }
 
 .Title {
@@ -67,14 +82,18 @@
   }
 }
 
-@media (min-width: $lg) and(min-height: 800px) {
+@media (min-width: $lg) and (min-height: 800px) {
   .ImgPanel {
     width: 50vw;
   }
 
+  .ImgPanelFull {
+    width: 50vw;
+  }
+
   .Full {
+    width: 50vw;
     height: 100vh;
-    position: relative;
   }
 
   .Half {
@@ -88,8 +107,8 @@
   }
 
   .TwoThirds {
-    width: 100%;
-    height: 66.66666667vh;
+    width: 50vw;
+    height: 100vh;
   }
 
   .Panel {
@@ -136,13 +155,5 @@
     transition: background 0.3s ease-in, border 0.3s ease-out, transform 0.1s cubic-bezier(0.91, 0.8, 0.54, 1);
     background: $LayoutButtonOnHover;
     border-color: transparent;
-  }
-
-  .Full:first-child {
-    width: 60%;
-  }
-
-  .Full:nth-child(2) {
-    width: 40%;
   }
 }
