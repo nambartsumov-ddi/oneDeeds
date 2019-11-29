@@ -1,4 +1,4 @@
-@import "../../styles/variables";
+@import '../../styles/variables';
 
 .Panel {
   display: flex;
@@ -13,57 +13,30 @@
 .ImgPanel {
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: 0 40%;
-  width: 100vw;
+  width: 100%;
   height: 100%;
 
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  overflow: hidden;
-}
-
-.ImgPanelFull {
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: 0 40%;
-  width: 100vw;
-  height: 100%;
-
-  display: flex;
-  justify-content: start;
-  margin-top: 40px;
-  align-items: center;
-  flex-direction: column;
-  overflow: hidden;
 }
 
 .Full {
-  width: 100vw;
-  height: 400vh;
+  height: 100vh;
+  position: relative;
 }
 
 .Half {
-  width: 100vw;
-  height: 200vh;
-}
-
-.Third {
   width: 100%;
-  height: 100vh;
-}
-
-.TwoThirds {
-  width: 100vw;
-  height: 300vh;
+  height: 50vh;
 }
 
 .Title {
   font-size: 1.9rem;
   letter-spacing: -1px;
   line-height: 1.235;
-  color: inherit;
+  color: #fff;
   margin: 0 10px 25px 10px;
   font-weight: 700;
   text-align: center;
@@ -82,35 +55,7 @@
   }
 }
 
-@media (min-width: $lg) and (min-height: 800px) {
-  .ImgPanel {
-    width: 50vw;
-  }
-
-  .ImgPanelFull {
-    width: 50vw;
-  }
-
-  .Full {
-    width: 50vw;
-    height: 100vh;
-  }
-
-  .Half {
-    width: 50vw;
-    height: 100vh;
-  }
-
-  .Third {
-    width: 100%;
-    height: 33.33333333vh;
-  }
-
-  .TwoThirds {
-    width: 50vw;
-    height: 100vh;
-  }
-
+@media (min-width: $lg) {
   .Panel {
     cursor: pointer;
   }
@@ -141,19 +86,18 @@
   .Half:focus {
     outline-width: 0;
   }
-
-  .Half:hover .CharityPanel button,
-  .Half:focus .CharityPanel button {
-    transition: background 0.3s ease-in, border 0.3s ease-out, transform 0.1s cubic-bezier(0.91, 0.8, 0.54, 1);
-    background: $CharityPrimaryColor;
-    color: white;
-    border-color: transparent;
-  }
-
   .Half:hover button,
   .Half:focus button {
     transition: background 0.3s ease-in, border 0.3s ease-out, transform 0.1s cubic-bezier(0.91, 0.8, 0.54, 1);
     background: $LayoutButtonOnHover;
     border-color: transparent;
+  }
+
+  .Full:first-child {
+    width: 60%;
+  }
+
+  .Full:nth-child(2) {
+    width: 40%;
   }
 }

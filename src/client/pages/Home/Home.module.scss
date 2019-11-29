@@ -1,4 +1,4 @@
-@import "../../styles/variables";
+@import '../../styles/variables';
 
 .Home {
   height: 100vh;
@@ -52,11 +52,6 @@
   background-color: #eaeaea;
 }
 
-.CharityPanel {
-  color: $CharityTextColor;
-  background-color: #ffffff;
-}
-
 .ThirdPanelDesc {
   text-align: left;
   line-height: 1.5em;
@@ -67,19 +62,7 @@
   }
 }
 
-.Charity {
-  display: flex;
-  height: 25vh;
-  width: 100%;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  .CharityRow {
-    display: flex;
-  }
-}
-
-@media (min-width: $lg) and (min-height: $lg-height) {
+@media (min-width: $lg) {
   .Home {
     overflow: hidden;
   }
